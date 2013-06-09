@@ -1,0 +1,155 @@
+<!--{if empty($_TPL['getmore'])}-->	
+<!--{eval $_TPL['titles'] = array('首页');}-->
+<!--{template header}-->
+
+<div id="content" style="width:810px;">
+
+<!--{if $space['uid'] && $space[self]}-->
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tr>
+			<td valign="top" width="150">
+				<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><!--{avatar($_SGLOBAL[supe_uid],middle)}--></div></div></div></div>
+
+				<ul class="u_setting">
+					<li class="dropmenu" id="usettingli" onclick="showMenu(this.id)"><a href="javascript:;">企业设置 <img src="image/more.gif" align="absmiddle"></a></li>
+				</ul>
+				<ul id="usettingli_menu" class="dropmenu_drop" style="display:none;">
+					
+					<li><a href="cp.php?ac=profile">实名验证</a></li>
+					<li><a href="cp.php?ac=message">企业资料</a></li>
+					<li><a href="cp.php?ac=avatar">企业头像</a></li>
+					<!--{if $_SCONFIG[sendmailday]}-->
+					<li><a href="cp.php?ac=sendmail">邮件提醒</a></li>
+					<!--{/if}-->
+					<!--{if checkperm('admin')}-->
+					<li><a href="admincp.php">站点管理</a></li>
+					<!--{/if}-->
+					<!--{if checkperm('allowstat')}-->
+					<li><a href="do.php?ac=stat">趋势统计</a></li>
+					<!--{/if}-->
+				</ul>
+			</td>
+			<td valign="top">
+				<h3 class="index_name">
+						<a href="space.php?uid=$space[uid]"<!--{eval g_color($space[groupid]);}-->>{$_SN[$space[uid]]}</a>
+					<!--{eval g_icon($space[groupid]);}-->
+					<a href="cp.php?ac=credit">$space[star]</a>
+					
+						<!--{if $_SGLOBAL[session][magichidden]}-->当前隐身<!--{else}-->当前在线<!--{/if}-->
+
+						<!--{if $_SGLOBAL[magic][invisible]}-->
+							<!--{if $_SGLOBAL[session][magichidden]}-->
+							<img src="image/magic/invisible.small.gif" class="magicicon"><a id="a_magic_appear" href="cp.php?ac=magic&op=appear" onclick="ajaxmenu(event,this.id)" class="gray">我要在线</a>
+							<!--{else}-->
+							<img src="image/magic/invisible.small.gif" alt="{$_SGLOBAL[magic][invisible]}" class="magicicon"><a id="a_magic_invisible" href="magic.php?mid=invisible" onclick="ajaxmenu(event,this.id,1)" class="gray">我要隐身</a>
+							<!--{/if}-->
+						<!--{/if}-->
+					
+
+				
+				</h3>
+				
+				<div class="index_note">
+					已有 $space[viewnum] 人次访问, $space[credit] 个积分, $space[experience] 个经验
+				</div>
+
+				
+			</td>
+		</tr>
+	</table>
+
+	<!--{if $space[allnum]}-->
+	<div class="mgs_list">
+		<!--{if $space[notenum]}--><div><img src="image/icon/notice.gif"><a href="space.php?do=notice"><strong>$space[notenum]</strong> 条新通知</a></div><!--{/if}-->
+		<!--{if $space[addfriendnum]}--><div><img src="image/icon/friend.gif" alt="" /><a href="cp.php?ac=friend&op=request"><strong>$space[addfriendnum]</strong> 个好友请求</a></div><!--{/if}-->
+		<!--{if $space[mtaginvitenum]}--><div><img src="image/icon/mtag.gif" alt="" /><a href="cp.php?ac=mtag&op=mtaginvite"><strong>$space[mtaginvitenum]</strong> 个群组邀请</a></div><!--{/if}-->
+		<!--{if $space[eventinvitenum]}--><div><img src="image/icon/event.gif" alt="" /><a href="cp.php?ac=event&op=eventinvite"><strong>$space[eventinvitenum]</strong> 个活动邀请</a></div><!--{/if}-->
+		<!--{if $space[myinvitenum]}--><div><img src="image/icon/userapp.gif" alt="" /><a href="space.php?do=notice&view=userapp"><strong>$space[myinvitenum]</strong> 个应用消息</a></div><!--{/if}-->
+		<!--{if $space[pmnum]}--><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm"><strong>$space[pmnum]</strong> 条新短消息</a></div><!--{/if}-->
+		<!--{if $space[pokenum]}--><div><img src="image/icon/poke.gif" alt="" /><a href="cp.php?ac=poke"><strong> $space[pokenum]</strong> 个新招呼</a></div><!--{/if}-->
+		<!--{if $space[reportnum]}--><div><img src="image/icon/report.gif" alt="" /><a href="admincp.php?ac=report"><strong>$space[reportnum]</strong> 个举报</a></div><!--{/if}-->
+		<!--{if $space[namestatusnum]}--><div><img src="image/icon/profile.gif" alt="" /><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1"><strong>$space[namestatusnum]</strong> 个待认证用户</a></div><!--{/if}-->
+		<!--{if $space[eventverifynum]}--><div><img src="image/icon/event.gif" alt="" /><a href="admincp.php?ac=event&perpage=20&grade=0&searchsubmit=1"><strong>$space[eventverifynum]</strong> 个待审核活动</a></div><!--{/if}-->
+	</div>
+	<!--{/if}-->
+
+	
+	企业动态
+	产品介绍
+	客户管理
+	订单管理
+	预约管理
+	商品管理
+
+	
+
+
+
+	
+		
+<!--{/if}-->	
+
+	
+	
+	
+	
+
+	
+
+	
+
+</div>
+<!--/content-->
+
+
+
+
+	
+	
+
+	
+
+	
+
+	
+
+<script type="text/javascript">
+
+	var next = $start;
+	function feed_more() {
+		var x = new Ajax('XML', 'ajax_wait');
+		var html = '';
+		next = next + $perpage;
+		x.get('cp.php?ac=feed&op=get&start='+next+'&view=$_GET[view]&appid=$_GET[appid]&icon=$_GET[icon]&filter=$_GET[filter]&day=$_GET[day]', function(s){
+			html = '<h4 class="feedtime">以下是新读取的动态</h4>' + s;
+			$('feed_div').innerHTML += html;
+		});
+	}
+
+	function filter_more(id) {
+		if($('feed_filter_div_'+id).style.display == '') {
+			$('feed_filter_div_'+id).style.display = 'none';
+			$('feed_filter_notice_'+id).style.display = '';
+		} else {
+			$('feed_filter_div_'+id).style.display = '';
+			$('feed_filter_notice_'+id).style.display = 'none';
+		}
+	}
+
+	function close_feedbox() {
+		var x = new Ajax();
+		x.get('cp.php?ac=common&op=closefeedbox', function(s){
+			$('feed_box').style.display = 'none';
+		});
+	}
+	
+	var elems = selector('li[class~=magicthunder]', $('feed_div')); 
+	for(var i=0; i<elems.length; i++){		
+		magicColor(elems[i]); 
+	}
+</script>
+
+<!--{eval my_checkupdate();}-->
+<!--{eval my_showgift();}-->
+<!--{template footer}-->
+<!--{/if}-->

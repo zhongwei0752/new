@@ -1,0 +1,9 @@
+<?PHP exit;?>	2013-06-03 16:30:42		127.0.0.1	14	/new/home/do.php?ac=sendmail&rand=1370248242	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-04 15:47:53		127.0.0.1	15	/new/home/do.php?ac=sendmail&rand=1370332073	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-06 17:41:01		127.0.0.1	16	/new/new/home/do.php?ac=sendmail&rand=1370511661	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-09 17:31:34		127.0.0.1	17	/v5/v5/home/do.php?ac=sendmail&rand=1370770294	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-09 17:58:49		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1370771929	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-09 17:59:22		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1370771962	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-09 18:20:24		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1370773224	zhongwei0752@gmail.com sendmail failed.
+<?PHP exit;?>	2013-06-09 18:22:40		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1370773360	623610577@qq.com sendmail failed.
+<?PHP exit;?>	2013-06-09 18:23:39		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1370773419	623610577@qq.com sendmail failed.
