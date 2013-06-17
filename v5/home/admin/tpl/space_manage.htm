@@ -6,6 +6,7 @@
 <!--{if $uid}-->
 	<form method="post" action="admincp.php?ac=space&uid=$uid" enctype="multipart/form-data">
 	<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+
 	<div class="bdrcontent">
 		<div class="title">
 			<h3>$member[username] 基本信息</h3>
@@ -50,6 +51,7 @@
 		
 		</table>
 	</div>
+	
 	<!--{if $managespaceinfo}-->
 	<br>
 	<div class="bdrcontent">
@@ -136,14 +138,10 @@
 		</div>
 		<table cellspacing="0" cellpadding="0" class="formtable">
 		<tr><th style="width:12em;">微信公众号</th><td><input type="text" class="t_input" name="weixin" value="$member[weixin]" size="20"></td></tr>
-		<tr><th style="width:12em;">企业名称</th><td><input type="text" class="t_input" name="businessname" value="$member[businessname]" size="40"></td></tr>
 		<tr><th style="width:12em;">企业地址</th><td><input type="text" class="t_input" name="businessaddress" value="$member[businessaddress]" size="60"></td></tr>
 		<tr><th style="width:12em;">行业</th><td><input type="text" class="t_input" name="business" value="$member[business]" size="10"></td></tr>
 		<tr><th style="width:12em;">运营地区</th><td><input type="text" class="t_input" name="resideprovince" value="$member[resideprovince]" size="10">-<input type="text" class="t_input" name="residecity" value="$member[residecity]" size="10"></td></tr>
 		<tr><th style="width:12em;">固话</th><td><input type="text" class="t_input" name="telephone" value="$member[telephone]" size="20"></td></tr>
-		<tr><th style="width:12em;">手机</th><td><input type="text" class="t_input" name="businesstelephone" value="$member[businesstelephone]" size="20"></td></tr>
-		<tr><th style="width:12em;">QQ</th><td><input type="text" class="t_input" name="businessqq" value="$member[businessqq]" size="20"></td></tr>
-		<tr><th style="width:12em;">邮箱</th><td><input type="text" class="t_input" name="businessemail" value="$member[businessemail]" size="20"></td></tr>
 		<tr><th style="width:12em;">企业logo</th><td><img src="$member[smalllogourl]"></td></tr>
 		<tr><th style="width:12em;">企业介绍</th><td><textarea rows="4" cols="100" name="companyintroduce">$member[companyintroduce]</textarea></td></tr>
 		</table>

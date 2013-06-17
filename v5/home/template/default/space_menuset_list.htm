@@ -98,14 +98,14 @@
 				
 				<div class="title">
 					
-					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4><br/><!--{if $value[money]}-->单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--><!--{if $_GET[view]!='me'}--><!--{if $value[money]}--><input type="checkbox" id="num$value[menusetid]" name="$value[subject]" value ="$value[menusetid]"/><!--{else}--><input type="checkbox" id="num$value[menusetid]" name="$value[subject]" value ="$value[menusetid]"  <!--{if !$zhongwei}-->checked<!--{/if}-->/><!--{if !$zhongwei}--><div id="numh$value[menusetid]">你要订购<input type='text' name='$value[menusetid]' value='1' style='width:20px;' />月</div><!--{/if}--><!--{/if}--><div id="numh$value[menusetid]"></div><!--{eval $value1=$value['wei'];}--><!--{if $value1['num']==$value['menusetid']}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}-->
+					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4><br/><!--{if $value[money]}-->单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--><!--{if $_GET[view]!='me'}--><!--{if $value[money]}--><input type="checkbox" id="num$value[menusetid]" /><!--{else}--><input type="checkbox" id="num$value[menusetid]"  <!--{if !$zhongwei}-->checked<!--{/if}-->/><!--{if !$zhongwei}--><div id="numh$value[menusetid]">你要订购<input type='text' name='$value[menusetid]' value='1' style='width:20px;' />月</div><!--{/if}--><!--{/if}--><div id="numh$value[menusetid]"></div><!--{eval $value1=$value['wei'];}--><!--{if $value1['num']==$value['menusetid']}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}-->
 					
 					<div>
 
 					<!--{if $value['friend']}-->
 					<span class="r_option locked gray"><a href="$theurl&friend=$value[friend]" class="gray">{$friendsname[$value[friend]]}</a></span>
 					<!--{/if}-->
-					<span class="gray"><!--{if $_GET[view]=='me'}--><br/>有效期:<!--{date('Y-m-d H:i',$value[dateline],1)}-->--<!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{/if}--></span>
+					<span class="gray"><!--{if $_GET[view]=='me'}--><br/>有效期:<!--{date('Y-m-d H:i',$value[dateline1],1)}-->--<!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{/if}--></span>
 					</div>
 				</div>
 				<div class="detail image_right l_text s_clear" id="menuset_article_$value[menusetid]">

@@ -16,11 +16,11 @@
 
 		function __construct()
 		{
-			$this->upload_name = $_FILES["file"]["name"]; //取得上传文件名
-			$this->upload_filetype = $_FILES["file"]["type"];
-			$this->upload_tmp_name = $_FILES["file"]["tmp_name"];
+			$this->upload_name = $_FILES["file3"]["name"]; //取得上传文件名
+			$this->upload_filetype = $_FILES["file3"]["type"];
+			$this->upload_tmp_name = $_FILES["file3"]["tmp_name"];
 			$this->allow_uploadedfile_type = array("image/gif","image/jpeg");
-			$this->upload_file_size = $_FILES["file"]["size"];
+			$this->upload_file_size = $_FILES["file3"]["size"];
 		}
 
 		function upload_file($id,$table)

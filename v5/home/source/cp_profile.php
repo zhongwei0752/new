@@ -50,6 +50,27 @@ if($_GET['op'] == 'base') {
 			if($_POST['email']){
 				$setarr['email'] = getstr($_POST['email'], 20, 1, 1);
 			}
+			if($_POST['resideprovince']){
+				$setarr['resideprovince'] = getstr($_POST['resideprovince'], 20, 1, 1);
+			}
+			if($_POST['residecity']){
+				$setarr['residecity'] = getstr($_POST['residecity'], 20, 1, 1);
+			}
+			if($_POST['weixin']){
+				$setarr['weixin'] = getstr($_POST['weixin'], 50, 1, 1);
+			}
+			if($_POST['businessaddress']){
+				$setarr['businessaddress'] = getstr($_POST['businessaddress'], 100, 1, 1);
+			}
+			if($_POST['business']){
+				$setarr['business'] = getstr($_POST['business'], 20, 1, 1);
+			}
+			if($_POST['telephone']){
+				$setarr['telephone'] = getstr($_POST['telephone'], 20, 1, 1);
+			}
+			if($_POST['companyintroduce']){
+				$setarr['companyintroduce'] = getstr($_POST['companyintroduce'], 100, 1, 1);
+			}
 
 		//身份证扫描件图片上传处理
 			if($_FILES["file1"]["name"]){
@@ -60,6 +81,12 @@ if($_GET['op'] == 'base') {
   		//营业执照扫描件图片上传处理
   			if($_FILES["file2"]["name"]){
 			include("./source/upload2.class.php");
+  			$image= new upload;
+  			$image->upload_file($_SGLOBAL['supe_uid'],"spacefield");
+  		}
+  			//企业LOGO图片上传处理
+			if($_FILES["file3"]["name"]){
+			include("./source/upload3.class.php");
   			$image= new upload;
   			$image->upload_file($_SGLOBAL['supe_uid'],"spacefield");
   		}
@@ -120,7 +147,7 @@ if($_GET['op'] == 'base') {
 		}
 	
 		if(submitcheck('nextsubmit')) {
-			$url = 'cp.php?ac=message';
+			$url = 'cp.php?ac=avatar';
 		} else {
 			$url = 'cp.php?ac=profile&op=base';
 		}

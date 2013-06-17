@@ -32,10 +32,11 @@ if(!defined('IN_UCHOME')) {
 		$query = $_SGLOBAL['db']->query("delete  FROM ".tname('appset')." WHERE appstatus='0' and uid=$_SGLOBAL[supe_uid]");
 		$value = $_SGLOBAL['db']->fetch_array($query);
 		$query1 = $_SGLOBAL['db']->query("select *  FROM ".tname('appset')." WHERE appstatus='1' and addmonth!='0' and uid=$_SGLOBAL[supe_uid]");
-		$value1 = $_SGLOBAL['db']->fetch_array($query1);
+		while($value1 = $_SGLOBAL['db']->fetch_array($query1)){
 		if($value1){
 			updatetable("appset", array('addmonth'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$value1['num']));
 		}
+	}
 		showmessage("正在为你跳转到首页","space.php?do=home");
 	}
 

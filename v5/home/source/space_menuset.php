@@ -444,39 +444,30 @@ if($_GET['view'] != 'me') {
 	$zhong1=$value4;
 
 	if($_POST){
-		foreach($_POST as $p => $o){
-	$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE subject='$p'");
-	$value1 = $_SGLOBAL['db']->fetch_array($query1);
-
-	if(!empty($value1)){
-
-	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE num='$o' and uid=$_SGLOBAL[supe_uid]");
-	$value = $_SGLOBAL['db']->fetch_array($query);
-	if(empty($value)){
-		if($space['namestatus']){
-			inserttable("appset", array('num'=>$o,'dateline' => $_SGLOBAL['timestamp'], 'uid'=>$_SGLOBAL['supe_uid']));
-		}else{
-			$showmessage='你所选择的应用包含付费应用，须先进行实名验证';
-			$showlink="cp.php?ac=profile";
-	}
+		if(empty($space['namestatus'])){
+			showmessage("你还未进行实名验证，现在为你跳转到实名验证页面。","cp.php?ac=profile");
 		}
-	}
-}
-	foreach($_POST as $p => $o){
-
-	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE subject='$p'");
+		foreach($_POST as $p => $o){
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE num='$p' and uid=$_SGLOBAL[supe_uid]");
 	$value = $_SGLOBAL['db']->fetch_array($query);
 	if(empty($value)){
-		
+		$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')."  WHERE menusetid='$p'");
+		$value2 = $_SGLOBAL['db']->fetch_array($query2);
+		if($value2['money']){
+		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+		$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
+		$showlink="space.php?do=showmenuset";	
+		}else{
+		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
+		$showmessage1='订制成功。';
+		$showlink1="space.php?do=menuset";
+		}
+	}else{
 	$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid WHERE bf.num='$p' and bf.uid=$_SGLOBAL[supe_uid]");
 	$value2 = $_SGLOBAL['db']->fetch_array($query2);
-	if($value2){
-	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE subject='$p'");
-	$value = $_SGLOBAL['db']->fetch_array($query);
 	if($value2['money']){
-		if($space['namestatus']){
-			if($value2['appstatus']=='0'){
+		if($value2['appstatus']=='0'){
 			updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline']+$value2['month']*2592000+$o*2592000),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 			$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 			$showlink="space.php?do=showmenuset";
@@ -485,31 +476,22 @@ if($_GET['view'] != 'me') {
 			$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 			$showlink="space.php?do=showmenuset";
 		}
-		}else{
-			$showmessage='你所选择的应用包含付费应用，须先进行实名验证';
-			$showlink="cp.php?ac=profile";
-		}
-	}else{
-		updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline']+$value2['month']*2592000+$o*2592000),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
-		updatetable("appset", array('appstatus'=>'1'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
-		$showmessage1='订制成功。';
-		$showlink1="space.php?do=menuset";
-
-
-	}
-		}
-	
-
-	}
-
-	}
-	if($showmessage){
+}else{
+	updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline1']+$value2['month']*2592000+$o*2592000),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+	updatetable("appset", array('appstatus'=>'1'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+	$showmessage1='订制成功。';
+	$showlink1="space.php?do=menuset";
+}
+}
+}
+if($showmessage){
 	showmessage("$showmessage","$showlink");
 }else{
 	showmessage("$showmessage1","$showlink1");
 }
-	//showmessage("完成","space.php?do=menuset");
-	}
+}
+	
+
 
 
 

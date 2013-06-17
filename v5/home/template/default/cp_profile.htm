@@ -101,6 +101,18 @@
 	<td>&nbsp;</td>
 </tr>
 <tr>
+	<th style="width:10em;">企业LOGO:</th>
+	<td>
+		<!--{if $space[smalllogourl] && empty($_GET['namechange'])}-->
+		<img src="$space['smalllogourl']"/>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<img src="$space['smalllogourl']"/><input type="file"  name="file3" />
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
 	<tr>
 	<th style="width:10em;">公司名称:</th>
 	<td>
@@ -109,6 +121,18 @@
 		<!--{else}-->
 		<!--{if empty($_SCONFIG['namechange'])}-->您的公司名称一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
 		<label for="companyname"><input id="companyname" type="text" value="$space['companyname']" name="companyname" /></label> 
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;">固话:</th>
+	<td>
+		<!--{if $space[telephone] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['telephone']</span>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的固话一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="telephone"><input id="telephone" type="text" value="$space['telephone']" name="telephone" /></label> 
 		<!--{/if}-->
 	</td>
 	<td>&nbsp;</td>
@@ -151,6 +175,60 @@
 	<!--{/if}-->
 </tr>
 <tr>
+	<th style="width:10em;">微信公众号:</th>
+	<td>
+		<!--{if $space[weixin] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['weixin']</span>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的微信公众号一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="weixin"><input id="weixin" type="text" value="$space['weixin']" name="weixin" /></label> 
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;">企业地址:</th>
+	<td>
+		<!--{if $space[businessaddress] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['businessaddress']</span>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="businessaddress"><input id="businessaddress" type="text" value="$space['businessaddress']" name="businessaddress" /></label> 
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th style="width:10em;">行业:</th>
+	<td>
+		<!--{if $space[business] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['business']</span>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="business"><input id="business" type="text" value="$space['business']" name="business" /></label> 
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<th>运营地区:</th>
+	<!--{if $space[resideprovince] && empty($_GET['namechange']) && $space[residecity]}-->
+	<td>
+	<span style="font-weight:bold;">$space[resideprovince] - $space[residecity]</span>
+</td>
+	<!--{else}-->
+	<td id="residecitybox">
+		<script type="text/javascript" src="source/script_city.js"></script>
+		<script type="text/javascript">
+		<!--
+		showprovince('resideprovince', 'residecity', '$space[resideprovince]', 'residecitybox');
+		showcity('residecity', '$space[residecity]', 'resideprovince', 'residecitybox');
+		//-->
+		</script>
+	</td>
+	<!--{/if}-->
+</tr>
+<tr>
 	<th style="width:10em;">常用邮箱:</th>
 	<td>
 		<!--{if $space[email] && empty($_GET['namechange'])}-->
@@ -161,7 +239,18 @@
 		<!--{/if}-->
 	</td>
 </tr>
-
+<tr>
+	<th style="width:10em;">企业介绍:</th>
+	<td>
+		<!--{if $space[companyintroduce] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['companyintroduce']</span>
+		<!--{else}-->
+		<!--{if empty($_SCONFIG['namechange'])}-->您的邮箱一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="companyintroduce"><textarea name="companyintroduce" rows="3" cols="50">$space['companyintroduce']</textarea></label> 
+		<!--{/if}-->
+	</td>
+	<td>&nbsp;</td>
+</tr>
 <tr>
 	<th style="width:10em;">&nbsp;</th>
 	<td>

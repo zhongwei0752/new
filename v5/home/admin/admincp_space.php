@@ -180,61 +180,32 @@ if(submitcheck('usergroupsubmit')) {
 
 	if($managespaceinfo) {
 		//¸½Êô±í
-		if($_POST['name']){
-			$setarr1['name']=getstr($_POST['name'], 60, 1, 1);
-		}
-		if($_POST['linkman']){
-			$setarr1['linkman']=getstr($_POST['linkman'], 60, 1, 1);
-		}
-		if($_POST['idcard']){
-			$setarr['idcard']=getstr($_POST['idcard'], 60, 1, 1);
-		}
-		if($_POST['businessnum']){
-			$setarr['businessnum']=getstr($_POST['businessnum'], 60, 1, 1);
-		}
-		if($_POST['companyname']){
-			$setarr['companyname']=getstr($_POST['companyname'], 60, 1, 1);
-		}
-		if($_POST['mobile']){
-			$setarr['mobile']=getstr($_POST['mobile'], 60, 1, 1);
-		}
-		if($_POST['weixin']){
-			$setarr['weixin']=getstr($_POST['weixin'], 60, 1, 1);
-		}
-		if($_POST['businessname']){
-			$setarr['businessname']=getstr($_POST['businessname'], 60, 1, 1);
-		}
-		if($_POST['businessaddress']){
-			$setarr['businessaddress']=getstr($_POST['businessaddress'], 60, 1, 1);
-		}
-		if($_POST['business']){
-			$setarr['business']=getstr($_POST['business'], 60, 1, 1);
-		}
-		if($_POST['resideprovince']){
-			$setarr['resideprovince']=getstr($_POST['resideprovince'], 60, 1, 1);
-		}
-		if($_POST['telephone']){
-			$setarr['telephone']=getstr($_POST['telephone'], 60, 1, 1);
-		}
-		if($_POST['businesstelephone']){
-			$setarr['businesstelephone']=getstr($_POST['businesstelephone'], 60, 1, 1);
-		}
-		if($_POST['businessqq']){
-			$setarr['businessqq']=getstr($_POST['businessqq'], 60, 1, 1);
-		}
-		if($_POST['businessemail']){
-			$setarr['businessemail']=getstr($_POST['businessemail'], 60, 1, 1);
-		}
-		if($_POST['companyintroduce']){
-			$setarr['companyintroduce']=getstr($_POST['companyintroduce'], 60, 1, 1);
-		}
+		
 
 		$setarr = array(
 			'email' => $email,
 			'emailcheck' => $emailcheck,
 			'qq' => getstr($_POST['qq'], 20, 1, 1),
-			'msn' => getstr($_POST['msn'], 80, 1, 1)
+			'msn' => getstr($_POST['msn'], 80, 1, 1),
+			'idcard'=>getstr($_POST['idcard'], 60, 1, 1),
+			'businessnum'=>getstr($_POST['businessnum'], 60, 1, 1),
+			'companyname'=>getstr($_POST['companyname'], 60, 1, 1),
+			'mobile'=>getstr($_POST['mobile'], 60, 1, 1),
+			'weixin'=>getstr($_POST['weixin'], 60, 1, 1),
+			'businessaddress'=>getstr($_POST['businessaddress'], 60, 1, 1),
+			'business'=>getstr($_POST['business'], 60, 1, 1),
+			'resideprovince'=>getstr($_POST['resideprovince'], 60, 1, 1),
+			'telephone'=>getstr($_POST['telephone'], 60, 1, 1),
+			'companyintroduce'=>getstr($_POST['companyintroduce'], 60, 1, 1)
+		
+
+
 		);
+		$setarr1= array(
+		'name'=>getstr($_POST['name'], 60, 1, 1),
+		'linkman'=>getstr($_POST['linkman'], 60, 1, 1),
+		
+			);
 		foreach ($profilefields as $field => $value) {
 			if($value['formtype'] == 'select') $value['maxsize'] = 255;
 			$setarr['field_'.$field] = getstr($_POST['field_'.$field], $value['maxsize'], 1, 1);
@@ -244,6 +215,9 @@ if(submitcheck('usergroupsubmit')) {
 		if($_POST['clearcss']) $setarr['css'] = '';
 		
 		updatetable('spacefield', $setarr, array('uid'=>$uid));
+		
+	}
+	if($setarr1){
 		updatetable('space', $setarr1, array('uid'=>$uid));
 	}
 
