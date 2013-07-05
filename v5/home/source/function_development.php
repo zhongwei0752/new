@@ -183,22 +183,18 @@ function development_post($POST, $olds=array()) {
 	if(checkperm('managedevelopment')) {
 		$developmentarr['hot'] = intval($POST['hot']);
 	}
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('development')." WHERE classid='$classid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-	if($classnum) {
+	
+	if($olds['developmentid']) {
 		//¸üÐÂ
-		
-		updatetable('development', $developmentarr, array('classid'=>$classid));
+		$developmentid = $olds['developmentid'];
+		updatetable('development', $developmentarr, array('developmentid'=>$developmentid));
 		
 		$fuids = array();
 		
 		$developmentarr['uid'] = $olds['uid'];
 		$developmentarr['username'] = $olds['username'];
-		$developmentarr['developmentid'] = $classnum['developmentid'];
-		$developmentid=$classnum['developmentid'];
 	} else {
 		//²ÎÓëÈÈÄÖ
-
 		$developmentarr['topicid'] = topic_check($POST['topicid'], 'development');
 
 		$developmentarr['uid'] = $_SGLOBAL['supe_uid'];
@@ -239,23 +235,14 @@ function development_post($POST, $olds=array()) {
 		$fieldarr['tag'] = empty($tagarr)?'':addslashes(serialize($tagarr));
 	}
 
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('developmentfield')." WHERE developmentid='$developmentid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-
-	if(!empty($classnum)||$classnum!="0") {
+	if($olds) {
 		//¸üÐÂ
-		
-		
 		updatetable('developmentfield', $fieldarr, array('developmentid'=>$developmentid));
 	} else {
-	
 		$fieldarr['developmentid'] = $developmentid;
-
 		$fieldarr['uid'] = $developmentarr['uid'];
-
 		inserttable('developmentfield', $fieldarr);
 	}
-
 	//¿Õ¼ä¸üÐÂ
 	if($isself) {
 		if($olds) {

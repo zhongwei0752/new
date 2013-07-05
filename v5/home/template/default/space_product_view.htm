@@ -1,15 +1,15 @@
-<!--{eval $_TPL['titles'] = array($product['subject'], '企业介绍');}-->
+<!--{eval $_TPL['titles'] = array($product['subject'], '产品介绍');}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 <!--{template header}-->
 
 <!--{if $space[self]}-->
-<h2 class="title"><img src="image/app/blog.gif" />{$_SN[$space[uid]]}>企业介绍</h2>
+<h2 class="title"><img src="image/app/blog.gif" />{$_SN[$space[uid]]}>产品介绍</h2>
 
 <!--{else}-->
 <!--{eval
-	$_TPL['spacetitle'] = "企业介绍";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有企业介绍</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=product&id=$product[productid]\">查看企业介绍</a>";
+	$_TPL['spacetitle'] = "产品介绍";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有产品介绍</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=product&id=$product[productid]\">查看产品介绍</a>";
 }-->
 <!--{template space_menu}-->
 <!--{/if}-->

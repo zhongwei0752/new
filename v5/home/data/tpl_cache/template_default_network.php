@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/header|template/default/footer', '1370773898', 'template/default/network');?><?php $_TPL['nosidebar']=1; ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/header|template/default/footer', '1373019854', 'template/default/network');?><?php $_TPL['nosidebar']=1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,7 +41,6 @@
 <ul class="menu">
 <?php if($_SGLOBAL['supe_uid']) { ?>
 <li><a href="space.php?do=home">首页</a></li>
-<li><a href="space.php?do=home">企业主页</a></li>
 <li><a href="space.php?do=friend">粉丝列表</a></li>
 <?php } else { ?>
 <li><a href="index.php">首页</a></li>
@@ -104,7 +103,6 @@
 <li><img src="image/app/blog.gif"><a href="space.php?do=blog">预约预订管理</a></li>
 <li><img src="image/app/blog.gif"><a href="space.php?do=blog">焦点推荐</a></li>
 <li><img src="image/app/blog.gif"><a href="space.php?do=blog">群发</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=menuset&view=me">应用管理</a></li>
 <li><img src="image/app/blog.gif"><a href="space.php?do=blog">选择手机模块</a></li>
 </ul>
 
@@ -128,14 +126,15 @@
 <p class="app_more"><a href="javascript:;" id="a_app_more" onclick="userapp_open();" class="off">展开</a></p>
 <?php } ?>
 
-<?php if($_SCONFIG['my_status']) { ?>
+
 <div class="app_m">
 <ul>
-<li><img src="image/app_add.gif"><a href="cp.php?ac=userapp&my_suffix=%2Fapp%2Flist" class="addApp">添加应用</a></li>
-<li><img src="image/app_set.gif"><a href="cp.php?ac=userapp&op=menu" class="myApp">管理应用</a></li>
+<?php if($_SN[$_SGLOBAL['supe_uid']]=="admin") { ?>
+<li><img src="image/app_add.gif"><a href="cp.php?ac=menuset" class="addApp">添加应用</a></li>
+<?php } ?>
+<li><img src="image/app_set.gif"><a href="space.php?do=menuset&view=me" class="myApp">管理应用</a></li>
 </ul>
 </div>
-<?php } ?>
 
 <?php } else { ?>
 <div class="bar_text">

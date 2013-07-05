@@ -396,7 +396,7 @@ if($id) {
 
 	//·ÖÒ³
 	$multi = multi($count, $perpage, $page, $theurl);
-	capi_showmessage_by_data("rest_success", 0, array('delevelopment'=>$list, 'count'=>$count));
+	capi_showmessage_by_data("rest_success", 0, array('development'=>$list, 'count'=>$count));
 
 	//ÊµÃû
 	realname_get();

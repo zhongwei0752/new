@@ -12,6 +12,23 @@ $doid = empty($_GET['doid'])?0:intval($_GET['doid']);
 $id = empty($_GET['id'])?0:intval($_GET['id']);
 if(empty($_POST['refer'])) $_POST['refer'] = "space.php?do=talk&view=me";
 
+//各模块小logo
+$ac=$_GET['ac'];
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE english='$ac'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$wei1=$value4;
+
+//判断是否购买
+$query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.english='$ac'
+				ORDER BY b.dateline ASC");
+$value5 = $_SGLOBAL['db']->fetch_array($query5);
+$zhong2=$value5;
+if(empty($zhong2)){
+	showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
+}
+
 if(submitcheck('addsubmit')) {
 
 	$add_talk = 1;

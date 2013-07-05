@@ -184,22 +184,18 @@ function product_post($POST, $olds=array()) {
 	if(checkperm('manageproduct')) {
 		$productarr['hot'] = intval($POST['hot']);
 	}
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('product')." WHERE classid='$classid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-	if($classnum) {
+
+	if($olds['productid']) {
 		//¸üÐÂ
-		
-		updatetable('product', $productarr, array('classid'=>$classid));
+		$productid = $olds['productid'];
+		updatetable('product', $productarr, array('productid'=>$productid));
 		
 		$fuids = array();
 		
 		$productarr['uid'] = $olds['uid'];
 		$productarr['username'] = $olds['username'];
-		$productarr['productid'] = $classnum['productid'];
-		$productid=$classnum['productid'];
 	} else {
 		//²ÎÓëÈÈÄÖ
-
 		$productarr['topicid'] = topic_check($POST['topicid'], 'product');
 
 		$productarr['uid'] = $_SGLOBAL['supe_uid'];
@@ -239,21 +235,12 @@ function product_post($POST, $olds=array()) {
 		//¸üÐÂ¸½±íÖÐµÄtag
 		$fieldarr['tag'] = empty($tagarr)?'':addslashes(serialize($tagarr));
 	}
-
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('productfield')." WHERE productid='$productid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-
-	if(!empty($classnum)||$classnum!="0") {
+if($olds) {
 		//¸üÐÂ
-		
-		
 		updatetable('productfield', $fieldarr, array('productid'=>$productid));
 	} else {
-	
 		$fieldarr['productid'] = $productid;
-
 		$fieldarr['uid'] = $productarr['uid'];
-
 		inserttable('productfield', $fieldarr);
 	}
 

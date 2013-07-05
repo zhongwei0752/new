@@ -7,20 +7,22 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-
-
-//显示全站动态的好友数
-if(empty($_SCONFIG['showallfriendnum']) || $_SCONFIG['showallfriendnum']<1) $_SCONFIG['showallfriendnum'] = 10;
-//默认热点天数
-if(empty($_SCONFIG['feedhotday'])) $_SCONFIG['feedhotday'] = 2;
-
-//网站近况
-$isnewer = $space['friendnum']<$_SCONFIG['showallfriendnum']?1:0;
-if(empty($_GET['view']) && $space['self'] && $isnewer) {
-	$_GET['view'] = 'all';//默认显示
+if(empty($space['namestatus'])){
+	showmessage("璇峰厛杩涜瀹炲悕楠岃瘉","cp.php?ac=profile");
 }
 
-//分页
+//脧脭脢戮脠芦脮戮露炉脤卢碌脛潞脙脫脩脢媒
+if(empty($_SCONFIG['showallfriendnum']) || $_SCONFIG['showallfriendnum']<1) $_SCONFIG['showallfriendnum'] = 10;
+//脛卢脠脧脠脠碌茫脤矛脢媒
+if(empty($_SCONFIG['feedhotday'])) $_SCONFIG['feedhotday'] = 2;
+
+//脥酶脮戮陆眉驴枚
+$isnewer = $space['friendnum']<$_SCONFIG['showallfriendnum']?1:0;
+if(empty($_GET['view']) && $space['self'] && $isnewer) {
+	$_GET['view'] = 'all';//脛卢脠脧脧脭脢戮
+}
+
+//路脰脪鲁
 $perpage = $_SCONFIG['feedmaxnum']<50?50:$_SCONFIG['feedmaxnum'];
 $perpage = mob_perpage($perpage);
 
@@ -29,19 +31,19 @@ if($_GET['view'] == 'hot') {
 }
 
 $start = empty($_GET['start'])?0:intval($_GET['start']);
-//检查开始数
+//录矛虏茅驴陋脢录脢媒
 ckstart($start, $perpage);
 
-//今天时间开始线
+//陆帽脤矛脢卤录盲驴陋脢录脧脽
 $_SGLOBAL['today'] = sstrtotime(sgmdate('Y-m-d'));
 
-//最少热度
+//脳卯脡脵脠脠露脠
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
 $_SGLOBAL['gift_appid'] = '1027468';
 
 if($_GET['view'] == 'all') {
 
-	$wheresql = "1";//没有隐私
+	$wheresql = "1";//脙禄脫脨脪镁脣陆
 	$ordersql = "dateline DESC";
 	$theurl = "space.php?uid=$space[uid]&do=$do&view=all";
 	$f_index = '';
@@ -69,12 +71,12 @@ if($_GET['view'] == 'all') {
 		$theurl = "space.php?uid=$space[uid]&do=$do&view=we";
 		$f_index = 'USE INDEX(dateline)';
 		$_GET['view'] = 'we';
-		//不显示时间
+		//虏禄脧脭脢戮脢卤录盲
 		$_TPL['hidden_time'] = 1;
 	}
 }
 
-//过滤
+//鹿媒脗脣
 $appid = empty($_GET['appid'])?0:intval($_GET['appid']);
 if($appid) {
 	$wheresql .= " AND appid='$appid'";
@@ -98,7 +100,7 @@ $query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('feed')." $f_index
 	LIMIT $start,$perpage");
 
 if($_GET['view'] == 'me' || $_GET['view'] == 'hot') {
-	//个人动态
+	//赂枚脠脣露炉脤卢
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 		if(ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
 			realname_set($value['uid'], $value['username']);
@@ -107,7 +109,7 @@ if($_GET['view'] == 'me' || $_GET['view'] == 'hot') {
 		$count++;
 	}
 } else {
-	//要折叠的动态
+	//脪陋脮脹碌镁碌脛露炉脤卢
 	$hidden_icons = array();
 	if($_SCONFIG['feedhiddenicon']) {
 		$_SCONFIG['feedhiddenicon'] = str_replace(' ', '', $_SCONFIG['feedhiddenicon']);
@@ -149,25 +151,25 @@ $newspacelist = array();
 
 if($space['self'] && empty($start)) {
 
-	//短消息
+	//露脤脧没脧垄
 	$space['pmnum'] = $_SGLOBAL['member']['newpm'];
 
-	//举报管理
+	//戮脵卤篓鹿脺脌铆
 	if(checkperm('managereport')) {
 		$space['reportnum'] = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('report')." WHERE new='1'"), 0);
 	}
 
-	//审核活动
+	//脡贸潞脣禄卯露炉
 	if(checkperm('manageevent')) {
 		$space['eventverifynum'] = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('event')." WHERE grade='0'"), 0);
 	}
 
-	//等待实名认证
+	//碌脠麓媒脢碌脙没脠脧脰陇
 	if($_SCONFIG['realname'] && checkperm('managename')) {
 		$space['namestatusnum'] = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('space')." WHERE namestatus='0' AND profilestatus='1'"), 0);
 	}
 	
-	//欢迎新成员
+	//禄露脫颅脨脗鲁脡脭卤
 	if($_SCONFIG['newspacenum']>0) {
 		$newspacelist = unserialize(data_get('newspacelist'));
 		if(!is_array($newspacelist)) $newspacelist = array();
@@ -177,7 +179,7 @@ if($space['self'] && empty($start)) {
 		}
 	}
 
-	//最近访客列表
+	//脳卯陆眉路脙驴脥脕脨卤铆
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('visitor')." WHERE uid='$space[uid]' ORDER BY dateline DESC LIMIT 0,12");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 		realname_set($value['vuid'], $value['vusername']);
@@ -185,7 +187,7 @@ if($space['self'] && empty($start)) {
 		$oluids[] = $value['vuid'];
 	}
 
-	//访客在线
+	//路脙驴脥脭脷脧脽
 	if($oluids) {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('session')." WHERE uid IN (".simplode($oluids).")");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
@@ -200,7 +202,7 @@ if($space['self'] && empty($start)) {
 	$oluids = array();
 	$olfcount = 0;
 	if($space['feedfriend']) {
-		//在线好友
+		//脭脷脧脽潞脙脫脩
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('session')." WHERE uid IN ($space[feedfriend]) ORDER BY lastactivity DESC LIMIT 0,15");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(!$value['magichidden']) {
@@ -213,7 +215,7 @@ if($space['self'] && empty($start)) {
 		}
 	}
 	if($olfcount < 15) {
-		//我的好友
+		//脦脪碌脛潞脙脫脩
 		$query = $_SGLOBAL['db']->query("SELECT fuid AS uid, fusername AS username, num FROM ".tname('friend')." WHERE uid='$space[uid]' AND status='1' ORDER BY num DESC, dateline DESC LIMIT 0,30");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(empty($oluids[$value['uid']])) {
@@ -225,13 +227,13 @@ if($space['self'] && empty($start)) {
 		}
 	}
 
-	//获取任务
+	//禄帽脠隆脠脦脦帽
 	include_once(S_ROOT.'./source/function_space.php');
 	$task = gettask();
 
-	//好友生日
+	//潞脙脫脩脡煤脠脮
 	if($space['feedfriend']) {
-		list($s_month, $s_day) = explode('-', sgmdate('n-j', $_SGLOBAL['timestamp']-3600*24*3));//过期3天
+		list($s_month, $s_day) = explode('-', sgmdate('n-j', $_SGLOBAL['timestamp']-3600*24*3));//鹿媒脝脷3脤矛
 		list($n_month, $n_day) = explode('-', sgmdate('n-j', $_SGLOBAL['timestamp']));
 		list($e_month, $e_day) = explode('-', sgmdate('n-j', $_SGLOBAL['timestamp']+3600*24*7));
 		if($e_month == $s_month) {
@@ -255,13 +257,13 @@ if($space['self'] && empty($start)) {
 		}
 	}
 
-	//积分
+	//禄媒路脰
 	$space['star'] = getstar($space['experience']);
 
-	//域名
+	//脫貌脙没
 	$space['domainurl'] = space_domain($space);
 
-	//热点
+	//脠脠碌茫
 	if($_SCONFIG['feedhotnum'] > 0 && ($_GET['view'] == 'we' || $_GET['view'] == 'all')) {
 		$hotlist_all = array();
 		$hotstarttime = $_SGLOBAL['timestamp'] - $_SCONFIG['feedhotday']*3600*24;
@@ -293,7 +295,7 @@ if($space['self'] && empty($start)) {
 		}
 	}
 	
-	//热闹
+	//脠脠脛脰
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('topic')." ORDER BY lastpost DESC LIMIT 0,1");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 		$value['pic'] = $value['pic']?pic_get($value['pic'], $value['thumb'], $value['remote']):'';
@@ -301,27 +303,27 @@ if($space['self'] && empty($start)) {
 	}
 
 
-	//提醒总数
+	//脤谩脨脩脳脺脢媒
 	$space['allnum'] = 0;
 	foreach (array('notenum', 'addfriendnum', 'mtaginvitenum', 'eventinvitenum', 'myinvitenum', 'pokenum', 'reportnum', 'namestatusnum', 'eventverifynum') as $value) {
 		$space['allnum'] = $space['allnum'] + $space[$value];
 	}
 }
 
-//实名处理
+//脢碌脙没麓娄脌铆
 realname_get();
 
-//feed合并
+//feed潞脧虏垄
 $list = array();
 
 if($_GET['view'] == 'hot') {
-	//热点
+	//脠脠碌茫
 	foreach ($feed_list as $value) {
 		$value = mkfeed($value);
 		$list['today'][] = $value;
 	}
 } elseif($_GET['view'] == 'me') {
-	//个人
+	//赂枚脠脣
 	foreach ($feed_list as $value) {
 		if($hotlist[$value['feedid']]) continue;
 		$value = mkfeed($value);
@@ -335,7 +337,7 @@ if($_GET['view'] == 'hot') {
 		}
 	}
 } else {
-	//好友、全站
+	//潞脙脫脩隆垄脠芦脮戮
 	foreach ($feed_list as $values) {
 		$actors = array();
 		$a_value = array();
@@ -356,7 +358,7 @@ if($_GET['view'] == 'hot') {
 			$list[$theday][] = $a_value;
 		}
 	}
-	//应用
+	//脫娄脫脙
 	foreach ($appfeed_list as $values) {
 		$actors = array();
 		$a_value = array();
@@ -371,7 +373,7 @@ if($_GET['view'] == 'hot') {
 	}
 }
 
-//获得个性模板
+//禄帽碌脙赂枚脨脭脛拢掳氓
 $templates = $default_template = array();
 $tpl_dir = sreaddir(S_ROOT.'./template');
 foreach ($tpl_dir as $dir) {
@@ -388,7 +390,7 @@ foreach ($tpl_dir as $dir) {
 $_TPL['templates'] = $templates;
 $_TPL['default_template'] = $default_template;
 
-//标签激活
+//卤锚脟漏录陇禄卯
 $my_actives = array(in_array($_GET['filter'], array('site','myapp'))?$_GET['filter']:'all' => ' class="active"');
 $actives = array(in_array($_GET['view'], array('me','all','hot'))?$_GET['view']:'we' => ' class="active"');
 
@@ -396,7 +398,7 @@ $actives = array(in_array($_GET['view'], array('me','all','hot'))?$_GET['view']:
 if(empty($cp_mode)) include_once template("space_feed");
 
 
-//筛选
+//脡赂脩隆
 function ckicon_uid($feed) {
 	global $_SGLOBAL, $space, $_SCONFIG;
 
@@ -414,7 +416,7 @@ function ckicon_uid($feed) {
 	return true;
 }
 
-//推荐礼物
+//脥脝录枚脌帽脦茂
 function my_showgift() {
 	global $_SGLOBAL, $space, $_SCONFIG;
 	if($_SCONFIG['my_showgift'] && $_SGLOBAL['my_userapp'][$_SGLOBAL['gift_appid']]) {

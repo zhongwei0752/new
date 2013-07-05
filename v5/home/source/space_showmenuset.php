@@ -7,12 +7,15 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-
+	$number=rand();
+	
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid WHERE bf.uid=$_SGLOBAL[supe_uid] and b.money!='0'");
 	while($value = $_SGLOBAL['db']->fetch_array($query)){
 		if($value['appstatus']=='0'){
-			$value['cost']=$value['month']*$value['money'];		
+			$value['cost']=$value['month']*$value['money'];
+			$costid=$value['id'];
+			$addmonth=$value['addmonth'];
 			$allcost1[]=$value['month']*$value['money'];
 			if($value['month']){
 			$list[]=$value;
@@ -27,7 +30,7 @@ if(!defined('IN_UCHOME')) {
 			
 
 	}
-
+	$zfbuid=$_SGLOBAL['supe_uid'];
 	if($_POST['cancel']){
 		$query = $_SGLOBAL['db']->query("delete  FROM ".tname('appset')." WHERE appstatus='0' and uid=$_SGLOBAL[supe_uid]");
 		$value = $_SGLOBAL['db']->fetch_array($query);

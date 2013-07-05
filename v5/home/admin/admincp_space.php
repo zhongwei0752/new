@@ -195,6 +195,7 @@ if(submitcheck('usergroupsubmit')) {
 			'businessaddress'=>getstr($_POST['businessaddress'], 60, 1, 1),
 			'business'=>getstr($_POST['business'], 60, 1, 1),
 			'resideprovince'=>getstr($_POST['resideprovince'], 60, 1, 1),
+			'residecity'=>getstr($_POST['residecity'], 60, 1, 1),
 			'telephone'=>getstr($_POST['telephone'], 60, 1, 1),
 			'companyintroduce'=>getstr($_POST['companyintroduce'], 60, 1, 1)
 		

@@ -127,7 +127,7 @@
 		var cu = $('checkusername');
 		var unLen = userName.replace(/[^\x00-\xff]/g, "**").length;
 
-		if(unLen < 3 || unLen > 15) {
+		if(unLen < 3 || unLen > 150) {
 			warning(cu, unLen < 3 ? '用户名小于3个字符' : '用户名超过 15 个字符');
 			return;
 		}

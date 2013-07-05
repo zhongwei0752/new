@@ -30,66 +30,70 @@ if($_GET['op'] == 'base') {
 		$profilefields = empty($_SGLOBAL['profilefield'])?array():$_SGLOBAL['profilefield'];
 	
 		//Ìá½»¼ì²é
-	
-		
+			if($_POST['qq']){
+				$setarr['qq'] = getstr($_POST['qq'], 40, 1, 1);
+			}
 			if($_POST['idcard']){
-				$setarr['idcard'] = getstr($_POST['idcard'], 20, 1, 1);
+				$setarr['idcard'] = getstr($_POST['idcard'], 60, 1, 1);
 			}
 			if($_POST['businessnum']){
-				$setarr['businessnum'] = getstr($_POST['businessnum'], 20, 1, 1);
-			}
-			if($_POST['companyname']){
-				$setarr['companyname'] = getstr($_POST['companyname'], 50, 1, 1);
+				$setarr['businessnum'] = getstr($_POST['businessnum'], 60, 1, 1);
 			}
 			if($_POST['mobile']){
-				$setarr['mobile'] = getstr($_POST['mobile'], 40, 1, 1);
+				$setarr['mobile'] = getstr($_POST['mobile'], 60, 1, 1);
 			}
-			if($_POST['qq']){
-				$setarr['qq'] = getstr($_POST['qq'], 20, 1, 1);
-			}
-			if($_POST['email']){
-				$setarr['email'] = getstr($_POST['email'], 20, 1, 1);
-			}
-			if($_POST['resideprovince']){
-				$setarr['resideprovince'] = getstr($_POST['resideprovince'], 20, 1, 1);
-			}
-			if($_POST['residecity']){
-				$setarr['residecity'] = getstr($_POST['residecity'], 20, 1, 1);
-			}
-			if($_POST['weixin']){
-				$setarr['weixin'] = getstr($_POST['weixin'], 50, 1, 1);
-			}
+			
 			if($_POST['businessaddress']){
-				$setarr['businessaddress'] = getstr($_POST['businessaddress'], 100, 1, 1);
+				$setarr['businessaddress'] = getstr($_POST['businessaddress'], 60, 1, 1);
 			}
 			if($_POST['business']){
-				$setarr['business'] = getstr($_POST['business'], 20, 1, 1);
+				$setarr['business'] = getstr($_POST['business'], 60, 1, 1);
+			}
+			if($_POST['resideprovince']){
+				$setarr['resideprovince'] = getstr($_POST['resideprovince'], 60, 1, 1);
+			}
+			if($_POST['residecity']){
+				$setarr['residecity'] = getstr($_POST['residecity'], 60, 1, 1);
 			}
 			if($_POST['telephone']){
-				$setarr['telephone'] = getstr($_POST['telephone'], 20, 1, 1);
+				$setarr['telephone'] = getstr($_POST['telephone'], 60, 1, 1);
 			}
 			if($_POST['companyintroduce']){
-				$setarr['companyintroduce'] = getstr($_POST['companyintroduce'], 100, 1, 1);
+				$setarr['companyintroduce'] = getstr($_POST['companyintroduce'], 800, 1, 1);
+			}
+			if($_POST['email']){
+				$setarr['email'] = getstr($_POST['email'], 60, 1, 1);
+			}
+			if($_POST['emailcheck']){
+				$setarr['emailcheck'] = $emailcheck;
 			}
 
+			if($setarr){
+				updatetable('spacefield', $setarr, array('uid'=>$_SGLOBAL['supe_uid']));
+				updatetable('space',array('profilestatus'=>'1'), array('uid'=>$_SGLOBAL['supe_uid']));//更新提交状态
+				updatetable('space',array('namestatus'=>'0'), array('uid'=>$_SGLOBAL['supe_uid']));
+			}
 		//身份证扫描件图片上传处理
 			if($_FILES["file1"]["name"]){
 			include("./source/upload1.class.php");
   			$image= new upload;
   			$image->upload_file($_SGLOBAL['supe_uid'],"space");
   		}
+
   		//营业执照扫描件图片上传处理
   			if($_FILES["file2"]["name"]){
 			include("./source/upload2.class.php");
-  			$image= new upload;
-  			$image->upload_file($_SGLOBAL['supe_uid'],"spacefield");
+  			$image1= new upload1;
+  			$image1->upload_file1($_SGLOBAL['supe_uid'],"spacefield");
   		}
+
   			//企业LOGO图片上传处理
 			if($_FILES["file3"]["name"]){
 			include("./source/upload3.class.php");
-  			$image= new upload;
-  			$image->upload_file($_SGLOBAL['supe_uid'],"spacefield");
+  			$image2= new upload2;
+  			$image2->upload_file2($_SGLOBAL['supe_uid'],"spacefield");
   		}
+
 		//ÐÔ±ð
 		$_POST['sex'] = intval($_POST['sex']);
 		if($_POST['sex'] && empty($space['sex'])) $setarr['sex'] = $_POST['sex'];
@@ -102,13 +106,7 @@ if($_GET['op'] == 'base') {
 			}
 		}
 
-		if(empty($setarr)){
-			
-			}else{
-				updatetable('spacefield', $setarr, array('uid'=>$_SGLOBAL['supe_uid']));
-				updatetable('space',array('profilestatus'=>'1'), array('uid'=>$_SGLOBAL['supe_uid']));//更新提交状态
-				updatetable('space',array('namestatus'=>'0'), array('uid'=>$_SGLOBAL['supe_uid']));
-			}
+		
 		
 		
 		//ÒþË½
@@ -125,11 +123,15 @@ if($_GET['op'] == 'base') {
 
 		
 		if($_POST['name']){
-				$setarr1['name'] = getstr($_POST['name'], 10, 1, 1);
+				$setarr1['name'] = getstr($_POST['name'], 40, 1, 1);
 				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
 			}
 			if($_POST['linkman']){
-				$setarr1['linkman'] = getstr($_POST['linkman'], 10, 1, 1);
+				$setarr1['linkman'] = getstr($_POST['linkman'], 40, 1, 1);
+				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
+			}
+			if($_POST['wxkey']){
+				$setarr1['wxkey'] = getstr($_POST['wxkey'], 40, 1, 1);
 				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
 			}
 		

@@ -7,8 +7,24 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
+//鍚勬ā鍧楀皬logo
+$do=$_GET['do'];
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE english='$do'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$wei1=$value4;
 
-//分页
+//鍒ゆ柇鏄惁璐拱
+$query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.english='$do'
+				ORDER BY b.dateline ASC");
+$value5 = $_SGLOBAL['db']->fetch_array($query5);
+$zhong2=$value5;
+if(empty($zhong2)){
+	showmessage("鏈喘涔板簲鐢紝璇疯喘涔板悗鍐嶄娇鐢紒","space.php?do=menuset&view=all");
+}
+
+//路脰脪鲁
 $perpage = 20;
 $perpage = mob_perpage($perpage);
 
@@ -16,17 +32,17 @@ $page = empty($_GET['page'])?0:intval($_GET['page']);
 if($page<1) $page=1;
 $start = ($page-1)*$perpage;
 
-//检查开始数
+//录矛虏茅驴陋脢录脢媒
 ckstart($start, $perpage);
 
 $dolist = array();
 $count = 0;
 
 if(empty($_GET['view']) && ($space['friendnum']<$_SCONFIG['showallfriendnum'])) {
-	$_GET['view'] = 'all';//默认显示
+	$_GET['view'] = 'all';//脛卢脠脧脧脭脢戮
 }
 	
-//处理查询
+//麓娄脌铆虏茅脩炉
 $f_index = '';
 if($_GET['view'] == 'all') {
 	
@@ -63,7 +79,7 @@ if($doid) {
 $doids = $clist = $newdoids = array();
 if(empty($count)) {
 	$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('talk')." WHERE $wheresql"), 0);
-	//更新统计
+	//赂眉脨脗脥鲁录脝
 	if($wheresql == "uid='$space[uid]'" && $space['talknum'] != $count) {
 		updatetable('space', array('talknum' => $count), array('uid'=>$space['uid']));
 	}
@@ -80,20 +96,20 @@ if($count) {
 	}
 }
 
-//单条处理
+//碌楼脤玫麓娄脌铆
 if($doid) {
 	$dovalue = empty($dolist)?array():$dolist[0];
 	if($dovalue) {
 		if($dovalue['uid'] == $_SGLOBAL['supe_uid']) {
 			$actives = array('me'=>' class="active"');
 		} else {
-			$space = getspace($dovalue['uid']);//对方的空间
+			$space = getspace($dovalue['uid']);//露脭路陆碌脛驴脮录盲
 			$actives = array('all'=>' class="active"');
 		}
 	}
 }
 
-//回复
+//禄脴赂麓
 if($doids) {
 	
 	include_once(S_ROOT.'./source/class_tree.php');
@@ -124,10 +140,10 @@ foreach ($newdoids as $cdoid) {
 	}
 }
 
-//分页
+//路脰脪鲁
 $multi = multi($count, $perpage, $page, $theurl);
 
-//同心情的
+//脥卢脨脛脟茅碌脛
 $moodlist = array();
 if($space['mood'] && empty($start)) {
 	$query = $_SGLOBAL['db']->query("SELECT s.uid,s.username,s.name,s.namestatus,s.mood,s.updatetime,s.groupid,sf.note,sf.sex
@@ -145,7 +161,7 @@ if($space['mood'] && empty($start)) {
 
 $upid = 0;
 
-//实名
+//脢碌脙没
 realname_get();
 
 $_TPL['css'] = 'talk';

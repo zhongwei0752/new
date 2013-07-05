@@ -7,7 +7,18 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-
+if(empty($space['namestatus'])){
+	showmessage("请先进行实名验证","cp.php?ac=profile");
+}
+$menusetid = empty($_GET['menusetid'])?0:intval($_GET['menusetid']);
+if($_GET['op']=='delete'){
+	updatetable('appset', array('appstatus' => '0','cheak' => '1'), array('num'=>$menusetid));
+	showmessage("删除成功","space.php?do=menuset&view=me");
+}
+if($_GET['op']=='add'){
+	updatetable('appset', array('appstatus' => '1','cheak' => '0'), array('num'=>$menusetid));
+	showmessage("添加成功","space.php?do=menuset&view=me");
+}
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
 
 $page = empty($_GET['page'])?1:intval($_GET['page']);
@@ -369,8 +380,8 @@ if($id) {
 			updatetable('space', array('menusetnum' => $count), array('uid'=>$space['uid']));
 		}
 		if($count) {
-			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('menuset')." b $f_index
-				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid
+			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor,ba.cheak,ba.appstatus, b.* FROM ".tname('menuset')." b $f_index
+				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid LEFT JOIN ".tname('appset')." ba ON b.menusetid=ba.num
 				WHERE $wheresql
 				ORDER BY $ordersql ASC LIMIT $start,$perpage");
 		}
@@ -420,13 +431,21 @@ if($_GET['view'] != 'me') {
 					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-					$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				//识别标签，只出现符合标签的应用
+				$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('spacefield')." 
+				WHERE uid='$space[uid]' ORDER BY uid  ASC LIMIT $start,$perpage");
+				$value2=$_SGLOBAL['db']->fetch_array($query2);
+				$a=$value2['business'];
+				$wei=explode("，",$value['apptag']);
+			if(in_array("$a", $wei)){
+				$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid] and bf.appstatus='1'
 				ORDER BY b.dateline ASC LIMIT $start,$perpage");
 				$value1=$_SGLOBAL['db']->fetch_array($query1);
 				$value['wei'] = $value1;
 				$list[] = $value;
+			}
 			} else {
 				$pricount++;
 			}
@@ -458,7 +477,7 @@ if($_GET['view'] != 'me') {
 		$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 		$showlink="space.php?do=showmenuset";	
 		}else{
-		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
+		inserttable("appset", array('month'=>'0','dateline1' => '0','endtime'=>'0','uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
 		$showmessage1='订制成功。';
 		$showlink1="space.php?do=menuset";
 		}
@@ -477,7 +496,7 @@ if($_GET['view'] != 'me') {
 			$showlink="space.php?do=showmenuset";
 		}
 }else{
-	updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline1']+$value2['month']*2592000+$o*2592000),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+	updatetable("appset", array('month'=>'0','endtime'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	updatetable("appset", array('appstatus'=>'1'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	$showmessage1='订制成功。';
 	$showlink1="space.php?do=menuset";
@@ -499,6 +518,7 @@ if($showmessage){
 	//删除过期的应用
 	$query3 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')."");
 	while($value3 = $_SGLOBAL['db']->fetch_array($query3)){
+		if($value3['endtime']){
 		if($value3['endtime']<$_SGLOBAL['timestamp']){
 			$num=$value3['num'];
 			$uid=$value3['uid'];
@@ -506,6 +526,7 @@ if($showmessage){
 			$value = $_SGLOBAL['db']->fetch_array($query);
 
 		}
+	}
 	}
 
 	$_TPL['css'] = 'menuset';

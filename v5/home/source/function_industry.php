@@ -183,22 +183,17 @@ function industry_post($POST, $olds=array()) {
 	if(checkperm('manageindustry')) {
 		$industryarr['hot'] = intval($POST['hot']);
 	}
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('industry')." WHERE classid='$classid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-	if($classnum) {
+	if($olds['industryid']) {
 		//¸üÐÂ
-		
-		updatetable('industry', $industryarr, array('classid'=>$classid));
+		$industryid = $olds['industryid'];
+		updatetable('industry', $industryarr, array('industryid'=>$industryid));
 		
 		$fuids = array();
 		
 		$industryarr['uid'] = $olds['uid'];
 		$industryarr['username'] = $olds['username'];
-		$industryarr['industryid'] = $classnum['industryid'];
-		$industryid=$classnum['industryid'];
 	} else {
 		//²ÎÓëÈÈÄÖ
-
 		$industryarr['topicid'] = topic_check($POST['topicid'], 'industry');
 
 		$industryarr['uid'] = $_SGLOBAL['supe_uid'];
@@ -239,20 +234,13 @@ function industry_post($POST, $olds=array()) {
 		$fieldarr['tag'] = empty($tagarr)?'':addslashes(serialize($tagarr));
 	}
 
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('industryfield')." WHERE industryid='$industryid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-
-	if(!empty($classnum)||$classnum!="0") {
+	
+	if($olds) {
 		//¸üÐÂ
-		
-		
 		updatetable('industryfield', $fieldarr, array('industryid'=>$industryid));
 	} else {
-	
 		$fieldarr['industryid'] = $industryid;
-
 		$fieldarr['uid'] = $industryarr['uid'];
-
 		inserttable('industryfield', $fieldarr);
 	}
 

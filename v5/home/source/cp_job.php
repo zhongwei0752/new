@@ -8,9 +8,26 @@ if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
 
-//�����Ϣ
+//¼ì²éÐÅÏ¢
 $jobid = empty($_GET['jobid'])?0:intval($_GET['jobid']);
 $op = empty($_GET['op'])?'':$_GET['op'];
+
+//各模块小logo
+$ac=$_GET['ac'];
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE english='$ac'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$wei1=$value4;
+
+//判断是否购买
+$query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.english='$ac'
+				ORDER BY b.dateline ASC");
+$value5 = $_SGLOBAL['db']->fetch_array($query5);
+$zhong2=$value5;
+if(empty($zhong2)){
+	showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
+}
 
 $job = array();
 if($jobid) {
@@ -20,29 +37,29 @@ if($jobid) {
 	$job = $_SGLOBAL['db']->fetch_array($query);
 }
 
-//Ȩ�޼��
+//È¨ÏÞ¼ì²é
 if(empty($job)) {
 	if(!checkperm('allowjob')) {
 		ckspacelog();
 		showmessage('no_authority_to_add_log');
 	}
 	
-	//ʵ����֤
+	//ÊµÃûÈÏÖ¤
 	ckrealname('job');
 	
-	//��Ƶ��֤
+	//ÊÓÆµÈÏÖ¤
 	ckvideophoto('job');
 	
-	//���û���ϰ
+	//ÐÂÓÃ»§¼ûÏ°
 	cknewuser();
 	
-	//�ж��Ƿ񷢲�̫��
+	//ÅÐ¶ÏÊÇ·ñ·¢²¼Ì«¿ì
 	$waittime = interval_check('post');
 	if($waittime > 0) {
 		showmessage('operating_too_fast','',1,array($waittime));
 	}
 	
-	//�����ⲿ����
+	//½ÓÊÕÍâ²¿±êÌâ
 	$job['subject'] = empty($_GET['subject'])?'':getstr($_GET['subject'], 80, 1, 0);
 	$job['message'] = empty($_GET['message'])?'':getstr($_GET['message'], 5000, 1, 0);
 	
@@ -53,7 +70,7 @@ if(empty($job)) {
 	}
 }
 
-//���ӱ༭����
+//Ìí¼Ó±à¼­²Ù×÷
 if(submitcheck('jobsubmit')) {
 
 	if(empty($job['jobid'])) {
@@ -65,7 +82,7 @@ if(submitcheck('jobsubmit')) {
 		}
 	}
 	
-	//��֤��
+	//ÑéÖ¤Âë
 	if(checkperm('seccode') && !ckseccode($_POST['seccode'])) {
 		showmessage('incorrect_code');
 	}
@@ -84,7 +101,7 @@ if(submitcheck('jobsubmit')) {
 }
 
 if($_GET['op'] == 'delete') {
-	//ɾ��
+	//É¾³ý
 	if(submitcheck('deletesubmit')) {
 		include_once(S_ROOT.'./source/function_delete.php');
 		if(deletejobs(array($jobid))) {
@@ -102,7 +119,7 @@ if($_GET['op'] == 'delete') {
 	showmessage('do_success', "space.php?uid=$uid&do=job&id=$id", 0);
 	
 } elseif($_GET['op'] == 'edithot') {
-	//Ȩ��
+	//È¨ÏÞ
 	if(!checkperm('managejob')) {
 		showmessage('no_privilege');
 	}
@@ -122,10 +139,10 @@ if($_GET['op'] == 'delete') {
 	
 } else {
 
-	//���ӱ༭
-	//��ȡ���˷���
+	//Ìí¼Ó±à¼­
+	//»ñÈ¡¸öÈË·ÖÀà
 	$classarr = $job['uid']?getclassjobarr($job['uid']):getclassjobarr($_SGLOBAL['supe_uid']);
-	//��ȡ���
+	//»ñÈ¡Ïà²á
 
 	$albums = getalbums($_SGLOBAL['supe_uid']);
 	
@@ -157,10 +174,10 @@ if($_GET['op'] == 'delete') {
 	
 	$allowhtml = checkperm('allowhtml');
 	
-	//������
+	//ºÃÓÑ×é
 	$groups = getfriendgroup();
 	
-	//�����ȵ�
+	//²ÎÓëÈÈµã
 	$topic = array();
 	$topicid = $_GET['topicid'] = intval($_GET['topicid']);
 	if($topicid) {
@@ -170,7 +187,7 @@ if($_GET['op'] == 'delete') {
 		$actives = array('job' => ' class="active"');
 	}
 	
-	//�˵�����
+	//²Ëµ¥¼¤»î
 	$menuactives = array('space'=>' class="active"');
 }
 

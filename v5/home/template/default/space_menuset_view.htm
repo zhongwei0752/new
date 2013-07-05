@@ -77,8 +77,8 @@
 </div>
 <!--{/if}-->
 <div id="content">
-<!--{if $menuset[money]}-->单价:$menuset[money]元/月<!--{else}-->单价:免费<!--{/if}--><br/>
-	<a href="cp.php?ac=menuset&menusetid=$menuset[menusetid]&op=buy&money=$menuset[money]" id="menuset_buy_$menuset[menusetid]" onclick="ajaxmenu(event, this.id)">购买</a>
+<!--{if $menuset[money]}-->单价:$menuset[money]元/月<!--{else}-->单价:免费<!--{/if}--><br/><!--{if $menuset[money]}-->
+	<a href="cp.php?ac=menuset&menusetid=$menuset[menusetid]&op=buy&money=$menuset[money]" id="menuset_buy_$menuset[menusetid]" onclick="ajaxmenu(event, this.id)">购买</a><!--{/if}-->
 	<div id="click_div">
 		<!--{template space_click}-->
 	</div>
@@ -148,6 +148,7 @@
 	<!--{/if}-->
 
 	<!--{if $otherlist}-->
+	<!--
 	<div class="sidebox">
 		<h2 class="title">
 			<a href="space.php?uid=$menuset[uid]&do=menuset&view=me" class="r_option">全部</a>
@@ -155,9 +156,9 @@
 		</h2>
 		<ul class="news_list">
 			<!--{loop $otherlist $value}-->
-			<li style="height:auto;"><a href="space.php?uid=$value[uid]&do=menuset&id=$value[menusetid]">$value[subject]</a></li>
+			<!--<li style="height:auto;"><a href="space.php?uid=$value[uid]&do=menuset&id=$value[menusetid]">$value[subject]</a></li>
 			<!--{/loop}-->
-		</ul>
+		<!--</ul>
 	</div>
 	<!--{/if}-->
 

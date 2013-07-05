@@ -8,6 +8,23 @@ if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
 
+//鍚勬ā鍧楀皬logo
+$do=$_GET['do'];
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE english='$do'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$wei1=$value4;
+
+//鍒ゆ柇鏄惁璐拱
+$query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.english='$do'
+				ORDER BY b.dateline ASC");
+$value5 = $_SGLOBAL['db']->fetch_array($query5);
+$zhong2=$value5;
+if(empty($zhong2)){
+	showmessage("鏈喘涔板簲鐢紝璇疯喘涔板悗鍐嶄娇鐢紒","space.php?do=menuset&view=all");
+}
+
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
 
 $page = empty($_GET['page'])?1:intval($_GET['page']);
@@ -15,27 +32,27 @@ if($page<1) $page=1;
 $id = empty($_GET['id'])?0:intval($_GET['id']);
 $classid = empty($_GET['classid'])?0:intval($_GET['classid']);
 
-//表态分类
+//卤铆脤卢路脰脌脿
 @include_once(S_ROOT.'./data/data_click.php');
 $clicks = empty($_SGLOBAL['click']['branchid'])?array():$_SGLOBAL['click']['branchid'];
 
 if($id) {
 
-	//读取日志
+	//露脕脠隆脠脮脰戮
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('branch')." b LEFT JOIN ".tname('branchfield')." bf ON bf.branchid=b.branchid WHERE b.branchid='$id' AND b.uid='$space[uid]'");
 	$branch = $_SGLOBAL['db']->fetch_array($query);
-	//日志不存在
+	//脠脮脰戮虏禄麓忙脭脷
 	if(empty($branch)) {
 		showmessage('view_to_info_did_not_exist');
 	}
 
-	//检查好友权限
+	//录矛虏茅潞脙脫脩脠篓脧脼
 	if(!ckfriend($branch['uid'], $branch['friend'], $branch['target_ids'])) {
-		//没有权限
+		//脙禄脫脨脠篓脧脼
 		include template('space_privacy');
 		exit();
 	} elseif(!$space['self'] && $branch['friend'] == 4) {
-		//密码输入问题
+		//脙脺脗毛脢盲脠毛脦脢脤芒
 		$cookiename = "view_pwd_branch_$branch[branchid]";
 		$cookievalue = empty($_SCOOKIE[$cookiename])?'':$_SCOOKIE[$cookiename];
 		if($cookievalue != md5(md5($branch['password']))) {
@@ -45,17 +62,17 @@ if($id) {
 		}
 	}
 
-	//整理
+	//脮没脌铆
 	$branch['tag'] = empty($branch['tag'])?array():unserialize($branch['tag']);
 
-	//处理视频标签
+	//麓娄脌铆脢脫脝碌卤锚脟漏
 	include_once(S_ROOT.'./source/function_branch.php');
 
 	$branch['message'] = branch_bbcode($branch['message']);
 
 	$otherlist = $newlist = array();
 
-	//有效期
+	//脫脨脨搂脝脷
 	if($_SCONFIG['uc_tagrelatedtime'] && ($_SGLOBAL['timestamp'] - $branch['relatedtime'] > $_SCONFIG['uc_tagrelatedtime'])) {
 		$branch['related'] = array();
 	}
@@ -76,7 +93,7 @@ if($id) {
 				$branch['related'] = uc_tag_get($b_tags[$tag_index], $_SGLOBAL['tagtpl']['limit']);
 			}
 		} else {
-			//自身TAG
+			//脳脭脡铆TAG
 			$tag_branchids = array();
 			$query = $_SGLOBAL['db']->query("SELECT DISTINCT branchid FROM ".tname('tagbranch')." WHERE tagid IN (".simplode($b_tagids).") AND branchid<>'$branch[branchid]' ORDER BY branchid DESC LIMIT 0,10");
 			while ($value = $_SGLOBAL['db']->fetch_array($query)) {
@@ -85,7 +102,7 @@ if($id) {
 			if($tag_branchids) {
 				$query = $_SGLOBAL['db']->query("SELECT uid,username,subject,branchid FROM ".tname('branch')." WHERE branchid IN (".simplode($tag_branchids).")");
 				while ($value = $_SGLOBAL['db']->fetch_array($query)) {
-					realname_set($value['uid'], $value['username']);//实名
+					realname_set($value['uid'], $value['username']);//脢碌脙没
 					$value['url'] = "space.php?uid=$value[uid]&do=branch&id=$value[branchid]";
 					$branch['related'][UC_APPID]['data'][] = $value;
 				}
@@ -115,12 +132,12 @@ if($id) {
 				}
 			}
 		}
-		updatetable('branchfield', array('related'=>addslashes(serialize(sstripslashes($branch['related']))), 'relatedtime'=>$_SGLOBAL['timestamp']), array('branchid'=>$branch['branchid']));//更新
+		updatetable('branchfield', array('related'=>addslashes(serialize(sstripslashes($branch['related']))), 'relatedtime'=>$_SGLOBAL['timestamp']), array('branchid'=>$branch['branchid']));//赂眉脨脗
 	} else {
 		$branch['related'] = empty($branch['related'])?array():unserialize($branch['related']);
 	}
 
-	//作者的其他最新日志
+	//脳梅脮脽碌脛脝盲脣没脳卯脨脗脠脮脰戮
 	$otherlist = array();
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('branch')." WHERE uid='$space[uid]' ORDER BY dateline DESC LIMIT 0,6");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
@@ -129,7 +146,7 @@ if($id) {
 		}
 	}
 
-	//最新的日志
+	//脳卯脨脗碌脛脠脮脰戮
 	$newlist = array();
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('branch')." WHERE hot>=3 ORDER BY dateline DESC LIMIT 0,6");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
@@ -139,13 +156,13 @@ if($id) {
 		}
 	}
 
-	//评论
+	//脝脌脗脹
 	$perpage = 30;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
 
-	//检查开始数
+	//录矛虏茅驴陋脢录脢媒
 	ckstart($start, $perpage);
 
 	$count = $branch['replynum'];
@@ -157,22 +174,22 @@ if($id) {
 
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('comment')." WHERE $csql id='$id' AND idtype='branchid' ORDER BY dateline LIMIT $start,$perpage");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
-			realname_set($value['authorid'], $value['author']);//实名
+			realname_set($value['authorid'], $value['author']);//脢碌脙没
 			$list[] = $value;
 		}
 	}
 
-	//分页
+	//路脰脪鲁
 	$multi = multi($count, $perpage, $page, "space.php?uid=$branch[uid]&do=$do&id=$id", '', 'content');
 
-	//访问统计
+	//路脙脦脢脥鲁录脝
 	if(!$space['self'] && $_SCOOKIE['view_branchid'] != $branch['branchid']) {
 		$_SGLOBAL['db']->query("UPDATE ".tname('branch')." SET viewnum=viewnum+1 WHERE branchid='$branch[branchid]'");
-		inserttable('log', array('id'=>$space['uid'], 'idtype'=>'uid'));//延迟更新
+		inserttable('log', array('id'=>$space['uid'], 'idtype'=>'uid'));//脩脫鲁脵赂眉脨脗
 		ssetcookie('view_branchid', $branch['branchid']);
 	}
 
-	//表态
+	//卤铆脤卢
 	$hash = md5($branch['uid']."\t".$branch['dateline']);
 	$id = $branch['branchid'];
 	$idtype = 'branchid';
@@ -184,38 +201,38 @@ if($id) {
 		$clicks[$key] = $value;
 	}
 
-	//点评
+	//碌茫脝脌
 	$clickuserlist = array();
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('clickuser')."
 		WHERE id='$id' AND idtype='$idtype'
 		ORDER BY dateline DESC
 		LIMIT 0,18");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
-		realname_set($value['uid'], $value['username']);//实名
+		realname_set($value['uid'], $value['username']);//脢碌脙没
 		$value['clickname'] = $clicks[$value['clickid']]['name'];
 		$clickuserlist[] = $value;
 	}
 
-	//热点
+	//脠脠碌茫
 	$topic = topic_get($branch['topicid']);
 
-	//实名
+	//脢碌脙没
 	realname_get();
 
 	$_TPL['css'] = 'branch';
 	include_once template("space_branch_view");
 
 } else {
-	//分页
+	//路脰脪鲁
 	$perpage = 10;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
 
-	//检查开始数
+	//录矛虏茅驴陋脢录脢媒
 	ckstart($start, $perpage);
 
-	//摘要截取
+	//脮陋脪陋陆脴脠隆
 	$summarylen = 300;
 
 	$classarr = array();
@@ -226,13 +243,13 @@ if($id) {
 	$ordersql = 'b.dateline';
 
 	if(empty($_GET['view']) && ($space['friendnum']<$_SCONFIG['showallfriendnum'])) {
-		$_GET['view'] = 'me';//默认显示
+		$_GET['view'] = 'me';//脛卢脠脧脧脭脢戮
 	}
 
-	//处理查询
+	//麓娄脌铆虏茅脩炉
 	$f_index = '';
 	if($_GET['view'] == 'click') {
-		//踩过的日志
+		//虏脠鹿媒碌脛脠脮脰戮
 		$theurl = "space.php?uid=$space[uid]&do=$do&view=click";
 		$actives = array('click'=>' class="active"');
 
@@ -257,19 +274,19 @@ if($id) {
 	} else {
 		
 		if($_GET['view'] == 'all') {
-			//大家的日志
+			//麓贸录脪碌脛脠脮脰戮
 			$wheresql = '1';
 
 			$actives = array('all'=>' class="active"');
 
-			//排序
+			//脜脜脨貌
 			$orderarr = array('dateline','replynum','viewnum','hot');
 			foreach ($clicks as $value) {
 				$orderarr[] = "click_$value[clickid]";
 			}
 			if(!in_array($_GET['orderby'], $orderarr)) $_GET['orderby'] = '';
 
-			//时间
+			//脢卤录盲
 			$_GET['day'] = intval($_GET['day']);
 			$_GET['hotday'] = 7;
 
@@ -304,11 +321,11 @@ if($id) {
 			if(empty($space['feedfriend']) || $classid) $_GET['view'] = 'me';
 			
 			if($_GET['view'] == 'me') {
-				//查看个人的
+				//虏茅驴麓赂枚脠脣碌脛
 				$wheresql = "b.uid='$space[uid]'";
 				$theurl = "space.php?uid=$space[uid]&do=$do&view=me";
 				$actives = array('me'=>' class="active"');
-				//日志分类
+				//脠脮脰戮路脰脌脿
 				$query = $_SGLOBAL['db']->query("SELECT classid, classname FROM ".tname('classbranch')." WHERE uid='$space[uid]' or uid='0'");
 				while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 					$classarr[$value['classid']] = $value['classname'];
@@ -320,7 +337,7 @@ if($id) {
 	
 				$fuid_actives = array();
 	
-				//查看指定好友的
+				//虏茅驴麓脰赂露篓潞脙脫脩碌脛
 				$fusername = trim($_GET['fusername']);
 				$fuid = intval($_GET['fuid']);
 				if($fusername) {
@@ -335,7 +352,7 @@ if($id) {
 	
 				$actives = array('we'=>' class="active"');
 	
-				//好友列表
+				//潞脙脫脩脕脨卤铆
 				$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('friend')." WHERE uid='$space[uid]' AND status='1' ORDER BY num DESC, dateline DESC LIMIT 0,500");
 				while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 					realname_set($value['fuid'], $value['fusername']);
@@ -344,20 +361,20 @@ if($id) {
 			}
 		}
 
-		//分类
+		//路脰脌脿
 		if($classid) {
 			$wheresql .= " AND b.classid='$classid'";
 			$theurl .= "&classid=$classid";
 		}
 
-		//设置权限
+		//脡猫脰脙脠篓脧脼
 		$_GET['friend'] = intval($_GET['friend']);
 		if($_GET['friend']) {
 			$wheresql .= " AND b.friend='$_GET[friend]'";
 			$theurl .= "&friend=$_GET[friend]";
 		}
 
-		//搜索
+		//脣脩脣梅
 		if($searchkey = stripsearchkey($_GET['searchkey'])) {
 			$wheresql .= " AND b.subject LIKE '%$searchkey%'";
 			$theurl .= "&searchkey=$_GET[searchkey]";
@@ -365,7 +382,7 @@ if($id) {
 		}
 
 		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('branch')." b WHERE $wheresql"),0);
-		//更新统计
+		//赂眉脨脗脥鲁录脝
 		if($wheresql == "b.uid='$space[uid]'" && $space['branchnum'] != $count) {
 			updatetable('space', array('branchnum' => $count), array('uid'=>$space['uid']));
 		}
@@ -394,10 +411,10 @@ if($id) {
 		}
 	}
 
-	//分页
+	//路脰脪鲁
 	$multi = multi($count, $perpage, $page, $theurl);
 
-	//实名
+	//脢碌脙没
 	realname_get();
 
 	$_TPL['css'] = 'branch';

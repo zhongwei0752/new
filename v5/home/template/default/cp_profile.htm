@@ -17,7 +17,7 @@
 </tr>
 <!--{if !$_SCONFIG['realname']}-->
 <tr>
-	<th style="width:10em;">真实姓名:</th>
+	<th style="width:10em;">公司名称:</th>
 	<td>
 		<input type="text" id="name" name="name" value="<!--{eval echo stripslashes($space['name']);}-->" class="t_input" />
 	</td>
@@ -25,7 +25,7 @@
 </tr>
 <!--{else}-->
 <tr>
-	<th style="width:10em;">真实姓名:</th>
+	<th style="width:10em;">公司名称:</th>
 	<td>
 	<!--{if $space[name] && empty($_GET['namechange'])}-->
 	<span style="font-weight:bold;"><!--{eval echo stripslashes($space['name']);}--></span>
@@ -33,7 +33,7 @@
 	<input type="hidden" name="name" value="<!--{eval echo stripslashes($space['name']);}-->" />
 	<!--{else}-->
 	<!--{if $rncredit && $_GET['namechange']}--><img src="image/credit.gif" align="absmiddle"> 本操作需要支付积分 $rncredit 个，您现在的积分 $space[credit] 个。<br><!--{/if}-->
-	<!--{if empty($_SCONFIG['namechange'])}-->您的真实姓名一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+	<!--{if empty($_SCONFIG['namechange'])}-->您的公司名称一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
 	<input type="text" id="name" name="name" value="<!--{eval echo stripslashes($space['name']);}-->" class="t_input" />
 	<!--{/if}-->
 	</td>
@@ -113,19 +113,6 @@
 	<td>&nbsp;</td>
 </tr>
 <tr>
-	<tr>
-	<th style="width:10em;">公司名称:</th>
-	<td>
-		<!--{if $space[companyname] && empty($_GET['namechange'])}-->
-		<span style="font-weight:bold;">$space['companyname']</span>
-		<!--{else}-->
-		<!--{if empty($_SCONFIG['namechange'])}-->您的公司名称一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
-		<label for="companyname"><input id="companyname" type="text" value="$space['companyname']" name="companyname" /></label> 
-		<!--{/if}-->
-	</td>
-	<td>&nbsp;</td>
-</tr>
-<tr>
 	<th style="width:10em;">固话:</th>
 	<td>
 		<!--{if $space[telephone] && empty($_GET['namechange'])}-->
@@ -177,11 +164,11 @@
 <tr>
 	<th style="width:10em;">微信公众号:</th>
 	<td>
-		<!--{if $space[weixin] && empty($_GET['namechange'])}-->
-		<span style="font-weight:bold;">$space['weixin']</span>
+		<!--{if $space[wxkey] && empty($_GET['namechange'])}-->
+		<span style="font-weight:bold;">$space['wxkey']</span>
 		<!--{else}-->
 		<!--{if empty($_SCONFIG['namechange'])}-->您的微信公众号一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
-		<label for="weixin"><input id="weixin" type="text" value="$space['weixin']" name="weixin" /></label> 
+		<label for="wxkey"><input id="wxkey" type="text" value="$space['wxkey']" name="wxkey" /></label> 
 		<!--{/if}-->
 	</td>
 	<td>&nbsp;</td>
@@ -245,8 +232,8 @@
 		<!--{if $space[companyintroduce] && empty($_GET['namechange'])}-->
 		<span style="font-weight:bold;">$space['companyintroduce']</span>
 		<!--{else}-->
-		<!--{if empty($_SCONFIG['namechange'])}-->您的邮箱一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
-		<label for="companyintroduce"><textarea name="companyintroduce" rows="3" cols="50">$space['companyintroduce']</textarea></label> 
+		<!--{if empty($_SCONFIG['namechange'])}-->您的企业介绍一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
+		<label for="companyintroduce"><textarea name="companyintroduce" rows="5" cols="80">$space['companyintroduce']</textarea></label> 
 		<!--{/if}-->
 	</td>
 	<td>&nbsp;</td>

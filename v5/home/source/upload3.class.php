@@ -1,6 +1,6 @@
 <?php
 
-	class upload
+	class upload2
 	{
 		var $upload_name;					//上传文件名
 		var $upload_tmp_name;				//上传临时文件名
@@ -23,7 +23,7 @@
 			$this->upload_file_size = $_FILES["file3"]["size"];
 		}
 
-		function upload_file($id,$table)
+		function upload_file2($id,$table)
 		{   
 			if(!empty($this->upload_filetype)){
 			if(in_array($this->upload_filetype,$this->allow_uploadedfile_type))
@@ -41,9 +41,9 @@
 					$this->upload_target_path = $this->upload_target_dir.$this->upload_final_name;
 					if(move_uploaded_file($this->upload_tmp_name,$this->upload_target_path)){
 					include("./source/image3.class.php");
-  					$image=new image();
+  					$image=new image2();
 
-  					$image->reImg($this->upload_target_path,64,64,80,$id,$table);
+  					$image->reImg3($this->upload_target_path,64,64,80,$id,$table);
   					
   					
   					updatetable($table, array('logourl'=>$this->upload_target_path), array('uid'=>$id));

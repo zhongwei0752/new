@@ -9,8 +9,18 @@
 
 <!--{/loop}-->
 总额:<!--{eval $allcost=array_sum($allcost1);}-->$allcost
-<form action = "space.php?do=showmenuset" method = "post">
+<form name=alipayment action=./payphp/alipayapi.php method=post target="_blank">
+
+<input type="hidden" name="WIDseller_email" value="1907983236@qq.com" />
+<input type="hidden" name="WIDout_trade_no" value="$number.$zfbuid" />
+<input type="hidden" name="WIDsubject" value="微伍应用" />
+<input type="hidden" name="WIDtotal_fee" value="$allcost" />
+<input type="hidden" name="WIDbody" value="欢迎选购微伍应用" />
+<input type="hidden" name="WIDshow_url" value="欢迎选购微伍应用" />
 <input type="submit" value="购买"  name="buy">
+
+</form>
+<form action = "space.php?do=showmenuset" method = "post">
 <input type="submit" value="暂不购买"  name="cancel">
 </form>
 <!--{else}-->

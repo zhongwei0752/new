@@ -70,9 +70,12 @@
 		<!--{if $space[reportnum]}--><div><img src="image/icon/report.gif" alt="" /><a href="admincp.php?ac=report"><strong>$space[reportnum]</strong> 个举报</a></div><!--{/if}-->
 		<!--{if $space[namestatusnum]}--><div><img src="image/icon/profile.gif" alt="" /><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1"><strong>$space[namestatusnum]</strong> 个待认证用户</a></div><!--{/if}-->
 		<!--{if $space[eventverifynum]}--><div><img src="image/icon/event.gif" alt="" /><a href="admincp.php?ac=event&perpage=20&grade=0&searchsubmit=1"><strong>$space[eventverifynum]</strong> 个待审核活动</a></div><!--{/if}-->
+
 	</div>
 	<!--{/if}-->
-
+	<div class="mgs_list">
+	<!--{if $_SGLOBAL['member']['newpm']}--><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm&filter=privatepm"><strong>$_SGLOBAL['member']['newpm']</strong> 个新回复</a></div><!--{/if}-->
+	</div>
 	
 	企业动态
 	产品介绍

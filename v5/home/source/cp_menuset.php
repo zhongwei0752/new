@@ -127,9 +127,9 @@ if($_GET['op'] == 'delete') {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE num='$menuset[menusetid]' and uid=$_SGLOBAL[supe_uid]");
 		$value = $_SGLOBAL['db']->fetch_array($query);
 		if(empty($value)){
-			inserttable("appset", array('num'=>$menuset['menusetid'],'dateline' => $_SGLOBAL['timestamp'],'month'=>$_POST['buy'],'endtime'=>$_SGLOBAL['timestamp']+$_POST['buy']*2592000, 'uid'=>$_SGLOBAL['supe_uid']));
+			inserttable("appset", array('num'=>$menuset['menusetid'],'dateline1' => $_SGLOBAL['timestamp'],'month'=>$_POST['buy'],'endtime'=>$_SGLOBAL['timestamp']+$_POST['buy']*2592000, 'uid'=>$_SGLOBAL['supe_uid']));
 		}else{
-			updatetable('appset', array('month'=>$value['month']+$_POST['buy'],'endtime'=>$value['dateline']+$value['month']*2592000+$_POST['buy']*2592000), array('num'=>$menuset['menusetid']));
+			updatetable('appset', array('month'=>$value['month']+$_POST['buy'],'endtime'=>$value['dateline1']+$value['month']*2592000+$_POST['buy']*2592000), array('num'=>$menuset['menusetid']));
 		}
 		$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE menusetid='$menuset[menusetid]'");
 		$value1 = $_SGLOBAL['db']->fetch_array($query1);
