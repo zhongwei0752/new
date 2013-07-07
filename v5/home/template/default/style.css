@@ -119,10 +119,10 @@ body { background: #FFF; }
         .dropmenu_drop li a { color: #2C629E; font-size: 12px; font-weight: normal; }
 		.dropmenu_drop .active { font-weight: bold; }
 
-#main { margin: 0 0 20px; width: 100%; background: url(image/appSidebar_bg.gif) repeat-y 0 0; overflow: hidden; }
+#main { margin: 0 0 20px; width: 100%; overflow: hidden; }
 
 /*************************************************APP SIDEBAR***/
-#app_sidebar { float: left; margin: 0 20px 0 0; padding: 10px 0 0; width: 140px; background: url(image/appSidebar_top_bg.gif) no-repeat 0 0; font-size: 14px; }
+#app_sidebar { float: left; margin: 0 0 0 0;  width: 205px;  font-size: 14px; }
   #app_sidebar .topline { border-top: 1px dashed #CCC; }
   .app_list { margin: 0 10px 0 10px; padding: 5px 5px 0 5px; overflow: hidden; }
     .app_list li { position: relative; margin: 0 0 12px; width: 110px; height: 20px; line-height: 21px; overflow: hidden; }
@@ -411,7 +411,7 @@ a.button { padding: 5px; }
     .menu_list li { float: left; width: 50%; line-height: 180%; text-align: center; }
 .facebox { padding: 8px; width: 250px; border: 1px solid #CCC; background: #FFF; z-index: 100000;}
     .facebox ul li { float: left; width: 25px; height: 25px; overflow: hidden; }
-#bottom { height: 10px; background: url(image/appSidebar_bottom_bg.gif) no-repeat; clear: both; overflow: hidden; }
+#bottom { height: 10px; clear: both; overflow: hidden; }
 #footer { padding: 10px 0 10px 0; border-top: 1px solid #EBE6C9; color: #333; text-align: center; }
     #footer a { color: #333; }
     .noimage{ float: left; margin: 0 5px 0 0; }

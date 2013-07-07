@@ -10,81 +10,48 @@
 	</div>
 	<!--/main-->
 	<!--{/if}-->
-	<div class="footerbar">
-		<div class="fbtop"></div>
-		<div class="nbox_c">
-			<div class="foobox">
-				<div class="fbox">
-					<h2 class="ntitle">使用帮助</h2>
-					<ul>
-						<li><a href="#">开通流程</a></li>
-						<li><a href="#">管理员手册</a></li>
-						<li><a href="#">用户手册</a></li>
-					</ul>
-				</div>
-				<div class="fbox">
-					<h2 class="ntitle">投诉与建议</h2>
-					<ul>
-					<li><a href="#">在线客服</a></li>
-					<li><a href="#">留言板</a></li>
-					</ul>
-				</div>
-				<div class="fbox">
-					<h2 class="ntitle">合作</h2>
-					<ul>
-						<li><a href="#">品牌企业合作</a></li>
-						<li><a href="#">媒体合作</a></li>
-						<li><a href="#">收费细则</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="nbox_s">
-			<h2 class="ntitle">关于我们</h2>
-			<ul>
-				<li><a href="cp.php?ac=invite">企业介绍</a></li>
-				<li><a href="cp.php?ac=invite">联系方式</a></li>
-				<li><a href="cp.php?ac=invite">人才招聘</a></li>
-			</ul>
-		</div>
-		<div class="fbbottom"></div>
-	</div>
+	<div class="footer">
+        <div class="footer_map container_12">
+           <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">使用帮助:</li>
+                <li><a href="">开通流程</a></li>
+                <li><a href="">管理员手册</a></li>
+                <li><a href="">用户手册</a></li>
+           </ul>
 
-</div>
-	<div id="footer">
-		<!--{if $_TPL['templates']}-->
-		<div class="chostlp" title="切换风格"><img id="chostlp" src="{$_TPL['default_template']['icon']}" onmouseover="showMenu(this.id)" alt="{$_TPL['default_template']['name']}" /></div>
-		<ul id="chostlp_menu" class="chostlp_drop" style="display: none">
-		<!--{loop $_TPL['templates'] $value}-->
-			<li><a href="cp.php?ac=common&op=changetpl&name=$value[name]" title="$value[name]"><img src="$value[icon]" alt="$value[name]" /></a></li>
-		<!--{/loop}-->
-		</ul>
-		<!--{/if}-->
-		
-		<p class="r_option">
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">投诉与建议:</li>
+                <li><a href="">在线客服</a></li>
+                <li><a href="">留言板</a></li>
+           </ul>
+
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png"><span>合作:</span></li>
+                <li><a href="">品牌企业合作</a></li>
+                <li><a href="">媒体合作</a></li>
+                <li><a href="">收费细节</a></li>
+           </ul>
+
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">关于我们:</li>
+                <li><a href="">企业介绍</a></li>
+                <li><a href="">联系方式</a></li>
+                <li><a href="">人才招聘</a></li>
+           </ul>
+          
+        </div><!-- map end -->
+        <div class="footer_info">
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+            
 			<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
-		</p>
 		
-		<!--{if $_SGLOBAL['ad']['footer']}-->
-		<p style="padding:5px 0 10px 0;"><!--{ad/footer}--></p>
-		<!--{/if}-->
-			
-		<!--{if $_SCONFIG['close']}-->
-		<p style="color:blue;font-weight:bold;">
-			提醒：当前站点处于关闭状态
-		</p>
-		<!--{/if}-->
+        </div>
+    </div>
 
-		<p>
-			版权所有:广州市宏门网络科技有限公司 ICP:粤A-XXXXXXXX
-		</p>
-		<!--{if $_SCONFIG['debuginfo']}-->
-		<p><!--{eval echo debuginfo();}--></p>
-		<!--{/if}-->
-	</div>
 </div>
 <!--/wrap-->
-
+    <script src="js/jquery_v1.10.2.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
 <!--{if $_SGLOBAL['appmenu']}-->
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">
 	<li><a href="{$_SGLOBAL[appmenu][url]}" title="{$_SGLOBAL[appmenu][name]}" target="_blank">{$_SGLOBAL[appmenu][name]}</a></li>
