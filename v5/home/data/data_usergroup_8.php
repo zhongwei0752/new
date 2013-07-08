@@ -97,12 +97,7 @@ $_SGLOBAL['usergroup']=Array
 		'allowindustry' => '0',
 		'allowproduct' => '0',
 		'allowdevelopment' => '0',
-		'allowbranch' => '0',
-		'allowmenuset' => '0',
-		'allowjob' => '0',
-		'allowtalk' => '0',
-		'managemenuset' => '0',
-		'allowcases' => '0'
+		'allowbranch' => '0'
 		)
 	)
 ?>

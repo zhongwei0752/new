@@ -4,3 +4,4 @@
 <?PHP exit;?>	2013-07-01 13:29:17		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1372656557	zhongwei0752@gmail.com sendmail failed.
 <?PHP exit;?>	2013-07-01 13:32:43		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1372656763	zhongwei0752@gmail.com sendmail failed.
 <?PHP exit;?>	2013-07-01 13:34:58		127.0.0.1	0	/v5/v5/home/do.php?ac=sendmail&rand=1372656898	zhongwei0752@gmail.com sendmail failed.
+<?PHP exit;?>	2013-07-07 21:21:56		127.0.0.1	3	/v5/v5/home/do.php?ac=sendmail&rand=1373203316	623610577@qq.com sendmail failed.

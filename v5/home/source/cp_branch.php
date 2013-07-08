@@ -25,9 +25,9 @@ $query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $
 				ORDER BY b.dateline ASC");
 $value5 = $_SGLOBAL['db']->fetch_array($query5);
 $zhong2=$value5;
-if(empty($zhong2)){
-	showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
-}
+//if(empty($zhong2)){
+	//showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
+//}
 
 $branch = array();
 if($branchid) {
@@ -39,10 +39,10 @@ if($branchid) {
 
 //È¨ÏÞ¼ì²é
 if(empty($branch)) {
-	if(!checkperm('allowbranch')) {
-		ckspacelog();
-		showmessage('no_authority_to_add_log');
-	}
+	//if(!checkperm('allowbranch')) {
+	//	ckspacelog();
+	//	showmessage('no_authority_to_add_log');
+	//}
 	
 	//ÊµÃûÈÏÖ¤
 	ckrealname('branch');

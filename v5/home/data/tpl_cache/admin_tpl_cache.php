@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/cache|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1373019851', 'admin/tpl/cache');?><?php $_TPL['menunames'] = array(
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/cache|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1373174716', 'admin/tpl/cache');?><?php $_TPL['menunames'] = array(
 		'index' => '管理首页',
 		'config' => '站点设置',
 		'privacy' => '隐私设置',
@@ -65,7 +65,12 @@
 <script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_face.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+ <!-- Bootstrap -->
+   <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
 <style type="text/css">
+
 @import url(template/default/network.css);
 @import url(template/default/style.css);
 <?php if($_TPL['css']) { ?>
@@ -89,105 +94,84 @@
 <div id="ajaxwaitid"></div>
 <div id="header">
 <?php if($_SGLOBAL['ad']['header']) { ?><div id="ad_header"><?php adshow('header'); ?></div><?php } ?>
-<div class="headerwarp">
-<h1 class="logo"><a href="index.php"><img src="template/<?=$_SCONFIG['template']?>/image/logo.gif" alt="<?=$_SCONFIG['sitename']?>" /></a></h1>
-<ul class="menu">
-<?php if($_SGLOBAL['supe_uid']) { ?>
-<li><a href="space.php?do=home">首页</a></li>
-<li><a href="space.php?do=friend">粉丝列表</a></li>
-<?php } else { ?>
-<li><a href="index.php">首页</a></li>
-
-<?php } ?>	
-<?php if($_SGLOBAL['supe_uid']) { ?>
-<li><a href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>(新)<?php } ?></a></li>
+ <div class="wrapper">
+ <div class="navbar">
+            <div class="navbar-inner container_36">
+                
+                <a class="logo grid_1" href="#"><img src="img/logo.png"></a>
+                <?php if($_SGLOBAL['supe_uid']) { ?>
+                <a href="space.php?do=home" class="grid_2">首页</a>
+                <a href="space.php?do=friend" class="grid_2">客户列表</a>
+                <?php } else { ?>
+                 <a href="index.php" class="grid_2">首页</a>
+                <?php } ?>
+                <?php if($_SGLOBAL['supe_uid']) { ?>	
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>(新)<?php } ?></a>
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><li class="notify" id="membernotemenu" onmouseover="showMenu(this.id)"><a href="space.php?do=notice"><?=$_SGLOBAL['member']['allnotenum']?>个提醒</a></li><?php } ?>
 <?php } else { ?>
-<li><a href="help.php">帮助</a></li>
+<a class="grid_2" href="help.php">帮助</a>
 <?php } ?>
-</ul>
 
-<div class="nav_account">
-<?php if($_SGLOBAL['supe_uid']) { ?>
-<a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>" class="login_thumb"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
-<a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>" class="loginName"><?=$_SN[$_SGLOBAL['supe_uid']]?></a>
-<?php if($_SGLOBAL['member']['credit']) { ?>
-<a href="cp.php?ac=credit" style="font-size:11px;padding:0 0 0 5px;"><img src="image/credit.gif"><?=$_SGLOBAL['member']['credit']?></a>
+                <?php if($_SGLOBAL['supe_uid']) { ?>
+                <div class="grid_3"></div>
+                <div class="grid_4">
+                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
+                   <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
+                </div>
+         <?php } else { ?>
+<div class="grid_3"></div>
+                <div class="grid_4">
+                   <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <span class="company_name">欢迎您</span><br/>
+                   <a href="do.php?ac=<?=$_SCONFIG['login_action']?>" class="header_btn setting_btn">登录</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  class="header_btn quit_btn">注册</a> 
+                </div>
 <?php } ?>
-<br />
-<?php if(empty($_SCONFIG['closeinvite'])) { ?>
-<a href="cp.php?ac=invite">邀请</a> 
-<?php } ?>
-<a href="cp.php?ac=task">任务</a> 
-<a href="cp.php?ac=magic">道具</a>
-<a href="cp.php">设置</a> 
-<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>">退出</a>
-<?php } else { ?>
-<a href="do.php?ac=<?=$_SCONFIG['register_action']?>" class="login_thumb"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
-欢迎您<br>
-<a href="do.php?ac=<?=$_SCONFIG['login_action']?>">登录</a> | 
-<a href="do.php?ac=<?=$_SCONFIG['register_action']?>">注册</a>
-<?php } ?>
-</div>
-</div>
-</div>
+  </div>
+         </div>
+     </div>
 
-<div id="wrap">
+<div id="wrap" style="width:1024px;">
 
 <div>
 <?php if(empty($_TPL['nosidebar'])) { ?>
 
 <?php if($zhong1) { ?>
 <div id="main">
-
 <div id="app_sidebar">
+
 <?php if($_SGLOBAL['supe_uid']) { ?>
-<ul class="app_list" id="default_userapp">
-<li>基本组件</li>
 
-<?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li><img src="<?=$value['image2url']?>"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
-
+<div class="side_bar" >
+              <div class="side_bar_inner" >
+                    <ul>
+                        <li class="side_header"><span class="title">基本组件</span><a href="" class="manage_btn">管理</a></li>
+                        <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
+<li class="side_option"><img src="<?=$value['image2url']?>"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
-<li>高级组件</li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">客户管理</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">商品管理</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">订单管理</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">预约预订管理</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">焦点推荐</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">群发</a></li>
-<li><img src="image/app/blog.gif"><a href="space.php?do=blog">选择手机模块</a></li>
-</ul>
-
-<ul class="app_list topline" id="my_defaultapp">
-<?php if($_SCONFIG['my_status']) { ?>
-<?php if(is_array($_SGLOBAL['userapp'])) { foreach($_SGLOBAL['userapp'] as $value) { ?>
-<li><img src="http://appicon.manyou.com/icons/<?=$value['appid']?>"><a href="userapp.php?id=<?=$value['appid']?>"><?=$value['appname']?></a></li>
-<?php } } ?>
-<?php } ?>
-</ul>
-
-<?php if($_SCONFIG['my_status']) { ?>
-<ul class="app_list topline" id="my_userapp">
-<?php if(is_array($_SGLOBAL['my_menu'])) { foreach($_SGLOBAL['my_menu'] as $value) { ?>
-<li id="userapp_li_<?=$value['appid']?>"><img src="http://appicon.manyou.com/icons/<?=$value['appid']?>"><a href="userapp.php?id=<?=$value['appid']?>" title="<?=$value['appname']?>"><?=$value['appname']?></a></li>
-<?php } } ?>
-</ul>
-<?php } ?>
-
-<?php if($_SGLOBAL['my_menu_more']) { ?>
-<p class="app_more"><a href="javascript:;" id="a_app_more" onclick="userapp_open();" class="off">展开</a></p>
-<?php } ?>
+                       <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
+                       
+                        <li class="side_header"><span class="title">高级组件</span><a href="" class="manage_btn">管理</a></li>
+                        <li class="side_option"><a href="">客户管理</a></li>
+                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="">订单管理</a></li>
+                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="">群发</a></li>
+                        <li class="side_option"><a href="">选择手机模板</a></li>
+                    </ul>
+              </div>
+         </div>
 
 
-<div class="app_m">
+<!--<div class="app_m">
 <ul>
 <?php if($_SN[$_SGLOBAL['supe_uid']]=="admin") { ?>
-<li><img src="image/app_add.gif"><a href="cp.php?ac=menuset" class="addApp">添加应用</a></li>
+<!--<li><img src="image/app_add.gif"><a href="cp.php?ac=menuset" class="addApp">添加应用</a></li>
 <?php } ?>
-<li><img src="image/app_set.gif"><a href="space.php?do=menuset&view=me" class="myApp">管理应用</a></li>
+<!--<li><img src="image/app_set.gif"><a href="space.php?do=menuset&view=me" class="myApp">管理应用</a></li>
 </ul>
-</div>
+</div>-->
 
 <?php } else { ?>
 <div class="bar_text">
@@ -206,10 +190,11 @@
 </form>
 </div>
 <?php } ?>
+
 </div>
 <?php } ?>
 <?php if($zhong1) { ?>
-<div id="mainarea">
+<div id="mainarea" style="margin-left:10px;">
 <?php } else { ?>
 <div id="mainarea" style="width:970px;">
 <?php } ?>

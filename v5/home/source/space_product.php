@@ -21,9 +21,9 @@ $query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $
 				ORDER BY b.dateline ASC");
 $value5 = $_SGLOBAL['db']->fetch_array($query5);
 $zhong2=$value5;
-if(empty($zhong2)){
-	showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
-}
+//if(empty($zhong2)){
+//	showmessage("未购买应用，请购买后再使用！","space.php?do=menuset&view=all");
+//}
 
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
 
@@ -157,7 +157,7 @@ if($id) {
 	}
 
 	//ÆÀÂÛ
-	$perpage = 30;
+	$perpage = 10;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
@@ -166,7 +166,6 @@ if($id) {
 	ckstart($start, $perpage);
 
 	$count = $product['replynum'];
-
 	$list = array();
 	if($count) {
 		$cid = empty($_GET['cid'])?0:intval($_GET['cid']);
