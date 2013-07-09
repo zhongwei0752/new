@@ -3,7 +3,7 @@
 <!--{template header}-->
 
 <!--{if $space[self]}-->
-<h2 class="title"><img src="image/app/blog.gif" />{$_SN[$space[uid]]}>企业动态</h2>
+
 
 <!--{else}-->
 <!--{eval
@@ -17,94 +17,27 @@
 <script type="text/javascript" charset="$_SC[charset]" src="source/script_calendar.js"></script>
 
 <div class="entry" style="padding:0 0 10px;">
-
-	<div class="title">
-		<h1<!--{if $development[magiccolor]}--> class="magiccolor$development[magiccolor]"<!--{/if}-->>$development[subject]</h1>
-		<a href="cp.php?ac=development" class="r_option" style="padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; ">发布</a>
-		<!--{if $development[order]}--><a href="cp.php?ac=development" class="r_option" style="padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer;margin-right:20px; ">预订/预约</a><!--{/if}-->
-		<!--{if $development['friend']}-->
-		<span class="r_option locked gray">{$friendsname[$development[friend]]}</span>
-		<!--{/if}-->
-		<!--{if $development[hot]}--><span class="hot"><em>热</em>$development[hot]</span><!--{/if}-->
-		<!--{if $development['friend']}-->
-		<span class="r_option locked gray">
-		<a href="space.php?uid=$space[uid]&do=$do&view=me&friend=$development[friend]" class="gray">{$friendsname[$value[friend]]}</a>
-		</span>
-		<!--{/if}-->
-		<!--{if $development[viewnum]}--><span class="gray">已有 $development[viewnum] 次阅读</span><!--{/if}-->
-		&nbsp; <span class="gray"><!--{date('Y-m-d H:i',$development[dateline],1)}--></span>
-		<!--{if $development[tag]}-->
-		&nbsp; 标签:&nbsp;
-		<!--{loop $development[tag] $tagid $tagname}-->
-		<a href="#">$tagname</a>&nbsp;&nbsp;
-		<!--{/loop}-->
-		<!--{/if}-->
-		<!--{if $development[money]}-->
-		|&nbsp;价格:$development[money]
-		<!--{/if}-->
-	</div>
-
-
-	<div id="development_article" class="article <!--{if $development[magicpaper]}--> magicpaper$development[magicpaper]<!--{/if}-->">
-		<div class="resizeimg">
-			<div class="resizeimg2">
-			<div class="resizeimg3">
-			<div class="resizeimg4">
-			<!--{if $_SGLOBAL['ad']['rightside']}-->
-			<div style="float: right; padding:5px;"><!--{ad/rightside}--></div>
-			<!--{/if}-->
-			$development[message]
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div style="padding:0 0 10px;">
-	<div style="text-align: right; padding-top:10px; ">
-		
-
-		
-
-		<!--{if $_SGLOBAL[supe_uid] == $development[uid] || checkperm('managedevelopment')}-->
-		
-		<a href="cp.php?ac=development&developmentid=$development[developmentid]&op=edit">编辑</a><span class="pipe">|</span>
-		<a href="cp.php?ac=development&developmentid=$development[developmentid]&op=delete" id="blog_delete_$development[developmentid]" onclick="ajaxmenu(event, this.id)">删除</a>
-		<!--{/if}-->
-		
-	</div>
-
-</div>
-
-<div id="content" style="width:810px;">
-
-	<div id="click_div">
-		<!--{template space_click}-->
-	</div>
+<div class="content">
+                 <div class="content_detail_wrapper">
+                      <div class="content_page_detail">
+                           <div class="content_title">$development[subject]</div>
+                           <div class="content_text_detail" style="overflow:hidden">
+                               <p>$development[message]</p>
+                           </div>
+                           <div class="feed_action">
+                              <ul>
+                                 <li>阅览（$development[viewnum]）</li>
+                                 <li>评论（$development[replynum]）</li>
+                                 <!--{if $_SGLOBAL[supe_uid] == $development[uid] || checkperm('managedevelopment')}-->
+                                 <li><a href="cp.php?ac=development&developmentid=$development[developmentid]&op=edit">修改</a></li>
+                                 <li><a href="cp.php?ac=development&developmentid=$development[developmentid]&op=delete" id="blog_delete_$development[developmentid]" onclick="ajaxmenu(event, this.id)">删除</a></li>
+                                 <!--{/if}-->
+                              </ul>
+                           </div>
 
 	<div class="comments" id="div_main_content">
 		<h2>
 			<!--{if !$development[noreply]}-->
-			<a href="#quickcommentform_{$id}" class="r_option">发表评论</a>
-			<!--{/if}-->
-			评论 (<span id="comment_replynum">$development[replynum]</span> 个评论)</h2>
-		<div class="page">$multi</div>
-		<div class="comments_list" id="comment">
-			<!--{if $cid}-->
-			<div class="notice">
-				当前只显示与你操作相关的单个评论，<a href="space.php?uid=$development[uid]&do=development&id=$development[developmentid]">点击此处查看全部评论</a>
-			</div>
-			<!--{/if}-->
-			<ul id="comment_ul">
-			<!--{loop $list $value}-->
-				<!--{template space_comment_li}-->
-			<!--{/loop}-->
-			</ul>
-		</div>
-		<div class="page">$multi</div>
-
-		<!--{if !$development[noreply]}-->
 		<form id="quickcommentform_{$id}" name="quickcommentform_{$id}" action="cp.php?ac=comment" method="post" class="quickpost">
 
 			<table cellpadding="0" cellspacing="0">
@@ -115,8 +48,10 @@
 						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
 						<!--{/if}-->
 						<br />
-						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:690px;height:75px;float:left;"></textarea>
-						<input type="button" style=" margin: 0 10px 0; width: 80px; height: 80px; border: none; background: url(template/default/image/post_button.jpg); text-indent: -300px; overflow: hidden; cursor: pointer;" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')" />
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;height:105px;float:left;"></textarea>
+						<div class="comment_wrapper container_12" style="margin:0px;">
+						<div class="comment_btn grid_2" id="commentsubmit_btn" name="commentsubmit_btn"  value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')">发布</div>
+					</div>
 					</td>
 				</tr>
 				<tr>
@@ -135,7 +70,30 @@
 		<!--{/if}-->
 	</div>
 
-</div>
+
+		<div class="comments_list" id="comment">
+			<!--{if $cid}-->
+			<div class="notice">
+				当前只显示与你操作相关的单个评论，<a href="space.php?uid=$development[uid]&do=development&id=$development[developmentid]">点击此处查看全部评论</a>
+			</div>
+			<!--{/if}-->
+			<ul id="comment_ul">
+			<!--{loop $list $value}-->
+				<!--{template space_comment_li}-->
+			<!--{/loop}-->
+			</ul>
+		</div>
+		<div class="page">$multi</div>
+
+		
+
+
+
+                           </div>
+                      </div>
+                 </div>
+                 
+                </div>
 
 
 

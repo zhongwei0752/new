@@ -3,102 +3,40 @@
 <!--{template header}-->
 
 <!--{if $space[self]}-->
-<h2 class="title"><img src="image/app/blog.gif" />{$_SN[$space[uid]]}>行业动态</h2>
+
 
 <!--{else}-->
 <!--{eval
 	$_TPL['spacetitle'] = "行业动态";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有企业介绍</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=industry&id=$industry[industryid]\">查看企业介绍</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有行业动态</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=industry&id=$industry[industryid]\">查看行业动态</a>";
 }-->
 <!--{template space_menu}-->
 <!--{/if}-->
 
 <script type="text/javascript" charset="$_SC[charset]" src="source/script_calendar.js"></script>
-
 <div class="entry" style="padding:0 0 10px;">
 
-	<div class="title">
-		<h1<!--{if $industry[magiccolor]}--> class="magiccolor$industry[magiccolor]"<!--{/if}-->>$industry[subject]</h1>
-		<a href="cp.php?ac=industry" class="r_option" style="padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; ">发布</a>
-		<!--{if $industry['friend']}-->
-		<span class="r_option locked gray">{$friendsname[$industry[friend]]}</span>
-		<!--{/if}-->
-		<!--{if $industry[hot]}--><span class="hot"><em>热</em>$industry[hot]</span><!--{/if}-->
-		<!--{if $industry['friend']}-->
-		<span class="r_option locked gray">
-		<a href="space.php?uid=$space[uid]&do=$do&view=me&friend=$industry[friend]" class="gray">{$friendsname[$value[friend]]}</a>
-		</span>
-		<!--{/if}-->
-		<!--{if $industry[viewnum]}--><span class="gray">已有 $industry[viewnum] 次阅读</span><!--{/if}-->
-		&nbsp; <span class="gray"><!--{date('Y-m-d H:i',$industry[dateline],1)}--></span>
-		<!--{if $industry[tag]}-->
-		&nbsp; <a href="space.php?uid=$industry[uid]&do=tag">标签</a>:&nbsp;
-		<!--{loop $industry[tag] $tagid $tagname}-->
-		<a href="space.php?uid=$industry[uid]&do=tag&id=$tagid">$tagname</a>&nbsp;
-		<!--{/loop}-->
-		<!--{/if}-->
-	</div>
 
-
-	<div id="industry_article" class="article <!--{if $industry[magicpaper]}--> magicpaper$industry[magicpaper]<!--{/if}-->">
-		<div class="resizeimg">
-			<div class="resizeimg2">
-			<div class="resizeimg3">
-			<div class="resizeimg4">
-			<!--{if $_SGLOBAL['ad']['rightside']}-->
-			<div style="float: right; padding:5px;"><!--{ad/rightside}--></div>
-			<!--{/if}-->
-			$industry[message]
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div style="padding:0 0 10px;">
-	<div style="text-align: right; padding-top:10px; ">
+            <div class="content">
+                 <div class="content_detail_wrapper">
+                      <div class="content_page_detail">
+                           <div class="content_title">$industry[subject]</div>
+                           <div class="content_text_detail"style="overflow:hidden">
+                               <p>$industry[message]</p>
+                           </div>
+                           <div class="feed_action">
+                              <ul>
+                                 <li>阅览（$industry[viewnum]）</li>
+                                 <li>评论（$industry[replynum]）</li>
+                                 <!--{if $_SGLOBAL[supe_uid] == $industry[uid] || checkperm('manageindustry')}-->
+                                 <li><a href="cp.php?ac=industry&industryid=$industry[industryid]&op=edit">修改</a></li>
+                                 <li><a href="cp.php?ac=industry&industryid=$industry[industryid]&op=delete" id="blog_delete_$industry[industryid]" onclick="ajaxmenu(event, this.id)">删除</a></li>
+                                 <!--{/if}-->
+                              </ul>
+                           </div>
+            <div class="comments" id="div_main_content">
 		
-
-		
-
-		<!--{if $_SGLOBAL[supe_uid] == $industry[uid] || checkperm('manageindustry')}-->
-		
-		<a href="cp.php?ac=industry&industryid=$industry[industryid]&op=edit">编辑</a><span class="pipe">|</span>
-		<a href="cp.php?ac=industry&industryid=$industry[industryid]&op=delete" id="blog_delete_$industry[industryid]" onclick="ajaxmenu(event, this.id)">删除</a>
-		<!--{/if}-->
-		
-	</div>
-
-</div>
-
-<div id="content" style="width:810px;">
-
-	<div id="click_div">
-		<!--{template space_click}-->
-	</div>
-
-	<div class="comments" id="div_main_content">
-		<h2>
-			<!--{if !$industry[noreply]}-->
-			<a href="#quickcommentform_{$id}" class="r_option">发表评论</a>
-			<!--{/if}-->
-			评论 (<span id="comment_replynum">$industry[replynum]</span> 个评论)</h2>
-		<div class="page">$multi</div>
-		<div class="comments_list" id="comment">
-			<!--{if $cid}-->
-			<div class="notice">
-				当前只显示与你操作相关的单个评论，<a href="space.php?uid=$industry[uid]&do=industry&id=$industry[industryid]">点击此处查看全部评论</a>
-			</div>
-			<!--{/if}-->
-			<ul id="comment_ul">
-			<!--{loop $list $value}-->
-				<!--{template space_comment_li}-->
-			<!--{/loop}-->
-			</ul>
-		</div>
-		<div class="page">$multi</div>
 
 		<!--{if !$industry[noreply]}-->
 		<form id="quickcommentform_{$id}" name="quickcommentform_{$id}" action="cp.php?ac=comment" method="post" class="quickpost">
@@ -111,8 +49,10 @@
 						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
 						<!--{/if}-->
 						<br />
-						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:690px;height:75px;float:left;"></textarea>
-						<input type="button" style=" margin: 0 10px 0; width: 80px; height: 80px; border: none; background: url(template/default/image/post_button.jpg); text-indent: -300px; overflow: hidden; cursor: pointer;" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')" />
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;height:105px;float:left;"></textarea>
+						<div class="comment_wrapper container_12" style="margin:0px;">
+						<div class="comment_btn grid_2" id="commentsubmit_btn" name="commentsubmit_btn"  value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')">发布</div>
+					</div>
 					</td>
 				</tr>
 				<tr>
@@ -131,7 +71,35 @@
 		<!--{/if}-->
 	</div>
 
-</div>
+
+		<div class="comments_list" id="comment">
+			<!--{if $cid}-->
+			<div class="notice">
+				当前只显示与你操作相关的单个评论，<a href="space.php?uid=$industry[uid]&do=industry&id=$industry[industryid]">点击此处查看全部评论</a>
+			</div>
+			<!--{/if}-->
+			<ul id="comment_ul">
+			<!--{loop $list $value}-->
+				<!--{template space_comment_li}-->
+			<!--{/loop}-->
+			</ul>
+		</div>
+		<div class="page">$multi</div>
+
+		
+
+
+
+                           </div>
+                      </div>
+                 </div>
+                 
+                </div>
+     
+              
+
+
+
 
 
 
@@ -171,3 +139,11 @@ for(var i=0; i<elems.length; i++){
 </script>
 
 <!--{template footer}-->
+
+
+
+	
+
+		
+
+

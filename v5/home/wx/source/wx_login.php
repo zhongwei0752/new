@@ -13,8 +13,13 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 			
 		$user = uc_get_user($row['uid'], 1); 
 		uc_user_synlogin($row['uid']);
-		setSession($user[0],$user[1]);
-		wxshowmessage("快捷登陆成功","http://v5.home3d.cn/v5/v5/home/index.php");
+		$auth = setSession($user[0],$user[1]);
+		$weixinuid=$_GET['uid'];
+		$m_auth=rawurlencode($auth);
+		$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
+        $friend = file_get_contents($friendurl,0,null,null);
+        $friend_output = json_decode($friend);
+		wxshowmessage("快捷登录成功","http://v5.home3d.cn/v5/v5/home/index.php");
 }else{
 
 	$username = $_GET['wxkey'];
@@ -76,7 +81,10 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 					);
 					updatetable('space', $setarr, array('uid'=>$uid ));
 				}
-
+				$weixinuid=$_GET['uid'];
+				$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
+        		$friend = file_get_contents($friendurl,0,null,null);
+        		$friend_output = json_decode($friend);
 				wxshowmessage("快捷注册成功","http://v5.home3d.cn/v5/v5/home/index.php");
 
 }

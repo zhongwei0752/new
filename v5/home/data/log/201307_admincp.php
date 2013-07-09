@@ -77,3 +77,7 @@
 <?PHP exit;?>	2013-07-07 21:22:47		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"3";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-07 21:23:23		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"3";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-07 21:23:24		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-08 16:56:39		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-08 16:56:41		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-08 16:56:42		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-08 16:56:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}

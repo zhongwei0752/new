@@ -1,4 +1,4 @@
-<!--{eval $_TPL['titles'] = array('企业动态');}-->
+<!--{eval $_TPL['titles'] = array('产品介绍');}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 
 <!--{template header}-->
@@ -59,7 +59,7 @@
                           <div class="grid_2">
                              <div class="list_test ">
                                   <a href="space.php?uid=$value[uid]&do=$do&id=$value[productid]"><h3>$value[subject]</h3></a>
-                                  <p>$value[message]</p>
+                                  <p>$value[message]</p><br/>
                                   <p class="action_info">
                                    <a href="space.php?uid=$value[uid]"> <span>发布：{$_SN[$value[uid]]}</span></a>
                                     <!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[productid]"><span>阅读: $value[viewnum]次</span></a><!--{else}--><span>阅读: 0次</span><!--{/if}-->

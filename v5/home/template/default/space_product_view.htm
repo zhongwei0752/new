@@ -33,8 +33,10 @@
                               <ul>
                                  <li>阅览（$product[viewnum]）</li>
                                  <li>评论（$product[replynum]）</li>
+                                 <!--{if $_SGLOBAL[supe_uid] == $product[uid] || checkperm('manageproduct')}-->
                                  <li><a href="cp.php?ac=product&productid=$product[productid]&op=edit">修改</a></li>
                                  <li><a href="cp.php?ac=product&productid=$product[productid]&op=delete" id="blog_delete_$product[productid]" onclick="ajaxmenu(event, this.id)">删除</a></li>
+                                 <!--{/if}-->
                               </ul>
                            </div>
             <div class="comments" id="div_main_content">

@@ -28,53 +28,50 @@
 <!--{else}-->
 
 <!--{if $space[self]}-->
-<h2 class="title"><img src="$wei1[image2url]" />{$_SN[$space[uid]]}>成功案例</h2>
-<div class="tabs_header">
-	<ul class="tabs">
-		<li$actives[me]><a href="space.php?uid=$space[uid]&do=$do&view=me"><span>成功案例</span></a></li>
-		<li class="null"  style="margin-left:670px;"><a href="cp.php?ac=cases">发布</a></li>
-	</ul>
-</div>		
+<div class="content" style="font-size:16px;">
+          
+                 <div class="indexing">
+                   <img src="$wei1[image2url]" /><span>{$_SN[$space[uid]]}</span>><span>成功案例</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         成功案例
+                     </div>
+                     <a href="cp.php?ac=cases" class="btn grid_2">
+                      发布
+                     </a>
+                 </div>		
 
 <!--{/if}-->
 		
-<div id="content" style="width:810px;">
+<div id="content" style="width:760px;">
 
 
-	<div class="entry_list">
-		<ul>
-		<!--{if $list}-->
+	<div class="content_detail_wrapper">
+ 		<!--{if $list}-->
 		<!--{loop $list $value}-->
-			<li>
-				<div class="avatardiv" >
-					<div class="newavatar48" ><a href="space.php?uid=$value[uid]"><image src="$value['image1url']" /></a></div>
-					<!--{if $value['hot']}--><div class="digb">$value[hot]</div><!--{/if}-->
-				</div>
-				<div id="next" style="margin-left:60px;margin-top:5px;">
-				<div class="title">
-					
-					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4>
-				</div>	
-					
-				
-				<div class="detail image_right l_text" id="blog_article_$value[casesid]">
-					<!--{if $value[pic]}--><p class="image"><a href="space.php?uid=$value[uid]&do=cases&id=$value[casesid]"><img src="$value[pic]" alt="$value[subject]" /></a></p><!--{/if}-->
-					$value[message]
-				</div>
-				<div class="gray">
-					发布:<a href="space.php?uid=$value[uid]">{$_SN[$value[uid]]}</a><span class="pipe">|</span>
-					<!--{if $classarr[$value[classid]]}-->分类:{$classarr[$value[classid]]}<span class="pipe">|</span><!--{/if}-->
-					<!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]">阅读: $value[viewnum]次</a><span class="pipe">|</span><!--{else}-->阅读: 0次<span class="pipe">|</span><!--{/if}-->
-					<!--{if $value[replynum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]#comment">评论: $value[replynum] 个</a><!--{else}-->评论: 0次<!--{/if}-->
-				</div>
-				</div>
-			</li>
-			<br/>
-		<!--{/loop}-->
+                     <div class="content_list container_12">
+                          <div class="grid_1">
+                               <img src="$value[image1url]" class="list_pic">
+                          </div>
+                          <div class="grid_2">
+                             <div class="list_test ">
+                                  <a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]"><h3>$value[subject]</h3></a>
+                                  <p>$value[message]</p><br/>
+                                  <p class="action_info">
+                                   <a href="space.php?uid=$value[uid]"> <span>发布：{$_SN[$value[uid]]}</span></a>
+                                    <!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]"><span>阅读: $value[viewnum]次</span></a><!--{else}--><span>阅读: 0次</span><!--{/if}-->
+                                    <!--{if $value[replynum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]#comment"><span>评论: $value[replynum] 个</span></a><!--{else}--><span>评论: 0次</span><!--{/if}-->
+                                  </p>
+                             </div>
+                          </div>
+                     </div><!-- list end -->
+                     <br/>
+                   <!--{/loop}-->
 		<!--{else}-->
-			<div class="c_form">还没有相关的成功案例。</div>
+			<div class="c_form">还没有相关的产品介绍。</div>
 		<!--{/if}-->
-		</ul>
+          
 	</div>
 	
 	<div class="page">$multi</div>

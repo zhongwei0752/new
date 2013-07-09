@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_branch|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373190871', 'template/default/cp_branch');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_branch|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373342872', 'template/default/cp_branch');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,6 +15,7 @@
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
     <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
     <link rel="stylesheet" type="text/css" href="template/default/style1.css">
+
 <style type="text/css">
 
 @import url(template/default/network.css);
@@ -47,18 +48,21 @@
                 <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
                 <a href="space.php?do=home" class="grid_2">首页</a>
-                <a href="space.php?do=friend" class="grid_2">客户列表</a>
+                
+
                 <?php } else { ?>
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>(新)<?php } ?></a>
-<?php if($_SGLOBAL['member']['allnotenum']) { ?><li class="notify" id="membernotemenu" onmouseover="showMenu(this.id)"><a href="space.php?do=notice"><?=$_SGLOBAL['member']['allnotenum']?>个提醒</a></li><?php } ?>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
+<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
+<a href="space.php?do=friend" class="grid_2">客户列表</a>
 <?php } else { ?>
 <a class="grid_2" href="help.php">帮助</a>
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
+               
                 <div class="grid_3"></div>
                 <div class="grid_4">
                    <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
@@ -80,10 +84,11 @@
 <div id="wrap" style="width:1024px;">
 
 <div>
+<div id="main">
+
 <?php if(empty($_TPL['nosidebar'])) { ?>
 
-
-<div id="main">
+<?php if($zhong1) { ?>
 <div id="app_sidebar">
 
 
@@ -92,13 +97,13 @@
 <div class="side_bar" >
               <div class="side_bar_inner" >
                     <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
 <li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
-                        <li class="side_header"><span class="title">高级组件</span><a href="" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
@@ -139,17 +144,34 @@
 <?php } ?>
 
 </div>
-
-<?php if($zhong1) { ?>
-<div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 <?php } else { ?>
-<div id="mainarea" style="width:800px;">
+<div class="side_bar" >
+              <div class="side_bar_inner" >
+                    <ul>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
+                      
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
+
+                        </ul>
+
+              </div>
+         </div>
+
 <?php } ?>
+<div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
+
 
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
 
 <?php } ?>
+
+
+<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="template/default/style1.css">
+<link rel="stylesheet" type="text/css" href="template/default/file_beauty.css">
 
 
 <?php if($_GET['op'] == 'delete') { ?>
@@ -262,47 +284,68 @@
 </div>
 
 <?php } else { ?>
-<h2 class="title"><img src="<?=$wei1['image2url']?>" /><?=$_SN[$space['uid']]?>>分支机构</h2>
-<div class="tabs_header">
-<ul class="tabs">
-<?php if($branch['branchid']) { ?>
-<li class="active"><a href="cp.php?ac=branch&branchid=<?=$branch['branchid']?>"><span>编辑</span></a></li>
+
+<div class="content">
+          
+                 <div class="indexing">
+                   <img src="<?=$wei1['image2url']?>" /><span><?=$_SN[$space['uid']]?></span>><span>分支机构</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         发布
+                     </div>
+                     <a href="space.php?do=branch&view=me" class="link_back_bread grid_3">
+                      分支机构
+                     </a>
+                 </div>
 <?php } ?>
-<li<?php if(empty($branch['branchid'])) { ?> class="active"<?php } ?>><a href="cp.php?ac=branch"><span>发布</span></a></li>
-<li><a href="space.php?uid=<?=$space['uid']?>&do=branch&view=me"><span>分支机构</span></a></li>
-</ul>
-</div>
-<?php } ?>
-
-<div class="c_form">
-
-<style type="text/css">
-.userData {behavior:url(#default#userdata);}
-</style>
 
 
+  <div class="content_detail_wrapper">
+                    <div class="post_wrapper">
 <form method="post" action="cp.php?ac=branch&branchid=<?=$branch['branchid']?>" enctype="multipart/form-data">
 <table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr>
-<td>
-分店标题：<input type="text" class="t_input" id="subject" name="subject" value="<?=$branch['subject']?>" size="77" onblur="relatekw();"  />
-<br/>
-电话：<input type="text" class="t_input" size="82" id="telephone" name="telephone" value="<?=$branch['telephone']?>" > <br/>
-邮箱：<input type="text" class="t_input" size="82" id="email" name="email" value="<?=$branch['email']?>" > <br/>
-QQ：<input type="text" class="t_input" size="82" id="qq" name="qq" value="<?=$branch['qq']?>" > <br/>
-封面图片:<input type="file" name="files" value="<?=$branch['image1url']?>"/>
+
+<div class="post_list container_12">
+                         <span class="select_title grid_1">分店标题&nbsp;&nbsp;:</span>
+                           <input type="text" class="t_input" id="subject" name="subject" value="<?=$branch['subject']?>" onblur="relatekw();"  />
+                            </div>
+                            <div class="post_list container_12">
+                         <span class="select_title grid_1">电话&nbsp;&nbsp;:</span>
+                           <input type="text" class="t_input" id="telephone" name="telephone" value="<?=$branch['telephone']?>" > <br/>
+                            </div>
+                            <div class="post_list container_12">
+                         <span class="select_title grid_1">封面图片&nbsp;&nbsp;:</span>
+                           <input type="file" name="files" value="<?=$branch['image1url']?>" />
+                            </div>
+                            <div class="post_list container_12">
+                         <span class="select_title grid_1">邮箱&nbsp;&nbsp;:</span>
+                           <input type="text" class="t_input"  id="email" name="email" value="<?=$branch['email']?>" />
+                            </div>
+                            <div class="post_list container_12">
+                         <span class="select_title grid_1">QQ&nbsp;&nbsp;:</span>
+                           <input type="text" class="t_input" id="qq" name="qq" value="<?=$branch['qq']?>" />
+                            </div>
 </td>
 </tr>
 <tr>
-<td>正文：
-<a id="doodleBox" href="magic.php?mid=doodle&showid=branch_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
-<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$branch['message']?></textarea>
-<iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="400"></iframe>
+<td>
+<div class="post_list container_12">
+                         <span class="select_title grid_1">正文&nbsp;&nbsp;:</span>
+                          <a id="doodleBox" href="magic.php?mid=doodle&showid=branch_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$branch['message']?></textarea>
+  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+                            </div>
+
 </td>
 </tr>
 <tr><td>
-地址：<input type="text" class="t_input" size="82" id="place" name="place" value="<?=$branch['place']?>" ><input type="button" id="check" name="check" value="确认"> <br/>
-</td></tr>
+<div class="post_list container_12">
+                         <span class="select_title grid_1">地址&nbsp;&nbsp;:</span>
+                           <input type="text" size="82" class="t_input" id="place" name="place" value="<?=$branch['place']?>" ><input type="button" id="check" name="check" value="确认">
+                            </div>
+</td>
+</tr>
 <td><div id='allmap'></div></td>
 </table>
 
@@ -315,8 +358,10 @@ QQ：<input type="text" class="t_input" size="82" id="qq" name="qq" value="<?=$b
 <?php if(!$_SGLOBAL['inajax'] && (!$branch['uid'] || $branch['uid']==$_SGLOBAL['supe_uid'])) { ?>
 <table cellspacing="4" cellpadding="4" width="100%" class="infotable">
 <tr><th width="100">图片</th><td>
-<input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
-<input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
+<div class="pic_submit container_12">
+<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+<input type="button" class="btn grid_3" name="clickbutton[]" value="插入图片" class="button" style="margin-left:20px;" onclick="edit_album_show('album')">
+</div>
 </td></tr>
 </table>
 <?php } ?>
@@ -377,17 +422,21 @@ QQ：<input type="text" class="t_input" size="82" id="qq" name="qq" value="<?=$b
 </td>
 </tr>
 </table>
-
-
-
 <table cellspacing="4" cellpadding="4" width="100%" class="infotable">
 <tr>
 <th width="100">&nbsp;</th>
 <td>
-<input type="button" id="issuance" onclick="document.getElementById('branchbutton').click();" value="保存发布" class="submit" /></td>
+<div class="confirm_btn container_12">
+                           <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
+                           <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('branchbutton').click();" value="保存发布" class="submit" />
+                        
+                      </div>
+</td>
 </tr>
 </table>
 </div>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=81E8713d331d9cdbc7810585844907d3"></script>
 <script language="javascript">var jquery = jQuery.noConflict(); </script>
@@ -429,13 +478,13 @@ map.centerAndZoom(point,12);
 </script>
 
 <style type="text/css">
-#allmap {width: 560px;height: 300px;overflow: hidden;margin:0;}
-#l-map{width: 560px;height: 300px;float:left;border-right:2px solid #bcbcbc;}
-#r-result{width: 560px;height: 300px;float:left;}
+#allmap {width: 700px;height: 300px;overflow: hidden;margin:0 auto;}
+#l-map{width: 700px;height: 300px;float:left;border-right:2px solid #bcbcbc;}
+#r-result{width: 700px;height: 300px;float:left;}
 </style>
-
 <?php } ?>
-<?php if(empty($_SGLOBAL['inajax'])) { ?>
+
+   <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
 <?php if($_SGLOBAL['ad']['contentbottom']) { ?><br style="line-height:0;clear:both;"/><div id="ad_contentbottom"><?php adshow('contentbottom'); ?></div><?php } ?>
 </div>
@@ -447,7 +496,12 @@ map.centerAndZoom(point,12);
 </div>
 <!--/main-->
 <?php } ?>
+    </div>
+    </div>
+    
+        </div>
 <div class="footer">
+
         <div class="footer_map container_12">
            <ul class="grid_3">
                 <li class="map_title"><img src="./template/default/image/ff.png">使用帮助:</li>
@@ -482,7 +536,6 @@ map.centerAndZoom(point,12);
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
-        </div>
     </div>
 
 </div>

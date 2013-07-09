@@ -131,7 +131,12 @@
 			</script>
 		<!--{/loop}-->
 		<!--{if $_GET[view]!='me'}-->
+		<!--{if empty($zhongwei)}-->
+		<div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
+		
+		<!--{else}-->
 		<input type="submit" value="提交" >
+		<!--{/if}-->
 		<!--{/if}-->
 	</form>
 		<!--{if $pricount}-->

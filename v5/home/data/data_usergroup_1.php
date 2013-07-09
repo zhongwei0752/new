@@ -93,11 +93,16 @@ $_SGLOBAL['usergroup']=Array
 		'managevideophoto' => 1,
 		'managelog' => 1,
 		'magicaward' => '',
-		'allowintroduce' => '0',
-		'allowindustry' => '0',
-		'allowproduct' => '0',
-		'allowdevelopment' => '0',
-		'allowbranch' => '0'
+		'allowintroduce' => 1,
+		'allowindustry' => 1,
+		'allowproduct' => 1,
+		'allowdevelopment' => 1,
+		'allowbranch' => 1,
+		'allowmenuset' => 1,
+		'allowjob' => 1,
+		'allowtalk' => 1,
+		'managemenuset' => 1,
+		'allowcases' => 1
 		)
 	)
 ?>

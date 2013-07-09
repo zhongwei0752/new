@@ -3,7 +3,6 @@
 <!--{template header}-->
 
 <!--{if $space[self]}-->
-<h2 class="title"><img src="image/app/blog.gif" />{$_SN[$space[uid]]}>人才招聘</h2>
 
 <!--{else}-->
 <!--{eval
@@ -17,138 +16,57 @@
 <script type="text/javascript" charset="$_SC[charset]" src="source/script_calendar.js"></script>
 
 <div class="entry" style="padding:0 0 10px;">
+            <div class="content">
+                    <div class="indexing content_indexing">
+                       <span><a href="">{$_SN[$space[uid]]}</a></span>><span><a href="">人才招聘</a></span>
+                    </div><!-- end -->
+                 <div class="content_detail_wrapper">
+                      <div class="content_page_detail">
+                           <div class="content_title">$job[subject]</div>
+                         
+                           <div class="advertise_content_text_detail">
+                           	   <!--{if $job[message]}-->
+                               <p><b>职位描述:</b>$job[message]</p>
+                               <!--{/if}-->
+							   <!--{if $job[messagecomment]}-->
+                               <p><b>资格要求:</b>$job[messagecomment]</p>
+                               <!--{/if}-->
+                               <!--{if $job[telephone]}-->
+							   <p><b>电话:</b>$job[telephone]</p>
+							   <!--{/if}-->
+							   <!--{if $job[email]}-->
+							   <p><b>邮箱:</b>$job[email]</p>
+							   <!--{/if}-->
+							   <!--{if $job[money]}-->
+							   <p><b>待遇:</b>$job[money]</p>
+							   <!--{/if}-->
+							   <!--{if $job[othermessage]}-->
+							   <p><b>其它:</b>$job[othermessage]</p>
+							   <!--{/if}-->
+                              
+                           </div>
+                       
+                           <div class="feed_action">
+                              <ul>
+                                 <li>阅览（$job[viewnum]）</li>
+                                 <!--{if $_SGLOBAL[supe_uid] == $job[uid] || checkperm('managejob')}-->
+                                 <li><a href="cp.php?ac=job&jobid=$job[jobid]&op=edit">修改</a></li>
+                                 <li><a href="cp.php?ac=job&jobid=$job[jobid]&op=delete">删除</a></li>
+                                 <!--{/if}-->
+                              </ul>
+                           </div>
+                  
+                      </div>
+                 </div>
+                 
+                
+              
+            </div>
 
-	<div class="title">
-		<h1<!--{if $job[magiccolor]}--> class="magiccolor$job[magiccolor]"<!--{/if}-->>$job[subject]</h1>
-		<a href="cp.php?ac=job" class="r_option" style="padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; ">发布</a>
-		<!--{if $job['friend']}-->
-		<span class="r_option locked gray">{$friendsname[$job[friend]]}</span>
-		<!--{/if}-->
-		<!--{if $job[hot]}--><span class="hot"><em>热</em>$job[hot]</span><!--{/if}-->
-		<!--{if $job['friend']}-->
-		<span class="r_option locked gray">
-		<a href="space.php?uid=$space[uid]&do=$do&view=me&friend=$job[friend]" class="gray">{$friendsname[$value[friend]]}</a>
-		</span>
-		<!--{/if}-->
-		<!--{if $job[viewnum]}--><span class="gray">已有 $job[viewnum] 次阅读</span>&nbsp;<!--{/if}-->
-		 <span class="gray"><!--{date('Y-m-d H:i',$job[dateline],1)}--></span><br/>
-		<!--{if $job[tag]}-->
-		&nbsp; <a href="space.php?uid=$job[uid]&do=tag">标签</a>:&nbsp;
-		<!--{loop $job[tag] $tagid $tagname}-->
-		<a href="space.php?uid=$job[uid]&do=tag&id=$tagid">$tagname</a>&nbsp;
-		<!--{/loop}-->
-		<!--{/if}-->
-	</div>
+	
 
 
-	<div id="job_article" class="article <!--{if $job[magicpaper]}--> magicpaper$job[magicpaper]<!--{/if}-->">
-		<div class="resizeimg">
-			<div class="resizeimg2">
-			<div class="resizeimg3">
-			<div class="resizeimg4">
-			<!--{if $_SGLOBAL['ad']['rightside']}-->
-			<div style="float: right; padding:5px;"><!--{ad/rightside}--></div>
-			<!--{/if}-->
-			<br/>
-			<!--{if $job[message]}-->
-			<h1>职位描述:</h1>$job[message]<br/><br/><br/>
-			<!--{/if}-->
-			<!--{if $job[messagecomment]}-->
-			<h1>资格要求:</h1>$job[messagecomment]<br/><br/><br/>
-			<!--{/if}-->
-			<!--{if $job[telephone]}-->
-			<h1>电话:</h1>$job[telephone]<br/><br/><br/>
-			<!--{/if}-->
-			<!--{if $job[email]}-->
-			<h1>邮箱:</h1>$job[email]<br/><br/><br/>
-			<!--{/if}-->
-			<!--{if $job[money]}-->
-			<h1>待遇:</h1>$job[money]<br/><br/><br/>
-			<!--{/if}-->
-			<!--{if $job[othermessage]}-->
-			<h1>其它:</h1>$job[othermessage]<br/><br/><br/>
-			<!--{/if}-->
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<div style="padding:0 0 10px;">
-	<div style="text-align: right; padding-top:10px; ">
-		
-
-		
-
-		<!--{if $_SGLOBAL[supe_uid] == $job[uid] || checkperm('managejob')}-->
-		
-		<a href="cp.php?ac=job&jobid=$job[jobid]&op=edit">编辑</a><span class="pipe">|</span>
-		<a href="cp.php?ac=job&jobid=$job[jobid]&op=delete" id="blog_delete_$job[jobid]" onclick="ajaxmenu(event, this.id)">删除</a>
-		<!--{/if}-->
-		
-	</div>
-
-</div>
-<div id="content" style="width:810px;">
-
-	<div id="click_div">
-		<!--{template space_click}-->
-	</div>
-
-	<div class="comments" id="div_main_content">
-		<h2>
-			<!--{if !$job[noreply]}-->
-			<a href="#quickcommentform_{$id}" class="r_option">发表评论</a>
-			<!--{/if}-->
-			评论 (<span id="comment_replynum">$job[replynum]</span> 个评论)</h2>
-		<div class="page">$multi</div>
-		<div class="comments_list" id="comment">
-			<!--{if $cid}-->
-			<div class="notice">
-				当前只显示与你操作相关的单个评论，<a href="space.php?uid=$job[uid]&do=job&id=$job[jobid]">点击此处查看全部评论</a>
-			</div>
-			<!--{/if}-->
-			<ul id="comment_ul">
-			<!--{loop $list $value}-->
-				<!--{template space_comment_li}-->
-			<!--{/loop}-->
-			</ul>
-		</div>
-		<div class="page">$multi</div>
-
-		<!--{if !$job[noreply]}-->
-		<form id="quickcommentform_{$id}" name="quickcommentform_{$id}" action="cp.php?ac=comment" method="post" class="quickpost">
-
-			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
-						<!--{if $_SGLOBAL['magic']['doodle']}-->
-						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
-						<!--{/if}-->
-						<br />
-						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:690px;height:75px;float:left;"></textarea>
-						<input type="button" style=" margin: 0 10px 0; width: 80px; height: 80px; border: none; background: url(template/default/image/post_button.jpg); text-indent: -300px; overflow: hidden; cursor: pointer;" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="hidden" name="refer" value="space.php?uid=$job[uid]&do=$do&id=$id" />
-						<input type="hidden" name="id" value="$id">
-						<input type="hidden" name="idtype" value="jobid">
-						<input type="hidden" name="commentsubmit" value="true" />
-						
-						<div id="__quickcommentform_{$id}"></div>
-					</td>
-				</tr>
-			</table>
-		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" /></form>
-		<br />
-		<!--{/if}-->
-	</div>
-
-</div>
 
 
 

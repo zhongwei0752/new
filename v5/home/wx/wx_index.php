@@ -218,7 +218,7 @@ class wechatCallbackapiTest
                        $pic = "http://v5.home3d.cn/v5/v5/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       }  
-                       $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=login&wxkey=".$fromUsername;
+                       $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=login&wxkey=".$fromUsername."&uid=".$row[uid];
                        $subject="快速登陆/快速注册";
                        $pic = "";
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url);          

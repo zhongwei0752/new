@@ -1,5 +1,10 @@
 <!--{template header}-->
 
+<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="template/default/style1.css">
+<link rel="stylesheet" type="text/css" href="template/default/file_beauty.css">
+
+
 <!--{if $_GET[op] == 'delete'}-->
 
 <h1>删除栏目</h1>
@@ -40,64 +45,58 @@
 <!--{if $topic}-->
 	<!--{template cp_topic_menu}-->
 <!--{else}-->
-	<h2 class="title"><img src="$wei1[image2url]" />{$_SN[$space[uid]]}>人才招聘</h2>
-	<div class="tabs_header">
-		<ul class="tabs">
-			<!--{if $job[jobid]}-->
-			<li class="active"><a href="cp.php?ac=job&jobid=$job[jobid]"><span>编辑</span></a></li>
-			<!--{/if}-->
-			<li<!--{if empty($job[jobid])}--> class="active"<!--{/if}-->><a href="cp.php?ac=job"><span>发布</span></a></li>
-			<li><a href="space.php?uid=$space[uid]&do=job&view=me"><span>人才招聘</span></a></li>
-		</ul>
-	</div>
+
+	<div class="content">
+          
+                 <div class="indexing">
+                   <img src="$wei1[image2url]" /><span>{$_SN[$space[uid]]}</span>><span>人才招聘</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         发布
+                     </div>
+                     <a href="space.php?do=job&view=me" class="link_back_bread grid_3">
+                      人才招聘
+                     </a>
+                 </div>
 <!--{/if}-->
 
-<div class="c_form">
 
-	<style type="text/css">
-		.userData {behavior:url(#default#userdata);}
-	</style>
-
-
+	  <div class="content_detail_wrapper">
+                    <div class="post_wrapper">
 	<form method="post" action="cp.php?ac=job&jobid=$job[jobid]" enctype="multipart/form-data">
-		<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-			<tr>
-				<td>
-					职位名称:<input type="text" class="t_input" id="subject" name="subject" value="$job[subject]" size="77" onblur="relatekw();"  />
-					<br/>
-				封面图片:<input type="file" name="files" value="$job[image1url]"/>
-				</td>
-			</tr>
-			<tr>
-				<td>职位描述：
-				<a id="doodleBox" href="magic.php?mid=doodle&showid=job_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
-				<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$job[message]</textarea>
-				<iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="200"></iframe>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>资格要求：<br/>
-				
-				<textarea name="messagecomment" style="width:750px;height:200px;">$job[messagecomment]</textarea>
-				</td>
-			</tr>
-			
-			<tr><td>
-			电话:<input type="text" class="t_input" size="82" id="telephone" name="telephone" value="$job[telephone]" > <br/>
-				邮箱:<input type="text" class="t_input" size="82" id="email" name="email" value="$job[email]" > <br/>
-				待遇:<input type="text" class="t_input" size="82" id="money" name="money" value="$job[money]" > <br/>
-				
-			</td></tr>
-			<tr>
-				<td>其他：<br/>
-				
-				<textarea name="othermessage" style="width:750px;height:200px;">$job[othermessage]</textarea>
-				</td>
-			</tr>
-			
-		</table>
+					<div class="post_list container_12">
+                         <span class="select_title grid_1">职位名称&nbsp;&nbsp;:</span>
+                         <input type="text" class="t_input" id="subject" name="subject" value="$job[subject]"  onblur="relatekw();"  />
+                            </div>
+                         <div class="post_list container_12">
+                         <span class="select_title grid_1">职位描述&nbsp;&nbsp;:</span>
+                          <a id="doodleBox" href="magic.php?mid=doodle&showid=job_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$job[message]</textarea>
+						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+                            </div>
+                         <div class="post_list container_12">
+                         <span class="select_title grid_1">资格要求&nbsp;&nbsp;:</span>
+                          <textarea name="messagecomment" style="width:550px;height:200px;margin-left:20px;">$job[messagecomment]</textarea>
+                            </div>
+						 <div class="post_list container_12">
+                         <span class="select_title grid_1">电话&nbsp;&nbsp;:</span>
+                          <input type="text" class="t_input" id="telephone" name="telephone" value="$job[telephone]" />
+                            </div>
+                             <div class="post_list container_12">
+                         <span class="select_title grid_1">邮箱&nbsp;&nbsp;:</span>
+                          <input type="text" class="t_input" id="email" name="email" value="$job[email]" />
+                            </div>
+                             <div class="post_list container_12">
+                         <span class="select_title grid_1">待遇&nbsp;&nbsp;:</span>
+                          <input type="text" class="t_input" id="money" name="money" value="$job[money]" />
+                            </div>
+                            <div class="post_list container_12">
+                         <span class="select_title grid_1">其他&nbsp;&nbsp;:</span>
+                          <textarea name="othermessage" style="width:700px;height:200px;margin-left:20px;">$job[othermessage]</textarea>
+                            </div>
 		
+
 		<input type="hidden" name="jobsubmit" value="true" />
 		<input type="button" id="jobbutton" name="jobbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
 		<input type="hidden" name="topicid" value="$_GET[topicid]" />
@@ -106,9 +105,11 @@
 
 	<!--{if !$_SGLOBAL[inajax] && (!$job['uid'] || $job['uid']==$_SGLOBAL['supe_uid'])}-->
 	<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-		<tr><th width="100">正文图片</th><td>
-		<input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
-		<input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
+		<tr><th width="100">图片</th><td>
+			<div class="pic_submit container_12">
+		<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+		<input type="button" class="btn grid_3" name="clickbutton[]" value="插入图片" class="button" style="margin-left:20px;" onclick="edit_album_show('album')">
+	</div>
 		</td></tr>
 	</table>
 	<!--{/if}-->
@@ -169,20 +170,22 @@
 			</td>
 		</tr>
 	</table>
-
-
-
 	<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
 		<tr>
 			<th width="100">&nbsp;</th>
 			<td>
-			<input type="button" id="issuance" onclick="document.getElementById('jobbutton').click();" value="保存发布" class="submit" /></td>
+				<div class="confirm_btn container_12">
+                           <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
+                           <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('jobbutton').click();" value="保存发布" class="submit" />
+                        
+                      </div>
+			</td>
 		</tr>
 	</table>
 </div>
-
-
+</div>
 
 
 <!--{/if}-->
 <!--{template footer}-->
+

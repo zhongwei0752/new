@@ -596,19 +596,19 @@ ins.modify { padding-top: 5px; color: #666; text-decoration: none; text-align: r
 .magicframe2{ background: url(../../image/magic/frame/2.bg.gif); }
 .magicframe3{ background: #FFC url(../../image/magic/frame/3.bg.gif) no-repeat; }
 .magicframe4{ background: url(../../image/magic/frame/4.bg.gif); }
-	
+
 .magicframe .frame_jiao{ width:14px; height:14px; }
 	.magicframe .frame_x{ height:14px; }
 		.magicframe .frame_y{ width:14px; }
-		
+
 			.magicframe .frame_top_left{ background: url(../../image/magic/frame/frame_top_left.png) no-repeat; }
 			.magicframe .frame_top_right{ background: url(../../image/magic/frame/frame_top_right.png) no-repeat; }
 			.magicframe .frame_top_middle{ background: url(../../image/magic/frame/frame_top_middle.png) repeat-x; }
-			
+
 			.magicframe .frame_bottom_left{ background: url(../../image/magic/frame/frame_bottom_left.png) no-repeat; }
 			.magicframe .frame_bottom_right{ background: url(../../image/magic/frame/frame_bottom_right.png) no-repeat; }
 			.magicframe .frame_bottom_middle{ background: url(../../image/magic/frame/frame_bottom_middle.png) repeat-x; }
-			
+
 			.magicframe .frame_middle_left{ background: url(../../image/magic/frame/frame_middle_left.png) repeat-y; }
 			.magicframe .frame_middle_right{ background: url(../../image/magic/frame/frame_middle_right.png) repeat-y; }
 			.magicframe .frame_middle_middle{ background: #FFF; }
@@ -624,7 +624,7 @@ ins.modify { padding-top: 5px; color: #666; text-decoration: none; text-align: r
 			* html .magicframe .frame_middle_right{background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="../../image/magic/frame/frame_middle_right.png");}
 
 /*************************************************EVENT***/
-			
+
 .event_list{ margin: 20px 0 0; }
     .event_list ol{ margin: 0; padding: 0; list-style: none; }
     .event_list ol li{ margin: 0 0 20px; padding: 0 0 10px; width: 100%; border-bottom:1px solid #EBE6C9; overflow: hidden; }
