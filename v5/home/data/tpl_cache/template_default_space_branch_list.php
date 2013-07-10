@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_branch_list|template/default/header|template/default/footer', '1373342871', 'template/default/space_branch_list');?><?php $_TPL['titles'] = array('分支机构'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_branch_list|template/default/header|template/default/footer', '1373428495', 'template/default/space_branch_list');?><?php $_TPL['titles'] = array('分支机构'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -73,7 +73,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -102,7 +103,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -165,7 +166,6 @@
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
-
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
 
@@ -189,7 +189,7 @@
 </li>
 <?php } } ?>
 </ul>
-<div class="page"><?=$multi?></div>
+<div class='pagination'><ul><?=$multi?></ul></div>
 <?php } else { ?>
 <div class="c_form">还没有相关的分支机构。</div>
 <?php } ?>
@@ -197,10 +197,10 @@
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
-<div class="content" style="font-size:16px;">
+<div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><?=$_SN[$space['uid']]?></span>><span>分支机构</span>
+                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>分支机构</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -213,20 +213,20 @@
 
 <?php } ?>
 
-<div id="content" style="width:760px;">
+<div id="content" style="width:760px; ">
 
 
 <div class="content_detail_wrapper">
  		<?php if($list) { ?>
 <?php if(is_array($list)) { foreach($list as $value) { ?>
-                     <div class="content_list container_12">
+                     <div class="content_list container_12" >
                           <div class="grid_1">
                                <img src="<?=$value['image1url']?>" class="list_pic">
                           </div>
-                          <div class="grid_2">
+                          <div class="grid_2" >
                              <div class="list_test ">
                                   <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['branchid']?>"><h3><?=$value['subject']?></h3></a>
-                                  <p><?=$value['message']?></p><br/>
+                                  <p ><?=$value['message']?></p><br/>
                                   <p class="action_info">
                                    <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
                                     <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['branchid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
@@ -243,7 +243,7 @@
           
 </div>
 
-<div class="page"><?=$multi?></div>
+<div class='pagination'><ul><?=$multi?></ul></div>
 
 
 

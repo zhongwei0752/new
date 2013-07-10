@@ -46,17 +46,17 @@
 	<!--{template cp_topic_menu}-->
 <!--{else}-->
 
-	<div class="content">
+	<div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="$wei1[image2url]" /><span>{$_SN[$space[uid]]}</span>><span>产品动态</span>
+                   <img src="$wei1[image2url]" /><span><a href="space.php?uid=$space[uid]">{$_SN[$space[uid]]}</a></span>><span>企业动态</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
                          发布
                      </div>
                      <a href="space.php?do=development&view=me" class="link_back_bread grid_3">
-                      产品动态
+                      企业动态
                      </a>
                  </div>
 <!--{/if}-->
@@ -99,7 +99,7 @@
 			<tr>
 				<td>
 					<div class="post_list container_12">
-                         <span class="select_title grid_1">产品动态&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">企业动态&nbsp;&nbsp;:</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=development_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$development[message]</textarea>
 						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>

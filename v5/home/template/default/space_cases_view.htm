@@ -17,14 +17,17 @@
 <script type="text/javascript" charset="$_SC[charset]" src="source/script_calendar.js"></script>
 
 <div class="entry" style="padding:0 0 10px;">
-<div class="content">
+<div class="content" style="font-size:15px;">
+	<div class="indexing" style="margin-bottom:15px;">
+                  <img src="$wei1[image2url]" /><span><a href="space.php?uid=$space[uid]">{$_SN[$space[uid]]}</a></span>><span><a href="">成功案例</a></span>
+                 </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                       	<div class="content_title">$cases[subject]</div>
                            <h3 class="first_party"><span>案例甲方</span><span class="party_name">$cases[company]</span></h3>
-                           <div class="content_text_detail"><br/>
+                           <div class="content_text_detail" style="overflow:hidden"><br/>
                                <p>$cases[message]</p>
-                           </div>
+                           </div><br/>
                              <h3 class="first_party"><span>案例甲方评论</span></h3>
                            <div class="content_text_detail"><br/>
                                <p>$cases[messagecomment]</p>

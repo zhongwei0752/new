@@ -82,6 +82,8 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 					updatetable('space', $setarr, array('uid'=>$uid ));
 				}
 				$weixinuid=$_GET['uid'];
+				$auth = setSession($user[0],$user[1]);
+				$m_auth=rawurlencode($auth);
 				$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         		$friend = file_get_contents($friendurl,0,null,null);
         		$friend_output = json_decode($friend);

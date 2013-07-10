@@ -62,6 +62,11 @@ ul {
   width: 200px;
   height: 58px;
 }
+.navbar-inner .grid_7 {
+  width: 303px;
+  height: 58px;
+}
+
 .navbar-inner .grid_4 {
   height: 50px;
   padding-top: 8px;
@@ -468,8 +473,8 @@ ul {
 .comment_wrapper .grid_2:hover {
   background: url('./image/comment_hover.png') no-repeat;
 }
-.content_text_detail p {
-  text-indent: 2em;
+.content_text_detail  {
+  /*text-indent: 2em;*/
   color: #9e9d9d;
   line-height: 2em;
 }

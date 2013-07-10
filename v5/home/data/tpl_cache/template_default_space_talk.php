@@ -1,4 +1,10 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/footer', '1373352850', 'template/default/space_talk');?><?php $_TPL['titles'] = array('在线沟通'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/space_talk_li|template/default/footer', '1373428630', 'template/default/space_talk');?>
+
+
+
+
+
+<?php $_TPL['titles'] = array('在线沟通'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,7 +77,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -100,7 +107,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -163,7 +170,6 @@
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
-
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
 
@@ -212,7 +218,7 @@
 </li>
 <?php } } ?>
 </ol>
-<div class="page"><?=$multi?></div>
+<div class='pagination'><ul><?=$multi?></ul></div>
 </div>
 <?php } else { ?>
 <div class="c_form">现在还没有记录</div>
@@ -222,20 +228,15 @@
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
+<h2 class="title"><img src="<?=$wei1['image2url']?>">在线沟通</h2>
+<div class="tabs_header">
+<ul class="tabs">
 
-<div class="content" style="font-size:16px;">
-                 <div class="indexing">
-                  <img src="<?=$wei1['image2url']?>" /><span><a href=""><?=$_SN[$space['uid']]?></a></span>><span><a href="">在线沟通</a></span>
-                 </div><!-- end -->
-                 <div class="bread container_12">
-                     <div class="bread_actived grid_1">
-                         在线沟通
-                     </div>
-                     <a href="cp.php?ac=talk" class="btn grid_2">
-                      发布
-                     </a> 
-                 </div>
-             </div>
+<li<?=$actives['all']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>在线沟通</span></a></li>
+<li class="null"  style="margin-left:670px;"><a href="cp.php?ac=talk">发布</a></li>
+
+</ul>
+</div>
 <?php } else { ?>
 <?php $_TPL['spacetitle'] = "记录";
 	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=talk&view=me\">TA的所有记录</a>"; ?>
@@ -254,41 +255,70 @@
 <div class="h_status">按照发布时间排序</div>
 <?php } ?>
 
-<div id="content" style="width:760px;">
+<div id="content" style="width:810px;">	
+<?php if($dolist) { ?>
+<ul class="pm_list" id="pm_ul">
+<?php if(is_array($dolist)) { foreach($dolist as $dv) { ?>
+<?php $doid = $dv[doid]; ?>
+<li class="s_clear">
+<div class="avatar48">
+<a href="space.php?uid=<?=$dv['uid']?>"><?php echo avatar($dv[uid]); ?></a>
+</div>
+<div class="pm_body"><div class="pm_h"><div class="pm_f">
+<p><?php if($dv['subject']) { ?><a href="space.php?uid=<?=$dv['uid']?>"><?=$_SN[$dv['uid']]?></a><span style="color: #444;">:<?=$dv['subject']?> </span><?php } ?><span class="gray"><?php echo sgmdate('m-d H:i',$dv[dateline],1); ?></span></p>		
+<div class="pm_c">
+<?=$dv['message']?>
+</div>
+<div class="r_option"><a href="javascript:;" onclick="talkcomment_form(<?=$doid?>, 0);">回复</a><?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=talk&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="talk_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?> </div>
 
-<div class="content_detail_wrapper">
- 		<?php if($list) { ?>
+</div>
+<br/><hr style=" height:1px;border:none;border-top:1px dashed #C0C0C0;">
+<?php $list = $clist[$doid]; ?>
+<div class="sub_talk" id="talkcomment_<?=$doid?>"<?php if(!$list) { ?> style="display:none;"<?php } ?>>
+<span id="talkcomment_form_<?=$doid?>_0"></span>
+<ol>
 <?php if(is_array($list)) { foreach($list as $value) { ?>
-<div class="content_list container_12">
-                         
-                          <div class="grid_2_advertise">
-                             <div class="list_test ">
-                                  <h3><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['jobid']?>"><?=$value['subject']?></a></h3>
-                                  <p><?=$value['message']?></p><br/>
-                                  <p class="action_info">
-                                     <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
-                                    <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['jobid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
-                                  </p>
-                             </div>
-                          </div>
-                     </div><!-- list end -->
-                     
-                   <?php } } ?>
-<?php } else { ?>
-<div class="c_form">还没有相关的产品介绍。</div>
+<?php if($value['uid']) { ?>
+<li style="<?=$value['style']?>">
+<a href="space.php?uid=<?=$value['uid']?>"><?=$_SN[$value['uid']]?></a>: <?=$value['message']?> <span class="talktime">(<?php echo sgmdate('m-d H:i',$value[dateline],1); ?>)</span> 
+<a href="javascript:;" onclick="talkcomment_form(<?=$value['doid']?>, <?=$value['id']?>);" class="re">回复</a>
+<?php if($value['uid']==$_SGLOBAL['supe_uid'] || $dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=talk&op=delete&doid=<?=$value['doid']?>&id=<?=$value['id']?>" id="talk_delete_<?=$value['doid']?>_<?=$value['id']?>" onclick="ajaxmenu(event, this.id)" class="gray">删除</a><?php } ?>
+<span id="talkcomment_form_<?=$value['doid']?>_<?=$value['id']?>"></span>
+</li>
+<hr style=" height:1px;border:none;border-top:1px dashed #C0C0C0;">
 <?php } ?>
-          
+<?php } } ?>
+</ol>
+</div></div></div>
+</li>
+<?php } } ?>
+</ul>
+<?php } else { ?>
+<div class="c_form">
+当前没有相应的信息。
+</div>
+<?php } ?>
 </div>
 
-<div class="page"><?=$multi?></div>
-
-
-
+<div id="sidebar">
+<?php if($moodlist) { ?>
+<div class="sidebox">
+<h2 class="title">
+<p class="r_option"><a href="space.php?uid=<?=$space['uid']?>&do=mood">全部</a></p>
+跟<?php if($space['self']) { ?>我<?php } else { ?><?=$_SN[$space['uid']]?><?php } ?>同心情的朋友
+</h2>
+<ul class="avatar_list">
+<?php if(is_array($moodlist)) { foreach($moodlist as $key => $value) { ?>
+<li>
+<div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>&do=talk"><?php echo avatar($value[uid],small); ?></a></div>
+<p><a href="space.php?uid=<?=$value['uid']?>" title="<?=$_SN[$value['uid']]?>"><?=$_SN[$value['uid']]?></a></p>
+<p class="gray"><?php echo sgmdate('n月j日',$value[updatetime],1); ?></p>
+</li>
+<?php } } ?>
+</ul>
 </div>
-
-
-
-
+<?php } ?>
+</div>
 <?php } ?>
 
 

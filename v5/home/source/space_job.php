@@ -223,7 +223,7 @@ if($id) {
 
 } else {
 	//·ÖÒ³
-	$perpage = 10;
+	$perpage = 2;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;

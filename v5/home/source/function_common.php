@@ -749,56 +749,56 @@ function multi($num, $perpage, $curpage, $mpurl, $ajaxdiv='', $todiv='') {
 		$multipage = '';
 		$urlplus = $todiv?"#$todiv":'';
 		if($curpage - $offset > 1 && $pages > $page) {
-			$multipage .= "<a ";
+			$multipage .= "<li><a ";
 			if($_SGLOBAL['inajax']) {
 				$multipage .= "href=\"javascript:;\" onclick=\"ajaxget('{$mpurl}page=1&ajaxdiv=$ajaxdiv', '$ajaxdiv')\"";
 			} else {
 				$multipage .= "href=\"{$mpurl}page=1{$urlplus}\"";
 			}
-			$multipage .= " class=\"first\">1 ...</a>";
+			$multipage .= " class=\"first\">1 ...</a></li>";
 		}
 		if($curpage > 1) {
-			$multipage .= "<a ";
+			$multipage .= "<li><a ";
 			if($_SGLOBAL['inajax']) {
 				$multipage .= "href=\"javascript:;\" onclick=\"ajaxget('{$mpurl}page=".($curpage-1)."&ajaxdiv=$ajaxdiv', '$ajaxdiv')\"";
 			} else {
 				$multipage .= "href=\"{$mpurl}page=".($curpage-1)."$urlplus\"";
 			}
-			$multipage .= " class=\"prev\">&lsaquo;&lsaquo;</a>";
+			$multipage .= " class=\"prev\">&lsaquo;&lsaquo;</a></li>";
 		}
 		for($i = $from; $i <= $to; $i++) {
 			if($i == $curpage) {
-				$multipage .= '<strong>'.$i.'</strong>';
+				$multipage .= '<li><a  class="actived">'.$i.'</a></li>';
 			} else {
-				$multipage .= "<a ";
+				$multipage .= "<li><a ";
 				if($_SGLOBAL['inajax']) {
 					$multipage .= "href=\"javascript:;\" onclick=\"ajaxget('{$mpurl}page=$i&ajaxdiv=$ajaxdiv', '$ajaxdiv')\"";
 				} else {
 					$multipage .= "href=\"{$mpurl}page=$i{$urlplus}\"";
 				}
-				$multipage .= ">$i</a>";
+				$multipage .= ">$i</a></li>";
 			}
 		}
 		if($curpage < $pages) {
-			$multipage .= "<a ";
+			$multipage .= "<li><a ";
 			if($_SGLOBAL['inajax']) {
 				$multipage .= "href=\"javascript:;\" onclick=\"ajaxget('{$mpurl}page=".($curpage+1)."&ajaxdiv=$ajaxdiv', '$ajaxdiv')\"";
 			} else {
 				$multipage .= "href=\"{$mpurl}page=".($curpage+1)."{$urlplus}\"";
 			}
-			$multipage .= " class=\"next\">&rsaquo;&rsaquo;</a>";
+			$multipage .= " class=\"next\">&rsaquo;&rsaquo;</a></li>";
 		}
 		if($to < $pages) {
-			$multipage .= "<a ";
+			$multipage .= "<li><a ";
 			if($_SGLOBAL['inajax']) {
 				$multipage .= "href=\"javascript:;\" onclick=\"ajaxget('{$mpurl}page=$pages&ajaxdiv=$ajaxdiv', '$ajaxdiv')\"";
 			} else {
 				$multipage .= "href=\"{$mpurl}page=$pages{$urlplus}\"";
 			}
-			$multipage .= " class=\"last\">... $realpages</a>";
+			$multipage .= " class=\"last\">... $realpages</a></li>";
 		}
 		if($multipage) {
-			$multipage = '<em>&nbsp;'.$num.'&nbsp;</em>'.$multipage;
+			//$multipage = '<li><strong>&nbsp;'.$num.'&nbsp;</strong></li>'.$multipage;
 		}
 	}
 	return $multipage;
