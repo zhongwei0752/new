@@ -1,5 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1373427522', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
-<?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_login|template/default/header|template/default/footer', '1373594855', 'template/default/do_login');?><?php $_TPL['nosidebar']=1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -171,171 +170,126 @@
 <?php } ?>
 
 
-<?php if($space['self']) { ?>
-
-
-<?php } else { ?>
-<?php $_TPL['spacetitle'] = "成功案例";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有成功案例</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=cases&id=$cases[casesid]\">查看成功案例</a>"; ?>
-<div class="c_header a_header">
-<div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
-<?php if($_SGLOBAL['refer']) { ?>
-<a class="r_option" href="<?=$_SGLOBAL['refer']?>">&laquo; 返回上一页</a>
-<?php } ?>
-<p style="font-size:14px"><?=$_SN[$space['uid']]?>的<?=$_TPL['spacetitle']?></p>
-<a href="space.php?uid=<?=$space['uid']?>" class="spacelink"><?=$_SN[$space['uid']]?>的主页</a>
-<?php if($_TPL['spacemenus']) { ?>
-<?php if(is_array($_TPL['spacemenus'])) { foreach($_TPL['spacemenus'] as $value) { ?> <span class="pipe">&raquo;</span> <?=$value?><?php } } ?>
-<?php } ?>
-</div>
-
-<?php } ?>
-
-<script type="text/javascript" charset="<?=$_SC['charset']?>" src="source/script_calendar.js"></script>
-
-<div class="entry" style="padding:0 0 10px;">
-<div class="content" style="font-size:15px;">
-<div class="indexing" style="margin-bottom:15px;">
-                  <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span><a href="">成功案例</a></span>
-                 </div>
-                 <div class="content_detail_wrapper">
-                      <div class="content_page_detail">
-                      	<div class="content_title"><?=$cases['subject']?></div>
-                           <h3 class="first_party"><span>案例甲方</span><span class="party_name"><?=$cases['company']?></span></h3>
-                           <div class="content_text_detail" style="overflow:hidden"><br/>
-                               <p><?=$cases['message']?></p>
-                           </div><br/>
-                             <h3 class="first_party"><span>案例甲方评论</span></h3>
-                           <div class="content_text_detail"><br/>
-                               <p><?=$cases['messagecomment']?></p>
-                           </div>
-                           <div class="feed_action">
-                              <ul>
-                                 <li>阅览（<?=$cases['viewnum']?>）</li>
-                                 <li>评论（<?=$cases['replynum']?>）</li>
-                                 <?php if($_SGLOBAL['supe_uid'] == $cases['uid'] || checkperm('managecases')) { ?>
-                                 <li><a href="cp.php?ac=cases&casesid=<?=$cases['casesid']?>&op=edit">修改</a></li>
-                                 <li><a href="cp.php?ac=cases&casesid=<?=$cases['casesid']?>&op=delete" id="blog_delete_<?=$cases['casesid']?>" onclick="ajaxmenu(event, this.id)">删除</a></li>
-                                 <?php } ?>
-                              </ul>
-                           </div>
-
-<div class="comments" id="div_main_content">
-<h2>
-<?php if(!$cases['noreply']) { ?>
-<form id="quickcommentform_<?=$id?>" name="quickcommentform_<?=$id?>" action="cp.php?ac=comment" method="post" class="quickpost">
-
-<table cellpadding="0" cellspacing="0">
+<form id="loginform" name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post" class="c_form">
+<table cellpadding="0" cellspacing="0" class="formtable">
+<caption>
+<h2>请登录</h2>
+<p>如果您在本站已拥有帐号，请使用已有的帐号信息直接进行登录即可，不需重复注册。</p>
+</caption>
+<?php if($invitearr) { ?>
 <tr>
+<th width="100">好友邀请</th>
 <td>
-<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
-<?php if($_SGLOBAL['magic']['doodle']) { ?>
-<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
-<?php } ?>
-<br />
-<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;height:105px;float:left;"></textarea>
-<div class="comment_wrapper container_12" style="margin:0px;">
-<div class="comment_btn grid_2" id="commentsubmit_btn" name="commentsubmit_btn"  value="评论" onclick="ajaxpost('quickcommentform_<?=$id?>', 'comment_add')">发布</div>
-</div>
+<a href="space.php?<?=$url_plus?>" target="_blank"><?php echo avatar($invitearr[uid],small); ?></a>
+<a href="space.php?<?=$url_plus?>" target="_blank"><?=$_SN[$invitearr['uid']]?></a>
 </td>
 </tr>
+<?php } ?>
+
+<?php if($_SCONFIG['seccode_login']) { ?>
+<?php if($_SGLOBAL['input_seccode']) { ?>
+<tr>
+<th width="100">&nbsp;</th>
+<td>
+请通过下面的验证后，再提交登录
+</td>
+</tr>
+<?php } ?>
+<?php if($_SCONFIG['questionmode']) { ?>
+<tr>
+<th width="100" style="vertical-align: top;">请先回答问题</th>
+<td>
+<p><?php question(); ?></p>
+<input type="text" id="seccode" name="seccode" value="" tabindex="1" class="t_input"<?php if(empty($_SGLOBAL['input_seccode'])) { ?> onBlur="checkSeccode()"<?php } ?> />&nbsp;<span id="checkseccode">&nbsp;</span>
+</td>
+</tr>
+<?php } else { ?>
+<tr>
+<th width="100" style="vertical-align: top;">验证码</th>
+<td>
+<script>seccode();</script>
+<p>请输入上面的4位字母或数字，看不清可<a href="javascript:updateseccode()">更换一张</a></p>
+<input type="text" id="seccode" name="seccode" value="" tabindex="1" class="t_input"<?php if(empty($_SGLOBAL['input_seccode'])) { ?> onBlur="checkSeccode()"<?php } ?> />&nbsp;<span id="checkseccode">&nbsp;</span>
+</td>
+</tr>
+<?php } ?>
+<?php } ?>
+
+<tbody style="display:<?php if($_SGLOBAL['input_seccode']) { ?>none<?php } ?>;">
+<tr><th width="100"><label for="username">用户名</label></th><td><input type="text" name="username" id="username" class="t_input" value="<?=$membername?>" tabindex="2" /></td></tr>
+<tr><th width="100"><label for="password">密　码</label></th><td><input type="password" name="password" id="password" class="t_input" tabindex="3" value="<?=$password?>" /></td></tr>
+<tr>
+<th width="100">&nbsp;</th>
+<td>
+<input type="checkbox" id="cookietime" name="cookietime" value="315360000" <?=$cookiecheck?> style="margin-bottom: -2px;"><label for="cookietime">下次自动登录</label>
+</td>
+</tr>
+</tbody>
+<tr><th width="100">&nbsp;</th><td>
+<input type="hidden" name="refer" value="<?=$refer?>" />
+<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" tabindex="5" />
+<a href="do.php?ac=lostpasswd">忘记密码?</a>
+</td></tr>
+</table>
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" /></form>
+
+<script type="text/javascript">
+var lastSecCode = '';
+function checkSeccode() {
+var seccodeVerify = $('seccode').value;
+if(seccodeVerify == lastSecCode) {
+return;
+} else {
+lastSecCode = seccodeVerify;
+}
+ajaxresponse('checkseccode', 'op=checkseccode&seccode=' + (is_ie && document.charset == 'utf-8' ? encodeURIComponent(seccodeVerify) : seccodeVerify));
+}
+function ajaxresponse(objname, data) {
+var x = new Ajax('XML', objname);
+x.get('do.php?ac=<?=$_SCONFIG['register_action']?>&' + data, function(s){
+var obj = $(objname);
+s = trim(s);
+if(s.indexOf('succeed') > -1) {
+obj.style.display = '';
+obj.innerHTML = '<img src="image/check_right.gif" width="13" height="13">';
+obj.className = "warning";
+} else {
+warning(obj, s);
+}
+});
+}
+function warning(obj, msg) {
+if((ton = obj.id.substr(5, obj.id.length)) != 'password2') {
+$(ton).select();
+}
+obj.style.display = '';
+obj.innerHTML = '<img src="image/check_error.gif" width="13" height="13"> &nbsp; ' + msg;
+obj.className = "warning";
+}
+
+</script>
+
+<?php if($_SGLOBAL['input_seccode']) { ?>
+<script>
+$('seccode').style.background = '#FFFFCC';
+$('seccode').focus();
+</script>
+<?php } ?>
+
+
+<div class="c_form">
+<table cellpadding="0" cellspacing="0" class="formtable">
+<caption>
+<h2>还没有注册吗？</h2>
+<p>如果还没有本站的通行帐号，请先注册一个属于自己的帐号吧。</p>
+</caption>
 <tr>
 <td>
-<input type="hidden" name="refer" value="space.php?uid=<?=$cases['uid']?>&do=<?=$do?>&id=<?=$id?>" />
-<input type="hidden" name="id" value="<?=$id?>">
-<input type="hidden" name="idtype" value="casesid">
-<input type="hidden" name="commentsubmit" value="true" />
-
-<div id="__quickcommentform_<?=$id?>"></div>
+<a href="do.php?ac=<?=$_SCONFIG['register_action']?>" style="display: block; margin: 0 110px 2em; width: 100px; border: 1px solid #486B26; background: #76A14F; line-height: 30px; font-size: 14px; text-align: center; text-decoration: none;"><strong style="display: block; border-top: 1px solid #9EBC84; color: #FFF; padding: 0 0.5em;">立即注册</strong></a>
 </td>
 </tr>
 </table>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" /></form>
-<br />
-<?php } ?>
 </div>
-
-
-<div class="comments_list" id="comment">
-<?php if($cid) { ?>
-<div class="notice">
-当前只显示与你操作相关的单个评论，<a href="space.php?uid=<?=$cases['uid']?>&do=cases&id=<?=$cases['casesid']?>">点击此处查看全部评论</a>
-</div>
-<?php } ?>
-<ul id="comment_ul">
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<div class="comment_list container_12" style="margin-left:60px;">
-<?php if($value['author']) { ?>
-<div class="avatar48"><a href="space.php?uid=<?=$value['authorid']?>"><?php echo avatar($value[authorid],small); ?></a></div>
-<?php } else { ?>
- <img src="image/magic/hidden.gif" class="grid_1">
-<?php } ?>
-     <div class="grid_2">
-                                      <h6><span class="commenter">
-                                      	<?php if($value['author']) { ?>
-<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"><?=$_SN[$value['authorid']]?></a> 
-<?php } else { ?>
-匿名
-<?php } ?>:</span>
-<span class="comment_text"><?=$value['message']?></span></h6>
-        <span class="comment_time"><?php echo sgmdate('Y-m-d H:i',$value[dateline],1); ?></span>
-        </div>
- </div> <br/>
-
-
-<?php } } ?>
-</ul>
-</div>
-<div class="page"><?=$multi?></div>
-
-
-
-
-
-                           </div>
-                      </div>
-                 </div>
-                 
-                </div>
-
-
-
-<script type="text/javascript">
-<!--
-function closeSide2(oo) {
-if($('sidebar').style.display == 'none'){
-$('content').style.cssText = '';
-$('sidebar').style.display = 'block';
-oo.innerHTML = '&raquo; 关闭侧边栏';
-}
-else{
-$('content').style.cssText = 'margin: 0pt; width: 810px;';
-$('sidebar').style.display = 'none';
-oo.innerHTML = '&laquo; 打开侧边栏';
-}
-}
-function addFriendCall(){
-var el = $('friendinput');
-if(!el || el.value == "")	return;
-var s = '<input type="checkbox" name="fusername[]" value="'+el.value+'" id="'+el.value+'" checked>';
-s += '<label for="'+el.value+'">'+el.value+'</label>';
-s += '<br />';
-$('friends').innerHTML += s;
-el.value = '';
-}
-resizeImg('cases_article','700');
-resizeImg('div_main_content','450');
-
-//彩虹炫
-var elems = selector('div[class~=magicflicker]'); 
-for(var i=0; i<elems.length; i++){
-magicColor(elems[i]);
-}
-
--->
-</script>
-
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

@@ -81,3 +81,42 @@
 <?PHP exit;?>	2013-07-08 16:56:41		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
 <?PHP exit;?>	2013-07-08 16:56:42		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
 <?PHP exit;?>	2013-07-08 16:56:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 12:21:19		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-11 12:21:21		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 12:21:22		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-11 12:21:24		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 13:47:10		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-11 13:47:13		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 13:47:14		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-11 13:47:15		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 14:25:57		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-11 14:26:00		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 14:26:02		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-11 14:26:03		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 18:27:32		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-11 18:27:34		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 18:27:35		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-11 18:27:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-11 18:27:41		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-11 18:27:46		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-12 12:16:51		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-12 12:17:04		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-12 12:17:16		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
+<?PHP exit;?>	2013-07-12 12:17:22		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2	GET{ac=space;perpage=20;page=2;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"1";};listsubmit=提交;}
+<?PHP exit;?>	2013-07-12 12:17:30		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-12 12:17:32		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-12 12:17:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
+<?PHP exit;?>	2013-07-12 12:17:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2	GET{ac=space;perpage=20;page=2;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"1";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-12 12:17:44		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2namestatus=0	GET{ac=space;perpage=20;page=2namestatus=0;}
+<?PHP exit;?>	2013-07-12 14:50:27		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-12 14:50:33		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-12 14:50:37		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
+<?PHP exit;?>	2013-07-12 14:50:42		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2	GET{ac=space;perpage=20;page=2;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"1";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-12 14:50:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2namestatus=0	GET{ac=space;perpage=20;page=2namestatus=0;}
+<?PHP exit;?>	2013-07-12 17:27:57		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-12 17:28:00		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-12 17:28:05		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
+<?PHP exit;?>	2013-07-12 17:28:11		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=1	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=1;}
+<?PHP exit;?>	2013-07-12 17:28:20		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
+<?PHP exit;?>	2013-07-12 17:28:30		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2	GET{ac=space;perpage=20;page=2;}POST{formhash=fe00ab38;uids=a:2:{i:0;s:1:"5";i:1;s:1:"1";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-12 17:28:31		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2namestatus=0	GET{ac=space;perpage=20;page=2namestatus=0;}

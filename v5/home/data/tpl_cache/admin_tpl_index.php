@@ -1,5 +1,57 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_branch_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1373428486', 'template/default/space_branch_view');?><?php $_TPL['titles'] = array($branch['subject'], '分支机构'); ?>
-<?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/index|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1373621277', 'admin/tpl/index');?><?php $_TPL['menunames'] = array(
+		'index' => '管理首页',
+		'config' => '站点设置',
+		'privacy' => '隐私设置',
+		'usergroup' => '用户组',
+		'credit' => '积分规则',
+		'profilefield' => '用户栏目',
+		'profield' => '群组栏目',
+		'eventclass' => '活动分类',
+		'magic' => '道具设置',
+		'task' => '有奖任务',
+		'spam' => '防灌水设置',
+		'censor' => '词语屏蔽',
+		'ad' => '广告设置',
+		'userapp' => 'MYOP应用',
+		'app' => 'UCenter应用',
+		'network' => '随便看看',
+		'cache' => '缓存更新',
+		'log' => '系统log记录',
+		'space' => '用户管理',
+		'feed' => '动态(feed)',
+		'share' => '分享',
+		'blog' => '日志',
+		'album' => '相册',
+		'pic' => '图片',
+		'comment' => '评论/留言',
+		'thread' => '话题',
+		'post' => '回帖',
+		'doing' => '记录',
+		'tag' => '标签',
+		'mtag' => '群组',
+		'poll' => '投票',
+		'event' => '活动',
+		'magiclog' => '道具记录',
+		'report' => '举报',
+		'block' => '数据调用',
+		'template' => '模板编辑',
+		'backup' => '数据备份',
+		'stat' => '统计更新',
+		'cron' => '系统计划任务',
+		'click' => '表态动作',
+		'ip' => '访问IP设置',
+		'hotuser' => '推荐成员设置',
+		'defaultuser' => '默认好友设置',
+		'introduce' => '企业介绍',
+		'product' => '产品介绍',
+		'development' => '企业动态',
+		'industry' => '行业动态',
+		'cases' => '成功案例',
+		'branch' => '分支机构',
+		'job' => '人才招聘',
+		'talk' => '在线沟通'
+	); ?>
+<?php $_TPL['nosidebar'] = 1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -147,21 +199,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
@@ -171,207 +208,164 @@
 <?php } ?>
 
 
-<?php if($space['self']) { ?>
+<style type="text/css">
+@import url(admin/tpl/style.css);
+</style>
+
+<div id="cp_content">
 
 
-<?php } else { ?>
-<?php $_TPL['spacetitle'] = "分支机构";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有分支机构</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=branch&id=$branch[branchid]\">查看分支机构</a>"; ?>
-<div class="c_header a_header">
-<div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
-<?php if($_SGLOBAL['refer']) { ?>
-<a class="r_option" href="<?=$_SGLOBAL['refer']?>">&laquo; 返回上一页</a>
-<?php } ?>
-<p style="font-size:14px"><?=$_SN[$space['uid']]?>的<?=$_TPL['spacetitle']?></p>
-<a href="space.php?uid=<?=$space['uid']?>" class="spacelink"><?=$_SN[$space['uid']]?>的主页</a>
-<?php if($_TPL['spacemenus']) { ?>
-<?php if(is_array($_TPL['spacemenus'])) { foreach($_TPL['spacemenus'] as $value) { ?> <span class="pipe">&raquo;</span> <?=$value?><?php } } ?>
-<?php } ?>
+<div class="mainarea">
+<div class="maininner">
+<?php if($menus['0']['config']) { ?>
+<div class="bdrcontent">
+<div class="title"><h3>欢迎光临管理平台</h3></div>
+<p>通过登录管理平台，您可以对站点的参数进行设置，并可以及时获取官方的更新动态和重要补丁通告。</p>
 </div>
-
-<?php } ?>
-
-<script type="text/javascript" charset="<?=$_SC['charset']?>" src="source/script_calendar.js"></script>
-
-<div class="entry" style="padding:0 0 10px;">
-<div class="content" style="font-size:15px;">
-<div class="indexing" style="margin-bottom:15px;">
-                  <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span><a href="">分支机构</a></span>
-                 </div>
-                 <div class="content_detail_wrapper">
-                      <div class="content_page_detail">
-                      	 <div class="content_title"><?=$branch['subject']?></div>
-                           <h3 class="first_party">
-                            <span><?php if($branch['place']) { ?>地址:<?=$branch['place']?>;<?php } else { ?>地址:未填;<?php } ?></span>
-                            <span><?php if($branch['telephone']) { ?>电话:<?=$branch['telephone']?>;<?php } else { ?>电话:未填;<?php } ?></span>
-                            <span><?php if($branch['email']) { ?>邮箱:<?=$branch['email']?>;<?php } else { ?>邮箱:未填;<?php } ?></span>
-                            <span><?php if($branch['qq']) { ?>QQ:<?=$branch['qq']?>;<?php } else { ?>QQ:未填;<?php } ?></span>
-                          </h3>
-                          <!-- 此处的h3是借用成功案列里面的样式 -->
-                           <div class="content_text_detail" style="overflow:hidden">
-                               <p><?=$branch['message']?></p>
-                           </div><br/>
-                           
-                                <div id='allmap'></div> 
-                          
-                           <div class="feed_action">
-                              <ul>
-                                 <li>阅览（<?=$branch['viewnum']?>）</li>
-                                 <li>评论（<?=$branch['replynum']?>）</li>
-                                 <?php if($_SGLOBAL['supe_uid'] == $branch['uid'] || checkperm('managebranch')) { ?>
-                                 <li><a href="cp.php?ac=branch&branchid=<?=$branch['branchid']?>&op=edit">修改</a></li>
-                                 <li><a href="cp.php?ac=branch&branchid=<?=$branch['branchid']?>&op=delete" id="blog_delete_<?=$branch['branchid']?>" onclick="ajaxmenu(event, this.id)">删除</a></li>
-                                 <?php } ?>
-                              </ul>
-                           </div>
-
-<div class="comments" id="div_main_content">
-<h2>
-<?php if(!$branch['noreply']) { ?>
-<form id="quickcommentform_<?=$id?>" name="quickcommentform_<?=$id?>" action="cp.php?ac=comment" method="post" class="quickpost">
-
-<table cellpadding="0" cellspacing="0">
-<tr>
-<td>
-<a href="###" id="comment_face" title="插入表情" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
-<?php if($_SGLOBAL['magic']['doodle']) { ?>
-<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
-<?php } ?>
 <br />
-<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;height:105px;float:left;"></textarea>
-<div class="comment_wrapper container_12" style="margin:0px;">
-<div class="comment_btn grid_2" id="commentsubmit_btn" name="commentsubmit_btn"  value="评论" onclick="ajaxpost('quickcommentform_<?=$id?>', 'comment_add')">发布</div>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<input type="hidden" name="refer" value="space.php?uid=<?=$branch['uid']?>&do=<?=$do?>&id=<?=$id?>" />
-<input type="hidden" name="id" value="<?=$id?>">
-<input type="hidden" name="idtype" value="branchid">
-<input type="hidden" name="commentsubmit" value="true" />
 
-<div id="__quickcommentform_<?=$id?>"></div>
-</td>
-</tr>
+<div class="bdrcontent">
+<div class="title">
+<h3>官方最新动态</h3>
+<p>官方新版本的发布与重要补丁的升级等动态，都会在这里显示。</p>
+</div>
+<div id="customerinfor" style="line-height:1.5em;"></div>
+<br />
+<div class="title">
+<h3>技术支持服务</h3>
+<p>如果你在使用中遇到问题，可以访问以下链接需求帮助</p>
+</div>
+<ul class="listcol list2col">
+<li><a href=http://www.discuz.net/index.php?gid=141 target="_blank">官方交流论坛</a></li>
+<li><a href=http://www.comsenz.com/purchase/uchome target="_blank">Comsenz商业支持服务</a></li>
+</ul>
+</div>
+<br />
+
+<div class="bdrcontent">
+<div class="title">
+<h3>站点数据统计</h3>
+<p>通过站点统计，您可以整体把握站点的发展状况。</p>
+<p>您还可以查看<a href="do.php?ac=stat" target="_blank">趋势统计</a>，把握站点每日变化。</p>
+</div>
+<ul class="listcol list2col">
+<li>开通空间数: <?=$statistics['spacenum']?> (<a href="do.php?ac=stat&type=login" target="_blank">趋势</a>)</li>
+<li>全部动态数: <?=$statistics['feednum']?></li>
+<li>全部日志数: <?=$statistics['blognum']?> (<a href="do.php?ac=stat&type=blog" target="_blank">趋势</a>)</li>
+<li>全部相册数: <?=$statistics['albumnum']?> (<a href="do.php?ac=stat&type=pic" target="_blank">趋势</a>)</li>
+<li>全部分享数: <?=$statistics['sharenum']?> (<a href="do.php?ac=stat&type=share" target="_blank">趋势</a>)</li>
+<li>全部话题数: <?=$statistics['threadnum']?> (<a href="do.php?ac=stat&type=thread" target="_blank">趋势</a>)</li>
+<li>全部评论数: <?=$statistics['commentnum']?></li>
+<li>开启应用数: <?=$statistics['myappnum']?></li>
+</ul>
+</div>
+<br />
+
+<div class="bdrcontent">
+<div class="title"><h3>程序数据库/版本</h3></div>
+<ul>
+<li>操作系统: <?=$os?></li>
+<li>数据库版本: <?=$statistics['mysql']?></li>
+<li>上传许可: <?=$fileupload?></li>
+<li>数据库尺寸: <?=$dbsize?></li>
+<li>附件尺寸: <?=$attachsize?></li>
+<li>当前程序版本: UCenter Home <?=$statistics['version']?> ( <?=$statistics['release']?> )</li>
+<li>UCenter Client 版本: <?=UC_CLIENT_VERSION?> Release <?=UC_CLIENT_RELEASE?></li>
+</ul>
+</div>
+<br />
+
+<div class="bdrcontent">
+
+<div class="title">
+<h3>开发团队</h3>
+</div>
+<table>
+<tr><td width="80">版权所有</td><td><a  href="http://www.comsenz.com/" target="_blank">康盛创想(北京)科技有限公司 (Comsenz Inc.)</a></td></tr>
+<tr><td>总策划</td><td><a  href="http://www.discuz.net/space.php?uid=1" target="_blank">Kevin 'Crossday' Day</a>, <a  href="http://www.discuz.net/space.php?uid=174393" target="_blank">Guode 'Sup' Li</a></td></tr>
+<tr><td>开发团队</td><td><a  href="http://www.discuz.net/space.php?uid=322293" target="_blank">Qingpeng 'Andy' Zheng</a>, <a  href="http://www.discuz.net/space.php?uid=248739" target="_blank">Jing 'Qiezi' Zou</a>, <a  href="http://www.discuz.net/space.php?uid=672953" target="_blank">Fei 'Fengshu' Zhao</a>, <a  href="http://www.discuz.net/space.php?uid=465273" target="_blank">Lijun 'Maple-x' Zhang</a>, <a  href="http://www.discuz.net/space.php?uid=679269" target="_blank">Lei 'Shitou' Zhao</a>, <a  href="http://www.discuz.net/space.php?uid=906359" target="_blank">Peng 'Dingusxp' Xu</a></td></tr>
+<tr><td>美工设计</td><td><a  href="http://www.discuz.net/space.php?uid=294092" target="_blank">Fangming 'Lushnis' Li</a>, <a  href="http://www.discuz.net/space.php?uid=174393" target="_blank">Yulong 'Yulong' Li</a>, <a  href="http://www.discuz.net/space.php?uid=41050" target="_blank">Rujian '小古' Mo</a></td></tr>
+<tr><td>公司网站</td><td><a href=http://www.comsenz.com target="_blank">http://www.comsenz.com</a></td></tr>
+<tr><td>产品网站</td><td><a href=http://u.discuz.net target="_blank">http://u.discuz.net</a></td></tr>
 </table>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" /></form>
+</div>
+<?php } else { ?>
+<div class="bdrcontent">
+<div class="title"><h3>欢迎光临管理平台</h3></div>
+<p>通过管理平台操作，你可以对发布的信息进行批量管理。</p>
+
 <br />
+<div class="title"><h3>快捷管理菜单</h3></div>
+<ul class="listcol list2col">
+<?php if($menus['1']['space']) { ?><li><a href="admincp.php?ac=space" style="font-weight:bold;">用户</a><p>编辑用户的积分、用户组、管理空间信息、删除用户</p></li><?php } ?>
+<li><a href="admincp.php?ac=introduce" style="font-weight:bold;">企业介绍</a><p>对企业介绍进行批量删除</p></li>
+<li><a href="admincp.php?ac=product" style="font-weight:bold;">产品介绍</a><p>对产品介绍进行批量删除、编辑</p></li>
+<li><a href="admincp.php?ac=development" style="font-weight:bold;">企业动态</a><p>对企业动态进行批量删除</p></li>
+<li><a href="admincp.php?ac=industry" style="font-weight:bold;">行业动态</a><p>对行业动态进行批量删除</p></li>
+<li><a href="admincp.php?ac=cases" style="font-weight:bold;">成功案例</a><p>对成功案例进行批量删除</p></li>
+<li><a href="admincp.php?ac=branch" style="font-weight:bold;">分支机构</a><p>对分支机构进行批量删除、精华、置顶</p></li>
+<li><a href="admincp.php?ac=job" style="font-weight:bold;">人才招聘</a><p>对人才招聘进行批量删除</p></li>
+<li><a href="admincp.php?ac=talk" style="font-weight:bold;">在线沟通</a><p>对在线沟通进行批量删除</p></li>
+<?php if($menus['1']['tag']) { ?><li><a href="admincp.php?ac=tag" style="font-weight:bold;">标签</a><p>对站点的标签进行删除、关闭、合并</p></li><?php } ?>
+<?php if($menus['1']['mtag']) { ?><li><a href="admincp.php?ac=mtag" style="font-weight:bold;">群组</a><p>对站点的群组进行删除、关闭、合并</p></li><?php } ?>
+<?php if($menus['1']['event']) { ?><li><a href="admincp.php?ac=event" style="font-weight:bold;">活动</a><p>对站点的活动进行删除、审核、推荐</p></li><?php } ?>
+<?php if($menus['1']['css']) { ?><li><a href="admincp.php?ac=css" style="font-weight:bold;">模版样式</a><p>对站点共享的模版样式进行批量审核、删除</p></li><?php } ?>
+</ul>
+</div><br />
 <?php } ?>
 </div>
-
-
-<div class="comments_list" id="comment">
-<?php if($cid) { ?>
-<div class="notice">
-当前只显示与你操作相关的单个评论，<a href="space.php?uid=<?=$branch['uid']?>&do=branch&id=<?=$branch['branchid']?>">点击此处查看全部评论</a>
+<br>
 </div>
-<?php } ?>
-<ul id="comment_ul">
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<div class="comment_list container_12" style="margin-left:60px;">
-<?php if($value['author']) { ?>
-<div class="avatar48"><a href="space.php?uid=<?=$value['authorid']?>"><?php echo avatar($value[authorid],small); ?></a></div>
-<?php } else { ?>
- <img src="image/magic/hidden.gif" class="grid_1">
-<?php } ?>
-     <div class="grid_2">
-                                      <h6><span class="commenter">
-                                      	<?php if($value['author']) { ?>
-<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"><?=$_SN[$value['authorid']]?></a> 
-<?php } else { ?>
-匿名
-<?php } ?>:</span>
-<span class="comment_text"><?=$value['message']?></span></h6>
-        <span class="comment_time"><?php echo sgmdate('Y-m-d H:i',$value[dateline],1); ?></span>
-        </div>
- </div> <br/>
 
-
+<div class="side">
+<?php if($menus['0']) { ?>
+<div class="block style1">
+<h2>基本设置</h2>
+<ul class="folder">
+<?php if(is_array($acs['0'])) { foreach($acs['0'] as $value) { ?>
+<?php if($menus['0'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } ?>
 <?php } } ?>
 </ul>
 </div>
-<div class="page"><?=$multi?></div>
+<?php } ?>
 
+<div class="block style1">
+<h2>批量管理</h2>
+<ul class="folder">
+<?php if(is_array($acs['4'])) { foreach($acs['4'] as $value) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } } ?>
+<?php if(is_array($acs['1'])) { foreach($acs['1'] as $value) { ?>
+<?php if($menus['1'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } ?>
+<?php } } ?>
+</ul>
+</div>
 
+<?php if($menus['2']) { ?>
+<div class="block style1">
+<h2>高级设置</h2>
+<ul class="folder">
+<?php if(is_array($acs['2'])) { foreach($acs['2'] as $value) { ?>
+<?php if($menus['2'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } ?>
+<?php } } ?>
+<?php if($menus['0']['config']) { ?><li><a href="<?=UC_API?>" target="_blank">UCenter</a></li><?php } ?>
+</ul>
+</div>
+<?php } ?>
+</div>
 
+<?php if($statistics['update']) { ?>
+<script language="javascript" src="http://u.discuz.net/customer/update.php?get=<?=$statistics['update']?>"></script>
+<?php } ?>
+<?php my_checkupdate(); ?>
 
-
-                           </div>
-                      </div>
-                 </div>
-                 
-                </div>
-
-
-
-<script type="text/javascript">
-<!--
-function closeSide2(oo) {
-if($('sidebar').style.display == 'none'){
-$('content').style.cssText = '';
-$('sidebar').style.display = 'block';
-oo.innerHTML = '&raquo; 关闭侧边栏';
-}
-else{
-$('content').style.cssText = 'margin: 0pt; width: 810px;';
-$('sidebar').style.display = 'none';
-oo.innerHTML = '&laquo; 打开侧边栏';
-}
-}
-function addFriendCall(){
-var el = $('friendinput');
-if(!el || el.value == "")	return;
-var s = '<input type="checkbox" name="fusername[]" value="'+el.value+'" id="'+el.value+'" checked>';
-s += '<label for="'+el.value+'">'+el.value+'</label>';
-s += '<br />';
-$('friends').innerHTML += s;
-el.value = '';
-}
-resizeImg('branch_article','700');
-resizeImg('div_main_content','450');
-
-//彩虹炫
-var elems = selector('div[class~=magicflicker]'); 
-for(var i=0; i<elems.length; i++){
-magicColor(elems[i]);
-}
-
--->
-</script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=81E8713d331d9cdbc7810585844907d3"></script>
-<script language="javascript">var jquery = jQuery.noConflict(); </script>
-<script type="text/javascript">
-
-jquery(document).ready(function() {
-
-var map = new BMap.Map("allmap");
-
-var point = new BMap.Point(116.331398,39.897445);
-map.centerAndZoom(point,12);
-// 创建地址解析器实例
-var myGeo = new BMap.Geocoder();
-// 将地址解析结果显示在地图上,并调整地图视野
-myGeo.getPoint("<?=$branch['place']?>", function(point){
-  if (point) {
-
-    map.centerAndZoom(point, 16);
-    map.addOverlay(new BMap.Marker(point));
-    map.enableScrollWheelZoom();  
-  }
-}, "北京市");
-
-})
-</script>
-
-<style type="text/css">
-#allmap {width: 700px;height: 200px;overflow: hidden;margin:0 auto;}
-#l-map{width: 700px;height: 200px;float:left;border-right:2px solid #bcbcbc;}
-#r-result{width: 700px;height: 200px;float:left;}
-</style>
+</div>
 
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>

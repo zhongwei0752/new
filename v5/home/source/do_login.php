@@ -166,8 +166,15 @@ if(submitcheck('loginsubmit')) {
 	}
 	
 	realname_get();
-	
+	if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+		showmessage('login_success', "cp.php?ac=profile", 1, array($ucsynlogin));
+	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
+		showmessage('login_success', "./template/default/post_ok.htm", 1, array($ucsynlogin));
+	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
+		showmessage('login_success', "space.php?do=menuset", 1, array($ucsynlogin));
+	}else{
 	showmessage('login_success', $app?"userapp.php?id=$app":$_POST['refer'], 1, array($ucsynlogin));
+}
 }
 
 $membername = empty($_SCOOKIE['loginuser'])?'':sstripslashes($_SCOOKIE['loginuser']);

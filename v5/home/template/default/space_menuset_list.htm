@@ -1,8 +1,8 @@
+
 <!--{eval $_TPL['titles'] = array('应用');}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 
 <!--{template header}-->
-
 <!--{if !empty($_SGLOBAL[inajax])}-->
 	<div id="space_menuset" class="feed">
 		<h3 class="feed_header">
@@ -32,6 +32,7 @@
 <!--{else}-->
 
 <!--{if $space[self]}-->
+
 <!--{if $zhong1}-->
 <div class="searchbar floatright">
 <form method="get" action="space.php">
@@ -131,7 +132,7 @@
 			</script>
 		<!--{/loop}-->
 		<!--{if $_GET[view]!='me'}-->
-		<!--{if empty($zhongwei)}-->
+		<!--{if empty($list)}-->
 		<div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
 		
 		<!--{else}-->
@@ -193,7 +194,6 @@
 <!--{/if}-->
 
 
-
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
@@ -209,6 +209,9 @@ $(document).ready(function()
  	});
 	});
 </script>
+
+
 <!--{/if}-->
+
 	
 <!--{template footer}-->

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_doing|template/default/header|template/default/space_doing_li|template/default/space_menu|template/default/space_doing_form|template/default/space_doing_li|template/default/footer', '1373353955', 'template/default/space_doing');?><?php $_TPL['titles'] = array('记录'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1373623720', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,7 +71,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -100,7 +101,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -145,24 +146,8 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
-
 
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
@@ -171,68 +156,212 @@
 
 
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
-<div id="space_doing">
+<div id="space_friend">
 <h3 class="feed_header">
-<a href="space.php?do=doing&view=me" class="r_option" target="_blank">一句话记录</a>
-记录(共 <?=$count?> 条)
+<a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找好友</a>
+好友(共 <?=$count?> 个)
 </h3><br>
 
-<?php if($dolist) { ?>
-<div class="doing_list">
-<ol>
-<?php if(is_array($dolist)) { foreach($dolist as $dv) { ?>
-<?php $doid = $dv[doid]; ?>
-<li id="dl<?=$doid?>">
-<div class="doing">
-<div class="doingcontent"><a href="space.php?uid=<?=$dv['uid']?>"><?=$_SN[$dv['uid']]?></a>: <span><?=$dv['message']?></span>
-<span class="gray">(<?php echo sgmdate('m-d H:i',$dv[dateline],1); ?>)</span>
-<?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=doing&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="doing_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?>
-<a href="javascript:;" onclick="docomment_form(<?=$doid?>, 0);">回复</a>
-</div>
+<?php if($list) { ?>
+<div id="friend_ul">
+<ul class="line_list">
+<?php if(is_array($list)) { foreach($list as $key => $value) { ?>
+<li>
+<table width="100%">
+<tr>
+<td width="70">
+<div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>"><?php echo avatar($value[uid],small); ?></a></div>
+</td>
+<td>
+<div class="thumbTitle"><p<?php if($ols[$value['uid']]) { ?> class="online_icon_p"<?php } ?>><a href="space.php?uid=<?=$value['uid']?>"<?php g_color($value[groupid]); ?>><?=$_SN[$value['uid']]?></a> <?php g_icon($value[groupid]); ?></p></div>
 
-<?php $list = $clist[$doid]; ?>
-<div class="sub_doing" id="docomment_<?=$doid?>"<?php if(!$list) { ?> style="display:none;"<?php } ?>>
-<span id="docomment_form_<?=$doid?>_0"></span>
-<ol>
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<?php if($value['uid']) { ?>
-<li style="<?=$value['style']?>">
-<a href="space.php?uid=<?=$value['uid']?>"><?=$_SN[$value['uid']]?></a>: <?=$value['message']?> <span class="doingtime">(<?php echo sgmdate('m-d H:i',$value[dateline],1); ?>)</span> 
-<a href="javascript:;" onclick="docomment_form(<?=$value['doid']?>, <?=$value['id']?>);" class="re">回复</a>
-<?php if($value['uid']==$_SGLOBAL['supe_uid'] || $dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=doing&op=delete&doid=<?=$value['doid']?>&id=<?=$value['id']?>" id="doing_delete_<?=$value['doid']?>_<?=$value['id']?>" onclick="ajaxmenu(event, this.id)" class="gray">删除</a><?php } ?>
-<span id="docomment_form_<?=$value['doid']?>_<?=$value['id']?>"></span>
-</li>
+<?php if($value['note']) { ?><div><?=$value['note']?></div><?php } ?>
+
+<?php if($ols[$value['uid']]) { ?><div class="gray"><?php echo sgmdate('H:i',$ols[$value[uid]],1); ?></div><?php } ?>
+<div class="setti">
+
+<?php if(!$value['isfriend']) { ?>
+<a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
 <?php } ?>
-<?php } } ?>
-</ol>
 </div>
-
-</div>
+</td></tr></table>
 </li>
 <?php } } ?>
-</ol>
+</ul>
+</div>
 <div class="page"><?=$multi?></div>
-</div>
+
 <?php } else { ?>
-<div class="c_form">现在还没有记录</div>
+<div class="c_form">
+没有相关用户列表。
+</div>
 <?php } ?>
-</div><br>
+</div><br />
 
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
-<h2 class="title"><img src="image/app/doing.gif">记录</h2>
-<div class="tabs_header">
-<ul class="tabs">
-<?php if($space['friendnum']) { ?><li<?=$actives['we']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=we"><span>最新好友记录</span></a></li><?php } ?>
-<li<?=$actives['all']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"><span>大家的记录</span></a></li>
-<li<?=$actives['me']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>我的记录</span></a></li>
-<li<?=$actives['mood']?>><a href="space.php?uid=<?=$space['uid']?>&do=mood"><span>同心情的朋友</span></a></li>
+<div class="searchbar floatright">
+<?php if($_GET['view']=='me') { ?>
+<form method="get" action="space.php">
+<input type="hidden" name="do" value="friend">
+<input name="searchkey" value="" size="15" class="t_input" type="text">
+<input name="searchsubmit" value="找好友" class="submit" type="submit">
+<input type="hidden" name="searchmode" value="1" />
+</form>
+<?php } else { ?>
+<form method="get" action="cp.php">
+<input type="hidden" name="ac" value="friend" />
+<input type="hidden" name="op" value="search" />
+<input name="searchkey" value="" size="15" class="t_input" type="text">
+<input name="searchsubmit" value="找人" class="submit" type="submit">
+<input type="hidden" name="searchmode" value="1" />
+</form>
+<?php } ?>
+</div>
+<h2 class="title"><img src="image/icon/friend.gif" />好友</h2>
+<div class="content" style="font-size:15px;">
+
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         好友列表
+                     </div>
+                    
+                 </div>		
+
+ <div class="content_detail_wrapper">
+<div id="content"  style="width: 760px;" >
+
+<div class="c_mgs"><div class="ye_r_t"><div class="ye_l_t"><div class="ye_r_b"><div class="ye_l_b">
+<?php if($_GET['view']=='blacklist') { ?>
+加入到黑名单的用户，将会从您的好友列表中删除。同时，对方将不能进行与您相关的打招呼、踩日志、加好友、评论、留言、短消息等互动行为。
+<?php } elseif($_GET['view']=='me') { ?>
+
+当前共有 <?=$space['friendnum']?> 个好友。
+
+
+<?php if($maxfriendnum) { ?>
+(最多可以添加 <?=$maxfriendnum?> 个好友)
+<p>
+<?php if($_SGLOBAL['magic']['friendnum']) { ?>
+<img src="image/magic/friendnum.small.gif" class="magicicon" />
+<a id="a_magic_friendnum" href="magic.php?mid=friendnum" onclick="ajaxmenu(event, this.id, 1)">我要扩容好友数</a>
+(您可以购买道具“<?=$_SGLOBAL['magic']['friendnum']?>”来扩容，让自己可以添加更多的好友。)
+<?php } ?>
+</p>
+<?php } ?>
+
+<p style="padding-top:10px;">
+好友列表按照好友热度高低排序<br>
+好友热度是系统根据您与好友之间交互的动作自动累计的一个参考值，数值越大，表示您与这位好友互动越频繁。
+</p>
+<?php } elseif($_GET['view']=='online') { ?>
+<?php if($_GET['type'] == 'friend') { ?>
+这些好友当前在线，赶快去拜访一下吧
+<?php } elseif($_GET['type']=='near') { ?>
+通过系统匹配，这些朋友就在您附近，您可能认识他们
+<?php } else { ?>
+显示当前全部在线的用户
+<?php } ?>
+<?php } elseif($_GET['view']=='visitor') { ?>
+他们拜访过您，回访一下吧
+<?php } elseif($_GET['view']=='trace') { ?>
+您曾经拜访过的用户列表
+<?php } ?>
+</div></div></div></div></div>
+
+
+
+<?php if($list) { ?>
+<div class="thumb_list" id="friend_ul">
+<ul>
+<?php if(is_array($list)) { foreach($list as $key => $value) { ?>
+<li id="friend_<?=$value['uid']?>_li">
+<?php if($value['username'] == '') { ?>
+<div class="avatar48"><img src="image/magic/hidden.gif" alt="匿名" /></div>
+<div class="thumbTitle"><p>匿名</p></div>
+<?php } else { ?>
+<div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>"><?php echo avatar($value[uid],small); ?></a></div>
+<div class="thumbTitle">
+<p<?php if($ols[$value['uid']]) { ?> class="online_icon_p"<?php } ?>>
+<a href="space.php?uid=<?=$value['uid']?>"<?php g_color($value[groupid]); ?>><?=$_SN[$value['uid']]?></a> 
+<?php g_icon($value[groupid]); ?>
+<?php if($value['videostatus']) { ?>
+<img src="image/videophoto.gif" align="absmiddle">
+<?php } ?>
+</p></div>
+<?php if($value['note']) { ?><div><?=$value['note']?></div><?php } ?>
+<?php } ?>
+
+<?php if($_GET['view']=='blacklist') { ?>
+<div class="gray"><a href="cp.php?ac=friend&op=blacklist&subop=delete&uid=<?=$value['uid']?>&start=<?=$_GET['start']?>">黑名单除名</a></div>
+<?php } elseif($_GET['view']=='visitor' || $_GET['view'] == 'trace') { ?>
+<div class="gray"><?php echo sgmdate('n月j号',$value[dateline],1); ?></div>
+<?php } elseif($_GET['view']=='online') { ?>
+<div class="gray"><?php echo sgmdate('H:i',$ols[$value[uid]],1); ?></div>
+<?php } else { ?>
+<?php if($ols[$value['uid']]) { ?><div class="gray"><?php echo sgmdate('H:i',$ols[$value[uid]],1); ?></div><?php } ?>
+<div class="gray">
+<?php if($value['num']) { ?><a href="cp.php?ac=friend&op=changenum&uid=<?=$value['uid']?>" id="friendnum_<?=$value['uid']?>" onclick="ajaxmenu(event, this.id)">热度(<span id="spannum_<?=$value['uid']?>"><?=$value['num']?></span>)</a><span class="pipe">|</span><?php } ?>
+<?php if(!$value['isfriend']) { ?>
+<a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
+<?php } else { ?>
+<a href="cp.php?ac=friend&op=changegroup&uid=<?=$value['uid']?>" id="friend_group_<?=$value['uid']?>" onclick="ajaxmenu(event, this.id)">分组</a><span class="pipe">|</span>
+<a href="cp.php?ac=friend&op=ignore&uid=<?=$value['uid']?>" id="a_ignore_<?=$key?>" onclick="ajaxmenu(event, this.id)">删除</a>
+<?php } ?>
+</div>
+<?php } ?>
+</li>
+<?php } } ?>
 </ul>
 </div>
+<div class="page"><?=$multi?></div>
+
 <?php } else { ?>
-<?php $_TPL['spacetitle'] = "记录";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=doing&view=me\">TA的所有记录</a>"; ?>
+<div class="c_form" style="margin:0 auto;text-align:center;">
+没有相关用户列表。
+</div>
+<?php } ?>
+
+</div>
+</div>
+
+<div id="sidebar" style="width: 150px;">
+<?php if($_SCONFIG['my_status']) { ?>
+<!-- 同步好友至Manyou 开始 -->
+<script type="text/javascript">
+function my_sync_tip(msg, close_time) {;
+var my_tip = document.getElementById("my_tip");
+if (!my_tip) {
+my_tip = document.createElement("div");
+document.getElementsByTagName("body")[0].appendChild(my_tip);
+my_tip.id = "my_tip";
+}
+my_tip.style.display = 'block';
+my_tip.innerHTML = '<div class="popupmenu_centerbox" style="position: absolute; top: 200px; right: 500px; padding: 20px; width: 300px; height: 15px; z-index:9999;">' + msg + '</div>';
+if (close_time) {
+setTimeout("document.getElementById('my_tip').style.display = 'none';", close_time);
+}
+}
+function my_sync_friend() {
+my_sync_tip('正在同步好友信息...', 0);
+var my_scri = document.createElement("script");
+document.getElementsByTagName("head")[0].appendChild(my_scri);
+my_scri.charset = "UTF-8";
+my_scri.src = "http://uchome.manyou.com/user/syncFriends?sId=<?=$_SCONFIG['my_siteid']?>&uUchId=<?=$space['uid']?>&ts=<?=$_SGLOBAL['timestamp']?>&key=<?php echo md5($_SCONFIG[my_siteid] . $_SCONFIG[my_sitekey] . $space[uid] . $_SGLOBAL[timestamp]); ?>";
+}
+</script>
+
+<div class="c_mgs"><div class="ye_r_t"><div class="ye_l_t"><div class="ye_r_b"><div class="ye_l_b">
+<p>在游戏中找不到自己的好友？请点击下面的的按钮，将好友信息同步到里面。</p>
+<p style="text-align: center;padding: 20px 0 0;"> <a href="#" onclick="my_sync_friend(); return false;" title="将好友关系同步至Manyou平台，以便在应用里看到他们"><img alt="刷新好友信息" src="image/syncfriend.gif"/></a> </p>
+</div></div></div></div></div>
+<!-- 同步好友至Manyou 结束 -->
+<?php } ?>
+
+<?php } else { ?>
+<?php $_TPL['spacetitle'] = "好友";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=friend&view=me\">TA的好友列表</a>"; ?>
 <div class="c_header a_header">
 <div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
 <?php if($_SGLOBAL['refer']) { ?>
@@ -245,100 +374,48 @@
 <?php } ?>
 </div>
 
-<div class="h_status">按照发布时间排序</div>
+<div class="h_status">共有 <?=$space['friendnum']?> 个好友</div>
+<div class="space_list">
+<?php if($list) { ?>
+<?php if(is_array($list)) { foreach($list as $key => $value) { ?>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td width="65"><div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>"><?php echo avatar($value[uid],small); ?></a></div></td>
+<td>
+<h2>
+<?php if($ols[$value['uid']]) { ?><img src="image/online_icon.gif" align="absmiddle"> <?php } ?>
+<a href="space.php?uid=<?=$value['uid']?>" title="<?=$_SN[$value['uid']]?>"<?php g_color($value[groupid]); ?>><?=$_SN[$value['uid']]?></a>
+<?php if($value['username'] && $_SN[$value['uid']]!=$value['username']) { ?><span class="gray">(<?=$value['username']?>)</span><?php } ?>
+<?php g_icon($value[groupid]); ?>
+<?php if($value['videostatus']) { ?>
+<img src="image/videophoto.gif" align="absmiddle">
 <?php } ?>
-
-<div id="content">	
-
-<?php if($space['self']) { ?>
-
-<form method="post" id="doingform" action="cp.php?ac=doing&view=<?=$_GET['view']?>" class="post_doing">
-<div class="r_option">还可输入 <strong id="maxlimit">200</strong> 个字符</div>
-<a href="###" id="doingface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a></td>
-<?php if(checkperm('seccode')) { ?>
-<?php if($_SCONFIG['questionmode']) { ?>
-回答提问：<?php question(); ?> 
-<?php } else { ?>
-输入验证码：<script>seccode();</script> 
-<?php } ?>
-<input type="text" id="seccode" name="seccode" value="" size="10" class="t_input">
-<?php } ?>
-<br>
-<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:438px; height: 72px;"></textarea>
-<input type="hidden" name="addsubmit" value="true" />
-<button type="submit" id="add" name="add" class="post_button">发布</button>
-<input type="hidden" name="refer" value="<?=$theurl?>" />
-<input type="hidden" name="topicid" value="<?=$topicid?>" />
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-
-<br>
-<?php } ?>
-
-
-<?php if($dolist) { ?>
-<div class="doing_list">
-<ol>
-<?php if(is_array($dolist)) { foreach($dolist as $dv) { ?>
-<?php $doid = $dv[doid]; ?>
-<li id="dl<?=$doid?>">
-<div class="avatar48"><a href="space.php?uid=<?=$dv['uid']?>"><?php echo avatar($dv[uid],small); ?></a></div>
-<div class="doing">
-<div class="doingcontent"><a href="space.php?uid=<?=$dv['uid']?>"><?=$_SN[$dv['uid']]?></a>: <span><?=$dv['message']?></span>
-<span class="gray">(<?php echo sgmdate('m-d H:i',$dv[dateline],1); ?>)</span>
-<?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=doing&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="doing_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?>
-<a href="javascript:;" onclick="docomment_form(<?=$doid?>, 0);">回复</a>
-</div>
-
-<?php $list = $clist[$doid]; ?>
-<div class="sub_doing" id="docomment_<?=$doid?>"<?php if(!$list) { ?> style="display:none;"<?php } ?>>
-<span id="docomment_form_<?=$doid?>_0"></span>
-<ol>
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<?php if($value['uid']) { ?>
-<li style="<?=$value['style']?>">
-<a href="space.php?uid=<?=$value['uid']?>"><?=$_SN[$value['uid']]?></a>: <?=$value['message']?> <span class="doingtime">(<?php echo sgmdate('m-d H:i',$value[dateline],1); ?>)</span> 
-<a href="javascript:;" onclick="docomment_form(<?=$value['doid']?>, <?=$value['id']?>);" class="re">回复</a>
-<?php if($value['uid']==$_SGLOBAL['supe_uid'] || $dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=doing&op=delete&doid=<?=$value['doid']?>&id=<?=$value['id']?>" id="doing_delete_<?=$value['doid']?>_<?=$value['id']?>" onclick="ajaxmenu(event, this.id)" class="gray">删除</a><?php } ?>
-<span id="docomment_form_<?=$value['doid']?>_<?=$value['id']?>"></span>
-</li>
-<?php } ?>
-<?php } } ?>
-</ol>
-</div>
-
-</div>
-</li>
-<?php } } ?>
-</ol>
-<div class="page"><?=$multi?></div>
-</div>
-
-<?php } else { ?>
-<div class="c_form">现在还没有记录。<?php if($space['self']) { ?>你可以用一句话记录下这一刻在做什么。<?php } ?></div>
-<?php } ?>
-
-</div>
-
-<div id="sidebar">
-<?php if($moodlist) { ?>
-<div class="sidebox">
-<h2 class="title">
-<p class="r_option"><a href="space.php?uid=<?=$space['uid']?>&do=mood">全部</a></p>
-跟<?php if($space['self']) { ?>我<?php } else { ?><?=$_SN[$space['uid']]?><?php } ?>同心情的朋友
 </h2>
-<ul class="avatar_list">
-<?php if(is_array($moodlist)) { foreach($moodlist as $key => $value) { ?>
-<li>
-<div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>&do=doing"><?php echo avatar($value[uid],small); ?></a></div>
-<p><a href="space.php?uid=<?=$value['uid']?>" title="<?=$_SN[$value['uid']]?>"><?=$_SN[$value['uid']]?></a></p>
-<p class="gray"><?php echo sgmdate('n月j日',$value[updatetime],1); ?></p>
-</li>
-<?php } } ?>
+<?php if($value['sex']==2) { ?><p>美女</p><?php } elseif($value['sex']==1) { ?><p>帅哥</p><?php } ?></p>
+<p>
+<?php if($_GET['view']=='show') { ?>竞价<?php } ?>积分：<?=$value['credit']?> / <?php if($value['experience']) { ?>经验：<?=$value['experience']?> / <?php } ?>人气：<?=$value['viewnum']?> / 好友：<?=$value['friendnum']?></p>
+<?php if($value['note']) { ?><?=$value['note']?><?php } ?>
+</td>
+<td width="100">
+<ul class="line_list">
+<li><a href="space.php?uid=<?=$value['uid']?>">去串个门</a></li>
+<li><a href="cp.php?ac=poke&op=send&uid=<?=$value['uid']?>" id="a_poke_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)" title="打招呼">打个招呼</a></li>
+<?php if(isset($value['isfriend']) && !$value['isfriend']) { ?><li><a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)" title="加好友">加为好友</a></li><?php } ?>	
 </ul>
-</div>
+</td>
+</tr>
+</table>
+<?php } } ?>
+<div class="page"><?=$multi?></div>
+<?php } else { ?>
+<div class="c_form">没有相关成员。</div>
 <?php } ?>
 </div>
+
+
+
+<?php } ?>
+
 <?php } ?>
 
 

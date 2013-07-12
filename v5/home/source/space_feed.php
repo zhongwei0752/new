@@ -394,7 +394,19 @@ $_TPL['default_template'] = $default_template;
 $my_actives = array(in_array($_GET['filter'], array('site','myapp'))?$_GET['filter']:'all' => ' class="active"');
 $actives = array(in_array($_GET['view'], array('me','all','hot'))?$_GET['view']:'we' => ' class="active"');
 
+$myapp = $_SGLOBAL['db']->query("SELECT a.*,m.* FROM ".tname('appset')." a LEFT JOIN ".tname('menuset')." m ON a.num=m.menusetid WHERE m.uid='$space[uid]' ORDER BY m.menusetid DESC LIMIT 0,10");
+		while ($myvalue = $_SGLOBAL['db']->fetch_array($myapp)) {
+			//$a=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue['english'])."  WHERE uid='$myvalue[uid]'"), 0);
+			$a[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*) FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);
+			$b[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT sum(viewnum) AS viewnum FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);
+			$c[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT sum(replynum) AS replynum FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);
+			$d = $_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]' ORDER BY dateline DESC LIMIT 0,1");
+			$myself[]=$myvalue;
+		}
 
+//showmessage($a);
+
+//$b = array_sum($a);
 if(empty($cp_mode)) include_once template("space_feed");
 
 

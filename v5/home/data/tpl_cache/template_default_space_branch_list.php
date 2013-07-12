@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_branch_list|template/default/header|template/default/footer', '1373428495', 'template/default/space_branch_list');?><?php $_TPL['titles'] = array('分支机构'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_branch_list|template/default/header|template/default/footer', '1373623031', 'template/default/space_branch_list');?><?php $_TPL['titles'] = array('分支机构'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -148,21 +148,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 

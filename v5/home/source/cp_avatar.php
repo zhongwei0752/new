@@ -47,6 +47,9 @@ if($setarr) {
 	}
 }
 
+
+
+
 include template("cp_avatar");
 
 ?>

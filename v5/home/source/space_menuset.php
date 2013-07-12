@@ -506,7 +506,7 @@ if($_GET['view'] != 'me') {
 if($showmessage){
 	showmessage("$showmessage","$showlink");
 }else{
-	showmessage("$showmessage1","$showlink1");
+	include"./template/default/allcomplete.htm";
 }
 }
 	
@@ -530,7 +530,11 @@ if($showmessage){
 	}
 
 	$_TPL['css'] = 'menuset';
+	if($zhong1){
 	include_once template("space_menuset_list");
+}else{
+	include_once template("space_menuset_listnull");
+}
 }
 
 ?>

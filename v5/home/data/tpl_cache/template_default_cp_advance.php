@@ -1,7 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_blog_list|template/default/header|template/default/space_menu|template/default/footer', '1373338585', 'template/default/space_blog_list');?><?php $_TPL['titles'] = array('日志'); ?>
-<?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
-
-<?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1373623094', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -73,7 +70,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -102,7 +100,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -147,238 +145,58 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
-
 
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
 
 <?php } ?>
 
-
-<?php if(!empty($_SGLOBAL['inajax'])) { ?>
-<div id="space_blog" class="feed">
-<h3 class="feed_header">
-<a href="cp.php?ac=blog" class="r_option" target="_blank">发表日志</a>
-日志(共 <?=$count?> 篇)
-</h3>
-<?php if($count) { ?>
-<ul class="line_list">
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<li>
-<span class="gray r_option"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></span>
-<h4><a href="space.php?uid=<?=$space['uid']?>&do=blog&id=<?=$value['blogid']?>" target="_blank" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4>
-<div class="detail">
-<?=$value['message']?>
-</div>
-</li>
-<?php } } ?>
-</ul>
-<?php if($pricount) { ?>
-<div class="c_form">本页有 <?=$pricount?> 篇日志因作者的隐私设置而隐藏</div>
-<?php } ?>
-<div class="page"><?=$multi?></div>
-<?php } else { ?>
-<div class="c_form">还没有相关的日志。</div>
-<?php } ?>
-</div>
-<?php } else { ?>
-
-<?php if($space['self']) { ?>
-<div class="searchbar floatright">
-<form method="get" action="space.php">
-<input name="searchkey" value="" size="15" class="t_input" type="text">
-<input name="searchsubmit" value="搜索日志" class="submit" type="submit">
-<input type="hidden" name="searchmode" value="1" />
-<input type="hidden" name="do" value="blog" />
-<input type="hidden" name="view" value="all" />
-<input type="hidden" name="orderby" value="dateline" />
-</form>
-</div>
-<h2 class="title"><img src="image/app/blog.gif" />日志</h2>
+<h2 class="title"><img src="image/icon/profile.gif">企业设置</h2>
 <div class="tabs_header">
+<a href="cp.php?ac=advance" class="r_option">&raquo; 高级管理</a>
 <ul class="tabs">
-<?php if($space['friendnum']) { ?><li<?=$actives['we']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=we"><span>好友最新日志</span></a></li><?php } ?>
-<li<?=$actives['all']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"><span>大家的日志</span></a></li>
-<li<?=$actives['me']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>我的日志</span></a></li>
-<li<?=$actives['click']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=click"><span>我表态过的日志</span></a></li>
-<li class="null"><a href="cp.php?ac=blog">发表新日志</a></li>
-</ul>
-</div>		
-<?php } else { ?>
-<?php $_TPL['spacetitle'] = "日志";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有日志</a>"; ?>
-<div class="c_header a_header">
-<div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
-<?php if($_SGLOBAL['refer']) { ?>
-<a class="r_option" href="<?=$_SGLOBAL['refer']?>">&laquo; 返回上一页</a>
+<li<?=$actives['profile']?>><a href="cp.php?ac=profile"><span>实名认证</span></a></li>
+<!--<li<?=$actives['message']?>><a href="cp.php?ac=message"><span>企业资料</span></a></li>-->
+<li<?=$actives['avatar']?>><a href="cp.php?ac=avatar"><span>企业头像</span></a></li>
+<?php if($_SCONFIG['videophoto']) { ?>
+<li<?=$actives['videophoto']?>><a href="cp.php?ac=videophoto"><span>视频认证</span></a></li>
 <?php } ?>
-<p style="font-size:14px"><?=$_SN[$space['uid']]?>的<?=$_TPL['spacetitle']?></p>
-<a href="space.php?uid=<?=$space['uid']?>" class="spacelink"><?=$_SN[$space['uid']]?>的主页</a>
-<?php if($_TPL['spacemenus']) { ?>
-<?php if(is_array($_TPL['spacemenus'])) { foreach($_TPL['spacemenus'] as $value) { ?> <span class="pipe">&raquo;</span> <?=$value?><?php } } ?>
+<?php if($_SCONFIG['allowdomain'] && $_SCONFIG['domainroot'] && checkperm('domainlength')) { ?>
+<li<?=$actives['domain']?>><a href="cp.php?ac=domain"><span>我的域名</span></a></li>
 <?php } ?>
-</div>
-
-<div class="h_status">按照发布时间排序</div>
-<?php } ?>
-
-<div id="content" style="width:640px;">
-<?php if($_GET['orderby'] && $_GET['orderby'] != 'dateline') { ?>
-<div class="h_status">
-排行时间范围：
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>"<?=$day_actives['0']?>>全部</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=1"<?=$day_actives['1']?>>最近一天</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=2"<?=$day_actives['2']?>>最近两天</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=7"<?=$day_actives['7']?>>最近七天</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=30"<?=$day_actives['30']?>>最近三十天</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=90"<?=$day_actives['90']?>>最近三个月</a><span class="pipe">|</span>
-<a href="space.php?do=blog&view=all&orderby=<?=$_GET['orderby']?>&day=120"<?=$day_actives['120']?>>最近六个月</a>
-</div>
-<?php } ?>
-
-<?php if($searchkey) { ?>
-<div class="h_status">以下是搜索日志 <span style="color:red;font-weight:bold;"><?=$searchkey?></span> 结果列表</div>
-<?php } ?>
-
-<?php if($count) { ?>
-<div class="entry_list">
-<ul>
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<li>
-<div class="avatardiv">
-<div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>"><?php echo avatar($value[uid],small); ?></a></div>
-<?php if($value['hot']) { ?><div class="digb"><?=$value['hot']?></div><?php } ?>
-</div>
-
-<div class="title">
-<a href="cp.php?ac=share&type=blog&id=<?=$value['blogid']?>" id="a_share_<?=$value['blogid']?>" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
-<h4><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['blogid']?>" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4>
-<div>
-<?php if($value['friend']) { ?>
-<span class="r_option locked gray"><a href="<?=$theurl?>&friend=<?=$value['friend']?>" class="gray"><?=$friendsname[$value['friend']]?></a></span>
-<?php } ?>
-<a href="space.php?uid=<?=$value['uid']?>"><?=$_SN[$value['uid']]?></a> <span class="gray"><?php echo sgmdate('Y-m-d H:i',$value[dateline],1); ?></span>
-</div>
-</div>
-<div class="detail image_right l_text s_clear" id="blog_article_<?=$value['blogid']?>">
-<?php if($value['pic']) { ?><p class="image"><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>"><img src="<?=$value['pic']?>" alt="<?=$value['subject']?>" /></a></p><?php } ?>
-<?=$value['message']?>
-</div>
-<div class="gray">
-<?php if($classarr[$value['classid']]) { ?>分类: <a href="space.php?uid=<?=$value['uid']?>&do=blog&classid=<?=$value['classid']?>"><?=$classarr[$value['classid']]?></a><span class="pipe">|</span><?php } ?>
-<?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['blogid']?>"><?=$value['viewnum']?> 次阅读</a><span class="pipe">|</span><?php } ?>
-<?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['blogid']?>#comment"><?=$value['replynum']?> 个评论</a><?php } else { ?>没有评论<?php } ?>
-</div>
-</li>
-<?php } } ?>
-<?php if($pricount) { ?>
-<li>
-<div class="title">本页有 <?=$pricount?> 篇日志因作者的隐私设置而隐藏</div>
-</li>
+<?php if($_SCONFIG['sendmailday']) { ?>
+<li<?=$actives['sendmail']?>><a href="cp.php?ac=sendmail"><span>邮件提醒</span></a></li>
 <?php } ?>
 </ul>
 </div>
 
-<div class="page"><?=$multi?></div>
-
-<?php } else { ?>
-<div class="c_form">还没有相关的日志。</div>
-<?php } ?>
-
-</div>
-
-<div id="sidebar" style="width:150px;">
-
-<?php if($userlist) { ?>
-<div class="cat">
-<h3>按好友查看</h3>
-<ul class="post_list line_list">
-<li>
-选择好友:<br>
-<select name="fuidsel" onchange="fuidgoto(this.value);">
-<option value="">全部好友</option>
-<?php if(is_array($userlist)) { foreach($userlist as $value) { ?>
-<option value="<?=$value['fuid']?>"<?=$fuid_actives[$value['fuid']]?>><?=$_SN[$value['fuid']]?></option>
-<?php } } ?>
-</select>
-</li>
-</ul>
-</div>
-<?php } ?>
-
-<?php if($classarr) { ?>
-<div class="cat">
-<h3>日志分类</h3>
-<ul class="post_list line_list">
-<li<?php if(!$_GET['classid']) { ?> class="current"<?php } ?>><a href="space.php?uid=<?=$space['uid']?>&do=blog&view=me">全部日志</a></li>
-<?php if(is_array($classarr)) { foreach($classarr as $classid => $classname) { ?>
-<li<?php if($_GET['classid']==$classid) { ?> class="current"<?php } ?>>
-<?php if($space['self']) { ?>
-<a href="cp.php?ac=class&op=edit&classid=<?=$classid?>" id="c_edit_<?=$classid?>" onclick="ajaxmenu(event, this.id)" class="c_edit">编辑</a>
-<a href="cp.php?ac=class&op=delete&classid=<?=$classid?>" id="c_delete_<?=$classid?>" onclick="ajaxmenu(event, this.id)" class="c_delete">删除</a>
-<?php } ?>
-<a href="space.php?uid=<?=$space['uid']?>&do=blog&classid=<?=$classid?>&view=me"><?=$classname?></a>
-</li>
-<?php } } ?>
-</ul>
-</div>
-<?php } ?>
-
-<?php if($_GET['view'] == 'click') { ?>
-<div class="cat">
-<h3>表态动作</h3>
-<ul class="post_list line_list">
-<li<?=$click_actives['all']?>><a href="space.php?do=blog&view=click">全部动作</a></li>
-<?php if(is_array($clicks)) { foreach($clicks as $value) { ?>
-<li<?=$click_actives[$value['clickid']]?>>
-<a href="space.php?do=blog&view=click&clickid=<?=$value['clickid']?>"><?=$value['name']?></a>
-</li>
-<?php } } ?>
-</ul>
-</div>
-<?php } elseif($_GET['view'] == 'all') { ?>
-<div class="cat">
-<h3>排行榜</h3>
-<ul class="post_list line_list">
-<li<?=$all_actives['all']?>><a href="space.php?do=blog&view=all">推荐阅读</a></li>
-<li<?=$all_actives['dateline']?>><a href="space.php?do=blog&view=all&orderby=dateline">最新发表</a></li>
-<li<?=$all_actives['hot']?>><a href="space.php?do=blog&view=all&orderby=hot&day=<?=$_GET['hotday']?>">人气排行</a></li>
-<li<?=$all_actives['replynum']?>><a href="space.php?do=blog&view=all&orderby=replynum&day=<?=$_GET['hotday']?>">评论排行</a></li>
-<li<?=$all_actives['viewnum']?>><a href="space.php?do=blog&view=all&orderby=viewnum&day=<?=$_GET['hotday']?>">查看排行</a></li>
-<?php if(is_array($clicks)) { foreach($clicks as $value) { ?>
-<li<?=$all_actives['click_'.$value['clickid']]?>><a href="space.php?do=blog&view=all&orderby=click_<?=$value['clickid']?>&day=<?=$_GET['hotday']?>"><?=$value['name']?>排行</a></li>
-<?php } } ?>
-</ul>
-
-</div>
-<?php } ?>
-
-</div>
-
-<script>
-function fuidgoto(fuid) {
-window.location.href = "space.php?do=blog&view=we&fuid="+fuid;
-}
-</script>
-<?php } ?>
-
+<form method="post" action="admincp.php" class="c_form">
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+<table cellspacing="0" cellpadding="0" class="formtable">
+<caption>
+<h2>高级管理</h2>
+<p>通过高级管理，您可以对自己的日志、图片、留言等进行批量删除管理。<br>为了保护您的数据安全，请再次输入您的账户密码以登录高级管理平台。</p>
+</caption>
+<tr>
+<th width="120">用户名</th>
+<td><?=$_SGLOBAL['username']?> (<a href="cp.php?ac=common&op=logout">退出</a>)</td>
+</tr>
+<tr>
+<th>密码</th>
+<td><input type="password" name="password" class="t_input" /></td>
+</tr>
+<tr>
+<td></td>
+<td>
+<input type="hidden" name="loginsubmit" value="true" />
+<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
+<input type="submit" name="btnsubmit" value="进入平台" class="submit" />
+</td>
+</tr>
+</table>
+</form>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

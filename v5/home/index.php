@@ -21,6 +21,13 @@ if(!isset($_GET['do']) && $_SCONFIG['allowdomain']) {
 if($_SGLOBAL['supe_uid']) {
 $query3 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where uid=".$_SGLOBAL['supe_uid']);
 $value3 = $_SGLOBAL['db']->fetch_array($query3);
+if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
+	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
+	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
+		showmessage('enter_the_space', 'space.php?do=menuset', 0);
+	}else{
 if($value3['namestatus']){
 	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." where appstatus='1' and uid=".$_SGLOBAL['supe_uid']);
 	$value2 = $_SGLOBAL['db']->fetch_array($query2);
@@ -31,6 +38,7 @@ if($value3['namestatus']){
 }
 }else{
 	showmessage('enter_the_space', 'cp.php?ac=profile', 0);
+}
 }
 }
 

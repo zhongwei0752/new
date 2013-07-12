@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1373440967', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1373623716', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -147,21 +147,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
@@ -171,56 +156,33 @@
 <?php } ?>
 
 
-<div id="content" style="width:810px;">
+<div id="content" style="width:762px;margin-left:20px;margin-top:10px;">
 
 <?php if($space['uid'] && $space['self']) { ?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
 <td valign="top" width="150">
-<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></div></div></div></div>
-
-<ul class="u_setting">
-<li class="dropmenu" id="usettingli" onclick="showMenu(this.id)"><a href="javascript:;">企业设置 <img src="image/more.gif" align="absmiddle"></a></li>
-</ul>
-<ul id="usettingli_menu" class="dropmenu_drop" style="display:none;">
-
-<li><a href="cp.php?ac=profile">实名验证</a></li>
-<!--<li><a href="cp.php?ac=message">企业资料</a></li>-->
-<li><a href="cp.php?ac=avatar">企业头像</a></li>
-<?php if($_SCONFIG['sendmailday']) { ?>
-<li><a href="cp.php?ac=sendmail">邮件提醒</a></li>
-<?php } ?>
-<?php if(checkperm('admin')) { ?>
-<li><a href="admincp.php">站点管理</a></li>
-<?php } ?>
-<?php if(checkperm('allowstat')) { ?>
-<li><a href="do.php?ac=stat">趋势统计</a></li>
-<?php } ?>
-</ul>
+<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></a></div></div></div></div>
 </td>
 <td valign="top">
-<h3 class="index_name">
-<a href="space.php?uid=<?=$space['uid']?>"<?php g_color($space[groupid]); ?>><?=$_SN[$space['uid']]?></a>
+<h3 class="index_name" style="margin-left:20px;border:0px;">
+<a  href="space.php?uid=<?=$space['uid']?>"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
 <?php g_icon($space[groupid]); ?>
 <a href="cp.php?ac=credit"><?=$space['star']?></a>
+<br/>
+ <div class="company_avata_box container_12"  style="margin-top:-30px;">
+                   <div class="grid_2">
+                       <h5>当前状态:<?php if($_SGLOBAL['session']['magichidden']) { ?>当前隐身<?php } else { ?>在线<?php } ?></h5>
+                       <h5 style="margin-top:-10px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
+                       <a href="cp.php?ac=profile" style="margin-top:20px;" class="company_setting">企业设置</a>
+                   </div>
 
-<?php if($_SGLOBAL['session']['magichidden']) { ?>当前隐身<?php } else { ?>当前在线<?php } ?>
-
-<?php if($_SGLOBAL['magic']['invisible']) { ?>
-<?php if($_SGLOBAL['session']['magichidden']) { ?>
-<img src="image/magic/invisible.small.gif" class="magicicon"><a id="a_magic_appear" href="cp.php?ac=magic&op=appear" onclick="ajaxmenu(event,this.id)" class="gray">我要在线</a>
-<?php } else { ?>
-<img src="image/magic/invisible.small.gif" alt="<?=$_SGLOBAL['magic']['invisible']?>" class="magicicon"><a id="a_magic_invisible" href="magic.php?mid=invisible" onclick="ajaxmenu(event,this.id,1)" class="gray">我要隐身</a>
-<?php } ?>
-<?php } ?>
 
 
 
 </h3>
 
-<div class="index_note">
-已有 <?=$space['viewnum']?> 人次访问, <?=$space['credit']?> 个积分, <?=$space['experience']?> 个经验
-</div>
+
 
 
 </td>
@@ -245,15 +207,31 @@
 <div class="mgs_list">
 <?php if($_SGLOBAL['member']['newpm']) { ?><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm&filter=privatepm"><strong><?=$_SGLOBAL['member']['newpm']?></strong> 个新回复</a></div><?php } ?>
 </div>
+ <div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:20px 0;"></div>
+                <div class="container_12 index_assembly_boxes">
+                	<?php if($myself) { ?>
+<?php if(is_array($myself)) { foreach($myself as $value) { ?>
 
-企业动态
-产品介绍
-客户管理
-订单管理
-预约管理
-商品管理
-
-
+                    <div class="grid_6">
+                        <div class="index_assembly_box">
+                            <div class="assembly_title">
+                                   <span class="title"><?=$value['subject']?></span>
+                             </div>
+                             <div class="assembly_info">
+                                <img src="<?=$value['image1url']?>" style="width:120px;height:120px;">
+                                
+                                <h5 style="padding-top: 20px;">文章数：<?=$a[$value['menusetid']]?> 篇</h5>
+                                <h5>浏览量：<?=$b[$value['menusetid']]?>次</h5>
+                                <h5>评论数：<?=$c[$value['menusetid']]?>条</h5>
+                                <h5>有效期至：<?php if($value['money']) { ?><?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } else { ?>长期<?php } ?></h5>
+                                <a href="<?=$value['url']?>" class="quick_post">快速发布</a>
+                             </div>
+                        </div>
+                    </div><!-- end -->   
+                      <?php } } ?> 
+                      <?php } ?>     
+                    </div>
+                    </div>                                                         
 
 
 

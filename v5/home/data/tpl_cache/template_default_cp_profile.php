@@ -1,4 +1,160 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/cp_header|template/default/footer', '1373438575', 'template/default/cp_profile');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1373623088', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(empty($_SGLOBAL['inajax'])) { ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=<?=$_SC['charset']?>" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title><?php if($_TPL['titles']) { ?><?php if(is_array($_TPL['titles'])) { foreach($_TPL['titles'] as $value) { ?><?php if($value) { ?><?=$value?> - <?php } ?><?php } } ?><?php } ?><?php if($_SN[$space['uid']]) { ?><?=$_SN[$space['uid']]?> - <?php } ?><?=$_SCONFIG['sitename']?> - Powered by UCenter Home</title>
+<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
+<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+ <!-- Bootstrap -->
+   <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
+
+<style type="text/css">
+
+@import url(template/default/network.css);
+@import url(template/default/style.css);
+<?php if($_TPL['css']) { ?>
+@import url(template/default/<?=$_TPL['css']?>.css);
+<?php } ?>
+<?php if(!empty($_SGLOBAL['space_theme'])) { ?>
+@import url(theme/<?=$_SGLOBAL['space_theme']?>/style.css);
+<?php } elseif($_SCONFIG['template'] != 'default') { ?>
+@import url(template/<?=$_SCONFIG['template']?>/style.css);
+<?php } ?>
+<?php if(!empty($_SGLOBAL['space_css'])) { ?>
+<?=$_SGLOBAL['space_css']?>
+<?php } ?>
+</style>
+<link rel="shortcut icon" href="image/favicon.ico" />
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=<?=$space['uid']?>" />
+</head>
+<body>
+
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div id="header">
+<?php if($_SGLOBAL['ad']['header']) { ?><div id="ad_header"><?php adshow('header'); ?></div><?php } ?>
+ <div class="wrapper">
+ <div class="navbar">
+            <div class="navbar-inner container_36">
+                
+                <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
+                <?php if($_SGLOBAL['supe_uid']) { ?>
+                <a href="space.php?do=home" class="grid_2">首页</a>
+                
+
+                <?php } else { ?>
+                 <a href="index.php" class="grid_2">首页</a>
+                <?php } ?>
+                <?php if($_SGLOBAL['supe_uid']) { ?>	
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
+<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
+<a href="space.php?do=friend" class="grid_2">客户列表</a>
+<?php } else { ?>
+<a class="grid_2" href="help.php">帮助</a>
+<?php } ?>
+
+                <?php if($_SGLOBAL['supe_uid']) { ?>
+               
+                <div class="grid_3"></div>
+                <div class="grid_4">
+                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
+                   <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
+                </div>
+         <?php } else { ?>
+<div class="grid_7"></div>
+
+                <div class="grid_4">
+                   <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <span class="company_name">欢迎您</span><br/>
+                   <a href="do.php?ac=<?=$_SCONFIG['login_action']?>" class="header_btn setting_btn">登录</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  class="header_btn quit_btn">注册</a> 
+                </div>
+<?php } ?>
+  </div>
+         </div>
+
+
+<div id="wrap" style="width:1024px;">
+
+<div>
+<div id="main" style="margin:0 auto;margin-left:100px;" >
+
+<?php if(empty($_TPL['nosidebar'])) { ?>
+
+<?php if($zhong1) { ?>
+<div id="app_sidebar">
+
+
+<?php if($_SGLOBAL['supe_uid']) { ?>
+
+<div class="side_bar" >
+              <div class="side_bar_inner" >
+                    <ul>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+                       <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
+                       
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_option"><a href="">客户管理</a></li>
+                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="">订单管理</a></li>
+                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="">群发</a></li>
+                        <li class="side_option"><a href="">选择手机模板</a></li>
+                    </ul>
+              </div>
+         </div>
+
+
+<!--<div class="app_m">
+<ul>
+<?php if($_SN[$_SGLOBAL['supe_uid']]=="admin") { ?>
+<!--<li><img src="image/app_add.gif"><a href="cp.php?ac=menuset" class="addApp">添加应用</a></li>
+<?php } ?>
+<!--<li><img src="image/app_set.gif"><a href="space.php?do=menuset&view=me" class="myApp">管理应用</a></li>
+</ul>
+</div>-->
+
+<?php } else { ?>
+<div class="bar_text">
+<form id="loginform" name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&ref" method="post">
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+<p class="title">登录站点</p>
+<p>用户名</p>
+<p><input type="text" name="username" id="username" class="t_input" size="15" value="" /></p>
+<p>密码</p>
+<p><input type="password" name="password" id="password" class="t_input" size="15" value="" /></p>
+<p><input type="checkbox" id="cookietime" name="cookietime" value="315360000" checked /><label for="cookietime">记住我</label></p>
+<p>
+<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />
+<input type="button" name="regbutton" value="注册" class="button" onclick="urlto('do.php?ac=<?=$_SCONFIG['register_action']?>');">
+</p>
+</form>
+</div>
+<?php } ?>
+
+</div>
+<?php } ?>
+<div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
+
+<?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
+<?php } ?>
+
+<?php } ?>
+<?php } else { ?>
+<?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -145,21 +301,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
@@ -168,229 +309,145 @@
 
 <?php } ?>
 
-<h2 class="title"><img src="image/icon/profile.gif">企业设置</h2>
-<div class="tabs_header">
-<a href="cp.php?ac=advance" class="r_option">&raquo; 高级管理</a>
-<ul class="tabs">
-<li<?=$actives['profile']?>><a href="cp.php?ac=profile"><span>实名认证</span></a></li>
-<!--<li<?=$actives['message']?>><a href="cp.php?ac=message"><span>企业资料</span></a></li>-->
-<li<?=$actives['avatar']?>><a href="cp.php?ac=avatar"><span>企业头像</span></a></li>
-<?php if($_SCONFIG['videophoto']) { ?>
-<li<?=$actives['videophoto']?>><a href="cp.php?ac=videophoto"><span>视频认证</span></a></li>
 <?php } ?>
-<?php if($_SCONFIG['allowdomain'] && $_SCONFIG['domainroot'] && checkperm('domainlength')) { ?>
-<li<?=$actives['domain']?>><a href="cp.php?ac=domain"><span>我的域名</span></a></li>
-<?php } ?>
-<?php if($_SCONFIG['sendmailday']) { ?>
-<li<?=$actives['sendmail']?>><a href="cp.php?ac=sendmail"><span>邮件提醒</span></a></li>
-<?php } ?>
-</ul>
-</div>
-
-
+<link rel="stylesheet" type="text/css" href="./template/default/style2.css" />
+<div class="content" style="font-size:15px;width:760px;">
+               <?php if(empty($zhong1)) { ?><img src="./template/default/image/guide_identify.png" style="margin:20px 20px 0px 28px;"><?php } ?>
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         实名认证
+                     </div>
+                    <?php if($zhong1||$_SN[$_SGLOBAL['supe_uid']]=="admin") { ?> <a href="cp.php?ac=advance" class="link_back_bread grid_3">
+                      高级管理
+                     </a><?php } ?>
+                 
+                 </div><!-- end -->
+                 <div id="content" style="width:760px; ">
 <?php $farr = array(0=>'全用户','1'=>'仅好友','3'=>'仅自己'); ?>
 <form method="post" action="<?=$theurl?>&ref&namechange=<?=$_GET['namechange']?>" class="c_form"  enctype="multipart/form-data">
 
 <?php if($_GET['op'] == 'base') { ?>
-
-<table cellspacing="0" cellpadding="0" class="formtable" >
-<tr>
-<th style="width:10em;">您的登录用户名:</th>
-<td>
-<?php echo stripslashes($space['username']); ?> (<a href="cp.php?ac=password">修改登录密码</a>)
-</td>
-<td></td>
-</tr>
-<?php if(!$_SCONFIG['realname']) { ?>
-<tr>
-<th style="width:10em;">公司名称:</th>
-<td>
-<input type="text" id="name" name="name" value="<?php echo stripslashes($space['name']); ?>" class="t_input" />
-</td>
-<td>&nbsp;</td>
-</tr>
-<?php } else { ?>
-<tr>
-<th style="width:10em;">公司名称:</th>
-<td>
-<?php if($space['name'] && empty($_GET['namechange'])) { ?>
+<div class="content_detail_wrapper" style="color:#939393;width:760px; margin-left:-50px;margin-top:-5px;">
+                    <div class="post_wrapper">
+                  
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">您的登录用户名&nbsp;&nbsp;:</span>
+                         <?php echo stripslashes($space['username']); ?> (<a href="cp.php?ac=password">修改登录密码</a>)
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">公司名称&nbsp;&nbsp;:</span>
+                         <?php if($space['name'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?php echo stripslashes($space['name']); ?></span>
 
 <input type="hidden" name="name" value="<?php echo stripslashes($space['name']); ?>" />
 <?php } else { ?>
 <?php if($rncredit && $_GET['namechange']) { ?><img src="image/credit.gif" align="absmiddle"> 本操作需要支付积分 <?=$rncredit?> 个，您现在的积分 <?=$space['credit']?> 个。<br><?php } ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的公司名称一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<input type="text" id="name" name="name" value="<?php echo stripslashes($space['name']); ?>" class="t_input" />
-<?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<?php } ?>
-<tr>
-<th style="width:10em;">联系人:</th>
-<td>
-<?php if($space['linkman'] && empty($_GET['namechange'])) { ?>
+                         <input type="text" id="name" name="name" value="<?php echo stripslashes($space['name']); ?>"/>
+                         <?php } ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">联系人&nbsp;&nbsp;:</span>
+                         <?php if($space['linkman'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['linkman']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的联系人一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
 <label for="linkman"><input id="linkman" type="text" value="<?=$space['linkman']?>" name="linkman" /></label> 
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">联系人身份证号:</th>
-<td>
-<?php if($space['idcard'] && empty($_GET['namechange'])) { ?>
-<span style="font-weight:bold;"><?=$space['idcard']?></span>
-<?php } else { ?>
-<?php if(empty($_SCONFIG['namechange'])) { ?>您的身份证号一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="idcard"><input id="idcard" type="text" value="<?=$space['idcard']?>" name="idcard" /></label> 
-<?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">身份证扫描件:</th>
-<td>
-<?php if($space['image1url'] && empty($_GET['namechange'])) { ?>
-<img src="<?=$space['image1url']?>"/>
-<?php } else { ?>
-<?php if(empty($_SCONFIG['namechange'])) { ?>您的扫描件一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<img src="<?=$space['image1url']?>"/><input type="file"  name="file1" />
-<?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">营业执照注册号:</th>
-<td>
-<?php if($space['businessnum'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">联系人身份证号&nbsp;&nbsp;:</span>
+                         <?php if($space['idcard'] && empty($_GET['namechange'])) { ?>
+  <span style="font-weight:bold;"><?=$space['idcard']?></span>
+  <?php } else { ?>
+  <?php if(empty($_SCONFIG['namechange'])) { ?>您的身份证号一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
+  <label for="idcard"><input id="idcard" type="text" value="<?=$space['idcard']?>" name="idcard" /></label> 
+  <?php } ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">身份证扫描件&nbsp;&nbsp;:</span>
+                         <?php if($space['image1url'] && empty($_GET['namechange'])) { ?>
+ <img src="<?=$space['image1url']?>"/>
+ <?php } else { ?>
+ <?php if(empty($_SCONFIG['namechange'])) { ?>您的扫描件一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
+ <img src="<?=$space['image1url']?>"/><input type="file"  name="file1"/>
+ <?php } ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">营业执照注册号&nbsp;&nbsp;:</span>
+                         <?php if($space['businessnum'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['businessnum']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的身份证号一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="businessnum"><input id="businessnum" type="text" value="<?=$space['businessnum']?>" name="businessnum" /></label> 
+<input id="businessnum" type="text" value="<?=$space['businessnum']?>" name="businessnum" />
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">营业执照扫描件:</th>
-<td>
-<?php if($space['image4url'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">营业执照扫描件&nbsp;&nbsp;:</span>
+                         <?php if($space['image4url'] && empty($_GET['namechange'])) { ?>
 <img src="<?=$space['image4url']?>"/>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的营业执照扫描件一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
 <img src="<?=$space['image4url']?>"/><input id="businessimage" type="file"  name="file2" />
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">企业LOGO:</th>
-<td>
-<?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?>
-<img src="<?=$space['smalllogourl']?>"/>
-<?php } else { ?>
-<?php if(empty($_SCONFIG['namechange'])) { ?>您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<img src="<?=$space['smalllogourl']?>"/><input type="file"  name="file3" />
-<?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">固话:</th>
-<td>
-<?php if($space['telephone'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
+                         <?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?><img src="<?=$urlAvatarMiddle?>" /><?php } else { ?><?php if(empty($_SCONFIG['namechange'])) { ?><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><?php } ?><img src="<?=$urlAvatarMiddle?>" /><a id="go" rel="leanModal" name="signup" href="#signup">上传</a><?php } ?>
+                      </div>
+                      <div id="signup">
+  <?=$urlCameraFlash?>
+  </div>
+  <div class="post_list container_12">
+                         <span class="select_title grid_1">固话&nbsp;&nbsp;:</span>
+                         <?php if($space['telephone'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['telephone']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的固话一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="telephone"><input id="telephone" type="text" value="<?=$space['telephone']?>" name="telephone" /></label> 
+<input id="telephone" type="text" value="<?=$space['telephone']?>" name="telephone" />
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">联系人电话:</th>
-<td>
-<?php if($space['mobile'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                       <div class="post_list container_12">
+                         <span class="select_title grid_1">联系人电话&nbsp;&nbsp;:</span>
+                        <?php if($space['mobile'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['mobile']?></span>
-</td>
 <?php } else { ?>
-<input type="text" class="t_input" name="mobile" value="<?=$space['mobile']?>" /> 
-
-</td>
-<td>
-<select name="friend[mobile]">
-<option value="0"<?=$friendarr['mobile']['0']?>>全用户可见</option>
-<option value="1"<?=$friendarr['mobile']['1']?>>仅好友可见</option>
-<option value="3"<?=$friendarr['mobile']['3']?>>仅自己可见</option>
-</select>
-</td>
+<input type="text"  name="mobile" value="<?=$space['mobile']?>" /> 
 <?php } ?>
-</tr>
-<tr>
-<th style="width:10em;">联系人QQ:</th>
-<td>
-<?php if($space['qq'] && empty($_GET['namechange'])) { ?>
-<span style="font-weight:bold;"><?=$space['qq']?></span>
-</td>
-<?php } else { ?> 
-<input type="text" class="t_input" name="qq" value="<?=$space['qq']?>" />
-</td>
-<td>
-<select name="friend[qq]">
-<option value="0"<?=$friendarr['qq']['0']?>>全用户可见</option>
-<option value="1"<?=$friendarr['qq']['1']?>>仅好友可见</option>
-<option value="3"<?=$friendarr['qq']['3']?>>仅自己可见</option>
-</select>
-</td>
-<?php } ?>
-</tr>
-<tr>
-<th style="width:10em;">微信公众号:</th>
-<td>
-<?php if($space['wxkey'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">微信公众号&nbsp;&nbsp;:</span>
+                        <?php if($space['wxkey'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['wxkey']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的微信公众号一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="wxkey"><input id="wxkey" type="text" value="<?=$space['wxkey']?>" name="wxkey" /></label> 
+<input id="wxkey" type="text" value="<?=$space['wxkey']?>" name="wxkey" />
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">企业地址:</th>
-<td>
-<?php if($space['businessaddress'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">企业地址&nbsp;&nbsp;:</span>
+                         <?php if($space['businessaddress'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['businessaddress']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="businessaddress"><input id="businessaddress" type="text" value="<?=$space['businessaddress']?>" name="businessaddress" /></label> 
+<input id="businessaddress" type="text" value="<?=$space['businessaddress']?>" name="businessaddress" /> 
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th style="width:10em;">行业:</th>
-<td>
-<?php if($space['business'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">行业&nbsp;&nbsp;:</span>
+                         <?php if($space['business'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['business']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
 <label for="business"><input id="business" type="text" value="<?=$space['business']?>" name="business" /></label> 
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<th>运营地区:</th>
-<?php if($space['resideprovince'] && empty($_GET['namechange']) && $space['residecity']) { ?>
-<td>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">运营地区&nbsp;&nbsp;:</span>
+                         <?php if($space['resideprovince'] && empty($_GET['namechange']) && $space['residecity']) { ?>
 <span style="font-weight:bold;"><?=$space['resideprovince']?> - <?=$space['residecity']?></span>
-</td>
 <?php } else { ?>
-<td id="residecitybox">
+<span id="residecitybox">
 <script type="text/javascript" src="source/script_city.js"></script>
 <script type="text/javascript">
 <!--
@@ -398,37 +455,33 @@ showprovince('resideprovince', 'residecity', '<?=$space['resideprovince']?>', 'r
 showcity('residecity', '<?=$space['residecity']?>', 'resideprovince', 'residecitybox');
 //-->
 </script>
-</td>
+</span>
 <?php } ?>
-</tr>
-<tr>
-<th style="width:10em;">常用邮箱:</th>
-<td>
-<?php if($space['email'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">常用邮箱&nbsp;&nbsp;:</span>
+                         <?php if($space['email'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['email']?></span><br>
 
 <?php } else { ?>
-<input type="text" id="email" class="t_input" value="<?=$space['email']?>" name="email" value="" />	
+<input type="text" id="email"  value="<?=$space['email']?>" name="email" value="" />	
 <?php } ?>
-</td>
-</tr>
-<tr>
-<th style="width:10em;">企业介绍:</th>
-<td>
-<?php if($space['companyintroduce'] && empty($_GET['namechange'])) { ?>
+                      </div>
+                      <div class="post_list container_12">
+                         <span class="select_title grid_1">企业介绍&nbsp;&nbsp;:</span>
+                         <?php if($space['companyintroduce'] && empty($_GET['namechange'])) { ?>
 <span style="font-weight:bold;"><?=$space['companyintroduce']?></span>
 <?php } else { ?>
 <?php if(empty($_SCONFIG['namechange'])) { ?>您的企业介绍一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-<label for="companyintroduce"><textarea name="companyintroduce" rows="5" cols="80"><?=$space['companyintroduce']?></textarea></label> 
+<textarea name="companyintroduce" rows="5" cols="80"><?=$space['companyintroduce']?></textarea>
 <?php } ?>
-</td>
-<td>&nbsp;</td>
-</tr>
+                      </div>
+
+<table cellspacing="0" cellpadding="0" class="formtable" >
 <tr>
 <th style="width:10em;">&nbsp;</th>
 <td>
-<input type="submit" name="nextsubmit" value="继续下一项" class="submit" />
-<input type="submit" name="profilesubmit" value="保存" class="submit" />
+<input type="submit" name="nextsubmit" class="btn grid_2" value="保存" class="submit" />
 <br/>
 <?php if($_SCONFIG['namechange']) { ?>[<a href="<?=$theurl?>&namechange=1">修改</a>]<?php } ?>
 <?php if($space['namestatus']) { ?>[<font color="red">认证通过</font>]<br/><?php } else { ?><br>等待验证中，您目前将只能使用用户名，并且一些操作可能会受到限制<?php } ?>
@@ -769,7 +822,8 @@ showcity('residecity', '<?=$space['residecity']?>', 'resideprovince', 'residecit
 </tr>
 </table>
 <?php } ?>
-
+</div>
+</div>
 
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
@@ -782,7 +836,13 @@ $("newtbody").appendChild(newnode);
 }
 }
 </script>
-
+<script type="text/javascript" src="source/jquery.js"></script>
+<script type="text/javascript" src="./template/default/jquery.leanModal.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    			$('a[rel*=leanModal]').leanModal({ top : 200 });		
+});
+</script>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

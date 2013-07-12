@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_job|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373428625', 'template/default/cp_job');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_password|template/default/header|template/default/cp_header|template/default/footer', '1373601412', 'template/default/cp_password');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -168,264 +168,57 @@
 
 <?php } ?>
 
-
-<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
-<link rel="stylesheet" type="text/css" href="template/default/style1.css">
-<link rel="stylesheet" type="text/css" href="template/default/file_beauty.css">
-
-
-<?php if($_GET['op'] == 'delete') { ?>
-
-<h1>删除栏目</h1>
-<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
-<div class="popupmenu_inner">
-<form method="post" action="cp.php?ac=job&op=delete&jobid=<?=$jobid?>">
-<p>确定删除指定的栏目吗？</p>
-<p class="btn_line">
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="hidden" name="deletesubmit" value="true" />
-<input type="submit" name="btnsubmit" value="确定" class="submit" />
-</p>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-</div>
-
-<?php } elseif($_GET['op'] == 'edithot') { ?>
-
-<h1>调整热度</h1>
-<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
-<div class="popupmenu_inner">
-<form method="post" action="cp.php?ac=job&op=edithot&jobid=<?=$jobid?>">
-<p class="btn_line">
-新的热度：<input type="text" name="hot" value="<?=$job['hot']?>" size="5"> 
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="hidden" name="hotsubmit" value="true" />
-<input type="submit" name="btnsubmit" value="确定" class="submit" />
-</p>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-</div>
-
-<?php } else { ?>
-
-<script language="javascript" src="image/editor/editor_function.js"></script>
-<script language="javascript" src="source/script_blog.js"></script>
-
-<?php if($topic) { ?>
-<h2 class="title">
-<img src="image/app/topic.gif" />热闹 - <a href="space.php?do=topic&topicid=<?=$topicid?>"><?=$topic['subject']?></a>
-</h2>
+<h2 class="title"><img src="image/icon/profile.gif">企业设置</h2>
 <div class="tabs_header">
+<a href="cp.php?ac=advance" class="r_option">&raquo; 高级管理</a>
 <ul class="tabs">
-<li class="active"><a href="javascript:;"><span>凑个热闹</span></a></li>
-<li><a href="space.php?do=topic&topicid=<?=$topicid?>"><span>查看热闹</span></a></li>
-</ul>
-<?php if(checkperm('managetopic') || $topic['uid']==$_SGLOBAL['supe_uid']) { ?>
-<div class="r_option">
-<a href="cp.php?ac=topic&op=edit&topicid=<?=$topic['topicid']?>">编辑</a> | 
-<a href="cp.php?ac=topic&op=delete&topicid=<?=$topic['topicid']?>" id="a_delete_<?=$topic['topicid']?>" onclick="ajaxmenu(event,this.id);">删除</a>
-</p>
-</div>
+<li<?=$actives['profile']?>><a href="cp.php?ac=profile"><span>实名认证</span></a></li>
+<!--<li<?=$actives['message']?>><a href="cp.php?ac=message"><span>企业资料</span></a></li>-->
+<li<?=$actives['avatar']?>><a href="cp.php?ac=avatar"><span>企业头像</span></a></li>
+<?php if($_SCONFIG['videophoto']) { ?>
+<li<?=$actives['videophoto']?>><a href="cp.php?ac=videophoto"><span>视频认证</span></a></li>
 <?php } ?>
+<?php if($_SCONFIG['allowdomain'] && $_SCONFIG['domainroot'] && checkperm('domainlength')) { ?>
+<li<?=$actives['domain']?>><a href="cp.php?ac=domain"><span>我的域名</span></a></li>
+<?php } ?>
+<?php if($_SCONFIG['sendmailday']) { ?>
+<li<?=$actives['sendmail']?>><a href="cp.php?ac=sendmail"><span>邮件提醒</span></a></li>
+<?php } ?>
+</ul>
 </div>
 
-
-<div class="affiche">
-<table width="100%">
+<div class="c_form">
+<form method="post" action="cp.php?ac=password&op=">
+<table cellspacing="0" cellpadding="0" class="formtable">
+<caption>
+<h2>我的登录密码</h2>
+<p>修改密码后，您需要重新登陆一次。</p>
+</caption>
 <tr>
-<?php if($topic['pic']) { ?>
-<td width="160" id="event_icon" valign="top">
-<img src="<?=$topic['pic']?>" width="150">
-</td>
-<?php } ?>
-<td valign="top">
-<h2>
-<a href="space.php?do=topic&topicid=<?=$topic['topicid']?>"><?=$topic['subject']?></a>
-</h2>
-
-<div style="padding:5px 0;"><?=$topic['message']?></div>
-<ul>
-<li class="gray">发起作者: <a href="space.php?uid=<?=$topic['uid']?>"><?=$_SN[$topic['uid']]?></a></li>
-<li class="gray">发起时间: <?=$topic['dateline']?></li>
-<?php if($topic['endtime']) { ?><li class="gray">参与截止: <?=$topic['endtime']?></li><?php } ?>
-<?php if($topic['joinnum']) { ?>
-<li class="gray">参与人次: <?=$topic['joinnum']?></li>
-<?php } ?>
-<li class="gray">最后参与: <?=$topic['lastpost']?></li>
-</ul>
-
-<?php if($topic['allowjoin']) { ?>
-<a href="<?=$topic['joinurl']?>" class="feed_po" id="hot_add" onmouseover="showMenu(this.id)">凑个热闹</a>
-<ul id="hot_add_menu" class="dropmenu_drop" style="display:none;">
-<?php if(in_array('blog', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=blog&topicid=<?=$topicid?>">发表日志</a></li>
-<?php } ?>
-<?php if(in_array('pic', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=upload&topicid=<?=$topicid?>">上传图片</a></li>
-<?php } ?>
-<?php if(in_array('thread', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=thread&topicid=<?=$topicid?>">发起话题</a></li>
-<?php } ?>
-<?php if(in_array('poll', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=poll&topicid=<?=$topicid?>">发起投票</a></li>
-<?php } ?>
-<?php if(in_array('event', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=event&topicid=<?=$topicid?>">发起活动</a></li>
-<?php } ?>
-<?php if(in_array('share', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=share&topicid=<?=$topicid?>">添加分享</a></li>
-<?php } ?>
-</ul>
-<?php } else { ?>
-<p class="r_option">该热闹已经截止</p>
-<?php } ?>
-</td>
-</tr></table>
-</div>
-
-<?php } else { ?>
-
-<div class="content" style="font-size:15px;">
-          
-                 <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>人才招聘</span>
-                 </div><!-- end -->
-                 <div class="bread container_12">
-                     <div class="bread_actived grid_1">
-                         发布
-                     </div>
-                     <a href="space.php?do=job&view=me" class="link_back_bread grid_3">
-                      人才招聘
-                     </a>
-                 </div>
-<?php } ?>
-
-
-  <div class="content_detail_wrapper">
-                    <div class="post_wrapper">
-<form method="post" action="cp.php?ac=job&jobid=<?=$job['jobid']?>" enctype="multipart/form-data">
-<div class="post_list container_12">
-                         <span class="select_title grid_1">职位名称&nbsp;&nbsp;:</span>
-                         <input type="text" class="t_input" id="subject" name="subject" value="<?=$job['subject']?>"  onblur="relatekw();"  />
-                            </div>
-                         <div class="post_list container_12">
-                         <span class="select_title grid_1">职位描述&nbsp;&nbsp;:</span>
-                          <a id="doodleBox" href="magic.php?mid=doodle&showid=job_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
-  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$job['message']?></textarea>
-  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
-                            </div>
-                         <div class="post_list container_12">
-                         <span class="select_title grid_1">资格要求&nbsp;&nbsp;:</span>
-                          <textarea name="messagecomment" style="width:550px;height:200px;margin-left:20px;"><?=$job['messagecomment']?></textarea>
-                            </div>
- <div class="post_list container_12">
-                         <span class="select_title grid_1">电话&nbsp;&nbsp;:</span>
-                          <input type="text" class="t_input" id="telephone" name="telephone" value="<?=$job['telephone']?>" />
-                            </div>
-                             <div class="post_list container_12">
-                         <span class="select_title grid_1">邮箱&nbsp;&nbsp;:</span>
-                          <input type="text" class="t_input" id="email" name="email" value="<?=$job['email']?>" />
-                            </div>
-                             <div class="post_list container_12">
-                         <span class="select_title grid_1">待遇&nbsp;&nbsp;:</span>
-                          <input type="text" class="t_input" id="money" name="money" value="<?=$job['money']?>" />
-                            </div>
-                            <div class="post_list container_12">
-                         <span class="select_title grid_1">其他&nbsp;&nbsp;:</span>
-                          <textarea name="othermessage" style="width:5500px;height:200px;margin-left:20px;"><?=$job['othermessage']?></textarea>
-                            </div>
-
-
-<input type="hidden" name="jobsubmit" value="true" />
-<input type="button" id="jobbutton" name="jobbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
-<input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
+<th width="100">登录用户名</th>
+<td><?=$space['username']?></td>
+</tr>
+<tr>
+<th width="100">旧密码</th>
+<td><input type="password" id="password" name="password" value="" class="t_input" /></td>
+</tr>
+<tr>
+<th>新密码</th>
+<td><input type="password" id="newpasswd1" name="newpasswd1" value="" class="t_input"></td>
+</tr>
+<tr>
+<th>确认新密码</th>
+<td><input type="password" id="newpasswd2" name="newpasswd2" value="" class="t_input"></td>
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td><input type="submit" name="pwdsubmit" value="修改密码" class="submit" /></td>
+</tr>
+</table>
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
-
-<?php if(!$_SGLOBAL['inajax'] && (!$job['uid'] || $job['uid']==$_SGLOBAL['supe_uid'])) { ?>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr><th width="100">图片</th><td>
-<div class="pic_submit container_12">
-<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
-<input type="button" class="btn grid_3" name="clickbutton[]" value="插入图片" class="button" style="margin-left:20px;" onclick="edit_album_show('album')">
-</div>
-</td></tr>
-</table>
-<?php } ?>
-
-<table cellspacing="4" cellpadding="4" width="100%" id="uchome-edit-pic" class="infotable" style="display:none;">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-<strong>选择图片</strong>: 
-<table summary="Upload" cellspacing="2" cellpadding="0">
-<tbody id="attachbodyhidden" style="display:none">
-<tr>
-<td>
-<form method="post" id="upload" action="cp.php?ac=upload" enctype="multipart/form-data" target="uploadframe" style="background: transparent;">
-<input type="file" name="attach" style="border: 1px solid #CCC;" />
-<span id="localfile"></span>
-<input type="hidden" name="uploadsubmit" id="uploadsubmit" value="true" />
-<input type="hidden" name="albumid" id="albumid" value="0" />
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-</td>
-</tr>
-</tbody>
-<tbody id="attachbody"></tbody>
-</table>
-<strong>存储相册</strong>: 
-<table cellspacing="2" cellpadding="0">
-<tr>
-<td>
-<select name="albumid" id="uploadalbum" onchange="addSort(this)">
-<option value="-1">请选择相册</option>
-<option value="-1">默认相册</option>
-<?php if(is_array($albums)) { foreach($albums as $value) { ?>
-<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
-<?php } } ?>
-<option value="addoption" style="color:red;">+新建相册</option>
-</select>
-<script src="source/script_upload.js" type="text/javascript"></script>
-<iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable" id="uchome-edit-album" style="display:none;">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-选择相册: <select name="view_albumid" onchange="picView(this.value)">
-<option value="none">选择一个相册</option>
-<option value="0">默认相册</option>
-<?php if(is_array($albums)) { foreach($albums as $value) { ?>
-<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
-<?php } } ?>
-</select> (点击图片可以插入到内容中)
-<div id="albumpic_body"></div>
-</td>
-</tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-<div class="confirm_btn container_12">
-                           <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
-                           <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('jobbutton').click();" value="保存发布" class="submit" />
-                        
-                      </div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 
-
-<?php } ?>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -541,6 +334,4 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?>
-
-<?php ob_out();?>
+<?php } ?><?php ob_out();?>

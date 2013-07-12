@@ -1,4 +1,5 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1373365262', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1373623383', 'template/default/space_menuset_list');?>
+<?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -148,21 +149,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
@@ -170,7 +156,6 @@
 <?php } ?>
 
 <?php } ?>
-
 
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
 <div id="space_menuset" class="feed">
@@ -201,6 +186,7 @@
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
+
 <?php if($zhong1) { ?>
 <div class="searchbar floatright">
 <form method="get" action="space.php">
@@ -309,7 +295,7 @@ if($("#num<?=$value['menusetid']?>").attr("checked")==true){
 </script>
 <?php } } ?>
 <?php if($_GET['view']!='me') { ?>
-<?php if(empty($zhongwei)) { ?>
+<?php if(empty($list)) { ?>
 <div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
 
 <?php } else { ?>
@@ -371,7 +357,6 @@ if($("#num<?=$value['menusetid']?>").attr("checked")==true){
 <?php } ?>
 
 
-
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
@@ -387,7 +372,10 @@ $("#num").click(function(){
  	});
 });
 </script>
+
+
 <?php } ?>
+
 
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -504,4 +492,5 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?><?php ob_out();?>
+<?php } ?>
+<?php ob_out();?>

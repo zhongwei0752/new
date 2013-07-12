@@ -1,338 +1,159 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/header|template/default/footer', '1373438418', 'template/default/network');?><?php $_TPL['nosidebar']=1; ?>
-<?php if(empty($_SGLOBAL['inajax'])) { ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1373621430', 'template/default/network');?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=<?=$_SC['charset']?>" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
-<title><?php if($_TPL['titles']) { ?><?php if(is_array($_TPL['titles'])) { foreach($_TPL['titles'] as $value) { ?><?php if($value) { ?><?=$value?> - <?php } ?><?php } } ?><?php } ?><?php if($_SN[$space['uid']]) { ?><?=$_SN[$space['uid']]?> - <?php } ?><?=$_SCONFIG['sitename']?> - Powered by UCenter Home</title>
-<script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
-<script language="javascript" type="text/javascript" src="source/script_common.js"></script>
-<script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
-<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
-<script language="javascript" type="text/javascript" src="source/script_face.js"></script>
-<script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
- <!-- Bootstrap -->
+  <head>
+    <title>v5v5v5v5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
-    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
-
-<style type="text/css">
-
-@import url(template/default/network.css);
-@import url(template/default/style.css);
-<?php if($_TPL['css']) { ?>
-@import url(template/default/<?=$_TPL['css']?>.css);
-<?php } ?>
-<?php if(!empty($_SGLOBAL['space_theme'])) { ?>
-@import url(theme/<?=$_SGLOBAL['space_theme']?>/style.css);
-<?php } elseif($_SCONFIG['template'] != 'default') { ?>
-@import url(template/<?=$_SCONFIG['template']?>/style.css);
-<?php } ?>
-<?php if(!empty($_SGLOBAL['space_css'])) { ?>
-<?=$_SGLOBAL['space_css']?>
-<?php } ?>
-</style>
-<link rel="shortcut icon" href="image/favicon.ico" />
-<link rel="edituri" type="application/rsd+xml" title="rsd" href="xmlrpc.php?rsd=<?=$space['uid']?>" />
-</head>
-<body>
-
-<div id="append_parent"></div>
-<div id="ajaxwaitid"></div>
-<div id="header">
-<?php if($_SGLOBAL['ad']['header']) { ?><div id="ad_header"><?php adshow('header'); ?></div><?php } ?>
- <div class="wrapper">
- <div class="navbar">
+    <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+  </head>
+  <body>
+    
+    <div class="wrapper">
+        <div class="navbar">
             <div class="navbar-inner container_36">
+                <a class="logo grid_1" href="#" style="background:none;"><img src="./template/default/image/logo.png"></a>
+                <a href="#" class="grid_5" style="float:right;color:#BDBEBF;padding-right:10px;">帮助</a>
+             </div>
+         </div>
+         <!-- navbar end -->
+         <div class="login_wrapper container_12">
+            <div class="grid_1">
+                 <img src="./template/default/image/login_pic.png">
+            </div>
+            <div class="grid_2 sign_window" id="log">
+                  <ul>
+                     <li style="float:left">注册账号</li>
+                     <li style="padding-left:80px;" id="btna"><span>登陆</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
+                  </ul>
+                  <form class="">
+                    <input type="text" name="" placeholder="用户名" />
+                 </form>
+                  <form class="">
+                    <input type="text" name="" placeholder="邮箱" />
+                 </form>
+                  <form class="">
+                    <input name="" type="text" value="密码" id="tx"/>
+                    <input name="" type="password" style="display:none;" id="pwd" />
+                 </form>
+                 <a href="#" class="sign_btn">注册微伍</a>
+            </div>
+             <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-300px;margin-top:-278px;">
+                  <ul>
+                     <li style="float:left">登陆账号</li>
+                     <li style="padding-left:80px;" id="btnb"><span>注册</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
+                  </ul>
                 
-                <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
-                <?php if($_SGLOBAL['supe_uid']) { ?>
-                <a href="space.php?do=home" class="grid_2">首页</a>
-                
+         <form name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post">
+        <input type="text" name="username" id="username"  value="<?=$membername?>" />
+        <input type="password" name="password" id="password" value="<?=$password?>" />
+        <p class="submitrow">
+          <input type="hidden" name="refer" value="space.php?do=home" />
+          <input type="submit" id="loginsubmit" class="sign_btn" name="loginsubmit" value="登录" class="submit" />
+          <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+        </p>
+      </form>
+            </div>
+         </div>
 
-                <?php } else { ?>
-                 <a href="index.php" class="grid_2">首页</a>
-                <?php } ?>
-                <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
-<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
-<a href="space.php?do=friend" class="grid_2">客户列表</a>
-<?php } else { ?>
-<a class="grid_2" href="help.php">帮助</a>
-<?php } ?>
-
-                <?php if($_SGLOBAL['supe_uid']) { ?>
+          <p class="login_page_company_title"><span>已经开通企业</span><span class="more"><a href="">更多</a></span></p>
+          <div class="companies_wrapper">
+          <div class="companies container_12">
+            <?php if(is_array($openlist)) { foreach($openlist as $key => $value) { ?>
+            <div class="grid_3">
+                   <span style="float:left;padding-right:10px;width:71px;height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span>
+                   <span class="company_name"><?=$_SN[$value['uid']]?></span><br>
+                    <span><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>" class="fans"><?=$value['friendnum']?>粉丝</a></span> 
+              </div>
+       
+      <?php } } ?>
+             
+            
+          </div>
+    
+      </div><!-- 无类div结束 -->
+      <p class="login_page_company_title"><span>品牌合作企业</span><span class="more"><a href="">更多</a></span></p>
+               <div class="companies_wrapper">
+          <div class="companies container_12">
+              <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
                
-                <div class="grid_3"></div>
-                <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
-                   <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
-                   <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
-                </div>
-         <?php } else { ?>
-<div class="grid_7"></div>
-
-                <div class="grid_4">
-                   <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
-                   <span class="company_name">欢迎您</span><br/>
-                   <a href="do.php?ac=<?=$_SCONFIG['login_action']?>" class="header_btn setting_btn">登录</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  class="header_btn quit_btn">注册</a> 
-                </div>
-<?php } ?>
-  </div>
-         </div>
-
-
-<div id="wrap" style="width:1024px;">
-
-<div>
-<div id="main">
-
-<?php if(empty($_TPL['nosidebar'])) { ?>
-
-<?php if($zhong1) { ?>
-<div id="app_sidebar">
-
-
-<?php if($_SGLOBAL['supe_uid']) { ?>
-
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
- <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
-<?php } } ?>
-                       <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
-                       
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
-                        <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
-                        <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
-                    </ul>
+          </div>
+          
+            <div class="companies container_12">
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
               </div>
-         </div>
-
-
-<!--<div class="app_m">
-<ul>
-<?php if($_SN[$_SGLOBAL['supe_uid']]=="admin") { ?>
-<!--<li><img src="image/app_add.gif"><a href="cp.php?ac=menuset" class="addApp">添加应用</a></li>
-<?php } ?>
-<!--<li><img src="image/app_set.gif"><a href="space.php?do=menuset&view=me" class="myApp">管理应用</a></li>
-</ul>
-</div>-->
-
-<?php } else { ?>
-<div class="bar_text">
-<form id="loginform" name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&ref" method="post">
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-<p class="title">登录站点</p>
-<p>用户名</p>
-<p><input type="text" name="username" id="username" class="t_input" size="15" value="" /></p>
-<p>密码</p>
-<p><input type="password" name="password" id="password" class="t_input" size="15" value="" /></p>
-<p><input type="checkbox" id="cookietime" name="cookietime" value="315360000" checked /><label for="cookietime">记住我</label></p>
-<p>
-<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />
-<input type="button" name="regbutton" value="注册" class="button" onclick="urlto('do.php?ac=<?=$_SCONFIG['register_action']?>');">
-</p>
-</form>
-</div>
-<?php } ?>
-
-</div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
               </div>
-         </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+               <div class="grid_4">
+                  <img src="./template/default/image/example3.png">
+              </div>
+          </div>
+      </div><!-- 无类div结束 -->
+    </div><!-- wrraper end -->
 
-<?php } ?>
-<div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
-<?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
-<?php } ?>
-
-<?php } ?>
-
-<div id="network">
-
-<script>
-function setintro(type) {
-var intro = '';
-var bPosition = '';
-if(type == 'doing') {
-intro = '用一句话记录自己生活中的点点滴滴';
-bPosition = '0';
-} else if(type == 'mtag') {
-intro = '创建自己的小圈子，与大家交流感兴趣的话题';
-bPosition = '175px';
-} else if(type == 'pic') {
-intro = '上传照片，分享生活中的精彩瞬间';
-bPosition = '55px';
-} else if(type == 'app') {
-intro = '与好友一起玩转游戏和游戏，增加好友感情';
-bPosition = '118px';
-} else {
-intro = '马上注册，与好友分享日志、照片，一起玩转游戏';
-bPosition = '0';
-}
-$('guest_intro').innerHTML = intro + '......';
-$('guest_intro').style.backgroundPosition = bPosition + ' 100%'
-}
-function scrollPic(e, LN, Width, Price, Speed) {
-id = e.id;
-if(LN == 'Last'){ scrollNum = Width; } else if(LN == 'Next'){ scrollNum = 0 - Width; }
-scrollStart = parseInt(e.style.marginLeft, 10);
-scrollEnd = parseInt(e.style.marginLeft, 10) + scrollNum;
-
-MaxIndex = (e.getElementsByTagName('li').length / Price).toFixed(0);
-sPicMaxScroll = 0 - Width * MaxIndex;
-
-if(scrollStart == 0 && scrollEnd == Width){
-scrollEnd = -1806;
-e.style.marginLeft = parseInt(e.style.marginLeft, 10) - Speed + 'px';
-} else if(scrollStart == sPicMaxScroll + Width && scrollEnd == sPicMaxScroll){
-scrollEnd = 0;
-e.style.marginLeft = parseInt(e.style.marginLeft, 10) + Speed + 'px';
-}
-scrollShowPic = setInterval(scrollShow, 1);
-
-function scrollShow() {
-if(scrollStart > scrollEnd) {
-if(parseInt(e.style.marginLeft, 10) > scrollEnd) {
-$(id + '_last').onclick = function(){ return false; };
-$(id + '_next').onclick = function(){ return false; };
-e.style.marginLeft = parseInt(e.style.marginLeft, 10) - Speed + 'px';
-} else {
-clearInterval(scrollShowPic);
-$(id + '_last').onclick = function(){ scrollPic(e, 'Last', Width, Price, Speed);return false; };
-$(id + '_next').onclick = function(){ scrollPic(e, 'Next', Width, Price, Speed);return false; };
-}
-} else {
-if(parseInt(e.style.marginLeft, 10) < scrollEnd) {
-$(id + '_last').onclick = function(){ return false; };
-$(id + '_next').onclick = function(){ return false; };
-e.style.marginLeft = parseInt(e.style.marginLeft, 10) + Speed + 'px';
-} else {
-clearInterval(scrollShowPic);
-$(id + '_last').onclick = function(){ scrollPic(e, 'Last', Width, Price, Speed);return false; };
-$(id + '_next').onclick = function(){ scrollPic(e, 'Next', Width, Price, Speed);return false; };
-}					
-}
-}
-}
-function scrollShowNav(e, Width, Price, Speed) {
-id = e.id;
-$(id + '_last').onclick = function(){ scrollPic(e, 'Last', Width, Price, Speed);return false; };
-$(id + '_next').onclick = function(){ scrollPic(e, 'Next', Width, Price, Speed);return false; };
-
-}
-function getUserTip(obj) {
-var tipBox = $('usertip_box');
-tipBox.childNodes[0].innerHTML = '<strong>' + obj.rel + ':<\/strong> ' + obj.rev + '...';
-
-var showLeft;
-if(obj.parentNode.offsetLeft > 730) {
-showLeft = $('showuser').offsetLeft + obj.parentNode.offsetLeft - 148;
-tipBox.childNodes[0].style.right = 0;
-} else {
-tipBox.childNodes[0].style.right = 'auto';
-showLeft = $('showuser').offsetLeft + obj.parentNode.offsetLeft;
-}
-tipBox.style.left = showLeft + 'px';
-
-var showTop; 
-if(obj.className == 'uonline') {
-showTop = $('showuser').offsetTop + obj.parentNode.offsetTop - tipBox.childNodes[0].clientHeight;
-} else {
-showTop = $('showuser').offsetTop + obj.parentNode.offsetTop + 48;
-}
-tipBox.style.top = showTop + 'px';
-
-tipBox.style.visibility = 'visible';
-}
+     <script src="./source/jquery_v1.10.2.js"></script>
+    <script type="text/javascript">
+   $('#btna').click(function(){
+    $('#log').animate({ opacity: '0'
+},200);  
+     $('#sign').animate({right:'0'
+},200);  
+    // $('#log').slideToggle("medium","linear");
+    // $('#sign').slideToggle("medium","linear");
+   });
+    $('#btnb').click(function(){
+    $('#sign').animate({ right:'-300px'
+},200);  
+     $('#log').animate({opacity: '1'
+},200);  
+    // $('#log').slideToggle("medium","linear");
+    // $('#sign').slideToggle("medium","linear");
+   })
 </script>
+    <script type="text/javascript" src="./source/placeholder.js"></script>
+    <script type="text/javascript">
+var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
+tx.onfocus = function(){
+if(this.value != "密码") return;
+this.style.display = "none";
+pwd.style.display = "";
+pwd.value = "";
+pwd.focus();
+}
+pwd.onblur = function(){
+if(this.value != "") return;
+this.style.display = "none";
+tx.style.display = "";
+tx.value = "密码";
+}
 
-<?php if(empty($_SGLOBAL['supe_uid'])) { ?>
-<div id="guestbar" class="nbox">
-<div class="nbox_c">
-<p id="guest_intro">马上注册，与好友分享日志、照片，一起玩转游戏......</p>
-<a href="do.php?ac=<?=$_SCONFIG['register_action']?>" id="regbutton" onmouseover="setintro('register');">马上注册</a>
-<p id="guest_app">
-<a href="javascript:;" class="appdoing" onmouseover="setintro('doing');">记录</a>
-<a href="javascript:;" class="appphotos" onmouseover="setintro('pic');">照片</a>
-<a href="javascript:;" class="appgames" onmouseover="setintro('app');">游戏</a>
-<a href="javascript:;" class="appgroups" onmouseover="setintro('mtag');">群组</a> 
-</p>
-</div>	
-<div class="nbox_s side_rbox" id="nlogin_box">
-<h3 class="ntitle">请登录</h3>
-<div class="side_rbox_c">
-<form name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post">
-<p><label for="username">用户名</label> <input type="text" name="username" id="username" class="t_input" value="<?=$membername?>" /></p>
-<p><label for="password">密　码</label> <input type="password" name="password" id="password" class="t_input" value="<?=$password?>" /></p>
-<p class="checkrow"><input type="checkbox" id="cookietime" name="cookietime" value="315360000" <?=$cookiecheck?> style="margin-bottom: -2px;" /><label for="cookietime">下次自动登录</label></p>
-<p class="submitrow">
-<input type="hidden" name="refer" value="space.php?do=home" />
-<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />
-<a href="do.php?ac=lostpasswd">忘记密码?</a>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</p>
-</form>
-</div>
-</div>
-</div>
-<?php } ?>
-
-<div class="nbox">
-<div class="nbox_n">
-<h2 class="ntitle"><span class="r_option"><a href="do.php?ac=6c032a3c87d42ffd4902be6b3940146f">申请开通</a></span> 已经开通企业: &raquo;</h2>
-<ul class="bloglist">
-<?php if(is_array($openlist)) { foreach($openlist as $key => $value) { ?>
-<li <?php if($key%2==1) { ?>class="list_r"<?php } ?>>
-<div class="d_avatar avatar48"><a href="space.php?uid=<?=$value['uid']?>" title="<?=$_SN[$value['uid']]?>" target="_blank"><?php echo avatar($value[uid],small); ?></a></div>
-<p class="mess/age"><?=$_SN[$value['uid']]?></p>
-<p class="ho/t"><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>"><?=$value['friendnum']?> 粉丝</a></p>
-<p class="gray"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></p>
-</li>
-<?php } } ?>
-</ul>
-</div>
-</div>
-<div class="nbox">
-<div class="nbox_n">
-<h2 class="ntitle"> 品牌企业展示: &raquo;</h2>
-<ul class="bloglist">
-<li style="width:200px;margin-left:20px;">
-<img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-<li style="width:200px;margin-left:20px;"><img src="./template/default/image/headlogo.jpg"></li>
-
-
-</ul>
-</div>
-</div>
-
+</script>
+<!-- 以上为ie不兼容placeholder而写的 -->
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -448,4 +269,6 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?><?php ob_out();?>
+<?php } ?>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+<?php ob_out();?>

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_pm|template/default/header|template/default/footer', '1373353801', 'template/default/cp_pm');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_menuset|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373622667', 'template/default/cp_menuset');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -70,7 +70,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -99,7 +100,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -144,24 +145,8 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
-
 
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
@@ -169,18 +154,48 @@
 <?php } ?>
 
 
-
 <?php if($_GET['op'] == 'delete') { ?>
 
-<h1>删除短消息</h1>
+<h1>删除应用</h1>
 <a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
-<div class="popupmenu_inner" id="<?=$pmid?>">
-<form id="pmform" name="pmform" method="post" action="cp.php?ac=pm&op=delete&folder=<?=$folder?>&pmid=<?=$pmid?>">
-<p>确定删除指定的短消息吗？</p>
+<div class="popupmenu_inner">
+<form method="post" action="cp.php?ac=menuset&op=delete&menusetid=<?=$menusetid?>">
+<p>确定删除指定的应用吗？</p>
 <p class="btn_line">
 <input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
 <input type="hidden" name="deletesubmit" value="true" />
-<input type="submit" name="deletesubmit" value="确定" class="submit" />
+<input type="submit" name="btnsubmit" value="确定" class="submit" />
+</p>
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
+</div>
+<?php } elseif($_GET['op'] == 'buy') { ?>
+
+<h1>购买月份</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form method="post" action="cp.php?ac=menuset&op=buy&menusetid=<?=$menusetid?>">
+<p class="btn_line">
+单价:<?=$_GET['money']?>元/月<br/>
+月份：<input type="text" name="buy" value="<?=$menuset['buy']?>" size="5">月 
+<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
+<input type="hidden" name="buysubmit" value="true" />
+<input type="submit" name="btnsubmit" value="确定" class="submit" />
+</p>
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
+</div>
+<?php } elseif($_GET['op'] == 'edithot') { ?>
+
+<h1>调整热度</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form method="post" action="cp.php?ac=menuset&op=edithot&menusetid=<?=$menusetid?>">
+<p class="btn_line">
+新的热度：<input type="text" name="hot" value="<?=$menuset['hot']?>" size="5"> 
+<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
+<input type="hidden" name="hotsubmit" value="true" />
+<input type="submit" name="btnsubmit" value="确定" class="submit" />
 </p>
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
@@ -188,85 +203,295 @@
 
 <?php } else { ?>
 
-<?php if(!$_SGLOBAL['inajax']) { ?>
+<script language="javascript" src="image/editor/editor_function.js"></script>
+<script language="javascript" src="source/script_menuset.js"></script>
 
-<h2 class="title"><img src="image/icon/pm.gif">消息</h2>
+<?php if($topic) { ?>
+<h2 class="title">
+<img src="image/app/topic.gif" />热闹 - <a href="space.php?do=topic&topicid=<?=$topicid?>"><?=$topic['subject']?></a>
+</h2>
 <div class="tabs_header">
 <ul class="tabs">
-<li class="active"><a href="cp.php?ac=pm"><span>发短消息</span></a></li>
-<li><a href="space.php?do=pm&view=inbox"><span>返回收件箱</span></a></li>
+<li class="active"><a href="javascript:;"><span>凑个热闹</span></a></li>
+<li><a href="space.php?do=topic&topicid=<?=$topicid?>"><span>查看热闹</span></a></li>
 </ul>
+<?php if(checkperm('managetopic') || $topic['uid']==$_SGLOBAL['supe_uid']) { ?>
+<div class="r_option">
+<a href="cp.php?ac=topic&op=edit&topicid=<?=$topic['topicid']?>">编辑</a> | 
+<a href="cp.php?ac=topic&op=delete&topicid=<?=$topic['topicid']?>" id="a_delete_<?=$topic['topicid']?>" onclick="ajaxmenu(event,this.id);">删除</a>
+</p>
+</div>
+<?php } ?>
+</div>
+
+
+<div class="affiche">
+<table width="100%">
+<tr>
+<?php if($topic['pic']) { ?>
+<td width="160" id="event_icon" valign="top">
+<img src="<?=$topic['pic']?>" width="150">
+</td>
+<?php } ?>
+<td valign="top">
+<h2>
+<a href="space.php?do=topic&topicid=<?=$topic['topicid']?>"><?=$topic['subject']?></a>
+</h2>
+
+<div style="padding:5px 0;"><?=$topic['message']?></div>
+<ul>
+<li class="gray">发起作者: <a href="space.php?uid=<?=$topic['uid']?>"><?=$_SN[$topic['uid']]?></a></li>
+<li class="gray">发起时间: <?=$topic['dateline']?></li>
+<?php if($topic['endtime']) { ?><li class="gray">参与截止: <?=$topic['endtime']?></li><?php } ?>
+<?php if($topic['joinnum']) { ?>
+<li class="gray">参与人次: <?=$topic['joinnum']?></li>
+<?php } ?>
+<li class="gray">最后参与: <?=$topic['lastpost']?></li>
+</ul>
+
+<?php if($topic['allowjoin']) { ?>
+<a href="<?=$topic['joinurl']?>" class="feed_po" id="hot_add" onmouseover="showMenu(this.id)">凑个热闹</a>
+<ul id="hot_add_menu" class="dropmenu_drop" style="display:none;">
+<?php if(in_array('blog', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=blog&topicid=<?=$topicid?>">发表日志</a></li>
+<?php } ?>
+<?php if(in_array('pic', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=upload&topicid=<?=$topicid?>">上传图片</a></li>
+<?php } ?>
+<?php if(in_array('thread', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=thread&topicid=<?=$topicid?>">发起话题</a></li>
+<?php } ?>
+<?php if(in_array('poll', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=poll&topicid=<?=$topicid?>">发起投票</a></li>
+<?php } ?>
+<?php if(in_array('event', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=event&topicid=<?=$topicid?>">发起活动</a></li>
+<?php } ?>
+<?php if(in_array('share', $topic['jointype'])) { ?>
+<li><a href="cp.php?ac=share&topicid=<?=$topicid?>">添加分享</a></li>
+<?php } ?>
+</ul>
+<?php } else { ?>
+<p class="r_option">该热闹已经截止</p>
+<?php } ?>
+</td>
+</tr></table>
 </div>
 
 <?php } else { ?>
-
-<h1>发短消息</h1>
-<a href="javascript:hideMenu();" title="关闭" class="float_del">关闭</a>
-
+<h2 class="title"><img src="image/app/menuset.gif" />应用</h2>
+<div class="tabs_header">
+<ul class="tabs">
+<?php if($menuset['menusetid']) { ?>
+<li class="active"><a href="cp.php?ac=menuset&menusetid=<?=$menuset['menusetid']?>"><span>编辑应用</span></a></li>
 <?php } ?>
-
-<div class="popupmenu_inner" id="__pmform_<?=$pmid?>">
-<form id="pmform_<?=$pmid?>" name="pmform_<?=$pmid?>" method="post" action="cp.php?ac=pm&op=send&touid=<?=$touid?>&pmid=<?=$pmid?>" class="ajaxshowdiv">
-<table cellspacing="0" cellpadding="3">
-<?php if(!$touid) { ?>
-<tr>
-<th><label for="username">收件人：</label></th>
-<td>
-<script type="text/javascript" src="source/script_autocomplete.js"></script>
-<input type="text" id="username" name="username" value="" style="width: 396px;" class="t_input" tabindex="1" <?php if($friends) { ?> onclick="auc.handleEvent(this.value ,event);" onkeyup="auc.handleEvent(this.value ,event);" onkeydown="closeOpt(username,event);inputKeyDown(event);" autocomplete="off" <?php } ?> />
-<?php if($friends) { ?>
-<div id="username_menu" class="ajax_selector" onclick="$('username_menu').style.display='none';" style="display:none">
-<div class="ajax_selector_option" style="width: 396px; height: 100px;">
-<a href="javascript:;" onclick="$('username_menu').style.display='none';" class="float_del" style="margin-right: 5px;">a</a>
-<ul id="friendlist" class="blocklink">
-<?php if(is_array($friends)) { foreach($friends as $key => $value) { ?>
-<?php $fs[] = $value['username']; ?>
-<li><?=$value['username']?></li>
-<?php } } ?>
+<li<?php if(empty($menuset['menusetid'])) { ?> class="active"<?php } ?>><a href="cp.php?ac=menuset"><span>发表新应用</span></a></li>
+<li><a href="space.php?uid=<?=$space['uid']?>&do=menuset&view=me"><span>返回我的应用</span></a></li>
 </ul>
 </div>
-</div>
-<?php $friendstr = implode(',', $fs); ?>
-<script type="text/javascript">
-var close = true;
-var auc = new sAutoComplete("auc", "username_menu", "friendlist", "username");
-auc.addItem('<?=$friendstr?>');
-function closeOpt(key,evt) {
-if(evt.keyCode==9) {
-$('username_menu').style.display='none';
-}
-}
-function inputKeyDown(event) {
-if(event.keyCode == 13){
-doane(event);
-}
-}
-</script>
-
 <?php } ?>
+
+<div class="c_form">
+
+<style type="text/css">
+.userData {behavior:url(#default#userdata);}
+</style>
+
+
+<form method="post" action="cp.php?ac=menuset&menusetid=<?=$menuset['menusetid']?>" enctype="multipart/form-data">
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<tr>
+<td>
+应用名称:<input type="text" class="t_input" id="subject" name="subject" value="<?=$menuset['subject']?>" size="60" onblur="relatekw();" />
 </td>
 </tr>
+<tr>
+<td>
+应用链接:<input type="text" class="t_input" id="url" name="url" value="<?=$menuset['url']?>" size="60" onblur="relatekw();" />
+</td>
+</tr>
+<tr>
+<td>
+应用logo:<input type="file" name="files" value="<?=$menuset['image1url']?>"/>
+</td>
+</tr>
+<tr>
+<td>
+应用英文:<input type="text" class="t_input" id="url" name="english" value="<?=$menuset['english']?>" size="60" onblur="relatekw();" />
+</td>
+</tr>
+<tr>
+<td>
+应用标签（逗号隔开，仅限中文逗号！）:<input type="text" class="t_input" id="apptag" name="apptag" value="<?=$menuset['apptag']?>" size="60" onblur="relatekw();" />
+</td>
+</tr>
+<tr>
+<td>
+应用详情:<a id="doodleBox" href="magic.php?mid=doodle&showid=menuset_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$menuset['message']?></textarea>
+<iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="400"></iframe>
+</td>
+</tr>
+<tr>
+<td>
+应用单价:<input type="text" class="t_input" id="money" name="money" value="<?=$menuset['money']?>" size="10" onblur="relatekw();" />元/月
+</td>
+</tr>
+</table>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<tr>
+<th width="100">标签</th>
+<td><input type="text" class="t_input" size="40" id="tag" name="tag" value="<?=$menuset['tag']?>"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"></td>
+</tr>
 
+<?php if($menuset['uid'] && $menuset['uid']!=$_SGLOBAL['supe_uid']) { ?>
+<?php $selectgroupstyle='display:none'; ?>
+<tbody style="display:none;">
 <?php } ?>
 <tr>
-<th style="vertical-align: top;"><label for="message">内容：</label></th>
-<td><textarea id="message" name="message" cols="40" rows="4" style="width: 400px; height: 150px;" onkeydown="ctrlEnter(event, 'pmsubmit_btn');"></textarea></td>
+<th>隐私设置</th>
+<td>
+<select name="friend" onchange="passwordShow(this.value);">
+<option value="0"<?=$friendarr['0']?>>全站用户可见</option>
+<option value="1"<?=$friendarr['1']?>>全好友可见</option>
+<option value="2"<?=$friendarr['2']?>>仅指定的好友可见</option>
+<option value="3"<?=$friendarr['3']?>>仅自己可见</option>
+<option value="4"<?=$friendarr['4']?>>凭密码查看</option>
+</select>
+<span id="span_password" style="<?=$passwordstyle?>">密码:<input type="text" name="password" value="<?=$menuset['password']?>" size="10" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></span>
+<input type="checkbox" name="noreply" value="1"<?php if($menuset['noreply']) { ?> checked<?php } ?>> 不允许评论
+</td>
+</tr>
+<?php if($menuset['uid'] && $menuset['uid']!=$_SGLOBAL['supe_uid']) { ?></tbody><?php } ?>
+<tbody id="tb_selectgroup" style="<?=$selectgroupstyle?>">
+<tr>
+<th>指定好友</th>
+<td><select name="selectgroup" onchange="getgroup(this.value);">
+<option value="">从好友组选择好友</option>
+<?php if(is_array($groups)) { foreach($groups as $key => $value) { ?>
+<option value="<?=$key?>"><?=$value?></option>
+<?php } } ?>
+</select> 多次选择会累加到下面的好友名单</td>
 </tr>
 <tr>
 <th>&nbsp;</th>
 <td>
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="hidden" name="pmsubmit" value="true" />
-<?php if($_SGLOBAL['inajax']) { ?>
-<input type="button" name="pmsubmit_btn" id="pmsubmit_btn" value="发送" class="submit" onclick="ajaxpost('pmform_<?=$pmid?>','',2000)" />
-<?php } else { ?>
-<input type="submit" name="pmsubmit_btn" id="pmsubmit_btn" value="发送" class="submit" />
+<textarea name="target_names" id="target_names" style="width:85%;" rows="3"><?=$menuset['target_names']?></textarea>
+<br>(可以填写多个好友名，请用空格进行分割)</td>
+</tr>
+</tbody>
+
+
+<?php if(checkperm('managemenuset')) { ?>
+<tr>
+<th width="100">热度</th>
+<td>
+<input type="text" class="t_input" name="hot" id="hot" value="<?=$menuset['hot']?>" size="5">
+</td>
+</tr>
 <?php } ?>
+
+<?php if(checkperm('seccode')) { ?>
+<?php if($_SCONFIG['questionmode']) { ?>
+<tr>
+<th style="vertical-align: top;">请回答验证问题</th>
+<td>
+<p><?php question(); ?></p>
+<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
+</td>
+</tr>
+<?php } else { ?>
+<tr>
+<th style="vertical-align: top;">请填写验证码</th>
+<td>
+<script>seccode();</script>
+<p>请输入上面的4位字母或数字，看不清可<a href="javascript:updateseccode()">更换一张</a></p>
+<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
+</td>
+</tr>
+<?php } ?>
+<?php } ?>
+
+
+</table>
+<input type="hidden" name="menusetsubmit" value="true" />
+<input type="button" id="menusetbutton" name="menusetbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
+<input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
+
+<?php if(!$_SGLOBAL['inajax'] && (!$menuset['uid'] || $menuset['uid']==$_SGLOBAL['supe_uid'])) { ?>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<tr><th width="100">图片</th><td>
+<input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
+<input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
+</td></tr>
+</table>
+<?php } ?>
+
+<table cellspacing="4" cellpadding="4" width="100%" id="uchome-edit-pic" class="infotable" style="display:none;">
+<tr>
+<th width="100">&nbsp;</th>
+<td>
+<strong>选择图片</strong>: 
+<table summary="Upload" cellspacing="2" cellpadding="0">
+<tbody id="attachbodyhidden" style="display:none">
+<tr>
+<td>
+<form method="post" id="upload" action="cp.php?ac=upload" enctype="multipart/form-data" target="uploadframe" style="background: transparent;">
+<input type="file" name="attach" style="border: 1px solid #CCC;" />
+<span id="localfile"></span>
+<input type="hidden" name="uploadsubmit" id="uploadsubmit" value="true" />
+<input type="hidden" name="albumid" id="albumid" value="0" />
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
+</td>
+</tr>
+</tbody>
+<tbody id="attachbody"></tbody>
+</table>
+<strong>存储相册</strong>: 
+<table cellspacing="2" cellpadding="0">
+<tr>
+<td>
+<select name="albumid" id="uploadalbum" onchange="addSort(this)">
+<option value="-1">请选择相册</option>
+<option value="-1">默认相册</option>
+<?php if(is_array($albums)) { foreach($albums as $value) { ?>
+<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
+<?php } } ?>
+<option value="addoption" style="color:red;">+新建相册</option>
+</select>
+<script src="source/script_upload.js" type="text/javascript"></script>
+<iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
 </td>
 </tr>
 </table>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
+</td>
+</tr>
+</table>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable" id="uchome-edit-album" style="display:none;">
+<tr>
+<th width="100">&nbsp;</th>
+<td>
+选择相册: <select name="view_albumid" onchange="picView(this.value)">
+<option value="none">选择一个相册</option>
+<option value="0">默认相册</option>
+<?php if(is_array($albums)) { foreach($albums as $value) { ?>
+<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
+<?php } } ?>
+</select> (点击图片可以插入到内容中)
+<div id="albumpic_body"></div>
+</td>
+</tr>
+</table>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<tr>
+<th width="100">&nbsp;</th>
+<td>
+<input type="button" id="issuance" onclick="document.getElementById('menusetbutton').click();" value="保存发布" class="submit" /></td>
+</tr>
+</table>
 </div>
 
 <?php } ?>

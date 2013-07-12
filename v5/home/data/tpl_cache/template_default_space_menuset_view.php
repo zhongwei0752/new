@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_blog_view|template/default/header|template/default/space_menu|template/default/space_click|template/default/space_comment_li|template/default/footer', '1373338579', 'template/default/space_blog_view');?><?php $_TPL['titles'] = array($blog['subject'], '日志'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_click|template/default/space_comment_li|template/default/footer', '1373622679', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -72,7 +72,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -101,7 +102,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -146,24 +147,8 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
-
 
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
@@ -172,14 +157,13 @@
 
 
 <?php if($space['self']) { ?>
-<h2 class="title"><img src="image/app/blog.gif" />日志</h2>
+<h2 class="title"><img src="image/app/menuset.gif" />应用</h2>
 <div class="tabs_header">
 <ul class="tabs">
-<?php if($space['friendnum']) { ?><li<?=$actives['we']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=we"><span>好友最新日志</span></a></li><?php } ?>
-<li class="active"><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>我的日志</span></a></li>
-<li><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=click"><span>我踩过的日志</span></a></li>
-<li><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"><span>大家的日志</span></a></li>
-<li class="null"><a href="cp.php?ac=blog">发表新日志</a></li>
+<?php if($space['friendnum']) { ?><li<?=$actives['we']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=we"><span>好友最新应用</span></a></li><?php } ?>
+<li class="active"><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>我的应用</span></a></li>
+<li><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"><span>大家的应用</span></a></li>
+<?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?><li class="null"><a href="cp.php?ac=menuset">发表新应用</a></li><?php } ?>
 </ul>
 <?php if($_SGLOBAL['refer']) { ?>
 <div class="r_option">
@@ -188,9 +172,9 @@
 <?php } ?>
 </div>
 <?php } else { ?>
-<?php $_TPL['spacetitle'] = "日志";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有日志</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=blog&id=$blog[blogid]\">查看日志</a>"; ?>
+<?php $_TPL['spacetitle'] = "应用";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有应用</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=menuset&id=$menuset[menusetid]\">查看应用</a>"; ?>
 <div class="c_header a_header">
 <div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
 <?php if($_SGLOBAL['refer']) { ?>
@@ -210,28 +194,29 @@
 <div class="entry" style="padding:0 0 10px;">
 
 <div class="title">
-<h1<?php if($blog['magiccolor']) { ?> class="magiccolor<?=$blog['magiccolor']?>"<?php } ?>><?=$blog['subject']?></h1>
-<?php if($blog['friend']) { ?>
-<span class="r_option locked gray"><?=$friendsname[$blog['friend']]?></span>
+<h1<?php if($menuset['magiccolor']) { ?> class="magiccolor<?=$menuset['magiccolor']?>"<?php } ?>><?=$menuset['subject']?></h1>
+<?php if($menuset['friend']) { ?>
+<span class="r_option locked gray"><?=$friendsname[$menuset['friend']]?></span>
 <?php } ?>
-<?php if($blog['hot']) { ?><span class="hot"><em>热</em><?=$blog['hot']?></span><?php } ?>
-<?php if($blog['friend']) { ?>
+
+<?php if($menuset['hot']) { ?><span class="hot"><em>热</em><?=$menuset['hot']?></span><?php } ?>
+<?php if($menuset['friend']) { ?>
 <span class="r_option locked gray">
-<a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me&friend=<?=$blog['friend']?>" class="gray"><?=$friendsname[$value['friend']]?></a>
+<a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me&friend=<?=$menuset['friend']?>" class="gray"><?=$friendsname[$value['friend']]?></a>
 </span>
 <?php } ?>
-<?php if($blog['viewnum']) { ?><span class="gray">已有 <?=$blog['viewnum']?> 次阅读</span><?php } ?>
-&nbsp; <span class="gray"><?php echo sgmdate('Y-m-d H:i',$blog[dateline],1); ?></span>
-<?php if($blog['tag']) { ?>
-&nbsp; <a href="space.php?uid=<?=$blog['uid']?>&do=tag">标签</a>:&nbsp;
-<?php if(is_array($blog['tag'])) { foreach($blog['tag'] as $tagid => $tagname) { ?>
-<a href="space.php?uid=<?=$blog['uid']?>&do=tag&id=<?=$tagid?>"><?=$tagname?></a>&nbsp;
+<?php if($menuset['viewnum']) { ?><span class="gray">已有 <?=$menuset['viewnum']?> 次阅读</span><?php } ?>
+&nbsp; <span class="gray"><?php echo sgmdate('Y-m-d H:i',$menuset[dateline],1); ?></span>
+<?php if($menuset['tag']) { ?>
+&nbsp; <a href="space.php?uid=<?=$menuset['uid']?>&do=tag">标签</a>:&nbsp;
+<?php if(is_array($menuset['tag'])) { foreach($menuset['tag'] as $tagid => $tagname) { ?>
+<a href="space.php?uid=<?=$menuset['uid']?>&do=tag&id=<?=$tagid?>"><?=$tagname?></a>&nbsp;
 <?php } } ?>
 <?php } ?>
 </div>
 
 
-<div id="blog_article" class="article <?php if($blog['magicpaper']) { ?> magicpaper<?=$blog['magicpaper']?><?php } ?>">
+<div id="menuset_article" class="article <?php if($menuset['magicpaper']) { ?> magicpaper<?=$menuset['magicpaper']?><?php } ?>">
 <div class="resizeimg">
 <div class="resizeimg2">
 <div class="resizeimg3">
@@ -239,69 +224,24 @@
 <?php if($_SGLOBAL['ad']['rightside']) { ?>
 <div style="float: right; padding:5px;"><?php adshow('rightside'); ?></div>
 <?php } ?>
-<?=$blog['message']?>
+<?=$menuset['message']?>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-
+<?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?>
 <div style="padding:0 0 10px;">
 <div style="text-align: right; padding-top:10px; ">
-<a href="cp.php?ac=share&type=blog&id=<?=$blog['blogid']?>" id="a_share" onclick="ajaxmenu(event, this.id, 1)" class="a_share">分享</a>
-
-<?php if($_SGLOBAL['supe_uid'] == $blog['uid']) { ?>
-<?php if($_SGLOBAL['magic']['bgimage']) { ?>
-<img src="image/magic/bgimage.small.gif" class="magicicon">
-<?php if($blog['magicpaper']) { ?>
-<a href="cp.php?ac=magic&op=cancelbgimage&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_bgimage" onclick="ajaxmenu(event,this.id, 1)">取消<?=$_SGLOBAL['magic']['bgimage']?></a>
-<?php } else { ?>
-<a href="magic.php?mid=bgimage&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_bgimage" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['bgimage']?></a>	
-<?php } ?>
-<?php } ?>
-<?php if($_SGLOBAL['magic']['call']) { ?>
-<img src="image/magic/call.small.gif" class="magicicon">
-<a href="magic.php?mid=call&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_call" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['call']?></a>
-<?php } ?>
-<?php if($_SGLOBAL['magic']['updateline']) { ?>
-<img src="image/magic/updateline.small.gif" class="magicicon">
-<a href="magic.php?mid=updateline&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_updateline" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['updateline']?></a>
-<?php } ?>
-<?php if($_SGLOBAL['magic']['downdateline']) { ?>
-<img src="image/magic/downdateline.small.gif" class="magicicon">
-<a href="magic.php?mid=downdateline&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_downdateline" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['downdateline']?></a>
-<?php } ?>
-<?php if($_SGLOBAL['magic']['color']) { ?>
-<img src="image/magic/color.small.gif" class="magicicon">
-<?php if($blog['magiccolor']) { ?>
-<a href="cp.php?ac=magic&op=cancelcolor&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_color" onclick="ajaxmenu(event,this.id)">取消<?=$_SGLOBAL['magic']['color']?></a>
-<?php } else { ?>
-<a href="magic.php?mid=color&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_color" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['color']?></a>
-<?php } ?>
-<?php } ?>
-<?php if($_SGLOBAL['magic']['hot']) { ?>
-<img src="image/magic/hot.small.gif" class="magicicon">
-<a href="magic.php?mid=hot&idtype=blogid&id=<?=$blog['blogid']?>" id="a_magic_hot" onclick="ajaxmenu(event,this.id, 1)"><?=$_SGLOBAL['magic']['hot']?></a>
-<?php } ?>
-<span class="pipe">|</span>
-<?php } ?>
-
-<?php if($_SGLOBAL['supe_uid'] == $blog['uid'] || checkperm('manageblog')) { ?>
-<a href="cp.php?ac=topic&op=join&id=<?=$blog['blogid']?>&idtype=blogid" id="a_topicjoin_<?=$blog['blogid']?>" onclick="ajaxmenu(event, this.id)">凑热闹</a><span class="pipe">|</span>
-<a href="cp.php?ac=blog&blogid=<?=$blog['blogid']?>&op=edit">编辑</a><span class="pipe">|</span>
-<a href="cp.php?ac=blog&blogid=<?=$blog['blogid']?>&op=delete" id="blog_delete_<?=$blog['blogid']?>" onclick="ajaxmenu(event, this.id)">删除</a><span class="pipe">|</span>
-<?php } ?>
-<?php if(checkperm('manageblog')) { ?>
-<a href="cp.php?ac=blog&blogid=<?=$blog['blogid']?>&op=edithot" id="blog_hot_<?=$blog['blogid']?>" onclick="ajaxmenu(event, this.id)">热度</a><span class="pipe">|</span>
-<?php } ?>
-<a href="cp.php?ac=common&op=report&idtype=blogid&id=<?=$blog['blogid']?>" id="a_report" onclick="ajaxmenu(event, this.id, 1)">举报</a>
+<a href="cp.php?ac=menuset&menusetid=<?=$menuset['menusetid']?>&op=edit">編輯</a><span class="pipe">|</span>
+<a href="cp.php?ac=menuset&menusetid=<?=$menuset['menusetid']?>&op=delete" id="menuset_delete_<?=$menuset['menusetid']?>" onclick="ajaxmenu(event, this.id)">删除</a>
 </div>
-
 </div>
-
+<?php } ?>
 <div id="content">
-
+<?php if($menuset['money']) { ?>单价:<?=$menuset['money']?>元/月<?php } else { ?>单价:免费<?php } ?><br/><?php if($menuset['money']) { ?>
+<a href="cp.php?ac=menuset&menusetid=<?=$menuset['menusetid']?>&op=buy&money=<?=$menuset['money']?>" id="menuset_buy_<?=$menuset['menusetid']?>" onclick="ajaxmenu(event, this.id)">购买</a><?php } ?>
 <div id="click_div">
 
 <div class="digc">
@@ -353,15 +293,15 @@
 
 <div class="comments" id="div_main_content">
 <h2>
-<?php if(!$blog['noreply']) { ?>
+<?php if(!$menuset['noreply']) { ?>
 <a href="#quickcommentform_<?=$id?>" class="r_option">发表评论</a>
 <?php } ?>
-评论 (<span id="comment_replynum"><?=$blog['replynum']?></span> 个评论)</h2>
+评论 (<span id="comment_replynum"><?=$menuset['replynum']?></span> 个评论)</h2>
 <div class="page"><?=$multi?></div>
 <div class="comments_list" id="comment">
 <?php if($cid) { ?>
 <div class="notice">
-当前只显示与你操作相关的单个评论，<a href="space.php?uid=<?=$blog['uid']?>&do=blog&id=<?=$blog['blogid']?>">点击此处查看全部评论</a>
+当前只显示与你操作相关的单个评论，<a href="space.php?uid=<?=$menuset['uid']?>&do=menuset&id=<?=$menuset['menusetid']?>">点击此处查看全部评论</a>
 </div>
 <?php } ?>
 <ul id="comment_ul">
@@ -390,7 +330,7 @@
 </div>
 <div class="page"><?=$multi?></div>
 
-<?php if(!$blog['noreply']) { ?>
+<?php if(!$menuset['noreply']) { ?>
 <form id="quickcommentform_<?=$id?>" name="quickcommentform_<?=$id?>" action="cp.php?ac=comment" method="post" class="quickpost">
 
 <table cellpadding="0" cellspacing="0">
@@ -406,9 +346,9 @@
 </tr>
 <tr>
 <td>
-<input type="hidden" name="refer" value="space.php?uid=<?=$blog['uid']?>&do=<?=$do?>&id=<?=$id?>" />
+<input type="hidden" name="refer" value="space.php?uid=<?=$menuset['uid']?>&do=<?=$do?>&id=<?=$id?>" />
 <input type="hidden" name="id" value="<?=$id?>">
-<input type="hidden" name="idtype" value="blogid">
+<input type="hidden" name="idtype" value="menusetid">
 <input type="hidden" name="commentsubmit" value="true" />
 <input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="评论" onclick="ajaxpost('quickcommentform_<?=$id?>', 'comment_add')" />
 <div id="__quickcommentform_<?=$id?>"></div>
@@ -434,32 +374,33 @@
 <?php } ?>
 
 <?php if($otherlist) { ?>
+<!--
 <div class="sidebox">
 <h2 class="title">
-<a href="space.php?uid=<?=$blog['uid']?>&do=blog&view=me" class="r_option">全部</a>
-作者的其他最新日志
+<a href="space.php?uid=<?=$menuset['uid']?>&do=menuset&view=me" class="r_option">全部</a>
+作者的其他最新应用
 </h2>
 <ul class="news_list">
 <?php if(is_array($otherlist)) { foreach($otherlist as $value) { ?>
-<li style="height:auto;"><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>"><?=$value['subject']?></a></li>
+<!--<li style="height:auto;"><a href="space.php?uid=<?=$value['uid']?>&do=menuset&id=<?=$value['menusetid']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
-</ul>
+<!--</ul>
 </div>
 <?php } ?>
 
 <?php if($newlist) { ?>
 <div class="sidebox">
-<h2 class="title">热门日志导读</h2>
+<h2 class="title">热门应用导读</h2>
 <ul class="news_list">
 <?php if(is_array($newlist)) { foreach($newlist as $value) { ?>
-<li style="height:auto;"><a href="space.php?uid=<?=$value['uid']?>" style="font-weight:bold;"><?=$_SN[$value['uid']]?></a>: <a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>"><?=$value['subject']?></a></li>
+<li style="height:auto;"><a href="space.php?uid=<?=$value['uid']?>" style="font-weight:bold;"><?=$_SN[$value['uid']]?></a>: <a href="space.php?uid=<?=$value['uid']?>&do=menuset&id=<?=$value['menusetid']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
 </ul>
 </div>
 <?php } ?>
 
-<?php if($blog['related']) { ?>
-<?php if(is_array($blog['related'])) { foreach($blog['related'] as $appid => $values) { ?>
+<?php if($menuset['related']) { ?>
+<?php if(is_array($menuset['related'])) { foreach($menuset['related'] as $appid => $values) { ?>
 <div class="sidebox">
 <h2 class="title">您可能感兴趣的<?php if($_SGLOBAL['app'][$appid]['name']) { ?>(<?=$_SGLOBAL['app'][$appid]['name']?>)<?php } ?></h2>
 <ul class="news_list">
@@ -497,7 +438,7 @@ s += '<br />';
 $('friends').innerHTML += s;
 el.value = '';
 }
-resizeImg('blog_article','700');
+resizeImg('menuset_article','700');
 resizeImg('div_main_content','450');
 
 //彩虹炫

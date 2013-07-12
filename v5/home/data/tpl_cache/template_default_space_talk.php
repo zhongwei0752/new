@@ -1,9 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/space_talk_li|template/default/footer', '1373428630', 'template/default/space_talk');?>
-
-
-
-
-
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/space_talk_li|template/default/footer', '1373623056', 'template/default/space_talk');?>
 <?php $_TPL['titles'] = array('在线沟通'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -152,21 +147,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
@@ -175,6 +155,9 @@
 
 <?php } ?>
 
+<link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+<link type='text/css' href='./template/default/basic.css' rel='stylesheet' media='screen' />
 
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
 <div id="space_talk">
@@ -228,15 +211,20 @@
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
-<h2 class="title"><img src="<?=$wei1['image2url']?>">在线沟通</h2>
-<div class="tabs_header">
-<ul class="tabs">
 
-<li<?=$actives['all']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>在线沟通</span></a></li>
-<li class="null"  style="margin-left:670px;"><a href="cp.php?ac=talk">发布</a></li>
+            <div class="content" style="font-size:14px;">
+                 <div class="indexing">
+                 <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>在线沟通</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         在线沟通
+                     </div>
+                <a href="cp.php?ac=talk" class="btn grid_2">
+                      发布
+                     </a>
+                 </div>
 
-</ul>
-</div>
 <?php } else { ?>
 <?php $_TPL['spacetitle'] = "记录";
 	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=talk&view=me\">TA的所有记录</a>"; ?>
@@ -255,27 +243,30 @@
 <div class="h_status">按照发布时间排序</div>
 <?php } ?>
 
-<div id="content" style="width:810px;">	
+<div class="content_detail_wrapper">
+
+
 <?php if($dolist) { ?>
-<ul class="pm_list" id="pm_ul">
+
 <?php if(is_array($dolist)) { foreach($dolist as $dv) { ?>
 <?php $doid = $dv[doid]; ?>
-<li class="s_clear">
-<div class="avatar48">
-<a href="space.php?uid=<?=$dv['uid']?>"><?php echo avatar($dv[uid]); ?></a>
-</div>
-<div class="pm_body"><div class="pm_h"><div class="pm_f">
-<p><?php if($dv['subject']) { ?><a href="space.php?uid=<?=$dv['uid']?>"><?=$_SN[$dv['uid']]?></a><span style="color: #444;">:<?=$dv['subject']?> </span><?php } ?><span class="gray"><?php echo sgmdate('m-d H:i',$dv[dateline],1); ?></span></p>		
-<div class="pm_c">
-<?=$dv['message']?>
-</div>
-<div class="r_option"><a href="javascript:;" onclick="talkcomment_form(<?=$doid?>, 0);">回复</a><?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=talk&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="talk_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?> </div>
+<div class="content_list container_12">
+<div class="grid_2">
+                             <div class="list_test ">
+                                  <h3><?=$_SN[$dv['uid']]?>:<?=$dv['subject']?></h3>
+                                  <p><?=$dv['message']?></p> 
+                          
+<div class="talk">
 
-</div>
-<br/><hr style=" height:1px;border:none;border-top:1px dashed #C0C0C0;">
+
+
+<a href="javascript:;" onclick="docomment_form(<?=$doid?>, 0);">回复</a>
+<?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=talk&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="talk_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?>
+
 <?php $list = $clist[$doid]; ?>
+
 <div class="sub_talk" id="talkcomment_<?=$doid?>"<?php if(!$list) { ?> style="display:none;"<?php } ?>>
-<span id="talkcomment_form_<?=$doid?>_0"></span>
+<span id="docomment_form_<?=$doid?>_0"></span>
 <ol>
 <?php if(is_array($list)) { foreach($list as $value) { ?>
 <?php if($value['uid']) { ?>
@@ -289,10 +280,19 @@
 <?php } ?>
 <?php } } ?>
 </ol>
-</div></div></div>
-</li>
+</div>
+
+</div>
+
+                             </div>
+                          </div>
+
+<br/>
+
+</div>
+
 <?php } } ?>
-</ul>
+
 <?php } else { ?>
 <div class="c_form">
 当前没有相应的信息。

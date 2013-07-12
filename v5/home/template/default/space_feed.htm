@@ -2,56 +2,33 @@
 <!--{eval $_TPL['titles'] = array('首页');}-->
 <!--{template header}-->
 
-<div id="content" style="width:810px;">
+<div id="content" style="width:762px;margin-left:20px;margin-top:10px;">
 
 <!--{if $space['uid'] && $space[self]}-->
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
 			<td valign="top" width="150">
-				<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><!--{avatar($_SGLOBAL[supe_uid],middle)}--></div></div></div></div>
-
-				<ul class="u_setting">
-					<li class="dropmenu" id="usettingli" onclick="showMenu(this.id)"><a href="javascript:;">企业设置 <img src="image/more.gif" align="absmiddle"></a></li>
-				</ul>
-				<ul id="usettingli_menu" class="dropmenu_drop" style="display:none;">
-					
-					<li><a href="cp.php?ac=profile">实名验证</a></li>
-					<!--<li><a href="cp.php?ac=message">企业资料</a></li>-->
-					<li><a href="cp.php?ac=avatar">企业头像</a></li>
-					<!--{if $_SCONFIG[sendmailday]}-->
-					<li><a href="cp.php?ac=sendmail">邮件提醒</a></li>
-					<!--{/if}-->
-					<!--{if checkperm('admin')}-->
-					<li><a href="admincp.php">站点管理</a></li>
-					<!--{/if}-->
-					<!--{if checkperm('allowstat')}-->
-					<li><a href="do.php?ac=stat">趋势统计</a></li>
-					<!--{/if}-->
-				</ul>
+				<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><!--{avatar($_SGLOBAL[supe_uid],middle)}--></a></div></div></div></div>
 			</td>
 			<td valign="top">
-				<h3 class="index_name">
-						<a href="space.php?uid=$space[uid]"<!--{eval g_color($space[groupid]);}-->>{$_SN[$space[uid]]}</a>
+				<h3 class="index_name" style="margin-left:20px;border:0px;">
+						<a  href="space.php?uid=$space[uid]"<!--{eval g_color($space[groupid]);}--> >{$_SN[$space[uid]]}</a>
 					<!--{eval g_icon($space[groupid]);}-->
 					<a href="cp.php?ac=credit">$space[star]</a>
-					
-						<!--{if $_SGLOBAL[session][magichidden]}-->当前隐身<!--{else}-->当前在线<!--{/if}-->
+					<br/>
+					 <div class="company_avata_box container_12"  style="margin-top:-30px;">
+                   <div class="grid_2">
+                       <h5>当前状态:<!--{if $_SGLOBAL[session][magichidden]}-->当前隐身<!--{else}-->在线<!--{/if}--></h5>
+                       <h5 style="margin-top:-10px;">已有$space[viewnum]人访问,$space[experience]个信用</h5>
+                       <a href="cp.php?ac=profile" style="margin-top:20px;" class="company_setting">企业设置</a>
+                   </div>
 
-						<!--{if $_SGLOBAL[magic][invisible]}-->
-							<!--{if $_SGLOBAL[session][magichidden]}-->
-							<img src="image/magic/invisible.small.gif" class="magicicon"><a id="a_magic_appear" href="cp.php?ac=magic&op=appear" onclick="ajaxmenu(event,this.id)" class="gray">我要在线</a>
-							<!--{else}-->
-							<img src="image/magic/invisible.small.gif" alt="{$_SGLOBAL[magic][invisible]}" class="magicicon"><a id="a_magic_invisible" href="magic.php?mid=invisible" onclick="ajaxmenu(event,this.id,1)" class="gray">我要隐身</a>
-							<!--{/if}-->
-						<!--{/if}-->
+						
 					
-
 				
 				</h3>
 				
-				<div class="index_note">
-					已有 $space[viewnum] 人次访问, $space[credit] 个积分, $space[experience] 个经验
-				</div>
+			
 
 				
 			</td>
@@ -76,15 +53,31 @@
 	<div class="mgs_list">
 	<!--{if $_SGLOBAL['member']['newpm']}--><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm&filter=privatepm"><strong>$_SGLOBAL['member']['newpm']</strong> 个新回复</a></div><!--{/if}-->
 	</div>
-	
-	企业动态
-	产品介绍
-	客户管理
-	订单管理
-	预约管理
-	商品管理
-
-	
+	 <div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:20px 0;"></div>
+                <div class="container_12 index_assembly_boxes">
+                	<!--{if $myself}-->
+					<!--{loop $myself $value}-->
+					
+                    <div class="grid_6">
+                        <div class="index_assembly_box">
+                            <div class="assembly_title">
+                                   <span class="title">$value[subject]</span>
+                             </div>
+                             <div class="assembly_info">
+                                <img src="$value[image1url]" style="width:120px;height:120px;">
+                                
+                                <h5 style="padding-top: 20px;">文章数：$a[$value['menusetid']] 篇</h5>
+                                <h5>浏览量：$b[$value['menusetid']]次</h5>
+                                <h5>评论数：$c[$value['menusetid']]条</h5>
+                                <h5>有效期至：<!--{if $value[money]}--><!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{else}-->长期<!--{/if}--></h5>
+                                <a href="$value[url]" class="quick_post">快速发布</a>
+                             </div>
+                        </div>
+                    </div><!-- end -->   
+                      <!--{/loop}--> 
+                      <!--{/if}-->     
+                    </div>
+                    </div>                                                         
 
 
 

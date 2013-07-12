@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_blog|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373338575', 'template/default/cp_blog');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_doing|template/default/header|template/default/space_doing_li|template/default/space_doing_form|template/default/footer', '1373609628', 'template/default/cp_doing');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -70,7 +70,8 @@
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
          <?php } else { ?>
-<div class="grid_3"></div>
+<div class="grid_7"></div>
+
                 <div class="grid_4">
                    <a href="do.php?ac=<?=$_SCONFIG['register_action']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name">欢迎您</span><br/>
@@ -99,7 +100,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
-<li class="side_option"><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -162,7 +163,6 @@
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 
-
 <?php if($_SGLOBAL['ad']['contenttop']) { ?><div id="ad_contenttop"><?php adshow('contenttop'); ?></div><?php } ?>
 <?php } ?>
 
@@ -171,322 +171,80 @@
 
 <?php if($_GET['op'] == 'delete') { ?>
 
-<h1>删除日志</h1>
+<h1>删除记录</h1>
 <a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
-<div class="popupmenu_inner">
-<form method="post" action="cp.php?ac=blog&op=delete&blogid=<?=$blogid?>">
-<p>确定删除指定的日志吗？</p>
+<div class="popupmenu_inner" id="__doingform_<?=$doid?>_<?=$id?>">
+<form method="post" id="doingform_<?=$doid?>_<?=$id?>" name="doingform" action="cp.php?ac=doing&op=delete&doid=<?=$doid?>&id=<?=$_GET['id']?>">
+<p>确定删除该记录吗？</p>
 <p class="btn_line">
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="hidden" name="deletesubmit" value="true" />
-<input type="submit" name="btnsubmit" value="确定" class="submit" />
+<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>">
+<button name="deletesubmit" type="submit" class="submit" value="true">确定</button>
 </p>
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
 </div>
 
-<?php } elseif($_GET['op'] == 'edithot') { ?>
+<?php } elseif($_GET['op'] == 'getmood') { ?>
 
-<h1>调整热度</h1>
-<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
-<div class="popupmenu_inner">
-<form method="post" action="cp.php?ac=blog&op=edithot&blogid=<?=$blogid?>">
-<p class="btn_line">
-新的热度：<input type="text" name="hot" value="<?=$blog['hot']?>" size="5"> 
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="hidden" name="hotsubmit" value="true" />
-<input type="submit" name="btnsubmit" value="确定" class="submit" />
-</p>
+<?=$space['spacenote']?>
+
+<?php } elseif($_GET['op'] == 'docomment' || $_GET['op'] == 'getcomment') { ?>
+
+<span id="docomment_form_<?=$doid?>_<?=$id?>">
+<form id="docommform_<?=$doid?>_<?=$id?>" method="post" action="cp.php?ac=doing&op=comment&doid=<?=$doid?>&id=<?=$id?>" style="padding-left:10px;">
+<a href="#" id="do_face_<?=$doid?>_<?=$id?>" title="插入表情" onclick="showFace(this.id, 'do_message_<?=$doid?>_<?=$id?>');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
+<input type="text" id="do_message_<?=$doid?>_<?=$id?>" name="message" size="35" class="t_input" onkeydown="return ctrlEnter(event, 'docommform_btn_<?=$doid?>_<?=$id?>', 1);">
+<input type="hidden" name="commentsubmit" value="true" />
+<input type="button" name="do_button" class="submit" id="docommform_btn_<?=$doid?>_<?=$id?>" onclick="ajaxpost('docommform_<?=$doid?>_<?=$id?>', 'docomment_get', 1)" value="回复">
+<button type="button" name="btncancel" class="button" onclick="docomment_form_close(<?=$doid?>, <?=$id?>);">取消</button>
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
-</div>
+<div id="__docommform_<?=$doid?>_<?=$id?>"></div>
+</span>
 
-<?php } else { ?>
-
-<script language="javascript" src="image/editor/editor_function.js"></script>
-<script language="javascript" src="source/script_blog.js"></script>
-
-<?php if($topic) { ?>
-<h2 class="title">
-<img src="image/app/topic.gif" />热闹 - <a href="space.php?do=topic&topicid=<?=$topicid?>"><?=$topic['subject']?></a>
-</h2>
-<div class="tabs_header">
-<ul class="tabs">
-<li class="active"><a href="javascript:;"><span>凑个热闹</span></a></li>
-<li><a href="space.php?do=topic&topicid=<?=$topicid?>"><span>查看热闹</span></a></li>
-</ul>
-<?php if(checkperm('managetopic') || $topic['uid']==$_SGLOBAL['supe_uid']) { ?>
-<div class="r_option">
-<a href="cp.php?ac=topic&op=edit&topicid=<?=$topic['topicid']?>">编辑</a> | 
-<a href="cp.php?ac=topic&op=delete&topicid=<?=$topic['topicid']?>" id="a_delete_<?=$topic['topicid']?>" onclick="ajaxmenu(event,this.id);">删除</a>
-</p>
-</div>
-<?php } ?>
-</div>
-
-
-<div class="affiche">
-<table width="100%">
-<tr>
-<?php if($topic['pic']) { ?>
-<td width="160" id="event_icon" valign="top">
-<img src="<?=$topic['pic']?>" width="150">
-</td>
-<?php } ?>
-<td valign="top">
-<h2>
-<a href="space.php?do=topic&topicid=<?=$topic['topicid']?>"><?=$topic['subject']?></a>
-</h2>
-
-<div style="padding:5px 0;"><?=$topic['message']?></div>
-<ul>
-<li class="gray">发起作者: <a href="space.php?uid=<?=$topic['uid']?>"><?=$_SN[$topic['uid']]?></a></li>
-<li class="gray">发起时间: <?=$topic['dateline']?></li>
-<?php if($topic['endtime']) { ?><li class="gray">参与截止: <?=$topic['endtime']?></li><?php } ?>
-<?php if($topic['joinnum']) { ?>
-<li class="gray">参与人次: <?=$topic['joinnum']?></li>
-<?php } ?>
-<li class="gray">最后参与: <?=$topic['lastpost']?></li>
-</ul>
-
-<?php if($topic['allowjoin']) { ?>
-<a href="<?=$topic['joinurl']?>" class="feed_po" id="hot_add" onmouseover="showMenu(this.id)">凑个热闹</a>
-<ul id="hot_add_menu" class="dropmenu_drop" style="display:none;">
-<?php if(in_array('blog', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=blog&topicid=<?=$topicid?>">发表日志</a></li>
-<?php } ?>
-<?php if(in_array('pic', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=upload&topicid=<?=$topicid?>">上传图片</a></li>
-<?php } ?>
-<?php if(in_array('thread', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=thread&topicid=<?=$topicid?>">发起话题</a></li>
-<?php } ?>
-<?php if(in_array('poll', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=poll&topicid=<?=$topicid?>">发起投票</a></li>
-<?php } ?>
-<?php if(in_array('event', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=event&topicid=<?=$topicid?>">发起活动</a></li>
-<?php } ?>
-<?php if(in_array('share', $topic['jointype'])) { ?>
-<li><a href="cp.php?ac=share&topicid=<?=$topicid?>">添加分享</a></li>
-<?php } ?>
-</ul>
-<?php } else { ?>
-<p class="r_option">该热闹已经截止</p>
-<?php } ?>
-</td>
-</tr></table>
-</div>
-
-<?php } else { ?>
-<h2 class="title"><img src="image/app/blog.gif" />日志</h2>
-<div class="tabs_header">
-<ul class="tabs">
-<?php if($blog['blogid']) { ?>
-<li class="active"><a href="cp.php?ac=blog&blogid=<?=$blog['blogid']?>"><span>编辑日志</span></a></li>
-<?php } ?>
-<li<?php if(empty($blog['blogid'])) { ?> class="active"<?php } ?>><a href="cp.php?ac=blog"><span>发表新日志</span></a></li>
-<li><a href="cp.php?ac=import"><span>日志导入</span></a></li>
-<li><a href="space.php?uid=<?=$space['uid']?>&do=blog&view=me"><span>返回我的日志</span></a></li>
-</ul>
-</div>
-<?php } ?>
-
-<div class="c_form">
-
-<style type="text/css">
-.userData {behavior:url(#default#userdata);}
-</style>
-
-
-<form method="post" action="cp.php?ac=blog&blogid=<?=$blog['blogid']?>" enctype="multipart/form-data">
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr>
-<td>
-<select name="classid" id="classid" onchange="addSort(this)">
-<option value="0">选择分类</option>
-<?php if(is_array($classarr)) { foreach($classarr as $value) { ?>
-<?php if($value['classid'] == $blog['classid']) { ?>
-<option value="<?=$value['classid']?>" selected><?=$value['classname']?></option>
-<?php } else { ?>
-<option value="<?=$value['classid']?>"><?=$value['classname']?></option>
+<?php if($_GET['op'] == 'getcomment') { ?>
+<ol>
+<?php if(is_array($list)) { foreach($list as $value) { ?>
+<?php if($value['uid']) { ?>
+<li style="<?=$value['style']?>">
+<a href="space.php?uid=<?=$value['uid']?>"><?=$_SN[$value['uid']]?></a>: <?=$value['message']?> <span class="doingtime">(<?php echo sgmdate('m-d H:i',$value[dateline],1); ?>)</span> 
+<a href="javascript:;" onclick="docomment_form(<?=$value['doid']?>, <?=$value['id']?>);" class="re">回复</a>
+<?php if($value['uid']==$_SGLOBAL['supe_uid'] || $dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=doing&op=delete&doid=<?=$value['doid']?>&id=<?=$value['id']?>" id="doing_delete_<?=$value['doid']?>_<?=$value['id']?>" onclick="ajaxmenu(event, this.id)" class="gray">删除</a><?php } ?>
+<span id="docomment_form_<?=$value['doid']?>_<?=$value['id']?>"></span>
+</li>
 <?php } ?>
 <?php } } ?>
-<?php if(!$blog['uid'] || $blog['uid']==$_SGLOBAL['supe_uid']) { ?><option value="addoption" style="color:red;">+新建分类</option><?php } ?>
-</select>
-<input type="text" class="t_input" id="subject" name="subject" value="<?=$blog['subject']?>" size="60" onblur="relatekw();" />
-</td>
-</tr>
-<tr>
-<td>
-<a id="doodleBox" href="magic.php?mid=doodle&showid=blog_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
-<textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$blog['message']?></textarea>
-<iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:100%;border: 1px solid #C5C5C5;" height="400"></iframe>
-</td>
-</tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr>
-<th width="100">标签</th>
-<td><input type="text" class="t_input" size="40" id="tag" name="tag" value="<?=$blog['tag']?>"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"></td>
-</tr>
-
-<?php if($blog['uid'] && $blog['uid']!=$_SGLOBAL['supe_uid']) { ?>
-<?php $selectgroupstyle='display:none'; ?>
-<tbody style="display:none;">
-<?php } ?>
-<tr>
-<th>隐私设置</th>
-<td>
-<select name="friend" onchange="passwordShow(this.value);">
-<option value="0"<?=$friendarr['0']?>>全站用户可见</option>
-<option value="1"<?=$friendarr['1']?>>全好友可见</option>
-<option value="2"<?=$friendarr['2']?>>仅指定的好友可见</option>
-<option value="3"<?=$friendarr['3']?>>仅自己可见</option>
-<option value="4"<?=$friendarr['4']?>>凭密码查看</option>
-</select>
-<span id="span_password" style="<?=$passwordstyle?>">密码:<input type="text" name="password" value="<?=$blog['password']?>" size="10" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></span>
-<input type="checkbox" name="noreply" value="1"<?php if($blog['noreply']) { ?> checked<?php } ?>> 不允许评论
-</td>
-</tr>
-<?php if($blog['uid'] && $blog['uid']!=$_SGLOBAL['supe_uid']) { ?></tbody><?php } ?>
-<tbody id="tb_selectgroup" style="<?=$selectgroupstyle?>">
-<tr>
-<th>指定好友</th>
-<td><select name="selectgroup" onchange="getgroup(this.value);">
-<option value="">从好友组选择好友</option>
-<?php if(is_array($groups)) { foreach($groups as $key => $value) { ?>
-<option value="<?=$key?>"><?=$value?></option>
-<?php } } ?>
-</select> 多次选择会累加到下面的好友名单</td>
-</tr>
-<tr>
-<th>&nbsp;</th>
-<td>
-<textarea name="target_names" id="target_names" style="width:85%;" rows="3"><?=$blog['target_names']?></textarea>
-<br>(可以填写多个好友名，请用空格进行分割)</td>
-</tr>
-</tbody>
-
-
-<?php if(checkperm('manageblog')) { ?>
-<tr>
-<th width="100">热度</th>
-<td>
-<input type="text" class="t_input" name="hot" id="hot" value="<?=$blog['hot']?>" size="5">
-</td>
-</tr>
+</ol>
 <?php } ?>
 
+<?php } else { ?>
+
+<div id="content">
+
+<form method="post" id="doingform" action="cp.php?ac=doing&view=<?=$_GET['view']?>" class="post_doing">
+<div class="r_option">还可输入 <strong id="maxlimit">200</strong> 个字符</div>
+<a href="###" id="doingface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a></td>
 <?php if(checkperm('seccode')) { ?>
 <?php if($_SCONFIG['questionmode']) { ?>
-<tr>
-<th style="vertical-align: top;">请回答验证问题</th>
-<td>
-<p><?php question(); ?></p>
-<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
-</td>
-</tr>
+回答提问：<?php question(); ?> 
 <?php } else { ?>
-<tr>
-<th style="vertical-align: top;">请填写验证码</th>
-<td>
-<script>seccode();</script>
-<p>请输入上面的4位字母或数字，看不清可<a href="javascript:updateseccode()">更换一张</a></p>
-<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
-</td>
-</tr>
+输入验证码：<script>seccode();</script> 
 <?php } ?>
+<input type="text" id="seccode" name="seccode" value="" size="10" class="t_input">
 <?php } ?>
-
-<tr>
-<th width="100">动态选项</th>
-<td>
-<input type="checkbox" name="makefeed" id="makefeed" value="1"<?php if(ckprivacy('blog', 1)) { ?> checked<?php } ?>> 产生动态 (<a href="cp.php?ac=privacy#feed" target="_blank">更改默认设置</a>)
-</td>
-</tr>			
-</table>
-<input type="hidden" name="blogsubmit" value="true" />
-<input type="button" id="blogbutton" name="blogbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
-<input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
+<br>
+<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:438px; height: 72px;"></textarea>
+<input type="hidden" name="addsubmit" value="true" />
+<button type="submit" id="add" name="add" class="post_button">发布</button>
+<input type="hidden" name="refer" value="<?=$theurl?>" />
+<input type="hidden" name="topicid" value="<?=$topicid?>" />
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
 
-<?php if(!$_SGLOBAL['inajax'] && (!$blog['uid'] || $blog['uid']==$_SGLOBAL['supe_uid'])) { ?>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr><th width="100">图片</th><td>
-<input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
-<input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
-</td></tr>
-</table>
-<?php } ?>
-
-<table cellspacing="4" cellpadding="4" width="100%" id="uchome-edit-pic" class="infotable" style="display:none;">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-<strong>选择图片</strong>: 
-<table summary="Upload" cellspacing="2" cellpadding="0">
-<tbody id="attachbodyhidden" style="display:none">
-<tr>
-<td>
-<form method="post" id="upload" action="cp.php?ac=upload" enctype="multipart/form-data" target="uploadframe" style="background: transparent;">
-<input type="file" name="attach" style="border: 1px solid #CCC;" />
-<span id="localfile"></span>
-<input type="hidden" name="uploadsubmit" id="uploadsubmit" value="true" />
-<input type="hidden" name="albumid" id="albumid" value="0" />
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-</td>
-</tr>
-</tbody>
-<tbody id="attachbody"></tbody>
-</table>
-<strong>存储相册</strong>: 
-<table cellspacing="2" cellpadding="0">
-<tr>
-<td>
-<select name="albumid" id="uploadalbum" onchange="addSort(this)">
-<option value="-1">请选择相册</option>
-<option value="-1">默认相册</option>
-<?php if(is_array($albums)) { foreach($albums as $value) { ?>
-<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
-<?php } } ?>
-<option value="addoption" style="color:red;">+新建相册</option>
-</select>
-<script src="source/script_upload.js" type="text/javascript"></script>
-<iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable" id="uchome-edit-album" style="display:none;">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-选择相册: <select name="view_albumid" onchange="picView(this.value)">
-<option value="none">选择一个相册</option>
-<option value="0">默认相册</option>
-<?php if(is_array($albums)) { foreach($albums as $value) { ?>
-<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
-<?php } } ?>
-</select> (点击图片可以插入到内容中)
-<div id="albumpic_body"></div>
-</td>
-</tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr>
-<th width="100">&nbsp;</th>
-<td>
-<input type="button" id="issuance" onclick="document.getElementById('blogbutton').click();" value="保存发布" class="submit" /></td>
-</tr>
-</table>
 </div>
 
 <?php } ?>
+
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
