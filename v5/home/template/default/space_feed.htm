@@ -67,8 +67,8 @@
                                 <img src="$value[image1url]" style="width:120px;height:120px;">
                                 
                                 <h5 style="padding-top: 20px;">文章数：$a[$value['menusetid']] 篇</h5>
-                                <h5>浏览量：$b[$value['menusetid']]次</h5>
-                                <h5>评论数：$c[$value['menusetid']]条</h5>
+                                <h5>浏览量：<!--{if $b[$value['menusetid']]}-->$b[$value['menusetid']]<!--{else}-->0<!--{/if}-->次</h5>
+                                <h5>评论数：<!--{if $c[$value['menusetid']]}-->$c[$value['menusetid']]<!--{else}-->0<!--{/if}-->条</h5>
                                 <h5>有效期至：<!--{if $value[money]}--><!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{else}-->长期<!--{/if}--></h5>
                                 <a href="$value[url]" class="quick_post">快速发布</a>
                              </div>

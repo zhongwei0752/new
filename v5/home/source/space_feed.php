@@ -7,9 +7,15 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-if(empty($space['namestatus'])){
-	showmessage("请先进行实名验证","cp.php?ac=profile");
-}
+if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
+	}
+	if($space['profilestatus']!='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
+	}
+	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
+		showmessage('enter_the_space', 'space.php?do=menuset', 0);
+	}
 
 //ÏÔÊ¾È«Õ¾¶¯Ì¬µÄºÃÓÑÊý
 if(empty($_SCONFIG['showallfriendnum']) || $_SCONFIG['showallfriendnum']<1) $_SCONFIG['showallfriendnum'] = 10;
@@ -394,7 +400,10 @@ $_TPL['default_template'] = $default_template;
 $my_actives = array(in_array($_GET['filter'], array('site','myapp'))?$_GET['filter']:'all' => ' class="active"');
 $actives = array(in_array($_GET['view'], array('me','all','hot'))?$_GET['view']:'we' => ' class="active"');
 
-$myapp = $_SGLOBAL['db']->query("SELECT a.*,m.* FROM ".tname('appset')." a LEFT JOIN ".tname('menuset')." m ON a.num=m.menusetid WHERE m.uid='$space[uid]' ORDER BY m.menusetid DESC LIMIT 0,10");
+$myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				ORDER BY b.dateline ASC ");
 		while ($myvalue = $_SGLOBAL['db']->fetch_array($myapp)) {
 			//$a=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue['english'])."  WHERE uid='$myvalue[uid]'"), 0);
 			$a[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*) FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);

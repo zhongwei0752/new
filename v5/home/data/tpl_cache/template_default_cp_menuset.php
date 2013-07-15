@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_menuset|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373622667', 'template/default/cp_menuset');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_menuset|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1373875572', 'template/default/cp_menuset');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -47,18 +47,18 @@
                 
                 <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
-                <a href="space.php?do=home" class="grid_2">首页</a>
+                <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
 
                 <?php } else { ?>
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
-<a href="space.php?do=friend" class="grid_2">客户列表</a>
+<a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-<a class="grid_2" href="help.php">帮助</a>
+
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
@@ -160,6 +160,21 @@
 <a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
 <div class="popupmenu_inner">
 <form method="post" action="cp.php?ac=menuset&op=delete&menusetid=<?=$menusetid?>">
+<p>确定删除指定的应用吗？</p>
+<p class="btn_line">
+<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
+<input type="hidden" name="deletesubmit" value="true" />
+<input type="submit" name="btnsubmit" value="确定" class="submit" />
+</p>
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
+</div>
+
+<?php } elseif($_GET['op'] == 'delete1') { ?>
+<h1>删除应用</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form method="post" action="space.php?do=menuset&op=delete&menusetid=<?=$menusetid?>">
 <p>确定删除指定的应用吗？</p>
 <p class="btn_line">
 <input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />

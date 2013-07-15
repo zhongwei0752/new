@@ -1,8 +1,8 @@
-
 <!--{eval $_TPL['titles'] = array('应用');}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 
 <!--{template header}-->
+
 <!--{if !empty($_SGLOBAL[inajax])}-->
 	<div id="space_menuset" class="feed">
 		<h3 class="feed_header">
@@ -84,7 +84,7 @@
 	<!--{if $searchkey}-->
 	<div class="h_status">以下是搜索应用 <span style="color:red;font-weight:bold;">$searchkey</span> 结果列表</div>
 	<!--{/if}-->
-	
+	<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 	<!--{if $count}-->
 	<div class="entry_list">
 		<ul>
@@ -98,8 +98,8 @@
 				</div>
 				
 				<div class="title">
-					
-					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4><!--{if $_GET[view]=='me'}--><a href="space.php?do=menuset&op=delete&menusetid=$value['menusetid']">（删除）</a><!--{/if}--><br/><!--{if $value[money]}-->单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--><!--{if $_GET[view]!='me'}--><!--{if $value[money]}--><!--{if $value[cheak]!='1'}--><input type="checkbox" id="num$value[menusetid]" /><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{else}--> <!--{if $value[cheak]!='1'}--><!--{if $value[appstatus]!='1'}--><input type="checkbox" id="" checked/><!--{/if}--><!--{if $value[appstatus]!='1'}--><div id="numh$value[menusetid]"><input type='hidden' name='$value[menusetid]' value='1' style='width:20px;' /></div><!--{/if}--><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{/if}--><div id="numh$value[menusetid]"></div><!--{eval $value1=$value['wei'];}--><!--{if $value1['num']==$value['menusetid']}--><!--{if $value[money]}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}--><!--{/if}-->
+				
+					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4><!--{if $_GET[view]=='me'}--><a href="cp.php?ac=menuset&menusetid=$value[menusetid]&op=delete1" id="menuset_delete_$value[menusetid]" onclick="ajaxmenu(event, this.id)">（删除）</a><!--{/if}--><br/><!--{if $value[money]}-->单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--><!--{if $_GET[view]!='me'}--><!--{if $value[money]}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]!='1'}--><input type="checkbox" id="num$value[menusetid]" /><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{else}--> <!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]!='1'}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[appstatus]!='1'}--><input type="checkbox" id="" checked/><!--{/if}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[appstatus]!='1'}--><div id="numh$value[menusetid]"><input type='hidden' name='$value[menusetid]' value='1' style='width:20px;' /></div><!--{/if}--><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{/if}--><div id="numh$value[menusetid]"></div><!--{eval $value1=$value['wei'];}--><!--{if $value1['num']==$value['menusetid']}--><!--{if $value[money]}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}--><!--{/if}-->
 					
 					<div>
 

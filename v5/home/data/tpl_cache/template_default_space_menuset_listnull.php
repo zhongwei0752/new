@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1373621739', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1373884384', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>v5v5v5v5</title>
@@ -20,6 +20,9 @@
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
     </style>
+    <script src="./source/jquery.js"></script>
+    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+   <script type='text/javascript' src='./source/basic.js'></script>
   </head>
 
   <body>
@@ -41,32 +44,33 @@
                  <div class="content_detail_wrapper" style="color:#939393;">
                       <div class="container_12 assembly">
                            
-                           
-                           
+                        
                             
-                            <?php if(is_array($list)) { foreach($list as $value) { ?>
-                          <div class="grid_6">
-                            <div class="assembly_inner  bg1" id="<?=$value['menusetid']?>" >
-                               <div class="assembly_title" id='basic-modal'>
-                                 <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" class="view_detail basic">查看详情>></a>
-                                   <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>"><span class="title"><?=$value['subject']?></span><br/><div></a>
-                                   <span><?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><input type="checkbox" id="num<?=$value['menusetid']?>" /><?php } else { ?> <?php if($value['cheak']!='1') { ?><?php if($value['appstatus']!='1') { ?><input type="checkbox" id="" checked/><?php } ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } ?><?php } ?></div></span><div id="numh<?=$value['menusetid']?>"></div>
-                                  
-                               </div>
-                               <div class="assembly_produce">
+                          <?php if(is_array($list)) { foreach($list as $value) { ?>
+                         
+        
+        <div class="grid_6">
+                            <div class="assembly_inner bg1" id="choice">
+                            <div class="assembly_title" id='basic-modal'>
+        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a></div>
+        <?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><input type="checkbox" id="num<?=$value['menusetid']?>" name="wei" /><?php } else { ?> <?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><input type="checkbox" id="" name="wei" checked/><?php } ?><?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } ?><div id="numh<?=$value['menusetid']?>"></div><?php } ?>
+        <div class="assembly_produce">
                                     <img src="<?=$value['image1url']?>">
                                     <div class="produce_choice">
-                                        <p class="produce_text">13</p>
+                                        <p class="produce_text">123</p>
                                     </div>
-                                    <p class="price"><?php if($value['money']) { ?>单价:<?=$value['money']?>元/月<?php } else { ?>单价:免费<?php } ?></p>
-                               </div>
-                              </div>
-                           </div>
+                                   
+                               <?php if($value['money']) { ?> <p class="price">单价:<?=$value['money']?>元/月</p><?php } else { ?><p class="price">单价:免费</p><?php } ?>
+                             </div>
           
-             <script src="./source/jquery.js"></script>
-    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
-   <script type='text/javascript' src='./source/basic.js'></script>
-   <script>
+          </div>
+
+          </div>
+          
+          
+
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+      <script>
       $(document).ready(function()
         {
         
@@ -79,8 +83,7 @@
         });
       });
       </script>
-                  
-                     <?php } } ?> 
+    <?php } } ?>
                        
                 
                      <div class="confirm_btn container_12" style="padding-left:400px;">
@@ -94,7 +97,29 @@
           </div><!-- content_wrapper end -->
     </div><!-- wrraper end -->
  
+ 
+       <script type="text/javascript">
+       $(document).ready(function(){
 
+             $(".assembly_inner").toggle(
+                  function () {
+                    var zhong1 = $('#zhong').val();
+                   $(this).addClass("open");
+                   $(this).find("input[name='wei']").attr("checked",true);
+             
+                  },
+                  function () {
+                   $(this).removeClass("open");
+                    $(this).find("input[name='wei']").attr("checked",false);
+              
+                    }
+              );
+             
+
+
+            
+       })
+    </script>
  
    
    <?php if(empty($_SGLOBAL['inajax'])) { ?>

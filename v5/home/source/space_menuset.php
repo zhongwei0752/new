@@ -380,9 +380,8 @@ if($id) {
 			updatetable('space', array('menusetnum' => $count), array('uid'=>$space['uid']));
 		}
 		if($count) {
-			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor,ba.cheak,ba.appstatus, b.* FROM ".tname('menuset')." b $f_index
-				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid LEFT JOIN ".tname('appset')." ba ON b.menusetid=ba.num
-				WHERE $wheresql
+			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('menuset')." b $f_index
+				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid 
 				ORDER BY $ordersql ASC LIMIT $start,$perpage");
 		}
 	}
@@ -443,7 +442,12 @@ if($_GET['view'] != 'me') {
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid] and bf.appstatus='1'
 				ORDER BY b.dateline ASC LIMIT $start,$perpage");
 				$value1=$_SGLOBAL['db']->fetch_array($query1);
-				$value['wei'] = $value1;
+				$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid]
+				ORDER BY b.dateline ASC LIMIT $start,$perpage");
+				$value2=$_SGLOBAL['db']->fetch_array($query2);
+				$value['zhong'] = $value2;
 				$list[] = $value;
 			}
 			} else {

@@ -5,7 +5,6 @@
 */
 
 include_once('./common.php');
-
 if(is_numeric($_SERVER['QUERY_STRING'])) {
 	showmessage('enter_the_space', "space.php?uid=$_SERVER[QUERY_STRING]", 0);
 }
@@ -18,9 +17,11 @@ if(!isset($_GET['do']) && $_SCONFIG['allowdomain']) {
 		showmessage('enter_the_space', $_SCONFIG['siteallurl'].'space.php?domain='.$hostarr[0], 0);
 	}
 }
+
+
 if($_SGLOBAL['supe_uid']) {
 $query3 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where uid=".$_SGLOBAL['supe_uid']);
-$value3 = $_SGLOBAL['db']->fetch_array($query3);
+$space = $_SGLOBAL['db']->fetch_array($query3);
 if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
@@ -28,17 +29,7 @@ if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
 		showmessage('enter_the_space', 'space.php?do=menuset', 0);
 	}else{
-if($value3['namestatus']){
-	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." where appstatus='1' and uid=".$_SGLOBAL['supe_uid']);
-	$value2 = $_SGLOBAL['db']->fetch_array($query2);
-	if(empty($value2)){
-	showmessage('enter_the_space', 'space.php?do=menuset', 0);
-	}else{
-	showmessage('enter_the_space', 'space.php?do=home', 0);
-}
-}else{
-	showmessage('enter_the_space', 'cp.php?ac=profile', 0);
-}
+		include("./space.php");
 }
 }
 

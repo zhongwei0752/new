@@ -47,18 +47,18 @@ $_SGLOBAL[space_css]
                 
                 <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
                 <!--{if $_SGLOBAL[supe_uid]}-->
-                <a href="space.php?do=home" class="grid_2">首页</a>
+                <a href="space.php?do=home" class="grid_2"><!--{if $_GET[do]=="home"}--><p class="nav_actived">首页</p> <!--{else}-->首页<!--{/if}--></a>
                 
 
                 <!--{else}-->
                  <a href="index.php" class="grid_2">首页</a>
                 <!--{/if}-->
                 <!--{if $_SGLOBAL[supe_uid]}-->	
-                <a class="grid_2" href="space.php?do=pm<!--{if !empty($_SGLOBAL['member']['newpm'])}-->&filter=newpm<!--{/if}-->">消息<!--{if !empty($_SGLOBAL['member']['newpm'])}--><div class="message_pawpaw">$_SGLOBAL['member']['newpm']</div><!--{/if}--></a>
+                <a class="grid_2" href="space.php?do=pm<!--{if !empty($_SGLOBAL['member']['newpm'])}-->&filter=newpm<!--{/if}-->"><!--{if $_GET[do]=="pm"}--><p class="nav_actived">消息</p> <!--{else}-->消息<!--{/if}--><!--{if !empty($_SGLOBAL['member']['newpm'])}--><div class="message_pawpaw">$_SGLOBAL['member']['newpm']</div><!--{/if}--></a>
 				<!--{if $_SGLOBAL['member']['allnotenum']}--><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw">{$_SGLOBAL[member][allnotenum]}</div></a><!--{/if}-->
-				<a href="space.php?do=friend" class="grid_2">客户列表</a>
+				<a href="space.php?do=friend" class="grid_2"><!--{if $_GET[do]=="friend"}--><p class="nav_actived">客户列表</p> <!--{else}-->客户列表<!--{/if}--></a>
 				<!--{else}-->
-				<a class="grid_2" href="help.php">帮助</a>
+				
 				<!--{/if}-->
 
                 <!--{if $_SGLOBAL[supe_uid]}-->

@@ -28,8 +28,74 @@ if($_GET['op'] == 'base') {
 			profilefield_cache();
 		}
 		$profilefields = empty($_SGLOBAL['profilefield'])?array():$_SGLOBAL['profilefield'];
+		if(empty($space['linkman'])){
+		if(empty($_POST['linkman'])){
+			showmessage("联系人不能为空！");
+		}
+	}
+		if(empty($space['idcard'])){
+		if(empty($_POST['idcard'])){
+			showmessage("联系人身份证不能为空！");
+		}
+	}
+	if(empty($space['imageurl'])){
+		if(empty($_FILES["file1"]["name"])){
+			showmessage("身份证扫描件不能为空！");
+		}
+	}
+	if(empty($space['businessnum'])){
+		if(empty($_POST['businessnum'])){
+			showmessage("营业执照注册号不能为空！");
+		}
+	}
+	if(empty($space['image3url'])){
+		if(empty($_FILES["file2"]["name"])){
+			showmessage("营业执照扫描件不能为空！");
+		}
+	}
+	if(empty($space['telephone'])){
+		if(empty($_POST['telephone'])){
+			showmessage("固话不能为空！");
+		}
+	}
+	if(empty($space['mobile'])){
+		if(empty($_POST['mobile'])){
+			showmessage("联系人电话不能为空！");
+		}
+	}
+	if(empty($space['wxkey'])){
+		if(empty($_POST['wxkey'])){
+			showmessage("微信公众号不能为空！");
+		}
+	}
+	if(empty($space['businessaddress'])){
+		if(empty($_POST['businessaddress'])){
+			showmessage("企业地址不能为空！");
+		}
+	}
+	if(empty($space['business'])){
+		if(empty($_POST['business'])){
+			showmessage("行业不能为空！");
+		}
+	}
+	if(empty($space['resideprovince'])||empty($space['residecity'])){
+		if(empty($_POST['resideprovince'])||empty($_POST['residecity'])){
+			showmessage("运营地区不能为空！");
+		}
+	}
+	if(empty($space['email'])){
+		if(empty($_POST['email'])){
+			showmessage("邮箱不能为空！");
+		}
+	}
+	if(empty($space['companyintroduce'])){
+		if(empty($_POST['companyintroduce'])){
+			showmessage("企业介绍不能为空！");
+		}
+	}
 	
 		//Ìá½»¼ì²é
+
 			if($_POST['qq']){
 				$setarr['qq'] = getstr($_POST['qq'], 40, 1, 1);
 			}
@@ -615,7 +681,7 @@ class AvatarUploader
 	// ´Ó¿Í»§¶Ë·ÃÎÊÍ·ÏñÍ¼Æ¬µÄ url
 	public function getAvatarUrl( $uid, $size='middle' )
 	{
-		return $this->getBaseUrl() . "space/{$uid}_{$size}.jpg";
+		return $this->getBaseUrl() . "../upload/space/{$uid}_{$size}.jpg";
 	}
 
 	// ´¦Àí HTTP Request
@@ -631,12 +697,14 @@ class AvatarUploader
 
 			// µÚÒ»²½£ºÉÏ´«Ô­Ê¼Í¼Æ¬ÎÄ¼þ
 			echo $this->uploadAvatar( $uid );
+			
 			return true;
 
 		} else if ( $_GET['a'] == 'rectavatar') {
 		
 			// µÚ¶þ²½£ºÉÏ´«·Ö¸îºóµÄÈý¸öÍ¼Æ¬Êý¾ÝÁ÷
 			echo $this->rectAvatar( $uid );
+			
 			return true;
 		}
 
@@ -676,14 +744,17 @@ header("Cache-Control:no-cache");
 // ÏÔÊ¾±à¼­Ò³Ãæ£¬Ò³ÃæÖÐ°üº¬ camera.swf
 $au = new AvatarUploader();
 if ( $au->processRequest() ) {
+
+			
 	exit();
 }
+
 $uid = intval($space[uid]);
 $urlAvatarBig    = $au->getAvatarUrl( $uid, 'big' );
 $urlAvatarMiddle = $au->getAvatarUrl( $uid, 'middle' );
 $urlAvatarSmall  = $au->getAvatarUrl( $uid, 'small' );
 $urlCameraFlash = $au->renderHtml( $uid );
-
+updatetable("spacefield", array('logourl'=>$urlAvatarBig,'smalllogourl'=>$urlAvatarMiddle ), array('uid'=>$uid));
 include template("cp_profile");
 
 ?>

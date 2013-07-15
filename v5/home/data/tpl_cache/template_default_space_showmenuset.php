@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1373622590', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1373884283', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -50,18 +50,18 @@
                 
                 <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
-                <a href="space.php?do=home" class="grid_2">首页</a>
+                <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
 
                 <?php } else { ?>
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
-<a href="space.php?do=friend" class="grid_2">客户列表</a>
+<a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-<a class="grid_2" href="help.php">帮助</a>
+
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>

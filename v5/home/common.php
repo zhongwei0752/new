@@ -14,6 +14,7 @@ $_SGLOBAL = $_SCONFIG = $_SBLOCK = $_TPL = $_SCOOKIE = $_SN = $space = array();
 
 //程序目录
 define('S_ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
 //基本文件
 include_once(S_ROOT.'./ver.php');
 if(!@include_once(S_ROOT.'./config.php')) {

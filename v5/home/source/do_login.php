@@ -11,7 +11,15 @@ if(!defined('IN_UCHOME')) {
 include_once(S_ROOT.'./source/function_cp.php');
 
 if($_SGLOBAL['supe_uid']) {
-	showmessage('do_success', 'space.php', 0);
+	if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
+	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
+		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
+	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
+		showmessage('enter_the_space', 'space.php?do=menuset', 0);
+	}else{
+		include("./space.php");
+}
 }
 
 $refer = empty($_GET['refer'])?rawurldecode($_SCOOKIE['_refer']):$_GET['refer'];

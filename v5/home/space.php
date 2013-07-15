@@ -29,7 +29,7 @@ if($_SCONFIG['allowrewrite'] && isset($_GET['rewrite'])) {
 
 //ÔÊÐí¶¯×÷
 $dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto',
-	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei');
+	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','menusetnull');
 
 //»ñÈ¡±äÁ¿
 $isinvite = 0;

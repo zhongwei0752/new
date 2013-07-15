@@ -62,20 +62,20 @@ if(empty($op)) {
 			showmessage('registered', 'space.php');
 		}
 
-		if($_SCONFIG['seccode_register']) {
-			include_once(S_ROOT.'./source/function_cp.php');
-			if(!ckseccode($_POST['seccode'])) {
-				showmessage('incorrect_code');
-			}
-		}
+		//if($_SCONFIG['seccode_register']) {
+		//	include_once(S_ROOT.'./source/function_cp.php');
+		//	if(!ckseccode($_POST['seccode'])) {
+		//		showmessage('incorrect_code');
+		//	}
+		//}
 
 		if(!@include_once S_ROOT.'./uc_client/client.php') {
 			showmessage('system_error');
 		}
 
-		if($_POST['password'] != $_POST['password2']) {
-			showmessage('password_inconsistency');
-		}
+		//if($_POST['password'] != $_POST['password2']) {
+		//	showmessage('password_inconsistency');
+		//}
 
 		if(!$_POST['password'] || $_POST['password'] != addslashes($_POST['password'])) {
 			showmessage('profile_passwd_illegal');
@@ -222,14 +222,14 @@ if(empty($op)) {
 	} else {
 		showmessage('succeed');
 	}
-} elseif($op == "checkseccode") {
+}// elseif($op == "checkseccode") {
 	
-	include_once(S_ROOT.'./source/function_cp.php');
-	if(ckseccode(trim($_GET['seccode']))) {
-		showmessage('succeed');
-	} else {
-		showmessage('incorrect_code');
-	}
-}
+//	include_once(S_ROOT.'./source/function_cp.php');
+//	if(ckseccode(trim($_GET['seccode']))) {
+//		showmessage('succeed');
+//	} else {
+//		showmessage('incorrect_code');
+//	}
+//}
 
 ?>

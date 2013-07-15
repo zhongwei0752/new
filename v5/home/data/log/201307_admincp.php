@@ -120,3 +120,14 @@
 <?PHP exit;?>	2013-07-12 17:28:20		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&&orderby=uid&ordersc=desc&perpage=20&page=2	GET{ac=space;orderby=uid;ordersc=desc;perpage=20;page=2;}
 <?PHP exit;?>	2013-07-12 17:28:30		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2	GET{ac=space;perpage=20;page=2;}POST{formhash=fe00ab38;uids=a:2:{i:0;s:1:"5";i:1;s:1:"1";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-12 17:28:31		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=2namestatus=0	GET{ac=space;perpage=20;page=2namestatus=0;}
+<?PHP exit;?>	2013-07-14 21:55:05		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-14 21:55:11		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:1:"5";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-14 21:55:12		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-15 11:48:51		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-15 11:48:55		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-15 11:49:02		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"32";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-15 11:49:03		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-15 15:56:32		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-15 15:56:35		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-15 15:56:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-15 15:56:37		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}

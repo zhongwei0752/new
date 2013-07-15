@@ -1,3 +1,13 @@
+<script>
+  function register(id, result) {
+    if(result) {
+      $('registersubmit').disabled = true;
+      window.location.href = "$jumpurl";
+    } else {
+      updateseccode();
+    }
+  }
+</script>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -28,17 +38,15 @@
                      <li style="float:left">注册账号</li>
                      <li style="padding-left:80px;" id="btna"><span>登陆</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
                   </ul>
-                  <form class="">
-                    <input type="text" name="" placeholder="用户名" />
-                 </form>
-                  <form class="">
-                    <input type="text" name="" placeholder="邮箱" />
-                 </form>
-                  <form class="">
-                    <input name="" type="text" value="密码" id="tx"/>
+                 <form id="registerform" name="registerform" action="do.php?ac=$_SCONFIG[register_action]&$url_plus&ref" method="post" >
+                  <input type="text" id="username" name="username" value="" placeholder="用户名"  onBlur="checkUserName()" tabindex="2" />&nbsp;<span id="checkusername">&nbsp;</span>
+                  <input type="text" id="email" name="email" placeholder="邮箱"  tabindex="5" /><span>&nbsp;&nbsp;</span>
+                    <input type="password" name="password" id="tx" placeholder="密码"  onBlur="checkPassword()" onkeyup="checkPwd(this.value);" tabindex="3" />&nbsp;<span id="checkpassword">&nbsp;</span>
                     <input name="" type="password" style="display:none;" id="pwd" />
+                    <input type="hidden" name="refer" value="cp.php?ac=profile" />
+                    <input type="submit" id="registersubmit" name="registersubmit" value="注册微伍" class="sign_btn" onclick="<!--{if $register_rule}-->if(!checkClause()){return false;}<!--{/if}-->ajaxpost('registerform', 'register');" tabindex="6" />
+                    <input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
                  </form>
-                 <a href="#" class="sign_btn">注册微伍</a>
             </div>
              <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-300px;margin-top:-278px;">
                   <ul>
@@ -48,7 +56,7 @@
                 
          <form name="loginform" action="do.php?ac=$_SCONFIG[login_action]&$url_plus&ref" method="post">
         <input type="text" name="username" id="username"  value="$membername" />
-        <input type="password" name="password" id="password" value="$password" />
+        <input type="password" name="password" id="password"  />
         <p class="submitrow">
           <input type="hidden" name="refer" value="space.php?do=home" />
           <input type="submit" id="loginsubmit" class="sign_btn" name="loginsubmit" value="登录" class="submit" />
@@ -74,6 +82,49 @@
           </div>
     
       </div><!-- 无类div结束 -->
+
+<script type="text/javascript">
+<!--
+  $('username').focus();
+  var lastUserName = lastPassword = lastEmail = lastSecCode = '';
+  function checkUserName() {
+    var userName = $('username').value;
+    if(userName == lastUserName) {
+      return;
+    } else {
+      lastUserName = userName;
+    }
+    var cu = $('checkusername');
+    var unLen = userName.replace(/[^\x00-\xff]/g, "**").length;
+
+    if(unLen < 3 || unLen > 150) {
+      warning(cu, unLen < 3 ? '用户名小于3个字符' : '用户名超过 15 个字符');
+      return;
+    }
+    ajaxresponse('checkusername', 'op=checkusername&username=' + (is_ie && document.charset == 'utf-8' ? encodeURIComponent(userName) : userName));
+  }
+  function checkPassword(confirm) {
+    var password = $('password').value;
+    if(!confirm && password == lastPassword) {
+      return;
+    } else {
+      lastPassword = password;
+    }
+    var cp = $('checkpassword');
+    if(password == '' || /[\'\"\\]/.test(password)) {
+      warning(cp, '密码空或包含非法字符');
+      return false;
+    } else {
+      cp.style.display = '';
+      cp.innerHTML = '<img src="image/check_right.gif" width="13" height="13">';
+      if(!confirm) {
+        checkPassword2(true);
+      }
+      return true;
+    }
+  }
+  </script>
+
       <p class="login_page_company_title"><span>品牌合作企业</span><span class="more"><a href="">更多</a></span></p>
                <div class="companies_wrapper">
           <div class="companies container_12">

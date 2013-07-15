@@ -15,6 +15,21 @@
 <input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
 </form>
 </div>
+
+<!--{elseif $_GET[op] == 'delete1'}-->
+<h1>删除应用</h1>
+<a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
+<div class="popupmenu_inner">
+<form method="post" action="space.php?do=menuset&op=delete&menusetid=$menusetid">
+	<p>确定删除指定的应用吗？</p>
+	<p class="btn_line">
+		<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
+		<input type="hidden" name="deletesubmit" value="true" />
+		<input type="submit" name="btnsubmit" value="确定" class="submit" />
+	</p>
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+</div>
 <!--{elseif $_GET[op] == 'buy'}-->
 
 <h1>购买月份</h1>

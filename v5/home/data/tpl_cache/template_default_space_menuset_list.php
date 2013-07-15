@@ -1,5 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1373623383', 'template/default/space_menuset_list');?>
-<?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1373884376', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -51,18 +50,18 @@
                 
                 <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
-                <a href="space.php?do=home" class="grid_2">首页</a>
+                <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
 
                 <?php } else { ?>
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>">消息<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
-<a href="space.php?do=friend" class="grid_2">客户列表</a>
+<a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-<a class="grid_2" href="help.php">帮助</a>
+
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
@@ -157,6 +156,7 @@
 
 <?php } ?>
 
+
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
 <div id="space_menuset" class="feed">
 <h3 class="feed_header">
@@ -247,7 +247,7 @@
 <?php if($searchkey) { ?>
 <div class="h_status">以下是搜索应用 <span style="color:red;font-weight:bold;"><?=$searchkey?></span> 结果列表</div>
 <?php } ?>
-
+<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 <?php if($count) { ?>
 <div class="entry_list">
 <ul>
@@ -262,7 +262,7 @@
 
 <div class="title">
 
-<h4><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4><?php if($_GET['view']=='me') { ?><a href="space.php?do=menuset&op=delete&menusetid=<?=$value['menusetid']?>">（删除）</a><?php } ?><br/><?php if($value['money']) { ?>单价:<?=$value['money']?>元/月<?php } else { ?>单价:免费<?php } ?><?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><?php if($value['cheak']!='1') { ?><input type="checkbox" id="num<?=$value['menusetid']?>" /><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } else { ?> <?php if($value['cheak']!='1') { ?><?php if($value['appstatus']!='1') { ?><input type="checkbox" id="" checked/><?php } ?><?php if($value['appstatus']!='1') { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } ?><div id="numh<?=$value['menusetid']?>"></div><?php $value1=$value['wei']; ?><?php if($value1['num']==$value['menusetid']) { ?><?php if($value['money']) { ?>（已订购<?=$value1['month']?>个月）<br/>有效期至:<?php echo sgmdate('Y-m-d H:i:s',$value1[endtime]); ?><?php } ?><?php } ?><?php } ?>
+<h4><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4><?php if($_GET['view']=='me') { ?><a href="cp.php?ac=menuset&menusetid=<?=$value['menusetid']?>&op=delete1" id="menuset_delete_<?=$value['menusetid']?>" onclick="ajaxmenu(event, this.id)">（删除）</a><?php } ?><br/><?php if($value['money']) { ?>单价:<?=$value['money']?>元/月<?php } else { ?>单价:免费<?php } ?><?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']!='1') { ?><input type="checkbox" id="num<?=$value['menusetid']?>" /><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } else { ?> <?php $value2=$value['zhong']; ?><?php if($value2['cheak']!='1') { ?><?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><input type="checkbox" id="" checked/><?php } ?><?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } ?><div id="numh<?=$value['menusetid']?>"></div><?php $value1=$value['wei']; ?><?php if($value1['num']==$value['menusetid']) { ?><?php if($value['money']) { ?>（已订购<?=$value1['month']?>个月）<br/>有效期至:<?php echo sgmdate('Y-m-d H:i:s',$value1[endtime]); ?><?php } ?><?php } ?><?php } ?>
 
 <div>
 
