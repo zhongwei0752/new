@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1373623088', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1373818650', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -393,9 +393,9 @@
                       </div>
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
-                         <?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?><img src="<?=$urlAvatarMiddle?>" /><?php } else { ?><?php if(empty($_SCONFIG['namechange'])) { ?><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><?php } ?><img src="<?=$urlAvatarMiddle?>" /><a id="go" rel="leanModal" name="signup" href="#signup">上传</a><?php } ?>
+                         <?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?><?php if($space['smalllogourl']) { ?><img src="<?=$space['smalllogourl']?>" /><?php } ?><?php } else { ?><?php if(empty($_SCONFIG['namechange'])) { ?><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><?php } ?><img src="<?=$space['smalllogourl']?>" /><a id="go" rel="leanModal" name="signup" href="#signup">上传</a><?php } ?>
                       </div>
-                      <div id="signup">
+                      <div id="signup" style="margin-top:-120px;">
   <?=$urlCameraFlash?>
   </div>
   <div class="post_list container_12">
@@ -843,6 +843,7 @@ $(function() {
     			$('a[rel*=leanModal]').leanModal({ top : 200 });		
 });
 </script>
+
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

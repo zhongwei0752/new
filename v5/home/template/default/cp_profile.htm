@@ -239,9 +239,9 @@ $_SGLOBAL[space_css]
                       </div>
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
-                         <!--{if $space[smalllogourl] && empty($_GET['namechange'])}--><img src="$urlAvatarMiddle" /><!--{else}--><!--{if empty($_SCONFIG['namechange'])}--><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><!--{/if}--><img src="$urlAvatarMiddle" /><a id="go" rel="leanModal" name="signup" href="#signup">上传</a><!--{/if}-->
+                         <!--{if $space[smalllogourl] && empty($_GET['namechange'])}--><!--{if $space[smalllogourl]}--><img src="$space[smalllogourl]" /><!--{/if}--><!--{else}--><!--{if empty($_SCONFIG['namechange'])}--><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><!--{/if}--><img src="$space[smalllogourl]" /><a id="go" rel="leanModal" name="signup" href="#signup">上传</a><!--{/if}-->
                       </div>
-                      <div id="signup">
+                      <div id="signup" style="margin-top:-120px;">
 					  $urlCameraFlash
 					  </div>
 					  <div class="post_list container_12">
@@ -691,4 +691,5 @@ function add_tbody() {
     			$('a[rel*=leanModal]').leanModal({ top : 200 });		
 			});
 		</script>
+
 <!--{template footer}-->

@@ -5,7 +5,6 @@
 */
 
 include_once('./common.php');
-
 if(is_numeric($_SERVER['QUERY_STRING'])) {
 	showmessage('enter_the_space', "space.php?uid=$_SERVER[QUERY_STRING]", 0);
 }

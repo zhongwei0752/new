@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_login|template/default/header|template/default/footer', '1373594855', 'template/default/do_login');?><?php $_TPL['nosidebar']=1; ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_login|template/default/header|template/default/footer', '1373811444', 'template/default/do_login');?><?php $_TPL['nosidebar']=1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -146,21 +146,6 @@
 <?php } ?>
 
 </div>
-<?php } else { ?>
-<div class="side_bar" >
-              <div class="side_bar_inner" >
-                    <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-                      
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
-                       <li class="side_option"><a href="space.php?do=menuset">请添加</a></li>
-
-                        </ul>
-
-              </div>
-         </div>
-
 <?php } ?>
 <div id="mainarea" style="margin-left:10px;margin-top:10px;width:800px;">
 

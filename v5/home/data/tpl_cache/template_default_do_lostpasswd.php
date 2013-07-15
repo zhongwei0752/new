@@ -1,8 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1373810141', 'template/default/space_menuset_list');?>
-<?php $_TPL['titles'] = array('应用'); ?>
-<?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
-
-<?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_lostpasswd|template/default/header|template/default/footer', '1373811404', 'template/default/do_lostpasswd');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -157,225 +153,54 @@
 
 <?php } ?>
 
-<?php if(!empty($_SGLOBAL['inajax'])) { ?>
-<div id="space_menuset" class="feed">
-<h3 class="feed_header">
-<a href="cp.php?ac=menuset" class="r_option" target="_blank">发表应用</a>
-应用(共 <?=$count?> 篇)
-</h3>
-<?php if($count) { ?>
-<ul class="line_list">
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<li>
-<span class="gray r_option"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></span>
-<h4><a href="space.php?uid=<?=$space['uid']?>&do=menuset&id=<?=$value['menusetid']?>" target="_blank" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4>
-<div class="detail">
-<?=$value['message']?>
-</div>
-</li>
-<?php } } ?>
-</ul>
-<?php if($pricount) { ?>
-<div class="c_form">本页有 <?=$pricount?> 篇应用因作者的隐私设置而隐藏</div>
-<?php } ?>
-<div class="page"><?=$multi?></div>
-<?php } else { ?>
-<div class="c_form">还没有相关的应用。</div>
-<?php } ?>
-</div>
-<?php } else { ?>
 
-<?php if($space['self']) { ?>
+<?php if(empty($op)) { ?>
 
-<?php if($zhong1) { ?>
-<div class="searchbar floatright">
-<form method="get" action="space.php">
-<input name="searchkey" value="" size="15" class="t_input" type="text">
-<input name="searchsubmit" value="搜索应用" class="submit" type="submit">
-<input type="hidden" name="searchmode" value="1" />
-<input type="hidden" name="do" value="menuset" />
-<input type="hidden" name="view" value="all" />
-<input type="hidden" name="orderby" value="dateline" />
+<form id="theform" action="do.php?ac=lostpasswd&op=" method="POST" class="c_form">
+<table cellpadding="0" cellspacing="0" class="formtable">
+<caption>
+<h2>取回密码</h2>
+<p>第一步，请输入您在本站注册的用户名。</p>
+</caption>
+<tr><th width="120">用户名</th><td><input type="text" id="username" name="username" value="" class="t_input"> <span id="s_username"></span></td></tr>
+<tr><th>&nbsp;</th><td><input type="submit" id="lostpwsubmit" name="lostpwsubmit" value="下一步" class="submit" /></td></tr>
+</table>
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
-</div>
 
-<h2 class="title"><img src="image/app/blog.gif" />应用</h2>
-<div class="tabs_header">
-<ul class="tabs">
-<?php if($space['friendnum']) { ?><li<?=$actives['we']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=we"><span>好友最新应用</span></a></li><?php } ?>
-<li<?=$actives['all']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"><span>大家的应用</span></a></li>
-<li<?=$actives['me']?>><a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"><span>我的应用</span></a></li>
-<?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?><li class="null"><a href="cp.php?ac=menuset">发表新应用</a></li><?php } ?>
-</ul>
-</div>	
-<?php } ?>	
-<?php } else { ?>
-<?php $_TPL['spacetitle'] = "应用";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有应用</a>"; ?>
-<div class="c_header a_header">
-<div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
-<?php if($_SGLOBAL['refer']) { ?>
-<a class="r_option" href="<?=$_SGLOBAL['refer']?>">&laquo; 返回上一页</a>
-<?php } ?>
-<p style="font-size:14px"><?=$_SN[$space['uid']]?>的<?=$_TPL['spacetitle']?></p>
-<a href="space.php?uid=<?=$space['uid']?>" class="spacelink"><?=$_SN[$space['uid']]?>的主页</a>
-<?php if($_TPL['spacemenus']) { ?>
-<?php if(is_array($_TPL['spacemenus'])) { foreach($_TPL['spacemenus'] as $value) { ?> <span class="pipe">&raquo;</span> <?=$value?><?php } } ?>
-<?php } ?>
-</div>
+<?php } elseif($op=='email') { ?>
 
-<div class="h_status">按照发布时间排序</div>
-<?php } ?>
-<?php if($zhong1) { ?>
-<div id="content" style="width:640px;">
-<?php } else { ?>
-<div id="content" style="width:640px;margin:0 auto;float:center;">
-<?php } ?>
-<?php if($_GET['orderby'] && $_GET['orderby'] != 'dateline') { ?>
-<div class="h_status">
-排行时间范围：
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>"<?=$day_actives['0']?>>全部</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=1"<?=$day_actives['1']?>>最近一天</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=2"<?=$day_actives['2']?>>最近两天</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=7"<?=$day_actives['7']?>>最近七天</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=30"<?=$day_actives['30']?>>最近三十天</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=90"<?=$day_actives['90']?>>最近三个月</a><span class="pipe">|</span>
-<a href="space.php?do=menuset&view=all&orderby=<?=$_GET['orderby']?>&day=120"<?=$day_actives['120']?>>最近六个月</a>
-</div>
-<?php } ?>
-
-<?php if($searchkey) { ?>
-<div class="h_status">以下是搜索应用 <span style="color:red;font-weight:bold;"><?=$searchkey?></span> 结果列表</div>
-<?php } ?>
-
-<?php if($count) { ?>
-<div class="entry_list">
-<ul>
-<form action = "space.php?do=menuset" method = "post">
-
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-<li>
-<div class="avatardiv">
-<div class="avatar48"><img src="<?=$value['image1url']?>"/></div>
-<?php if($value['hot']) { ?><div class="digb"><?=$value['hot']?></div><?php } ?>
-</div>
-
-<div class="title">
-
-<h4><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4><?php if($_GET['view']=='me') { ?><a href="space.php?do=menuset&op=delete&menusetid=<?=$value['menusetid']?>">（删除）</a><?php } ?><br/><?php if($value['money']) { ?>单价:<?=$value['money']?>元/月<?php } else { ?>单价:免费<?php } ?><?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><?php if($value['cheak']!='1') { ?><input type="checkbox" id="num<?=$value['menusetid']?>" /><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } else { ?> <?php if($value['cheak']!='1') { ?><?php if($value['appstatus']!='1') { ?><input type="checkbox" id="" checked/><?php } ?><?php if($value['appstatus']!='1') { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } else { ?><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a><?php } ?><?php } ?><div id="numh<?=$value['menusetid']?>"></div><?php $value1=$value['wei']; ?><?php if($value1['num']==$value['menusetid']) { ?><?php if($value['money']) { ?>（已订购<?=$value1['month']?>个月）<br/>有效期至:<?php echo sgmdate('Y-m-d H:i:s',$value1[endtime]); ?><?php } ?><?php } ?><?php } ?>
-
-<div>
-
-<?php if($value['friend']) { ?>
-<span class="r_option locked gray"><a href="<?=$theurl?>&friend=<?=$value['friend']?>" class="gray"><?=$friendsname[$value['friend']]?></a></span>
-<?php } ?>
-<?php if($value['money']) { ?><span class="gray"><?php if($_GET['view']=='me') { ?>有效期:<?php echo sgmdate('Y-m-d H:i',$value[dateline1],1); ?>--<?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } ?></span><?php } ?>
-</div>
-</div>
-<div class="detail image_right l_text s_clear" id="menuset_article_<?=$value['menusetid']?>">
-<?php if($value['pic']) { ?><p class="image"><a href="space.php?uid=<?=$value['uid']?>&do=menuset&id=<?=$value['menusetid']?>"><img src="<?=$value['pic']?>" alt="<?=$value['subject']?>" /></a></p><?php } ?>
-<?=$value['message']?>
-</div>
-<div class="gray">
-</div>
-</li>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script>
-$(document).ready(function()
-{
-    		
-$("#num<?=$value['menusetid']?>").click(function(){
-if($("#num<?=$value['menusetid']?>").attr("checked")==true){
-    		$("#numh<?=$value['menusetid']?>").html("你要订购<input type='text' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />月");
-    	}else{
-    		$("#numh<?=$value['menusetid']?>").html("");
-    	}
- 				});
-});
-</script>
-<?php } } ?>
-<?php if($_GET['view']!='me') { ?>
-<?php if(empty($list)) { ?>
-<div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
-
-<?php } else { ?>
-<input type="submit" value="提交" >
-<?php } ?>
-<?php } ?>
+<form id="theform" action="do.php?ac=lostpasswd&op=email" method="POST" class="c_form">
+<table cellpadding="0" cellspacing="0" class="formtable">
+<caption>
+<h2>取回密码</h2>
+<p>第二步，请正确输入您在本站注册的email地址。</p>
+</caption>
+<tr><th width="120">邮箱</th><td><input type="text" id="email" name="email" value="<?=$email?>" class="t_input"> <span id="s_email"></span></td></tr>
+<tr><th>&nbsp;</th><td><input type="submit" id="emailsubmit" name="emailsubmit" value="取回密码" class="submit" /></td></tr>
+</table>
+<input type="hidden" id="username" name="username" value="<?=$username?>">
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
-<?php if($pricount) { ?>
-<li>
-<div class="title">本页有 <?=$pricount?> 篇应用因作者的隐私设置而隐藏</div>
-</li>
-<?php } ?>
-</ul>
-</div>
 
-<div class="page"><?=$multi?></div>
+<?php } elseif($op=='reset') { ?>
 
-<?php } else { ?>
-<div class="c_form">还没有相关的应用。</div>
-<?php } ?>
-
-</div>
-
-<div id="sidebar" style="width:150px;">
-
-<?php if($userlist) { ?>
-<div class="cat">
-<h3>按好友查看</h3>
-<ul class="post_list line_list">
-<li>
-选择好友:<br>
-<select name="fuidsel" onchange="fuidgoto(this.value);">
-<option value="">全部好友</option>
-<?php if(is_array($userlist)) { foreach($userlist as $value) { ?>
-<option value="<?=$value['fuid']?>"<?=$fuid_actives[$value['fuid']]?>><?=$_SN[$value['fuid']]?></option>
-<?php } } ?>
-</select>
-</li>
-</ul>
-</div>
-<?php } ?>
-
-<?php if($classarr) { ?>
-<div class="cat">
-<h3>应用分类</h3>
-<ul class="post_list line_list">
-<li<?php if(!$_GET['classid']) { ?> class="current"<?php } ?>><a href="space.php?uid=<?=$space['uid']?>&do=menuset&view=me">全部应用</a></li>
-<?php if(is_array($classarr)) { foreach($classarr as $classid => $classname) { ?>
-<li<?php if($_GET['classid']==$classid) { ?> class="current"<?php } ?>>
-<?php if($space['self']) { ?>
-<a href="cp.php?ac=class&op=edit&classid=<?=$classid?>" id="c_edit_<?=$classid?>" onclick="ajaxmenu(event, this.id)" class="c_edit">编辑</a>
-<a href="cp.php?ac=class&op=delete&classid=<?=$classid?>" id="c_delete_<?=$classid?>" onclick="ajaxmenu(event, this.id)" class="c_delete">删除</a>
-<?php } ?>
-<a href="space.php?uid=<?=$space['uid']?>&do=menuset&classid=<?=$classid?>&view=me"><?=$classname?></a>
-</li>
-<?php } } ?>
-</ul>
-</div>
-<?php } ?>
-
-
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script>
-function fuidgoto(fuid) {
-window.location.href = "space.php?do=menuset&view=we&fuid="+fuid;
-}
-
-$(document).ready(function()
-{
-    $("#numhidden<?=$value['menusetid']?>").hide();
-$("#num").click(function(){
-    $("#numhidden").hide();
- 	});
-});
-</script>
-
+<form id="theform" action="do.php?ac=lostpasswd&op=reset" method="POST" class="c_form">
+<table cellpadding="0" cellspacing="0" class="formtable">
+<caption>
+<h2>重设密码</h2>
+</caption>
+<tr><th width="100">用户名</th><td><?php echo stripslashes($space['username']); ?></td></tr>
+<tr><th>新密码</th><td><input type="password" id="newpasswd1" name="newpasswd1" value="" class="t_input"> <span id="s_newpasswd1"></span></td></tr>
+<tr><th>确认新密码</th><td><input type="password" id="newpasswd2" name="newpasswd2" value="" class="t_input"> <span id="s_newpasswd2"></span></td></tr>
+<tr><th>&nbsp;</th><td><input type="submit" id="resetsubmit" name="resetsubmit" value="重设密码" class="submit" /></td></tr>
+</table>
+<input type="hidden" name="uid" value="<?=$_GET['uid']?>" />
+<input type="hidden" name="id" value="<?=$_GET['id']?>" />
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+</form>
 
 <?php } ?>
-
 
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -492,5 +317,4 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?>
-<?php ob_out();?>
+<?php } ?><?php ob_out();?>

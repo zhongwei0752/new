@@ -615,7 +615,7 @@ class AvatarUploader
 	// ´Ó¿Í»§¶Ë·ÃÎÊÍ·ÏñÍ¼Æ¬µÄ url
 	public function getAvatarUrl( $uid, $size='middle' )
 	{
-		return $this->getBaseUrl() . "space/{$uid}_{$size}.jpg";
+		return $this->getBaseUrl() . "../upload/space/{$uid}_{$size}.jpg";
 	}
 
 	// ´¦Àí HTTP Request
@@ -678,10 +678,12 @@ $au = new AvatarUploader();
 if ( $au->processRequest() ) {
 	exit();
 }
+
 $uid = intval($space[uid]);
 $urlAvatarBig    = $au->getAvatarUrl( $uid, 'big' );
 $urlAvatarMiddle = $au->getAvatarUrl( $uid, 'middle' );
 $urlAvatarSmall  = $au->getAvatarUrl( $uid, 'small' );
+updatetable("spacefield", array('logourl'=>$urlAvatarBig,'smalllogourl'=>$urlAvatarMiddle ), array('uid'=>$uid));
 $urlCameraFlash = $au->renderHtml( $uid );
 
 include template("cp_profile");
