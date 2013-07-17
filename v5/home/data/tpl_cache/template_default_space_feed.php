@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1373882144', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1373971405', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -224,7 +224,7 @@
                                 <h5>浏览量：<?php if($b[$value['menusetid']]) { ?><?=$b[$value['menusetid']]?><?php } else { ?>0<?php } ?>次</h5>
                                 <h5>评论数：<?php if($c[$value['menusetid']]) { ?><?=$c[$value['menusetid']]?><?php } else { ?>0<?php } ?>条</h5>
                                 <h5>有效期至：<?php if($value['money']) { ?><?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } else { ?>长期<?php } ?></h5>
-                                <a href="<?=$value['url']?>" class="quick_post">快速发布</a>
+                                <a href="cp.php?ac=<?=$value['english']?>" class="quick_post">快速发布</a>
                              </div>
                         </div>
                     </div><!-- end -->   

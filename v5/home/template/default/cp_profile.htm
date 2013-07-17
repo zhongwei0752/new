@@ -243,7 +243,7 @@ $_SGLOBAL[space_css]
                       </div>
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
-                         <!--{if empty($_GET['namechange'])}--><!--{if $space[smalllogourl]}--><img src="$space[smalllogourl]" /><!--{/if}--><!--{else}--><!--{if empty($_SCONFIG['namechange'])}--><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><!--{/if}--><img src="$space[smalllogourl]" style="float:left;padding-right:10px;" /><a class="btn_addPic"  rel="leanModal" name="signup" href="#signup"><span>上传</span></a><!--{/if}-->
+                         <!--{if empty($_GET['namechange'])}--><!--{if $space[smalllogourl]}--><img src="$space[smalllogourl]" style="float:left;padding-right:10px;"/><a class="btn_addPic"  rel="leanModal" name="signup" href="#signup"><span>上传</span></a><!--{/if}--><!--{else}--><!--{if empty($_SCONFIG['namechange'])}--><!--您的企业LOGO一经确认，将不再允许再次修改，请真实填写。<br>--><!--{/if}--><img src="$space[smalllogourl]" style="float:left;padding-right:10px;" /><a class="btn_addPic"  rel="leanModal" name="signup" href="#signup"><span>上传</span></a><!--{/if}-->
                       </div>
                       <div id="signup" style="margin-top:-120px;">
 					  $urlCameraFlash
@@ -290,7 +290,7 @@ $_SGLOBAL[space_css]
 							<!--{else}-->
 							<!--{if empty($_SCONFIG['namechange'])}-->您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><!--{/if}-->
 						<label for="business"><select name="business">
-  						<option value ="business">互联网</option>
+  						<option value ="互联网">互联网</option>
   
 						</select><!--<input id="business" type="text" value="$space['business']" name="business" />--></label> 
 						<!--{/if}-->
@@ -336,7 +336,7 @@ $_SGLOBAL[space_css]
 	<td>
 	<input type="submit" name="nextsubmit" class="btn grid_2" value="保存" class="submit" />
 
-	<!--{if $_SCONFIG['namechange']}--><a class="btn grid_2" href="$theurl&namechange=1">修改</a><!--{/if}-->
+	<!--{if $_SCONFIG['namechange']}--><a class="btn grid_2" href="$theurl&namechange=1">修改</a><!--{/if}--><br/><br/>
 	<!--{if $space[namestatus]}-->[<font color="red">认证通过</font>]<br/><!--{else}--><br/><br/>等待验证中，您目前将只能使用用户名，并且一些操作可能会受到限制<!--{/if}-->
 	<!--{if $_SCONFIG['namecheck']}-->您填写/修改内容后，需要等待我们认证后才能有效，在认证通过之前，您将只能使用部分操作，并且一些操作可能会受到限制。<br><!--{/if}-->
 	</td>

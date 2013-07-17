@@ -29,7 +29,7 @@ if($_SCONFIG['allowrewrite'] && isset($_GET['rewrite'])) {
 
 //ÔÊÐí¶¯×÷
 $dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto',
-	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','menusetnull');
+	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid');
 
 //»ñÈ¡±äÁ¿
 $isinvite = 0;
@@ -145,7 +145,7 @@ if(!empty($_SCONFIG['cronnextrun']) && $_SCONFIG['cronnextrun'] <= $_SGLOBAL['ti
 $zhong = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
-				ORDER BY b.dateline ASC ");
+				ORDER BY bf.orderid ASC ");
 while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 	$zhongwei[]=$wei;
 

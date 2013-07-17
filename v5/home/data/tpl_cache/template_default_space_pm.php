@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_pm|template/default/header|template/default/footer', '1373882142', 'template/default/space_pm');?><?php $_TPL['titles'] = array('短消息'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_pm|template/default/header|template/default/footer', '1373971404', 'template/default/space_pm');?><?php $_TPL['titles'] = array('短消息'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -161,35 +161,26 @@
                  <span><a href=""></a></span><span><a href=""></a></span>
                  </div><!-- end -->
                  <div class="bread container_12">
-                     <div class="space.php?do=pm&filter=privatepm">
+                     <?php if($_GET['filter'] == 'newpm') { ?>
+<a href="space.php?do=pm&filter=privatepm" class="link_back_bread grid_3">
+                     已读消息
+                     </a>
+                     <div class="bread_actived grid_1">
+                      未读消息
+                     </div>
+                     <?php } else { ?>
+                     
+                     <div class="bread_actived grid_1">
                          已读消息
                      </div>
                      <a href="space.php?do=pm&filter=newpm" class="link_back_bread grid_3">
                       未读消息
                      </a>
+                     <?php } ?>
                  </div><!-- end -->
 <div class="content_detail_wrapper">
-                    <div class="message_wrapper">
-                        <p>开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程开通流程</p>
-                        <p class="time">2013-12-12</p>
-                    </div><!-- end -->
+<br/>
 <div class="h_status">
-<?php if($touid) { ?>
-<div class="r_option">
-你们的历史记录：
-<a href="space.php?do=pm&subop=view&touid=<?=$touid?>&daterange=1"<?=$actives['1']?>>最近一天</a> | 
-<a href="space.php?do=pm&subop=view&touid=<?=$touid?>&daterange=2"<?=$actives['2']?>>最近两天</a> | 
-<a href="space.php?do=pm&subop=view&touid=<?=$touid?>&daterange=3"<?=$actives['3']?>>最近三天</a> | 
-<a href="space.php?do=pm&subop=view&touid=<?=$touid?>&daterange=4"<?=$actives['4']?>>本周</a> | 
-<a href="space.php?do=pm&subop=view&touid=<?=$touid?>&daterange=5"<?=$actives['5']?>>全部</a>
-</div>
-<?php } ?>
-<a href="space.php?do=pm&filter=newpm"<?=$actives['newpm']?>>未读消息</a><span class="pipe">|</span>
-<a href="space.php?do=pm&filter=privatepm"<?=$actives['privatepm']?>>私人消息</a><span class="pipe">|</span>
-<a href="space.php?do=pm&filter=systempm"<?=$actives['systempm']?>>系统消息</a><span class="pipe">|</span>
-<a href="space.php?do=pm&filter=announcepm"<?=$actives['announcepm']?>>公共消息</a><span class="pipe">|</span>
-<a href="space.php?do=pm&subop=ignore"<?=$actives['ignore']?>>忽略列表</a>
-</div>
 
 <div class="c_form">
 

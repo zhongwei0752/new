@@ -462,7 +462,7 @@ if($_GET['view'] != 'me') {
 	//ÊµÃû
 	realname_get();
 	//如果未购买，则隐藏侧边栏；
-	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]'");
+	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
 	$value4 = $_SGLOBAL['db']->fetch_array($query4);
 	$zhong1=$value4;
 
@@ -477,11 +477,11 @@ if($_GET['view'] != 'me') {
 		$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')."  WHERE menusetid='$p'");
 		$value2 = $_SGLOBAL['db']->fetch_array($query2);
 		if($value2['money']){
-		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'orderid'=>$value2['menusetid'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 		$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 		$showlink="space.php?do=showmenuset";	
 		}else{
-		inserttable("appset", array('month'=>'0','dateline1' => '0','endtime'=>'0','uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
+		inserttable("appset", array('month'=>'0','dateline1' => '0','endtime'=>'0','orderid'=>$value2['menusetid'],'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
 		$showmessage1='订制成功。';
 		$showlink1="space.php?do=menuset";
 		}
@@ -516,7 +516,7 @@ if($showmessage){
 	
 
 
-
+	
 
 
 	//删除过期的应用

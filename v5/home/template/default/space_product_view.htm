@@ -56,7 +56,7 @@
 						<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
 						<!--{/if}-->
 						<br />
-						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:500px;height:105px;float:left;"></textarea>
+						<textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5" style="width:560px;height:105px;float:left;"></textarea>
 						<div class="comment_wrapper container_12" style="margin:0px;">
 						<div class="comment_btn grid_2" id="commentsubmit_btn" name="commentsubmit_btn"  value="评论" onclick="ajaxpost('quickcommentform_{$id}', 'comment_add')">发布</div>
 					</div>
@@ -91,7 +91,7 @@
 			<!--{/loop}-->
 			</ul>
 		</div>
-		<div class="page">$multi</div>
+		<div class='pagination'><ul>$multi</ul></div>
 
 		
 

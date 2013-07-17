@@ -2,7 +2,23 @@
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 
 <!--{template header}-->
-
+<link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/file_beauty.css">
+    <link type='text/css' href='./template/default/basic_chosen.css' rel='stylesheet' media='screen' />
+    <style type="text/css">
+       h3{color: #727272;margin-top: 20px;font-weight:normal;}
+       .selected{ -webkit-box-shadow: 3px 3px 3px;
+  -moz-box-shadow: 3px 3px 3px;
+  box-shadow: 3px 3px 3px;}
+  
+      .bg1{ background: url("./template/default/image/chosen_bg4.png");}
+      .open{ background: url("./template/default/image/chosen_bg3.png")!important;}
+      .open .price{color:#3EB2B8!important;}
+    </style>
+    <script src="./source/jquery.js"></script>
+    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+   <script type='text/javascript' src='./source/basic.js'></script>
 <!--{if !empty($_SGLOBAL[inajax])}-->
 	<div id="space_menuset" class="feed">
 		<h3 class="feed_header">
@@ -44,16 +60,34 @@
 	<input type="hidden" name="orderby" value="dateline" />
 </form>
 </div>
+<div class="content" style="font-size:15px;">
+          
+                 <div class="indexing">
+                   <img src="$wei1[image2url]" /><span><a href="space.php?uid=$space[uid]">{$_SN[$space[uid]]}</a></span>><span>企业动态</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                 	<!--{if $_GET[view]=="all"}-->
+                     <div class="bread_actived grid_1" style="space.php?uid=$space[uid]&do=$do&view=all">
+                         大家的应用
+                     </div>
+                     <a href="space.php?uid=$space[uid]&do=$do&view=me" class="link_back_bread grid_3">
+                      我的应用
+                     </a>
+                     <!--{else}-->
+                     <a href="space.php?uid=$space[uid]&do=$do&view=all" class="link_back_bread grid_3">
+                      大家的应用
+                     </a>
+                     <div class="bread_actived grid_1">
+                      我的应用
+                     </div>
+                     <!--{/if}-->
+                     <!--{if {$_SN[$_SGLOBAL[supe_uid]]}=='admin'}-->
+                     <a href="cp.php?ac=menuset" class="btn grid_2">
+                      发表新应用
+                     </a>
+                     <!--{/if}-->
+                 </div>		
 
-<h2 class="title"><img src="image/app/blog.gif" />应用</h2>
-<div class="tabs_header">
-	<ul class="tabs">
-		<!--{if $space[friendnum]}--><li$actives[we]><a href="space.php?uid=$space[uid]&do=$do&view=we"><span>好友最新应用</span></a></li><!--{/if}-->
-		<li$actives[all]><a href="space.php?uid=$space[uid]&do=$do&view=all"><span>大家的应用</span></a></li>
-		<li$actives[me]><a href="space.php?uid=$space[uid]&do=$do&view=me"><span>我的应用</span></a></li>
-		<!--{if {$_SN[$_SGLOBAL[supe_uid]]}=='admin'}--><li class="null"><a href="cp.php?ac=menuset">发表新应用</a></li><!--{/if}-->
-	</ul>
-</div>	
 <!--{/if}-->	
 <!--{else}-->
 <!--{eval 
@@ -61,154 +95,104 @@
 	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有应用</a>";
 }-->
 <!--{template space_menu}-->
-<div class="h_status">按照发布时间排序</div>
 <!--{/if}-->
-		<!--{if $zhong1}-->
-		<div id="content" style="width:640px;">
-		<!--{else}-->
-		<div id="content" style="width:640px;margin:0 auto;float:center;">
-		<!--{/if}-->
-	<!--{if $_GET['orderby'] && $_GET['orderby'] != 'dateline'}-->
-	<div class="h_status">
-		排行时间范围：
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]"{$day_actives[0]}>全部</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=1"{$day_actives[1]}>最近一天</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=2"{$day_actives[2]}>最近两天</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=7"{$day_actives[7]}>最近七天</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=30"{$day_actives[30]}>最近三十天</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=90"{$day_actives[90]}>最近三个月</a><span class="pipe">|</span>
-		<a href="space.php?do=menuset&view=all&orderby=$_GET[orderby]&day=120"{$day_actives[120]}>最近六个月</a>
-	</div>
-	<!--{/if}-->
+		<div id="content" style="width:760px;">
+			<div class="content_detail_wrapper">
+
+
 	
 	<!--{if $searchkey}-->
 	<div class="h_status">以下是搜索应用 <span style="color:red;font-weight:bold;">$searchkey</span> 结果列表</div>
 	<!--{/if}-->
 	<script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 	<!--{if $count}-->
-	<div class="entry_list">
-		<ul>
-		<form action = "space.php?do=menuset" method = "post">
-		
-		<!--{loop $list $value}-->
-			<li>
-				<div class="avatardiv">
-					<div class="avatar48"><img src="$value[image1url]"/></div>
-					<!--{if $value['hot']}--><div class="digb">$value[hot]</div><!--{/if}-->
-				</div>
-				
-				<div class="title">
-				
-					<h4><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a></h4><!--{if $_GET[view]=='me'}--><a href="cp.php?ac=menuset&menusetid=$value[menusetid]&op=delete1" id="menuset_delete_$value[menusetid]" onclick="ajaxmenu(event, this.id)">（删除）</a><!--{/if}--><br/><!--{if $value[money]}-->单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--><!--{if $_GET[view]!='me'}--><!--{if $value[money]}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]!='1'}--><input type="checkbox" id="num$value[menusetid]" /><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{else}--> <!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]!='1'}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[appstatus]!='1'}--><input type="checkbox" id="" checked/><!--{/if}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[appstatus]!='1'}--><div id="numh$value[menusetid]"><input type='hidden' name='$value[menusetid]' value='1' style='width:20px;' /></div><!--{/if}--><!--{else}--><br/>你购买的此应用还未过期，如若重新开通，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a><!--{/if}--><!--{/if}--><div id="numh$value[menusetid]"></div><!--{eval $value1=$value['wei'];}--><!--{if $value1['num']==$value['menusetid']}--><!--{if $value[money]}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}--><!--{/if}-->
-					
-					<div>
-
-					<!--{if $value['friend']}-->
-					<span class="r_option locked gray"><a href="$theurl&friend=$value[friend]" class="gray">{$friendsname[$value[friend]]}</a></span>
-					<!--{/if}-->
-					<!--{if $value[money]}--><span class="gray"><!--{if $_GET[view]=='me'}-->有效期:<!--{date('Y-m-d H:i',$value[dateline1],1)}-->--<!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{/if}--></span><!--{/if}-->
-					</div>
-				</div>
-				<div class="detail image_right l_text s_clear" id="menuset_article_$value[menusetid]">
-					<!--{if $value[pic]}--><p class="image"><a href="space.php?uid=$value[uid]&do=menuset&id=$value[menusetid]"><img src="$value[pic]" alt="$value[subject]" /></a></p><!--{/if}-->
-					$value[message]
-				</div>
-				<div class="gray">
-				</div>
-			</li>
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-			<script>
-			$(document).ready(function()
-				{
-    		
-			$("#num$value[menusetid]").click(function(){
-			if($("#num$value[menusetid]").attr("checked")==true){
-    		$("#numh$value[menusetid]").html("你要订购<input type='text' name='$value[menusetid]' value='1' style='width:20px;' />月");
-    	}else{
-    		$("#numh$value[menusetid]").html("");
-    	}
- 				});
-			});
-			</script>
-		<!--{/loop}-->
 		<!--{if $_GET[view]!='me'}-->
+		<form action = "space.php?do=menuset" method = "post">
+			<!--{else}-->
+			<form action = "space.php?do=orderid" method = "post">
+			<!--{/if}-->
+		<div class="container_12 index_assembly_boxes" style="margin-left:10px;margin-top:20px;">
+		    <!--{loop $list $value}-->
+                         
+        	
+        
+                    
+        <div class="grid_6">
+                            <div class="index_assembly_box bg1" <!--{if $_GET[view]!='me'}--><!--{if !$value[money]}--><!--{eval $value1=$value['zhong'];}--><!--{if $value1[appstatus]=='1'}-->style="background: url('./template/default/image/chosen_bg3.png')!important;"<!--{/if}--><!--{/if}--><!--{/if}-->  id="choice">
+                            <div class="assembly_title">
+        <a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" ><span class="title">$value[appstatus] $value[subject]</span></a><span style="font-size:2px;"><!--{if $_GET[view]!='me'}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]=='1'}-->（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a>重新开通）<!--{/if}--><!--{/if}--></span></div>
+        <div id="num$value[menusetid]">
+       <div id="numh$value[menusetid]"></div>
+        <div class="assembly_info1">
+                                    <img src="$value[image1url]">
+                                  
+                                <h5 style="padding-top: 20px;"><!--{if $_GET[view]!='me'}--><!--{eval $value1=$value['zhong'];}--><!--{if $value1['num']==$value['menusetid']}--><!--{if $value[money]}-->（已订购$value1['month']个月）<br/>有效期至:<!--{date('Y-m-d H:i:s',$value1[endtime])}--><!--{/if}--><!--{/if}--><!--{/if}--><!--{if $value[money]}--><!--{if $_GET[view]=='me'}-->有效期:<!--{date('Y-m-d H:i',$value[dateline1],1)}-->--<!--{date('Y-m-d H:i:s',$value[endtime])}--><!--{/if}--><!--{/if}--></h5>    
+                               <p class="price" <!--{if $_GET[view]!='me'}--><!--{if !$value[money]}--><!--{eval $value1=$value['zhong'];}--><!--{if $value1[appstatus]=='1'}-->style="color:#3EB2B8!important;"<!--{/if}--><!--{/if}--><!--{/if}--> ><!--{if $value[money]}--> 单价:$value[money]元/月<!--{else}-->单价:免费<!--{/if}--></p><!--{if $_GET[view]=='me'}--><!--{if $_GET[change]=='1'}--><select name="$value['menusetid']">
+                               <option value ="$value['orderid']" selected>$value['orderid']</option>
+                               <!--{eval  for($i=1;$i<10;$i++){ }-->
+  <option value ="$i">$i</option><!--{eval } }--></select><!--{else}-->序号:$value['orderid']<!--{/if}--><!--{/if}-->
+  								<h5 ><!--{if $_GET[view]=='me'}--><a href="cp.php?ac=menuset&menusetid=$value[menusetid]&op=delete1" id="menuset_delete_$value[menusetid]" onclick="ajaxmenu(event, this.id)">（删除）</a><!--{/if}--></h5>
+                             </div>
+          
+          </div>
+
+          </div></div>
+   
+          
+      <!--{if $_GET[view]!='me'}-->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+         <script>
+      $(document).ready(function()
+        {
+        
+      $("#num$value[menusetid]").toggle(
+        function () {
+                    $("#num$value[menusetid]").parent(".index_assembly_box").addClass("open");
+                    $("#numh$value[menusetid]").html("<input type='hidden' name='$value[menusetid]' value='1' style='width:20px;' />");
+                  },
+                  function () {
+                    $("#num$value[menusetid]").parent(".index_assembly_box").removeClass("open");
+                    $("#numh$value[menusetid]").html("");
+                    }
+              );
+        
+       
+      });
+      </script>
+      <!--{/if}-->
+    <!--{/loop}-->
+    <div class='pagination'><ul>$multi</ul></div>
+   
+    <!--{if $_GET[view]!='me'}-->
 		<!--{if empty($list)}-->
 		<div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
 		
 		<!--{else}-->
-		<input type="submit" value="提交" >
+		 <div class="confirm_btn container_12" style="padding-left:320px;">
+                           <input type="submit" class="btn grid_2"></a>
+                      </div>
 		<!--{/if}-->
 		<!--{/if}-->
-	</form>
-		<!--{if $pricount}-->
-			<li>
-				<div class="title">本页有 $pricount 篇应用因作者的隐私设置而隐藏</div>
-			</li>
-		<!--{/if}-->
-		</ul>
-	</div>
+		
+    
+			</div>	
+			 <!--{if $_GET[view]=='me'}-->
+    <div >*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
+    
+                           <input style="margin-left:260px;" type="submit" class="btn grid_2">
+                      <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1">修改</a>
+                      </form>
+                      <!--{/if}-->
+		
 	
-	<div class="page">$multi</div>
+	
 	
 	<!--{else}-->
 	<div class="c_form">还没有相关的应用。</div>
 	<!--{/if}-->
-
+	</div>
 </div>
 
-<div id="sidebar" style="width:150px;">
-
-<!--{if $userlist}-->
-	<div class="cat">
-	<h3>按好友查看</h3>
-	<ul class="post_list line_list">
-		<li>
-			选择好友:<br>
-			<select name="fuidsel" onchange="fuidgoto(this.value);">
-			<option value="">全部好友</option>
-			<!--{loop $userlist $value}-->
-			<option value="$value[fuid]"{$fuid_actives[$value[fuid]]}>{$_SN[$value[fuid]]}</option>
-			<!--{/loop}-->
-			</select>
-		</li>
-	</ul>
-	</div>
-<!--{/if}-->
-	
-<!--{if $classarr}-->
-	<div class="cat">
-	<h3>应用分类</h3>
-	<ul class="post_list line_list">
-		<li<!--{if !$_GET[classid]}--> class="current"<!--{/if}-->><a href="space.php?uid=$space[uid]&do=menuset&view=me">全部应用</a></li>
-		<!--{loop $classarr $classid $classname}-->
-		<li<!--{if $_GET[classid]==$classid}--> class="current"<!--{/if}-->>
-			<!--{if $space[self]}-->
-				<a href="cp.php?ac=class&op=edit&classid=$classid" id="c_edit_$classid" onclick="ajaxmenu(event, this.id)" class="c_edit">编辑</a>
-				<a href="cp.php?ac=class&op=delete&classid=$classid" id="c_delete_$classid" onclick="ajaxmenu(event, this.id)" class="c_delete">删除</a>
-			<!--{/if}-->
-			<a href="space.php?uid=$space[uid]&do=menuset&classid=$classid&view=me">$classname</a>
-		</li>
-		<!--{/loop}-->
-	</ul>
-	</div>
-<!--{/if}-->
-
-
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script>
-function fuidgoto(fuid) {
-	window.location.href = "space.php?do=menuset&view=we&fuid="+fuid;
-}
-
-$(document).ready(function()
-	{
-    $("#numhidden$value[menusetid]").hide();
-	$("#num").click(function(){
-    $("#numhidden").hide();
- 	});
-	});
-</script>
 
 
 <!--{/if}-->

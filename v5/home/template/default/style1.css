@@ -766,6 +766,7 @@ ul {
   background: #fff;
   height: 164px;
 }
+
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info img {
   padding: 20px 20px 20px 24px;
   float: left;
@@ -786,6 +787,31 @@ ul {
   border-radius: 4px;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info .quick_post:hover {
+  background: #389A93;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 {
+  height: 164px;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 img {
+  padding: 20px 20px 20px 24px;
+  float: left;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 h5 {
+  margin: 4px;
+  color: #8A8B8B;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post {
+  display: block;
+  width: 90px;
+  height: 30px;
+  background: #43B8B0;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  margin-left: 164px;
+  border-radius: 4px;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post:hover {
   background: #389A93;
 }
 .message_wrapper {

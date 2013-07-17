@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1373884384', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1373965967', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>v5v5v5v5</title>
@@ -50,10 +50,12 @@
                          
         
         <div class="grid_6">
-                            <div class="assembly_inner bg1" id="choice">
+                            <div class="assembly_inner bg1" >
                             <div class="assembly_title" id='basic-modal'>
-        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a></div>
-        <?php if($_GET['view']!='me') { ?><?php if($value['money']) { ?><input type="checkbox" id="num<?=$value['menusetid']?>" name="wei" /><?php } else { ?> <?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><input type="checkbox" id="" name="wei" checked/><?php } ?><?php $value2=$value['zhong']; ?><?php if($value2['appstatus']!='1') { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?><?php } ?><div id="numh<?=$value['menusetid']?>"></div><?php } ?>
+        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" class="view_detail 1basic">查看详情>></a></div>
+      <div id="num<?=$value['menusetid']?>" style="height:160px;">
+        <?php if($value['money']) { ?><div id="numh<?=$value['menusetid']?>"></div><?php } else { ?><div id="numh<?=$value['menusetid']?>"><input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' /></div><?php } ?>
+       
         <div class="assembly_produce">
                                     <img src="<?=$value['image1url']?>">
                                     <div class="produce_choice">
@@ -64,23 +66,31 @@
                              </div>
           
           </div>
-
+</div>
           </div>
           
           
 
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
       <script>
+
+ 
       $(document).ready(function()
         {
+           <?php if(!$value['money']) { ?>
+            $("#num<?=$value['menusetid']?>").parent(".assembly_inner").addClass("open");
+            <?php } ?>
+      $("#num<?=$value['menusetid']?>").toggle(
+        function () {
+                    $("#num<?=$value['menusetid']?>").parent(".assembly_inner").addClass("open");
+                    $("#numh<?=$value['menusetid']?>").html("<input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />");
+                  },
+                  function () {
+                    $("#num<?=$value['menusetid']?>").parent(".assembly_inner").removeClass("open");
+                    $("#numh<?=$value['menusetid']?>").html("");
+                    }
+              );
         
-      $("#num<?=$value['menusetid']?>").click(function(){
-      if($("#num<?=$value['menusetid']?>").attr("checked")==true){
-        $("#numh<?=$value['menusetid']?>").html("你要订购<input type='text' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />月");
-      }else{
-        $("#numh<?=$value['menusetid']?>").html("");
-      }
-        });
       });
       </script>
     <?php } } ?>
@@ -98,28 +108,7 @@
     </div><!-- wrraper end -->
  
  
-       <script type="text/javascript">
-       $(document).ready(function(){
-
-             $(".assembly_inner").toggle(
-                  function () {
-                    var zhong1 = $('#zhong').val();
-                   $(this).addClass("open");
-                   $(this).find("input[name='wei']").attr("checked",true);
-             
-                  },
-                  function () {
-                   $(this).removeClass("open");
-                    $(this).find("input[name='wei']").attr("checked",false);
-              
-                    }
-              );
-             
-
-
-            
-       })
-    </script>
+  
  
    
    <?php if(empty($_SGLOBAL['inajax'])) { ?>

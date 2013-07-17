@@ -28,6 +28,12 @@ if($_GET['op'] == 'base') {
 			profilefield_cache();
 		}
 		$profilefields = empty($_SGLOBAL['profilefield'])?array():$_SGLOBAL['profilefield'];
+
+		if(empty($space['name'])){
+		if(empty($_POST['name'])){
+			showmessage("公司名称不能为空！");
+		}
+	}
 		if(empty($space['linkman'])){
 		if(empty($_POST['linkman'])){
 			showmessage("联系人不能为空！");
@@ -754,7 +760,9 @@ $urlAvatarBig    = $au->getAvatarUrl( $uid, 'big' );
 $urlAvatarMiddle = $au->getAvatarUrl( $uid, 'middle' );
 $urlAvatarSmall  = $au->getAvatarUrl( $uid, 'small' );
 $urlCameraFlash = $au->renderHtml( $uid );
+if($urlCameraFlash){
 updatetable("spacefield", array('logourl'=>$urlAvatarBig,'smalllogourl'=>$urlAvatarMiddle ), array('uid'=>$uid));
+}
 include template("cp_profile");
 
 ?>

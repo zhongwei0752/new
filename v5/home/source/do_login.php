@@ -10,15 +10,16 @@ if(!defined('IN_UCHOME')) {
 
 include_once(S_ROOT.'./source/function_cp.php');
 
+
 if($_SGLOBAL['supe_uid']) {
 	if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
-	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
+	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
 		showmessage('enter_the_space', 'space.php?do=menuset', 0);
 	}else{
-		include("./space.php");
+		showmessage('enter_the_space', 'space.php?do=home', 0);
 }
 }
 
@@ -178,7 +179,7 @@ if(submitcheck('loginsubmit')) {
 		showmessage('login_success', "cp.php?ac=profile", 1, array($ucsynlogin));
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
 		showmessage('login_success', "./template/default/post_ok.htm", 1, array($ucsynlogin));
-	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'){
+	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($value2)){
 		showmessage('login_success', "space.php?do=menuset", 1, array($ucsynlogin));
 	}else{
 	showmessage('login_success', $app?"userapp.php?id=$app":$_POST['refer'], 1, array($ucsynlogin));
