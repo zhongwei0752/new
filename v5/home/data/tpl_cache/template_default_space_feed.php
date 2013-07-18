@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1373971405', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1374143200', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,7 +47,7 @@
  <div class="navbar">
             <div class="navbar-inner container_36">
                 
-                <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
+                <a class="logo grid_1" href="space.php?do=home"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
                 <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
@@ -60,7 +60,7 @@
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-
+<div class="grid_3" style="width:400px;display:inline-block;"></div>
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
@@ -102,7 +102,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
- <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -155,7 +155,9 @@
 
 <?php } ?>
 
-
+<style type="text/css">
+.navbar-inner .grid_4 a img{max-width: 40px;}
+</style>
 <div id="content" style="width:762px;margin-left:20px;margin-top:10px;">
 
 <?php if($space['uid'] && $space['self']) { ?>
@@ -166,9 +168,10 @@
 </td>
 <td valign="top">
 <h3 class="index_name" style="margin-left:20px;border:0px;">
-<a  href="space.php?uid=<?=$space['uid']?>"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
-<?php g_icon($space[groupid]); ?>
-<a href="cp.php?ac=credit"><?=$space['star']?></a>
+<a  href="space.php?uid=<?=$space['uid']?>" style="color:#999;font-size:18px;"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
+
+<span style="color:#43B8B0;">VIP</span>
+</h3>
 <br/>
  <div class="company_avata_box container_12"  style="margin-top:-30px;">
                    <div class="grid_2">
@@ -176,11 +179,11 @@
                        <h5 style="margin-top:-10px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
                        <a href="cp.php?ac=profile" style="margin-top:20px;" class="company_setting">企业设置</a>
                    </div>
+                 </div>
 
 
 
 
-</h3>
 
 
 
@@ -189,25 +192,11 @@
 </tr>
 </table>
 
-<?php if($space['allnum']) { ?>
-<div class="mgs_list">
-<?php if($space['notenum']) { ?><div><img src="image/icon/notice.gif"><a href="space.php?do=notice"><strong><?=$space['notenum']?></strong> 条新通知</a></div><?php } ?>
-<?php if($space['addfriendnum']) { ?><div><img src="image/icon/friend.gif" alt="" /><a href="cp.php?ac=friend&op=request"><strong><?=$space['addfriendnum']?></strong> 个好友请求</a></div><?php } ?>
-<?php if($space['mtaginvitenum']) { ?><div><img src="image/icon/mtag.gif" alt="" /><a href="cp.php?ac=mtag&op=mtaginvite"><strong><?=$space['mtaginvitenum']?></strong> 个群组邀请</a></div><?php } ?>
-<?php if($space['eventinvitenum']) { ?><div><img src="image/icon/event.gif" alt="" /><a href="cp.php?ac=event&op=eventinvite"><strong><?=$space['eventinvitenum']?></strong> 个活动邀请</a></div><?php } ?>
-<?php if($space['myinvitenum']) { ?><div><img src="image/icon/userapp.gif" alt="" /><a href="space.php?do=notice&view=userapp"><strong><?=$space['myinvitenum']?></strong> 个应用消息</a></div><?php } ?>
-<?php if($space['pmnum']) { ?><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm"><strong><?=$space['pmnum']?></strong> 条新短消息</a></div><?php } ?>
-<?php if($space['pokenum']) { ?><div><img src="image/icon/poke.gif" alt="" /><a href="cp.php?ac=poke"><strong> <?=$space['pokenum']?></strong> 个新招呼</a></div><?php } ?>
-<?php if($space['reportnum']) { ?><div><img src="image/icon/report.gif" alt="" /><a href="admincp.php?ac=report"><strong><?=$space['reportnum']?></strong> 个举报</a></div><?php } ?>
-<?php if($space['namestatusnum']) { ?><div><img src="image/icon/profile.gif" alt="" /><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1"><strong><?=$space['namestatusnum']?></strong> 个待认证用户</a></div><?php } ?>
-<?php if($space['eventverifynum']) { ?><div><img src="image/icon/event.gif" alt="" /><a href="admincp.php?ac=event&perpage=20&grade=0&searchsubmit=1"><strong><?=$space['eventverifynum']?></strong> 个待审核活动</a></div><?php } ?>
 
-</div>
-<?php } ?>
 <div class="mgs_list">
 <?php if($_SGLOBAL['member']['newpm']) { ?><div><img src="image/icon/pm.gif" alt="" /><a href="space.php?do=pm&filter=privatepm"><strong><?=$_SGLOBAL['member']['newpm']?></strong> 个新回复</a></div><?php } ?>
 </div>
- <div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:20px 0;"></div>
+ <div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:0px 0 30px 0;"></div>
                 <div class="container_12 index_assembly_boxes">
                 	<?php if($myself) { ?>
 <?php if(is_array($myself)) { foreach($myself as $value) { ?>

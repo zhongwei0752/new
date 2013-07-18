@@ -1,12 +1,16 @@
 /*************************************************GLOBALS***/
 * { word-wrap: break-word; word-break: break-all; }
+body {
+  margin: 0;
+  background: #ECEFF1;
+}
 body, th, td, input, select, textarea, button { font: 12px/1.5em Verdana, "Lucida Grande", Arial, Helvetica, sans-serif; }
 body, h1, h2, h3, h4, h5, h6, p, ul, dl, dt, dd, form, fieldset { margin: 0; padding: 0; }
 h1, h2, h3, h4, h5, h6 { font-size: 1em; }
 ul li { list-style: none; }
 select { margin-right: 2px; }
 
-a { color: #2C629E; text-decoration: none; }
+a { color: #999; text-decoration: none; }
 a:hover { text-decoration: underline; }
 a img { border: none; }
 
@@ -91,7 +95,6 @@ a.c_link { background-position: 0 -64px; }
 .ybg { margin-bottom: 2px; padding: 10px; border: 1px solid #EBE6C9; background: #FCF9E6; }
     .ybg table { width: 100%; }
 
-body { background: #FFF; }
 #wrap, .wrap { margin: 0 auto; width: 970px; }
 #ad_header { margin: 0 auto; padding: 1px; width: 966px; background: #FCF9E6; border: 1px solid #FF8E00; line-height:150%; }
     #ad_header a{ color: #000; }
@@ -259,7 +262,7 @@ textarea { border: 1px solid #ddd; overflow: auto; }
 .submit { padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; }
 a.submit { padding: 5px; }
 a.button { padding: 5px; }
-.c_form { padding: 0.5em 3em; }
+.c_form { padding: 0.5em 3em;color: #999; }
 .quickpost table { width: 100%; }
 .quickpost td { padding: 0.2em 0; }
 .quickpost textarea { width: 99%; height: 70px; font-size: 1.17em; }

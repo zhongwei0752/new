@@ -32,7 +32,7 @@ if(empty($refer)) {
 	$refer = 'space.php?do=home';
 }
 
-//好友邀请
+//潞脙脫脩脩没脟毛
 $uid = empty($_GET['uid'])?0:intval($_GET['uid']);
 $code = empty($_GET['code'])?'':$_GET['code'];
 $app = empty($_GET['app'])?'':intval($_GET['app']);
@@ -41,7 +41,7 @@ $invitearr = array();
 $reward = getreward('invitecode', 0);
 if($uid && $code && !$reward['credit']) {
 	$m_space = getspace($uid);
-	if($code == space_key($m_space, $app)) {//验证通过
+	if($code == space_key($m_space, $app)) {//脩茅脰陇脥篓鹿媒
 		$invitearr['uid'] = $uid;
 		$invitearr['username'] = $m_space['username'];
 	}
@@ -52,7 +52,7 @@ if($uid && $code && !$reward['credit']) {
 	$url_plus = "uid=$uid&invite=$invite";
 }
 
-//没有登录表单
+//脙禄脫脨碌脟脗录卤铆碌楼
 $_SGLOBAL['nologinform'] = 1;
 
 if(submitcheck('loginsubmit')) {
@@ -77,7 +77,7 @@ if(submitcheck('loginsubmit')) {
 		}
 	}
 
-	//同步获取用户源
+	//脥卢虏陆禄帽脠隆脫脙禄搂脭麓
 	if(!$passport = getpassport($username, $password)) {
 		showmessage('login_failure_please_re_login', 'do.php?ac='.$_SCONFIG['login_action']);
 	}
@@ -85,11 +85,11 @@ if(submitcheck('loginsubmit')) {
 	$setarr = array(
 		'uid' => $passport['uid'],
 		'username' => addslashes($passport['username']),
-		'password' => md5("$passport[uid]|$_SGLOBAL[timestamp]")//本地密码随机生成
+		'password' => md5("$passport[uid]|$_SGLOBAL[timestamp]")//卤戮碌脴脙脺脗毛脣忙禄煤脡煤鲁脡
 	);
 	
 	include_once(S_ROOT.'./source/function_space.php');
-	//开通空间
+	//驴陋脥篓驴脮录盲
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE uid='$setarr[uid]'");
 	if(!$space = $_SGLOBAL['db']->fetch_array($query)) {
 		$space = space_open($setarr['uid'], $setarr['username'], 0, $passport['email']);
@@ -97,27 +97,27 @@ if(submitcheck('loginsubmit')) {
 	
 	$_SGLOBAL['member'] = $space;
 	
-	//实名
+	//脢碌脙没
 	realname_set($space['uid'], $space['username'], $space['name'], $space['namestatus']);
 	
-	//检索当前用户
+	//录矛脣梅碌卤脟掳脫脙禄搂
 	$query = $_SGLOBAL['db']->query("SELECT password FROM ".tname('member')." WHERE uid='$setarr[uid]'");
 	if($value = $_SGLOBAL['db']->fetch_array($query)) {
 		$setarr['password'] = addslashes($value['password']);
 	} else {
-		//更新本地用户库
+		//赂眉脨脗卤戮碌脴脫脙禄搂驴芒
 		inserttable('member', $setarr, 0, true);
 	}
 
-	//清理在线session
+	//脟氓脌铆脭脷脧脽session
 	insertsession($setarr);
 	
-	//设置cookie
+	//脡猫脰脙cookie
 	ssetcookie('auth', authcode("$setarr[password]\t$setarr[uid]", 'ENCODE'), $cookietime);
 	ssetcookie('loginuser', $passport['username'], 31536000);
 	ssetcookie('_refer', '');
 	
-	//同步登录
+	//脥卢虏陆碌脟脗录
 	if($_SCONFIG['uc_status']) {
 		include_once S_ROOT.'./uc_client/client.php';
 		$ucsynlogin = uc_user_synlogin($setarr['uid']);
@@ -125,19 +125,19 @@ if(submitcheck('loginsubmit')) {
 		$ucsynlogin = '';
 	}
 	
-	//好友邀请
+	//潞脙脫脩脩没脟毛
 	if($invitearr) {
-		//成为好友
+		//鲁脡脦陋潞脙脫脩
 		invite_update($invitearr['id'], $setarr['uid'], $setarr['username'], $invitearr['uid'], $invitearr['username'], $app);
 	}
 	$_SGLOBAL['supe_uid'] = $space['uid'];
-	//判断用户是否设置了头像
+	//脜脨露脧脫脙禄搂脢脟路帽脡猫脰脙脕脣脥路脧帽
 	$reward = $setarr = array();
 	$experience = $credit = 0;
 	$avatar_exists = ckavatar($space['uid']);
 	if($avatar_exists) {
 		if(!$space['avatar']) {
-			//奖励积分
+			//陆卤脌酶禄媒路脰
 			$reward = getreward('setavatar', 0);
 			$credit = $reward['credit'];
 			$experience = $reward['experience'];
@@ -177,12 +177,16 @@ if(submitcheck('loginsubmit')) {
 	realname_get();
 	if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('login_success', "cp.php?ac=profile", 1, array($ucsynlogin));
-	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'){
+	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('login_success', "./template/default/post_ok.htm", 1, array($ucsynlogin));
 	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($value2)){
 		showmessage('login_success', "space.php?do=menuset", 1, array($ucsynlogin));
 	}else{
-	showmessage('login_success', $app?"userapp.php?id=$app":$_POST['refer'], 1, array($ucsynlogin));
+		//閲嶅畾鍚戞祻瑙堝櫒 
+		header("Location: space.php?do=home"); 
+		//纭繚閲嶅畾鍚戝悗锛屽悗缁唬鐮佷笉浼氳鎵ц 
+		exit;
+	//showmessage('login_success', $app?"userapp.php?id=$app":$_POST['refer'], 1, array($ucsynlogin));
 }
 }
 

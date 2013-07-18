@@ -1,3 +1,4 @@
+
 function date (format, timestamp) {
   // http://kevin.vanzonneveld.net
   // +   original by: Carlos R. L. Rodrigues (http://www.jsfromhell.com)
@@ -264,120 +265,43 @@ function date (format, timestamp) {
   return this.date(format, timestamp);
 }
 
-		
+
 $(document).ready(function(){
-	
-		var id=$.query.get('id');
-		var uid=$.query.get('uid');
-			
-		/* var url="http://www.betit.cn/capi/space.php?do=quiz&id="+id+"&uid="+uid+"&callback=?"
-		 function getLocalTime(nS) {   
-		return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");    
+  //var uid=$.query.get('uid');
+  var uid='3';
+  var idtype='introduce';
 
-
-}
-		 
-		$.getJSON( //使用getJSON方法取得JSON数据
-
-        url,
-
-        function(data){
-		//处理数据 data指向的是返回来的JSON数据
-		
-		tit="<a>"+ data.data.quiz.username +"</a>:<span class='bet_title'>"+ data.data.quiz.subject +"</span><br/>";
-		 dateline= getLocalTime(""+data.data.quiz.dateline+"");
-		 totalcost=""+ data.data.quiz.totalcost +"";
-		 leftpic=""+ data.data.quiz.options[0].pic +""
-		 rightpic=""+ data.data.quiz.options[1].pic +""
-		 leftoption=""+ data.data.quiz.options[0].option +""
-		 rightoption=""+ data.data.quiz.options[1].option +""
-		 leftvotenum=""+ data.data.quiz.options[0].votenum +""
-		 rightvotenum=""+ data.data.quiz.options[1].votenum +""
-		$("#username").html(tit);
-		$("#dateline").html(dateline);
-		$("#totalcost").html(totalcost);
-		$("#leftoption").html(leftoption);
-		$("#rightoption").html(rightoption);
-		$("#leftvotenum").html(leftvotenum);
-		$("#rightvotenum").html(rightvotenum);
-		$("#leftpic img").attr("src",""+leftpic+"!105x105");
-		$("#rightpic img").attr("src",""+rightpic+"!105x105");
-		url1="http://www.betit.cn/capi/do.php?ac=ajax&op=getcomment&id="+id+"&idtype=quizid&page=0&prepage=4&callback=?";
-		var tit1="";
-		$.getJSON( //使用getJSON方法取得JSON数据
-
-       url1,
-
-        function(json){
-		
-				tit1+="<div class='feed_bottom'><a href='#'  class='second_avatar'><img src='"+ json.data.comments[0].authoravatar +"'></a><div class='username'>"+ json.data.comments[0].author +":<span>"+ json.data.comments[0].message +"</span><br/><span style='color:gray;font-size:10px;'>";
-				tit1+=getLocalTime(""+ json.data.comments[0].dateline +"");
-				tit1+="</span></div></div><br/><div class='feed_bg_middle' style='margin-top:-20px;'><div class='feed_bg_left'></div><div class='feed_bg_right'></div></div>";
-				tit1+="<div class='feed_bottom'><a href='#'  class='second_avatar'><img src='"+ json.data.comments[1].authoravatar +"'></a><div class='username'>"+ json.data.comments[1].author +":<span>"+ json.data.comments[1].message +"</span><br/><span style='color:gray;font-size:10px;'>";
-				tit1+=getLocalTime(""+ json.data.comments[1].dateline +"");
-				tit1+="</span></div></div><br/><div class='feed_bg_middle' style='margin-top:-20px;'><div class='feed_bg_left'></div><div class='feed_bg_right'></div></div>";
-				tit1+="<div class='feed_bottom'><a href='#'  class='second_avatar'><img src='"+ json.data.comments[2].authoravatar +"'></a><div class='username'>"+ json.data.comments[2].author +":<span>"+ json.data.comments[2].message +"</span><br/><span style='color:gray;font-size:10px;'>";
-				tit1+=getLocalTime(""+ json.data.comments[2].dateline +"");
-				tit1+="</span></div></div><br/><div class='feed_bg_middle' style='margin-top:-20px;'><div class='feed_bg_left'></div><div class='feed_bg_right'>";
-				$("#wei").html(tit1);
-		})
-
-})*/
-$.ajax({
+	$.ajax({
 			dataType: "jsonp",
-			url: "http://www.betit.cn/capi/space.php?do=quiz&id="+id+"&uid="+uid+"&callback=?",
+			url: "http://localhost/v5/v5/home/capi/space.php?do="+idtype+"&uid="+uid+"",
 		   
 			success: function( data ) {
 			  /* Get the movies array from the data */
-				
 			  if(data.code==0){
-			  
-					data=data.data;
-          oid1=data.quiz.options[0].oid;
-          oid2=data.quiz.options[1].oid;
+			  if(""+idtype+""=="introduce"){
+					data=data.data.introduce;
+}
+          //oid1=data.quiz.options[0].oid;
+         // oid2=data.quiz.options[1].oid;
 					//data.message = html_entity_decode(data.message);
-					data.quiz.dateline = date('Y-m-d H:i',data.quiz.dateline);
+            for (var i = 0, len = data.length; i < len; ++i) {
+          data[i].dateline = date('Y-m-d H:i',data[i].dateline);
+        }
 					//data.user = getUser(data.uid, auth);
 					//data.idtype = "photoid";
 					//data.piclistlen = data.piclist.length;
 
 					$("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
-			 $.ajax({
-        dataType: "jsonp",
-        url: "http://www.betit.cn/capi/do.php?ac=ajax&op=getmorejoinuser&quizid="+id+"&page=0&prepage=6",
 
-        success: function( json ) {
-          if(json.code==0){
-          json=json.data;
-         
-          
-        $("#detail1Template").tmpl(json).appendTo('#detail-panel');
-        }
-        }
-        })
      
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://www.betit.cn/capi/do.php?ac=ajax&op=getcomment&id="+id+"&idtype=quizid&page=0&prepage=3&callback=?",
-        success: function( json ) {
-          if(json.code==0){
-          json=json.data.comments;
-        
-          for (var i = 0, len = json.length; i < len; ++i) {
-        
-          json[i].dateline = date('Y-m-d H:i',json[i].dateline);
-          
-          }
-        $("#commentTemplate").tmpl(json ).appendTo('#detail-panel');
-        }
-        }
-        })
+     
 			  }else{
 				alert("123");
 			  }
 			}
 		  })
  })
+
 
 //转发功能
 			  function transmit(fquizid,subject,option1,option2,pic1,pic2,joincost,portion,endtime,resulttime,friend,page,perpage,auth){

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1373967779', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374139923', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,7 +47,7 @@
  <div class="navbar">
             <div class="navbar-inner container_36">
                 
-                <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
+                <a class="logo grid_1" href="space.php?do=home"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
                 <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
@@ -60,7 +60,7 @@
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-
+<div class="grid_3" style="width:400px;display:inline-block;"></div>
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
@@ -102,7 +102,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
- <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -244,6 +244,7 @@
 <?php } ?>
 <ul id="comment_ul">
 <?php if(is_array($list)) { foreach($list as $value) { ?>
+<div style="border-bottom:1px dashed #999;margin-top:10px;">
 <div class="comment_list container_12" style="margin-left:60px;">
 <?php if($value['author']) { ?>
 <div class="avatar48"><a href="space.php?uid=<?=$value['authorid']?>"><?php echo avatar($value[authorid],small); ?></a></div>
@@ -260,7 +261,7 @@
 <span class="comment_text"><?=$value['message']?></span></h6>
         <span class="comment_time"><?php echo sgmdate('Y-m-d H:i',$value[dateline],1); ?></span>
         </div>
- </div> <br/>
+ </div> <br/></div>
 
 
 <?php } } ?>

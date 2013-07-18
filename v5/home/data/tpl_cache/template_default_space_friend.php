@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1373971403', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1374143194', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -46,7 +46,7 @@
  <div class="navbar">
             <div class="navbar-inner container_36">
                 
-                <a class="logo grid_1" href="#"><img src="./template/default/image/logo.png"></a>
+                <a class="logo grid_1" href="space.php?do=home"><img src="./template/default/image/logo.png"></a>
                 <?php if($_SGLOBAL['supe_uid']) { ?>
                 <a href="space.php?do=home" class="grid_2"><?php if($_GET['do']=="home") { ?><p class="nav_actived">首页</p> <?php } else { ?>首页<?php } ?></a>
                 
@@ -59,7 +59,7 @@
 <?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
-
+<div class="grid_3" style="width:400px;display:inline-block;"></div>
 <?php } ?>
 
                 <?php if($_SGLOBAL['supe_uid']) { ?>
@@ -101,7 +101,7 @@
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
- <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="side_option actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
@@ -201,26 +201,8 @@
 <?php } else { ?>
 
 <?php if($space['self']) { ?>
-<div class="searchbar floatright">
-<?php if($_GET['view']=='me') { ?>
-<form method="get" action="space.php">
-<input type="hidden" name="do" value="friend">
-<input name="searchkey" value="" size="15" class="t_input" type="text">
-<input name="searchsubmit" value="找好友" class="submit" type="submit">
-<input type="hidden" name="searchmode" value="1" />
-</form>
-<?php } else { ?>
-<form method="get" action="cp.php">
-<input type="hidden" name="ac" value="friend" />
-<input type="hidden" name="op" value="search" />
-<input name="searchkey" value="" size="15" class="t_input" type="text">
-<input name="searchsubmit" value="找人" class="submit" type="submit">
-<input type="hidden" name="searchmode" value="1" />
-</form>
-<?php } ?>
-</div>
-<h2 class="title"><img src="image/icon/friend.gif" />好友</h2>
-<div class="content" style="font-size:15px;">
+
+<div class="content" style="font-size:15px;width:760px;">
 
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -230,53 +212,16 @@
                  </div>		
 
  <div class="content_detail_wrapper">
-<div id="content"  style="width: 760px;" >
 
-<div class="c_mgs"><div class="ye_r_t"><div class="ye_l_t"><div class="ye_r_b"><div class="ye_l_b">
-<?php if($_GET['view']=='blacklist') { ?>
-加入到黑名单的用户，将会从您的好友列表中删除。同时，对方将不能进行与您相关的打招呼、踩日志、加好友、评论、留言、短消息等互动行为。
-<?php } elseif($_GET['view']=='me') { ?>
-
-当前共有 <?=$space['friendnum']?> 个好友。
-
-
-<?php if($maxfriendnum) { ?>
-(最多可以添加 <?=$maxfriendnum?> 个好友)
-<p>
-<?php if($_SGLOBAL['magic']['friendnum']) { ?>
-<img src="image/magic/friendnum.small.gif" class="magicicon" />
-<a id="a_magic_friendnum" href="magic.php?mid=friendnum" onclick="ajaxmenu(event, this.id, 1)">我要扩容好友数</a>
-(您可以购买道具“<?=$_SGLOBAL['magic']['friendnum']?>”来扩容，让自己可以添加更多的好友。)
-<?php } ?>
-</p>
-<?php } ?>
-
-<p style="padding-top:10px;">
-好友列表按照好友热度高低排序<br>
-好友热度是系统根据您与好友之间交互的动作自动累计的一个参考值，数值越大，表示您与这位好友互动越频繁。
-</p>
-<?php } elseif($_GET['view']=='online') { ?>
-<?php if($_GET['type'] == 'friend') { ?>
-这些好友当前在线，赶快去拜访一下吧
-<?php } elseif($_GET['type']=='near') { ?>
-通过系统匹配，这些朋友就在您附近，您可能认识他们
-<?php } else { ?>
-显示当前全部在线的用户
-<?php } ?>
-<?php } elseif($_GET['view']=='visitor') { ?>
-他们拜访过您，回访一下吧
-<?php } elseif($_GET['view']=='trace') { ?>
-您曾经拜访过的用户列表
-<?php } ?>
-</div></div></div></div></div>
 
 
 
 <?php if($list) { ?>
 <div class="thumb_list" id="friend_ul">
-<ul>
+<ul style="margin-top:30px;">
+
 <?php if(is_array($list)) { foreach($list as $key => $value) { ?>
-<li id="friend_<?=$value['uid']?>_li">
+<li id="friend_<?=$value['uid']?>_li" style="width:250px;margin-left:50px;height:80px;">
 <?php if($value['username'] == '') { ?>
 <div class="avatar48"><img src="image/magic/hidden.gif" alt="匿名" /></div>
 <div class="thumbTitle"><p>匿名</p></div>

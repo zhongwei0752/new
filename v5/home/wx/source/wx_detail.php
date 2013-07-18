@@ -14,5 +14,5 @@ if(empty($m_auth)){
 */
 
 
-include_once template("./wx/template/detail");
+include_once template("./wx/template/feedcontent");
 ?>

@@ -4,6 +4,7 @@
 body {
   margin: 0;
   background: #ECEFF1;
+  color: #999;
 }
 a {
   text-decoration: none!important;
@@ -31,11 +32,15 @@ ul {
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 20px;
-  border-bottom: #d2d2d2 1px solid;
+
 }
 .navbar_wrapper {
   background: #5d6a74;
   text-align: center;
+}
+.navbar-inner .grid_4 a img {
+max-width: 40px;
+padding-top: 1px;
 }
 .navbar {
   background-color: #5d6a74;
@@ -63,9 +68,9 @@ ul {
   width: 116px;
   background: url('./image/menu_split.png') no-repeat right;
   text-align: center;
-  color: #283A3A;
+  color: #BDC7C7;
   font-size: 16px;
-  text-shadow: 0px 1px 0px #838383;
+  text-shadow: -1px -1px 0px #2F3D41;
   line-height: 58px;
 }
 .navbar-inner .grid_2 .nav_actived {
@@ -177,10 +182,10 @@ ul {
 }
 .indexing {
   padding-top: 30px;
-  color: #626262;
+  
 }
 .indexing span a {
-  color: #626262;
+  
 }
 .content_indexing {
   padding-bottom: 26px;
@@ -211,7 +216,6 @@ ul {
 }
 .bread {
   margin-top: 20px;
-  color: #626262;
 }
 .bread .grid_1,
 .bread .grid_3 {
@@ -331,7 +335,7 @@ ul {
   color: #008cff;
 }
 .footer {
-  background-color: #ECEFF1;
+  background-color: #E4E5E6;
   width: 1024px;
   margin-right: auto;
   margin-left: auto;
@@ -348,8 +352,8 @@ ul {
 .footer_map ul .map_title {
   line-height: 30px;
   padding-left: 0;
-  font-size: 20px;
-  color: #454545;
+  font-size: 18px;
+  color: #999;
 }
 .footer_map ul .map_title img {
   float: left;
@@ -472,6 +476,8 @@ ul {
   font-size: 20px;
 }
 .feed_action ul {
+  position: relative;
+  top: 20px;
   width: 346px;
   float: right;
   text-align: right;
@@ -496,6 +502,7 @@ ul {
   height: 102px;
 }
 .comment_wrapper .grid_2 {
+  font-size: 26px;
   display: inline-block;
   width: 123px;
   height: 107px;
@@ -594,6 +601,7 @@ ul {
 .login_wrapper .grid_2 ul li {
   display: inline-block;
   padding-top: 10px;
+  color: #999999;
 }
 .login_wrapper .grid_2 form input {
   border-radius: 4px;
@@ -641,6 +649,7 @@ ul {
   font-size: 14px;
 }
 .companies .grid_3 .company_name {
+  color: #999999;
   display: inline-block;
   width: 140px;
   height: 54px;
@@ -665,11 +674,13 @@ ul {
 }
 .assembly .grid_6 {
   text-align: center;
+  width: 420px;
+  padding-left:12px;
 }
 .assembly .grid_6 .assembly_inner {
   width: 410px;
   height: 210px;
-  margin: 20px 20px 20px 26px;
+  margin: 20px 20px 0px 26px;
 }
 .assembly .grid_6 .assembly_inner .assembly_title {
   height: 46px;
@@ -690,6 +701,8 @@ ul {
 .assembly .grid_6 .assembly_inner .assembly_produce img {
   float: left;
   padding: 20px 20px 20px 24px;
+  min-width: 120px;
+
   max-width: 120px;
   max-height: 120px;
 }
@@ -703,12 +716,19 @@ ul {
 .assembly .grid_6 .assembly_inner .assembly_produce .price {
   float: right;
   padding-right: 60px;
-  padding-top: 54px;
+  padding-top: 74px;
   font-size: 20px;
+}
+.price2{
+  text-align: right;
+  position: relative;
+  top: 128px;
+  right: 40px;
+  font-size: 18px;
 }
 .company_avata_box {
   position: relative;
-  left: -24px;
+ 
   top: 20px;
   margin-bottom: 40px;
 }
@@ -722,8 +742,7 @@ ul {
 }
 .company_avata_box .grid_2 h3,
 .company_avata_box .grid_2 h5 {
-  margin-top: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .company_avata_box .grid_2 h3 {
   color: #727272;
@@ -758,7 +777,7 @@ ul {
   line-height: 38px;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_title .title {
-  font-size: 20px;
+  font-size: 16px;
   color: #44B1BA;
   padding-left: 20px;
 }
@@ -766,7 +785,6 @@ ul {
   background: #fff;
   height: 164px;
 }
-
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info img {
   padding: 20px 20px 20px 24px;
   float: left;
@@ -786,15 +804,22 @@ ul {
   margin-left: 164px;
   border-radius: 4px;
 }
-.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info .quick_post:hover {
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post:hover {
   background: #389A93;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 {
+  
   height: 164px;
+  margin: 0 auto;
+width: 340px;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 img {
-  padding: 20px 20px 20px 24px;
+  padding: 8px 20px 20px 20px;
   float: left;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 h5 {
   margin: 4px;
@@ -814,6 +839,15 @@ ul {
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post:hover {
   background: #389A93;
 }
+/*.index_assembly_box_manage{-webkit-box-shadow: 1px 1px 0px #CFD2D4;
+-moz-box-shadow: 1px 1px 0px #CFD2D4;
+box-shadow: 1px 1px 0px #CFD2D4;
+border-radius: 4px;
+border: 1px solid #CFD2D4;
+width: 360px;
+margin-bottom: 20px;
+background: url("./image/manage_bg.png");
+}*/
 .message_wrapper {
   width: 740px;
   margin-left: 10px;

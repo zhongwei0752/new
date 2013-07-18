@@ -221,11 +221,17 @@ if($_GET['op'] == 'base') {
 		}
 	
 		if(submitcheck('nextsubmit')) {
-			$url = './template/default/post_ok.htm';
-		} else {
-			$url = 'cp.php?ac=profile&op=base';
+		if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+		showmessage('login_success', "cp.php?ac=profile", 1, array($ucsynlogin));
+		}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
+		showmessage('login_success', "./template/default/post_ok.htm", 1, array($ucsynlogin));
+		}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($value2)){
+		showmessage('login_success', "space.php?do=menuset", 1, array($ucsynlogin));
+		}else{
+		showmessage('修改成功',"cp.php?ac=profile" );
+	//showmessage('login_success', $app?"userapp.php?id=$app":$_POST['refer'], 1, array($ucsynlogin));
+}
 		}
-		showmessage('update_on_successful_individuals', $url);
 	}
 
 	//ÐÔ±ð
@@ -737,9 +743,13 @@ class AvatarUploader
 				<embed src="'.$urlCameraFlash.'" quality="high" bgcolor="#ffffff" width="447" height="477" name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit"  wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 			</object>';
 		return $urlCameraFlash;
+		
+		
 	}
 }
-
+		$urlAvatarBig    = "./upload/space/$space[uid]_big.jpg";
+		$urlAvatarMiddle = "./upload/space/$space[uid]_middle.jpg";
+		updatetable("spacefield", array('logourl'=>$urlAvatarBig,'smalllogourl'=>$urlAvatarMiddle ), array('uid'=>$space['uid']));
 header("Expires: 0");
 header("Cache-Control: private, post-check=0, pre-check=0, max-age=0", FALSE);
 header("Pragma: no-cache");
@@ -756,13 +766,11 @@ if ( $au->processRequest() ) {
 }
 
 $uid = intval($space[uid]);
-$urlAvatarBig    = $au->getAvatarUrl( $uid, 'big' );
-$urlAvatarMiddle = $au->getAvatarUrl( $uid, 'middle' );
-$urlAvatarSmall  = $au->getAvatarUrl( $uid, 'small' );
+
 $urlCameraFlash = $au->renderHtml( $uid );
-if($urlCameraFlash){
-updatetable("spacefield", array('logourl'=>$urlAvatarBig,'smalllogourl'=>$urlAvatarMiddle ), array('uid'=>$uid));
-}
+
+
+
 include template("cp_profile");
 
 ?>

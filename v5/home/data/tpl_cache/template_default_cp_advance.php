@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1373969088', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1374048656', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

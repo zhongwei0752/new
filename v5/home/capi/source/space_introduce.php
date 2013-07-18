@@ -13,6 +13,7 @@ $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
 $page = empty($_REQUEST['page'])?1:intval($_REQUEST['page']);
 if($page<1) $page=1;
 $id = empty($_REQUEST['id'])?0:intval($_REQUEST['id']);
+$uid=empty($_REQUEST['uid'])?0:intval($_REQUEST['uid']);
 $classid = empty($_REQUEST['classid'])?0:intval($_REQUEST['classid']);
 
 //表态分类
@@ -22,8 +23,10 @@ $clicks = empty($_SGLOBAL['click']['introduceid'])?array():$_SGLOBAL['click']['i
 if($id) {
 
 	//读取日志
-	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('introduce')." b LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid WHERE b.introduceid='$id' AND b.uid='$space[uid]'");
+	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('introduce')." b LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid WHERE b.introduceid='$id' AND b.uid='$uid'");
 	$introduce = $_SGLOBAL['db']->fetch_array($query);
+	$introduce['message']=htmlentities($introduce['message'], ENT_QUOTES);
+	capi_showmessage_by_data("rest_success", 0, array('introduce'=>$introduce));
 	//日志不存在
 	if(empty($introduce)) {
 		capi_showmessage_by_data('view_to_info_did_not_exist');
@@ -203,7 +206,7 @@ if($id) {
 	realname_get();
 
 	$_TPL['css'] = 'introduce';
-	include_once template("space_introduce_view");
+	//include_once template("space_introduce_view");
 
 } else {
 	//分页
@@ -369,6 +372,7 @@ $_REQUEST['view'] = 'me';//默认显示
 		if($wheresql == "b.uid='$space[uid]'" && $space['introducenum'] != $count) {
 			updatetable('space', array('introducenum' => $count), array('uid'=>$space['uid']));
 		}
+		$wheresql="b.uid='$uid'";
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('introduce')." b $f_index
 				LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid

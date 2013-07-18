@@ -4,16 +4,10 @@
 	width: ~`@{percent} + "%"`;
 }
 
-// .max-width(@context:100px, @target: 100px){
-// 	@percent: (@target/@context)*100;
-// 	max-width: ~`@{percent} + "%"`;
-// }
-
-// .min-width(@context:100px, @target: 100px){
-// 	@percent: (@target/@context)*100;
-// 	min-width: ~`@{percent} + "%"`;
-// }
-
+.height(@context:100px, @target: 100px){
+	@percent: (@target/@context)*100;
+	height: ~`@{percent} + "%"`;
+}
 
 /* ! MIXIN FOR PADDING, SHORTHAND */
 .padding(@context, @top: 0, @right: 0, @bottom: 0, @left: 0){
@@ -64,4 +58,30 @@
 .margin-left(@context, @left: 0){
 	@percent:(@left/@context)*100;
 	margin-left: ~`@{percent} + "%"`;
+}
+
+.font-size-vw(@context, @width:0){
+	@vm:(@width/@context)*100;
+	font-size: ~`@{vm}+ "vw"`;
+}
+
+.font-size-vh(@context, @height:0){
+	@vh:(@height/@context)*100;
+	font-size: ~`@{vh}+ "vh"`;
+}
+
+.font-size-vmin(@context, @v:0){
+	@min:(@v/@context)*100;
+	font-size: ~`@{min}+ "vmin"`;
+}
+
+
+
+.font-size-em(@px){
+	@em: @px/16;
+	font-size: ~`@{em}+ "em"`;
+}
+.line-height(@context, @line){
+	@percent:(@line/@context)*100;
+	line-height:~`@{percent} + "%"`;
 }

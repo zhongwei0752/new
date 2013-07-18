@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374026261', 'template/default/network');?><script>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374142713', 'template/default/network');?><script>
   function register(id, result) {
     if(result) {
       $('registersubmit').disabled = true;
@@ -11,13 +11,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>v5v5v5v5</title>
+    <title>微伍v5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
     <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
     <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+    <style type="text/css">
+    * {
+font-family: 'Microsoft Yahei' !important;
+}
+        .companies .grid_3 span img{
+             max-width:71px;max-height:71px;min-width:71px;min-height:71px;
+          } 
+        .companies .grid_4 img{
+             max-width:172px;max-height:53px;min-width:172px;min-height:53px;
+        }
+        .login_hover{
+          color: #999;
+        }
+        .login_hover:hover{
+          color: #02B4AB;
+        }
+             </style>
   </head>
   <body>
     
@@ -25,7 +42,7 @@
         <div class="navbar">
             <div class="navbar-inner container_36">
                 <a class="logo grid_1" href="#" style="background:none;"><img src="./template/default/image/logo.png"></a>
-                <a href="#" class="grid_5" style="float:right;color:#BDBEBF;padding-right:10px;">帮助</a>
+                <a href="#" class="grid_5" style="float:right;color:#BDBEBF;padding-right:18px;">帮助</a>
              </div>
          </div>
          <!-- navbar end -->
@@ -36,7 +53,7 @@
             <div class="grid_2 sign_window" id="log">
                   <ul>
                      <li style="float:left">注册账号</li>
-                     <li style="padding-left:80px;" id="btna"><span>登陆</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
+                     <li style="padding-left:60px;" id="btna"><span style="margin-right:8px;"><a href="javascript:void(0)" class="login_hover">登陆</a></span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
                   </ul>
                  <form id="registerform" name="registerform" action="do.php?ac=<?=$_SCONFIG['register_action']?>&<?=$url_plus?>&ref" method="post" >
                   <input type="text" id="username" name="username" value="" placeholder="用户名"  onBlur="checkUserName()" tabindex="2" />&nbsp;<span id="checkusername">&nbsp;</span>
@@ -51,7 +68,7 @@
              <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-300px;margin-top:-278px;">
                   <ul>
                      <li style="float:left">登陆账号</li>
-                     <li style="padding-left:80px;" id="btnb"><span>注册</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
+                     <li style="padding-left:60px;" id="btnb"><span style="margin-right:8px;"><a href="javascript:void(0)" class="login_hover">注册</a></span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
                   </ul>
                 
          <form name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post">
@@ -66,14 +83,14 @@
             </div>
          </div>
 
-          <p class="login_page_company_title"><span>已经开通企业</span><span class="more"><a href="">更多</a></span></p>
+          <p class="login_page_company_title"><span><b>已经开通企业</b></span><span class="more"><a href="">更多</a></span></p>
           <div class="companies_wrapper">
           <div class="companies container_12">
             <?php if(is_array($openlist)) { foreach($openlist as $key => $value) { ?>
             <div class="grid_3">
-                   <span style="float:left;padding-right:10px;width:71px;height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span>
+                   <span style="float:left;padding-right:10px;max-width:71px;max-height:71px;min-width:71px;min-height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span>
                    <span class="company_name"><?=$_SN[$value['uid']]?></span><br>
-                    <span><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>" class="fans"><?=$value['friendnum']?>粉丝</a></span> 
+                    <span><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>" class="fans"><?=$value['friendnum']?>客户</a></span> 
               </div>
        
       <?php } } ?>
@@ -125,7 +142,7 @@
   }
   </script>
 
-      <p class="login_page_company_title"><span>品牌合作企业</span><span class="more"><a href="">更多</a></span></p>
+      <p class="login_page_company_title"><span><b>品牌合作企业</b></span><span class="more"><a href="">更多</a></span></p>
                <div class="companies_wrapper">
           <div class="companies container_12">
               <div class="grid_4">
