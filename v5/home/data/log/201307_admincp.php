@@ -153,3 +153,7 @@
 <?PHP exit;?>	2013-07-17 16:15:07		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
 <?PHP exit;?>	2013-07-17 16:15:13		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"35";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-17 16:15:15		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-18 22:31:06		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-18 22:31:16		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-18 22:31:28		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"45";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-18 22:31:29		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}

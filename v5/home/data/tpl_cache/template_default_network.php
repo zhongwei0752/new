@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374142713', 'template/default/network');?><script>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374174373', 'template/default/network');?><script>
   function register(id, result) {
     if(result) {
       $('registersubmit').disabled = true;
@@ -19,20 +19,11 @@
     <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
     <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
     <style type="text/css">
-    * {
-font-family: 'Microsoft Yahei' !important;
-}
         .companies .grid_3 span img{
              max-width:71px;max-height:71px;min-width:71px;min-height:71px;
           } 
         .companies .grid_4 img{
              max-width:172px;max-height:53px;min-width:172px;min-height:53px;
-        }
-        .login_hover{
-          color: #999;
-        }
-        .login_hover:hover{
-          color: #02B4AB;
         }
              </style>
   </head>
@@ -53,7 +44,7 @@ font-family: 'Microsoft Yahei' !important;
             <div class="grid_2 sign_window" id="log">
                   <ul>
                      <li style="float:left">注册账号</li>
-                     <li style="padding-left:60px;" id="btna"><span style="margin-right:8px;"><a href="javascript:void(0)" class="login_hover">登陆</a></span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
+                     <li style="padding-left:60px;" id="btna"><span style="margin-right:8px;">登陆</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
                   </ul>
                  <form id="registerform" name="registerform" action="do.php?ac=<?=$_SCONFIG['register_action']?>&<?=$url_plus?>&ref" method="post" >
                   <input type="text" id="username" name="username" value="" placeholder="用户名"  onBlur="checkUserName()" tabindex="2" />&nbsp;<span id="checkusername">&nbsp;</span>
@@ -68,7 +59,7 @@ font-family: 'Microsoft Yahei' !important;
              <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-300px;margin-top:-278px;">
                   <ul>
                      <li style="float:left">登陆账号</li>
-                     <li style="padding-left:60px;" id="btnb"><span style="margin-right:8px;"><a href="javascript:void(0)" class="login_hover">注册</a></span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
+                     <li style="padding-left:60px;" id="btnb"><span style="margin-right:8px;">注册</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
                   </ul>
                 
          <form name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post">

@@ -100,7 +100,7 @@ $_SCONFIG=Array
 			'click' => 1
 			)
 		),
-	'cronnextrun' => 1374143220,
+	'cronnextrun' => 1374177000,
 	'my_status' => '0',
 	'uniqueemail' => 1,
 	'updatestat' => 1,
@@ -150,8 +150,6 @@ $_SCONFIG=Array
 	'newusertime' => '',
 	'need_avatar' => '0',
 	'need_friendnum' => '',
-	'seccode_login' => '0',
-	'defaultfusername' => 'admin',
-	'defaultpoke' => ''
+	'seccode_login' => '0'
 	)
 ?>

@@ -260,12 +260,18 @@ $_SGLOBAL[space_css]
                       </div>
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
-                         
-                         <!--{if empty($_GET['namechange'])&& $space[smalllogourl]}-->&nbsp;&nbsp;<img src="$space[smalllogourl]" id="imageshow"/><!--{else}--><img src="$space[smalllogourl]" style="float:left;padding-right:10px;" /><a class="btn_addPic"  rel="leanModal" name="signup" href="#signup"><span>上传</span></a><!--{/if}-->
+                         <!--{if $space[smalllogourl] && empty($_GET['namechange'])}-->
+                           &nbsp;&nbsp;<img src="$space['smalllogourl']"/>
+                          <!--{else}-->
+                          <img src="$space['smalllogourl']" style="float:left;"/>
+                         <div class="grid_2">
+                            <input type="text"  id="file_text2" >
+                         </div>
+                          <div><div class="btn_addPic"><input type="file"   name="file3" class="upload_file2" style="position: absolute;left: 0;top: 0;font-size: 90px;margin: -20px 0 0 -1100px;opacity: 0;filter: alpha(opacity=0);cursor: pointer;" onchange="document.getElementById('file_text2').value=this.value"/>上传</div></div> 
+                       <!--{/if}--> 
+                       
                       </div>
-                      <div id="signup" style="margin-top:-100px;">
-					  $urlCameraFlash
-					  </div>
+                     
 					  <div class="post_list container_12">
                          <span class="select_title grid_1">固话&nbsp;&nbsp;:</span>
                          <div class="grid_2">

@@ -11,6 +11,7 @@
   
   	    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
      <script src="template/js/mobiscroll.custom-2.5.4.min.js"></script>
+     <script src="template/js/js/jquery.query.js" type="text/javascript"></script>
      <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
      <script type="text/javascript" src="template/js/feed.js"></script><!-- 时间选择插件 -->
   	 <script type="text/javascript">
@@ -46,7 +47,7 @@ $(document).ready(function(){
 
 <script id="detailTemplate" type="text/x-jquery-tmpl">
     
-   <a href="wx.php?do=detail&id={{= introduceid}}&uid={{= uid}}&idtype=$_GET[idtype]" class="list" data-role="none">
+   <a href="wx.php?do=detail&id={{= introduceid}}&uid={{= uid}}&idtype=$_GET[idtype]id" class="list" data-role="none">
               <table style="width:100%;border-spacing: 0;">
                <tr>
                   <td>

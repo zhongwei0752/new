@@ -5,6 +5,7 @@
 */
 
 include_once('./common.php');
+include_once('./function_capi.php');
 include_once(S_ROOT.'./data/data_magic.php');
 
 //是否关闭站点
@@ -28,7 +29,7 @@ if($_SCONFIG['allowrewrite'] && isset($_REQUEST['rewrite'])) {
 }
 
 //允许动作
-$dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto', /* chenler add */ 'quiz','stat', 'isonline', 'task','app','introduce','product','development','industry','branch','job','cases','talk');
+$dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto', /* chenler add */ 'quiz','stat', 'isonline', 'task','app','introduce','product','development','industry','branch','job','cases','talk','comment');
 
 //获取变量
 $isinvite = 0;

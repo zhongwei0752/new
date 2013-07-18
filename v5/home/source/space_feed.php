@@ -10,7 +10,7 @@ if(!defined('IN_UCHOME')) {
 if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}
-	if($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
+	if($space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){

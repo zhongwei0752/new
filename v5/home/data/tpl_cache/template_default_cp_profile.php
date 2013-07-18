@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374143195', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374157758', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -414,12 +414,18 @@
                       </div>
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
-                         
-                         <?php if(empty($_GET['namechange'])&& $space['smalllogourl']) { ?>&nbsp;&nbsp;<img src="<?=$space['smalllogourl']?>" id="imageshow"/><?php } else { ?><img src="<?=$space['smalllogourl']?>" style="float:left;padding-right:10px;" /><a class="btn_addPic"  rel="leanModal" name="signup" href="#signup"><span>上传</span></a><?php } ?>
+                         <?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?>
+                           &nbsp;&nbsp;<img src="<?=$space['smalllogourl']?>"/>
+                          <?php } else { ?>
+                          <img src="<?=$space['smalllogourl']?>" style="float:left;"/>
+                         <div class="grid_2">
+                            <input type="text"  id="file_text2" >
+                         </div>
+                          <div><div class="btn_addPic"><input type="file"   name="file3" class="upload_file2" style="position: absolute;left: 0;top: 0;font-size: 90px;margin: -20px 0 0 -1100px;opacity: 0;filter: alpha(opacity=0);cursor: pointer;" onchange="document.getElementById('file_text2').value=this.value"/>上传</div></div> 
+                       <?php } ?> 
+                       
                       </div>
-                      <div id="signup" style="margin-top:-100px;">
-  <?=$urlCameraFlash?>
-  </div>
+                     
   <div class="post_list container_12">
                          <span class="select_title grid_1">固话&nbsp;&nbsp;:</span>
                          <div class="grid_2">

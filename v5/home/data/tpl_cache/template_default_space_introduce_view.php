@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374142980', 'template/default/space_introduce_view');?><?php $_TPL['titles'] = array($introduce['subject'], '企业介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374173007', 'template/default/space_introduce_view');?><?php $_TPL['titles'] = array($introduce['subject'], '企业介绍'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

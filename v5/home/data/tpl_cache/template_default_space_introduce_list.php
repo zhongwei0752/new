@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_list|template/default/header|template/default/footer', '1374143205', 'template/default/space_introduce_list');?><?php $_TPL['titles'] = array('企业介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_list|template/default/header|template/default/footer', '1374175405', 'template/default/space_introduce_list');?><?php $_TPL['titles'] = array('企业介绍'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>

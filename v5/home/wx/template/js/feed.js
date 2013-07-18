@@ -268,8 +268,8 @@ function date (format, timestamp) {
 
 $(document).ready(function(){
   //var uid=$.query.get('uid');
-  var uid='3';
-  var idtype='introduce';
+  var uid=$.query.get('uid');
+  var idtype=$.query.get('idtype');
 
 	$.ajax({
 			dataType: "jsonp",

@@ -265,13 +265,19 @@ function date (format, timestamp) {
 }
 
 
+function HTMLDecode(input) {
+    var converter = document_createElement_x_x("DIV");
+    converter.innerHTML = input;
+    var output = converter.innerText;
+    converter = null;
+    return output;
+}
 
-
-function getDetail(type, id, uid){
-	if (type=="introduce"){
+function getDetail(idtype, id, uid){
+	if (idtype=="introduceid"){
 		$.ajax({
 			dataType: "jsonp",
-			url: "http://localhost/v5/v5/home/capi/space.php?do=introduce&uid=3&id=17",
+			url: "http://localhost/v5/v5/home/capi/space.php?do=introduce&uid="+uid+"&id="+id+"",
 		   
 			success: function( data ) {
 			  /* Get the movies array from the data */
@@ -279,8 +285,8 @@ function getDetail(type, id, uid){
 			  if(data.code==0){
 					data=data.data;
 					
-				data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);
-			    data.introduce.message	= html_entity_decode(data.introduce.message);				
+				data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);		
+
 					$("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
 			  }else{
 				alert(data.msg);
@@ -292,54 +298,49 @@ function getDetail(type, id, uid){
 }
 
 
-function getComment(idtype, id, page, perpage, auth){
+function getComment(idtype, id,uid, page, perpage){
 	 $("#morebtn .ui-btn-text").html("正在加载...");
 	 $("#morebtn").addClass('ui-disabled');
 	$.ajax({
 			dataType: "jsonp",
-			url: "http://www.familyday.com.cn/dapi/space.php?do=comment&id=" + id + "&idtype=" + idtype + "&page=" + page + "&perpage=" + perpage,
+			url: "http://localhost/v5/v5/home/capi/space.php?do=comment&idtype=" + idtype + "&uid=" + uid + "&id=" + id + "&page=" + page + "&perpage=" + perpage,
 		   
 			success: function( data ) {
 			  /* Get the movies array from the data */
 			  $("#morebtn .ui-btn-text").html("更多");
 			  $("#morebtn").removeClass('ui-disabled');
-			  if(data.error==0){
-					data=data.data;
+			  if(data.code==0){
+					data=data.data.comment;
 					if (data.length<=0)
 						
 						$('.more-btn').html('没有更多评论了，赶快发布新的评论吧！');
 					else{
 						for (var i = 0, len = data.length; i < len; ++i) {
-							data[i].message = html_entity_decode(data[i].message);
-							data[i].message = html_entity_decode(data[i].message);
 							data[i].dateline = date('Y-m-d H:i',data[i].dateline);
 						}
 						$("#commentTemplate").tmpl(data).appendTo('#comment-panel');
 						$('#page').val(parseInt($('#page').val())+1);
 					}
 			  }else{
-				alert(data.msg);
+				alert(data.data.commentcount);
 			  }
 			}
 		  });
 	$("#morebtn").removeClass('ui-disabled');
 }
 
-function cpComment(idtype, id, message, auth){
+function cpComment(idtype, id, message){
 	var pattern = /^[\s]{0,}$/g;
 	$("#publishbtn").addClass('ui-disabled');
 	if (!pattern.test(message)){
 		$.ajax({
 				dataType: "jsonp",
-				url: "http://www.familyday.com.cn/dapi/do.php?ac=comment&id=" + id + "&idtype=" + idtype + "&message=" + message + "&come=wx",
+				url: "http://localhost/v5/v5/home/capi/cp.php?ac=comment&id="+id+"&commentsubmit=true&idtype="+idtype+"&message="+message,
 			   
 				success: function( data ) {
-				  /* Get the movies array from the data */
-				  $("#publishbtn").removeClass('ui-disabled');
-				  if(data.error==0){
-					  $('#comment-panel').html("");
-					  $('#page').val(1);
-					  getComment($('#idtype').val(), $('#id').val(), $('#page').val(), $('#perpage').val(), $('#auth').val());		
+          if(data.code==0){
+				  alert("发布成功");
+        location.reload();
 				  }else{
 					alert(data.msg);
 				  }
@@ -353,6 +354,7 @@ function cpComment(idtype, id, message, auth){
 
 $(function(){
 	getDetail($('#idtype').val(), $('#id').val(), $('#uid').val());
+  getComment($('#idtype').val(), $('#id').val(), $('#uid').val(),$('#page').val(),$('#perpage').val());
 	
 	
 })
