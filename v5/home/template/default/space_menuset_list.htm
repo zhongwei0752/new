@@ -111,7 +111,7 @@
         <div class="grid_6">
                             <div class="index_assembly_box bg1" <!--{if $_GET[view]!='me'}--><!--{if !$value[money]}--><!--{eval $value1=$value['zhong'];}--><!--{if $value1[appstatus]=='1'}-->style="background: url('./template/default/image/chosen_bg3.png')!important;"<!--{/if}--><!--{/if}--><!--{/if}-->  id="choice">
                             <div class="assembly_title">
-        <a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" ><span class="title">$value[appstatus] $value[subject]</span></a><span style="font-size:2px;"><!--{if $_GET[view]!='me'}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]=='1'}-->（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a>重新开通）<!--{/if}--><!--{/if}--></span></div>
+        <a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" ><span class="title">$value[subject]</span></a><span style="font-size:2px;"><!--{if $_GET[view]!='me'}--><!--{eval $value2=$value['zhong'];}--><!--{if $value2[cheak]=='1'}-->（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=$value['menusetid']">戳我</a>重新开通）<!--{/if}--><!--{/if}--></span></div>
         <div id="num$value[menusetid]">
        <div id="numh$value[menusetid]"></div>
         <div class="assembly_info1">
@@ -169,10 +169,10 @@
     
 			</div>	
 			 <!--{if $_GET[view]=='me'}-->
-    <div >*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
+    <div style="padding-bottom: 30px;padding-left:12px;">*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
     
-                           <input style="margin-left:260px;" type="submit" class="btn grid_2">
-                      <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1">修改</a>
+                           <input style="margin-left:330px;margin-top: -10px;" type="submit" class="btn grid_2">
+                    <!--   <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" style="margin-top: -10px;">修改</a> -->
                       </form>
                       <!--{/if}-->
 		

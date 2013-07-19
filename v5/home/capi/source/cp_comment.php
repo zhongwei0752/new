@@ -22,11 +22,8 @@ if(capi_submitcheck('commentsubmit')) {
 		capi_showmessage_by_data('no_privilege');
 	}
 
-	//实名认证
-	ckrealname('comment');
 
-	//新用户见习
-	cknewuser();
+
 
 	//判断是否发布太快
 	$waittime = interval_check('post');
@@ -121,6 +118,7 @@ if(capi_submitcheck('commentsubmit')) {
 			break;
 		case 'blogid':
 			//¶ÁÈ¡ÈÕÖ¾
+
 			$query = $_SGLOBAL['db']->query("SELECT b.*, bf.target_ids, bf.hotuser
 				FROM ".tname('blog')." b
 				LEFT JOIN ".tname('blogfield')." bf ON bf.blogid=b.blogid
@@ -157,6 +155,7 @@ if(capi_submitcheck('commentsubmit')) {
 			
 			$hotarr = array('blogid', $blog['blogid'], $blog['hotuser']);
 			$stattype = 'blogcomment';//Í³¼Æ
+
 			break;
 		case 'introduceid':
 			//¶ÁÈ¡ÈÕÖ¾
@@ -177,6 +176,45 @@ if(capi_submitcheck('commentsubmit')) {
 			if(!ckfriend($introduce['uid'], $introduce['friend'], $introduce['target_ids'])) {
 				//Ã»ÓÐÈ¨ÏÞ
 			
+				capi_showmessage_by_data('no_privilege');
+			} elseif(!$tospace['self'] && $introduce['friend'] == 4) {
+				//ÃÜÂëÊäÈëÎÊÌâ
+				$cookiename = "view_pwd_introduce_$introduce[introduceid]";
+				$cookievalue = empty($_SCOOKIE[$cookiename])?'':$_SCOOKIE[$cookiename];
+				if($cookievalue != md5(md5($introduce['password']))) {
+					capi_showmessage_by_data('no_privilege');
+				}
+			}
+
+			//ÊÇ·ñÔÊÐíÆÀÂÛ
+			if(!empty($introduce['noreply'])) {
+				capi_showmessage_by_data('do_not_accept_comments');
+			}
+			if($introduce['target_ids']) {
+				$introduce['target_ids'] .= ",$introduce[uid]";
+			}
+			
+			$hotarr = array('introduceid', $introduce['introduceid'], $introduce['hotuser']);
+			$stattype = 'introducecomment';//Í³¼Æ
+			break;
+			case 'productid':
+			//¶ÁÈ¡ÈÕÖ¾
+			$query = $_SGLOBAL['db']->query("SELECT b.*, bf.target_ids, bf.hotuser
+				FROM ".tname('product')." b
+				LEFT JOIN ".tname('productfield')." bf ON bf.productid=b.productid
+				WHERE b.productid='$id'");
+			$product = $_SGLOBAL['db']->fetch_array($query);
+			//ÈÕÖ¾²»´æÔÚ
+			if(empty($product)) {
+				capi_showmessage_by_data('view_to_info_did_not_exist');
+			}
+			
+			//¼ìË÷¿Õ¼ä
+			$tospace = getspace($product['uid']);
+			
+			//ÑéÖ¤ÒþË½
+			if(!ckfriend($product['uid'], $product['friend'], $product['target_ids'])) {
+				//Ã»ÓÐÈ¨ÏÞ
 				capi_showmessage_by_data('no_privilege');
 			} elseif(!$tospace['self'] && $product['friend'] == 4) {
 				//ÃÜÂëÊäÈëÎÊÌâ
@@ -698,7 +736,7 @@ if(capi_submitcheck('commentsubmit')) {
 		'authorid' => $_SGLOBAL['supe_uid'],
 		'author' => $_SGLOBAL['supe_username'],
 		'dateline' => $_SGLOBAL['timestamp'],
-		'message' => $message,
+		'message' => $_REQUEST['message'],
 		'ip' => getonlineip()
 	);
 	//Èë¿â

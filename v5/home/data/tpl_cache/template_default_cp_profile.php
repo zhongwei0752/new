@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374157758', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374224847', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -948,7 +948,7 @@ $(function() {
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

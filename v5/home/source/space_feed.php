@@ -400,7 +400,7 @@ $_TPL['default_template'] = $default_template;
 $my_actives = array(in_array($_GET['filter'], array('site','myapp'))?$_GET['filter']:'all' => ' class="active"');
 $actives = array(in_array($_GET['view'], array('me','all','hot'))?$_GET['view']:'we' => ' class="active"');
 
-$myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+$myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
 				ORDER BY b.dateline ASC ");

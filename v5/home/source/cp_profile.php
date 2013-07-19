@@ -11,9 +11,8 @@ if(!defined('IN_UCHOME')) {
 if(!in_array($_GET['op'], array('base','contact','edu','work','info'))) {
 	$_GET['op'] = 'base';
 }
-
 		if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
-		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
+		include 'cp.php?ac=profile';
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){

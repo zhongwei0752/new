@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374174369', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374229989', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -101,13 +101,13 @@
 <div class="side_bar" >
               <div class="side_bar_inner" >
                     <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
@@ -274,7 +274,7 @@
         <div class="grid_6">
                             <div class="index_assembly_box bg1" <?php if($_GET['view']!='me') { ?><?php if(!$value['money']) { ?><?php $value1=$value['zhong']; ?><?php if($value1['appstatus']=='1') { ?>style="background: url('./template/default/image/chosen_bg3.png')!important;"<?php } ?><?php } ?><?php } ?>  id="choice">
                             <div class="assembly_title">
-        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['appstatus']?> <?=$value['subject']?></span></a><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?>（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a>重新开通）<?php } ?><?php } ?></span></div>
+        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?>（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a>重新开通）<?php } ?><?php } ?></span></div>
         <div id="num<?=$value['menusetid']?>">
        <div id="numh<?=$value['menusetid']?>"></div>
         <div class="assembly_info1">
@@ -332,10 +332,10 @@
     
 </div>	
  <?php if($_GET['view']=='me') { ?>
-    <div >*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
+    <div style="padding-bottom: 30px;padding-left:12px;">*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
     
-                           <input style="margin-left:260px;" type="submit" class="btn grid_2">
-                      <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1">修改</a>
+                           <input style="margin-left:330px;margin-top: -10px;" type="submit" class="btn grid_2">
+                    <!--   <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" style="margin-top: -10px;">修改</a> -->
                       </form>
                       <?php } ?>
 
@@ -410,7 +410,7 @@
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

@@ -101,10 +101,16 @@ padding-top: 1px;
   line-height: 28px;
 }
 .navbar-inner .grid_4 .setting_btn {
-  color: #1db8ab;
+  color: #C4C4C4;
+}
+.navbar-inner .grid_4 .setting_btn:hover{
+  color: #02B4AB;
 }
 .navbar-inner .grid_4 .quit_btn {
   color: #c4c4c4;
+}
+.navbar-inner .grid_4 .quit_btn:hover{
+  color: #02B4AB;
 }
 .navbar-inner .grid_4 .company_name {
   color: #c4c4c4;
@@ -395,6 +401,7 @@ padding-top: 1px;
   width: 170px;
 }
 .post_list .grid_2 input {
+  margin-top: 2px;
   width: 150px;
   height: 24px;
   border: #d4d4d4 1px solid;
@@ -445,6 +452,8 @@ padding-top: 1px;
   background: url('./image/btn_hover.png');
 }
 .content_title {
+  font-weight: bold;
+  color: #333;
   font-size: 20px;
   text-align: center;
   line-height: 40px;
@@ -476,8 +485,7 @@ padding-top: 1px;
   font-size: 20px;
 }
 .feed_action ul {
-  position: relative;
-  top: 20px;
+  margin-top: 20px;
   width: 346px;
   float: right;
   text-align: right;
@@ -517,7 +525,7 @@ padding-top: 1px;
 }
 .content_text_detail p {
   text-indent: 2em;
-  color: #9e9d9d;
+  color: #666;
   line-height: 1.8em;
 }
 .advertise_content_text_detail p {
@@ -603,6 +611,12 @@ padding-top: 1px;
   padding-top: 10px;
   color: #999999;
 }
+.login_hover{
+  color: #999;
+}
+.login_hover:hover{
+  color: #02B4AB;
+}
 .login_wrapper .grid_2 form input {
   border-radius: 4px;
   width: 200px;
@@ -649,7 +663,7 @@ padding-top: 1px;
   font-size: 14px;
 }
 .companies .grid_3 .company_name {
-  color: #999999;
+  color: #666;
   display: inline-block;
   width: 140px;
   height: 54px;

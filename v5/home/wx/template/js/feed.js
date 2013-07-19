@@ -281,6 +281,29 @@ $(document).ready(function(){
 			  if(""+idtype+""=="introduce"){
 					data=data.data.introduce;
 }
+            if(""+idtype+""=="product"){
+          data=data.data.product;
+}
+    if(""+idtype+""=="development"){
+          data=data.data.development;
+}
+  if(""+idtype+""=="industry"){
+          data=data.data.industry;
+}
+  if(""+idtype+""=="cases"){
+          data=data.data.cases;
+}
+ if(""+idtype+""=="branch"){
+          data=data.data.branch;
+}
+if(""+idtype+""=="job"){
+          data=data.data.job;
+}
+if(""+idtype+""=="talk"){
+          data=data.data.talk;
+}
+
+
           //oid1=data.quiz.options[0].oid;
          // oid2=data.quiz.options[1].oid;
 					//data.message = html_entity_decode(data.message);
@@ -296,7 +319,7 @@ $(document).ready(function(){
      
      
 			  }else{
-				alert("123");
+				alert(data.msg);
 			  }
 			}
 		  })

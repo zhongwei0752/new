@@ -1,23 +1,17 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374174373', 'template/default/network');?><script>
-  function register(id, result) {
-    if(result) {
-      $('registersubmit').disabled = true;
-      window.location.href = "<?=$jumpurl?>";
-    } else {
-      updateseccode();
-    }
-  }
-</script>
-<!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374229284', 'template/default/network');?><!DOCTYPE html>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>微伍v5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">  
     <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
     <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
     <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+     
     <style type="text/css">
         .companies .grid_3 span img{
              max-width:71px;max-height:71px;min-width:71px;min-height:71px;
@@ -44,7 +38,7 @@
             <div class="grid_2 sign_window" id="log">
                   <ul>
                      <li style="float:left">注册账号</li>
-                     <li style="padding-left:60px;" id="btna"><span style="margin-right:8px;">登陆</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna"></li>
+                     <li style="padding-left:60px;" id="btna"><a href="javascript:void(0)" class="login_hover"><span style="margin-right:8px;">登陆</span><img class="login_png" src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna" onmouseover="this.src='./template/default/image/login_btn_hover.png'" onmouseout="this.src='./template/default/image/login_btn.png'"></a></li>
                   </ul>
                  <form id="registerform" name="registerform" action="do.php?ac=<?=$_SCONFIG['register_action']?>&<?=$url_plus?>&ref" method="post" >
                   <input type="text" id="username" name="username" value="" placeholder="用户名"  onBlur="checkUserName()" tabindex="2" />&nbsp;<span id="checkusername">&nbsp;</span>
@@ -56,10 +50,11 @@
                     <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
                  </form>
             </div>
-             <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-300px;margin-top:-278px;">
+             <div class="grid_2 sign_window" id="sign" style="positon:relative;right:-1000px;margin-top:-278px;">
                   <ul>
                      <li style="float:left">登陆账号</li>
-                     <li style="padding-left:60px;" id="btnb"><span style="margin-right:8px;">注册</span><img src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id=""></li>
+                     <li style="padding-left:60px;" id="btnb"><a href="javascript:void(0)"  class="login_hover">注册
+                     <img class="login_png" src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="" onmouseover="this.src='./template/default/image/login_btn_hover.png'" onmouseout="this.src='./template/default/image/login_btn.png'"></a></li>
                   </ul>
                 
          <form name="loginform" action="do.php?ac=<?=$_SCONFIG['login_action']?>&<?=$url_plus?>&ref" method="post">
@@ -83,7 +78,7 @@
                    <span class="company_name"><?=$_SN[$value['uid']]?></span><br>
                     <span><a href="space.php?uid=<?=$value['uid']?>&do=blog&id=<?=$value['blogid']?>" class="fans"><?=$value['friendnum']?>客户</a></span> 
               </div>
-       
+      
       <?php } } ?>
              
             
@@ -91,47 +86,6 @@
     
       </div><!-- 无类div结束 -->
 
-<script type="text/javascript">
-<!--
-  $('username').focus();
-  var lastUserName = lastPassword = lastEmail = lastSecCode = '';
-  function checkUserName() {
-    var userName = $('username').value;
-    if(userName == lastUserName) {
-      return;
-    } else {
-      lastUserName = userName;
-    }
-    var cu = $('checkusername');
-    var unLen = userName.replace(/[^\x00-\xff]/g, "**").length;
-
-    if(unLen < 3 || unLen > 150) {
-      warning(cu, unLen < 3 ? '用户名小于3个字符' : '用户名超过 15 个字符');
-      return;
-    }
-    ajaxresponse('checkusername', 'op=checkusername&username=' + (is_ie && document.charset == 'utf-8' ? encodeURIComponent(userName) : userName));
-  }
-  function checkPassword(confirm) {
-    var password = $('password').value;
-    if(!confirm && password == lastPassword) {
-      return;
-    } else {
-      lastPassword = password;
-    }
-    var cp = $('checkpassword');
-    if(password == '' || /[\'\"\\]/.test(password)) {
-      warning(cp, '密码空或包含非法字符');
-      return false;
-    } else {
-      cp.style.display = '';
-      cp.innerHTML = '<img src="image/check_right.gif" width="13" height="13">';
-      if(!confirm) {
-        checkPassword2(true);
-      }
-      return true;
-    }
-  }
-  </script>
 
       <p class="login_page_company_title"><span><b>品牌合作企业</b></span><span class="more"><a href="">更多</a></span></p>
                <div class="companies_wrapper">
@@ -175,8 +129,10 @@
     </div><!-- wrraper end -->
 
 
-     <script src="./source/jquery_v1.10.2.js"></script>
+     <script src="./source/jquery.js" type="text/javascript"></script> 
+       <script type="text/javascript" src="./source/placeholder.js"></script>
     <script type="text/javascript">
+
    $('#btna').click(function(){
     $('#log').animate({ opacity: '0'
 },200);  
@@ -186,7 +142,7 @@
     // $('#sign').slideToggle("medium","linear");
    });
     $('#btnb').click(function(){
-    $('#sign').animate({ right:'-300px'
+    $('#sign').animate({ right:'-1000px'
 },200);  
      $('#log').animate({opacity: '1'
 },200);  
@@ -194,7 +150,75 @@
     // $('#sign').slideToggle("medium","linear");
    })
 </script>
-    <script type="text/javascript" src="./source/placeholder.js"></script>
+
+             <script type="text/javascript">
+<!--
+  $('username').focus();
+  var lastUserName = lastPassword = lastEmail = lastSecCode = '';
+  function checkUserName() {
+    var userName = $('username').value;
+    if(userName == lastUserName) {
+      return;
+    } else {
+      lastUserName = userName;
+    }
+    var cu = $('checkusername');
+    var unLen = userName.replace(/[^\x00-\xff]/g, "**").length;
+
+    if(unLen < 3 || unLen > 150) {
+      warning(cu, unLen < 3 ? '用户名小于3个字符' : '用户名超过 15 个字符');
+      return;
+    }
+    ajaxresponse('checkusername', 'op=checkusername&username=' + (is_ie && document.charset == 'utf-8' ? encodeURIComponent(userName) : userName));
+  }
+  function checkPassword(confirm) {
+    var password = $('password').value;
+    if(!confirm && password == lastPassword) {
+      return;
+    } else {
+      lastPassword = password;
+    }
+    var cp = $('checkpassword');
+    if(password == '' || /[\'\"\\]/.test(password)) {
+      warning(cp, '密码空或包含非法字符');
+      return false;
+    } else {
+      cp.style.display = '';
+      cp.innerHTML = '<img src="image/check_right.gif" width="13" height="13">';
+      if(!confirm) {
+        checkPassword2(true);
+      }
+      return true;
+    }
+  }
+  </script>
+  <script type="text/javascript">
+       $("input").change(function(){
+        $(this).css("color","#333")
+       })
+  </script>
+  <script type="text/javascript">
+      $(".login_hover").mouseover(function(){
+          $(".login_png").attr("src","./template/default/image/login_btn_hover.png")
+      });
+      $(".login_hover").mouseout(function(){
+          $(".login_png").attr("src","./template/default/image/login_btn.png")
+      });
+
+  </script>
+
+             <script>
+  function register(id, result) {
+    if(result) {
+      $('registersubmit').disabled = true;
+      window.location.href = "<?=$jumpurl?>";
+    } else {
+      updateseccode();
+    }
+  }
+</script>
+
+  
     <script type="text/javascript">
 var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
 tx.onfocus = function(){
@@ -270,7 +294,7 @@ tx.value = "密码";
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

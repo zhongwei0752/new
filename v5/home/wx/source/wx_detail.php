@@ -13,6 +13,6 @@ if(empty($m_auth)){
 }
 */
 
-
+$type=$_GET['type'];
 include_once template("./wx/template/feedcontent");
 ?>

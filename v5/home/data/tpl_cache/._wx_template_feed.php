@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374176910', './wx/template/feed');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374207742', './wx/template/feed');?><!DOCTYPE html>
 <html>
   <head>
   	 <title>企业介绍</title>
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 <script id="detailTemplate" type="text/x-jquery-tmpl">
     
-   <a href="wx.php?do=detail&id={{= introduceid}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id" class="list" data-role="none">
+   <a href="wx.php?do=detail&id={{= <?=$_GET['idtype']?>id}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id&type=<?=$_GET['idtype']?>" class="list" data-role="none">
               <table style="width:100%;border-spacing: 0;">
                <tr>
                   <td>
@@ -70,7 +70,7 @@ $(document).ready(function(){
   <body>
     <div data-role="page">
         <header data-role="header" data-tap-toggle="false" data-theme="none" class="header">
-            <span class="menu_title"><b>企业动态</b></span>
+            <span class="menu_title"><b><?=$appname?></b></span>
             <a href="#" data-theme="none" data-role="none" class="menu_btn" id="show"><img src="./template/img/menu_btn.png"></a>
         </header><!-- header end -->
         <div data-role="content">

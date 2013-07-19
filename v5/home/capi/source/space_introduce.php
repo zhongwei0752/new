@@ -16,7 +16,7 @@ $wei1=$value4;
 //判断是否购买
 $query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
-				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.english='$do'
+				WHERE bf.uid='$_REQUEST[uid]' and bf.appstatus='1' and b.english='$do'
 				ORDER BY b.dateline ASC");
 $value5 = $_SGLOBAL['db']->fetch_array($query5);
 $zhong2=$value5;
@@ -387,6 +387,7 @@ $_REQUEST['view'] = 'me';//Ä¬ÈÏÏÔÊ¾
 		if($wheresql == "b.uid='$space[uid]'" && $space['introducenum'] != $count) {
 			updatetable('space', array('introducenum' => $count), array('uid'=>$space['uid']));
 		}
+		$wheresql == "b.uid='$_REQUEST[uid]'" ;
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('introduce')." b $f_index
 				LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid

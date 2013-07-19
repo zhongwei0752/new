@@ -295,6 +295,153 @@ function getDetail(idtype, id, uid){
 			}
 		  });
 	}
+  if(idtype=="productid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=product&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.product.dateline = date('Y-m-d H:i',data.product.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="developmentid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=development&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.development.dateline = date('Y-m-d H:i',data.development.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="industryid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=industry&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.industry.dateline = date('Y-m-d H:i',data.industry.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="casesid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=cases&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.cases.dateline = date('Y-m-d H:i',data.cases.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="branchid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=branch&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.branch.dateline = date('Y-m-d H:i',data.branch.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="jobid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=job&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.job.dateline = date('Y-m-d H:i',data.job.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
+   if(idtype=="talkid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://localhost/v5/v5/home/capi/space.php?do=talk&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+
+        if(data.code==0){
+          data=data.data;
+          
+        data.talk.dateline = date('Y-m-d H:i',data.talk.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
 }
 
 

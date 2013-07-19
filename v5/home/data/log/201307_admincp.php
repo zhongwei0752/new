@@ -157,3 +157,11 @@
 <?PHP exit;?>	2013-07-18 22:31:16		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
 <?PHP exit;?>	2013-07-18 22:31:28		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"45";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-18 22:31:29		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-19 10:49:14		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-19 10:49:17		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-19 10:49:22		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"41";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-19 10:49:23		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-19 12:08:26		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-19 12:08:30		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-07-19 12:08:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"42";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-19 12:08:37		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
