@@ -24,6 +24,8 @@ if($id) {
 	//读取日志
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('cases')." b LEFT JOIN ".tname('casesfield')." bf ON bf.casesid=b.casesid WHERE b.casesid='$id' AND b.uid='$space[uid]'");
 	$cases = $_SGLOBAL['db']->fetch_array($query);
+	$cases["message"] = capi_fhtml($cases["message"]);
+	capi_showmessage_by_data("rest_success", 0, array('cases'=>$cases, 'count'=>count($cases)));
 	//日志不存在
 	if(empty($cases)) {
 		capi_showmessage_by_data('view_to_info_did_not_exist');
@@ -363,8 +365,10 @@ if($id) {
 			$theurl .= "&searchkey=$_REQUEST[searchkey]";
 			cksearch($theurl);
 		}
-
-		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('cases')." b WHERE $wheresql"),0);
+		$page=$_REQUEST['page'];
+		$perpage=$_REQUEST['perpage'];
+		$start = ($page-1)*$perpage;
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('cases')." b WHERE b.uid='$_REQUEST[uid]'"),0);
 		//更新统计
 		if($wheresql == "b.uid='$space[uid]'" && $space['casesnum'] != $count) {
 			updatetable('space', array('casesnum' => $count), array('uid'=>$space['uid']));
@@ -372,7 +376,7 @@ if($id) {
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('cases')." b $f_index
 				LEFT JOIN ".tname('casesfield')." bf ON bf.casesid=b.casesid
-				WHERE $wheresql
+				WHERE b.uid='$_REQUEST[uid]'
 				ORDER BY $ordersql DESC LIMIT $start,$perpage");
 		}
 	}

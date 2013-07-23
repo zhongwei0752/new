@@ -381,17 +381,18 @@ $_REQUEST['view'] = 'me';//Ä¬ÈÏÏÔÊ¾
 			$theurl .= "&searchkey=$_REQUEST[searchkey]";
 			cksearch($theurl);
 		}
-
-		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('introduce')." b WHERE $wheresql"),0);
+		$page=$_REQUEST['page'];
+		$perpage=$_REQUEST['perpage'];
+		$start = ($page-1)*$perpage;
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('introduce')." b WHERE b.uid='$_REQUEST[uid]'"),0);
 		//¸üÐÂÍ³¼Æ
 		if($wheresql == "b.uid='$space[uid]'" && $space['introducenum'] != $count) {
 			updatetable('space', array('introducenum' => $count), array('uid'=>$space['uid']));
 		}
-		$wheresql == "b.uid='$_REQUEST[uid]'" ;
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('introduce')." b $f_index
 				LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid
-				WHERE $wheresql
+				WHERE b.uid='$_REQUEST[uid]'
 				ORDER BY $ordersql DESC LIMIT $start,$perpage");
 		}
 	}

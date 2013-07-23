@@ -274,31 +274,31 @@ function HTMLDecode(input) {
 }
 
 function getDetail(idtype, id, uid){
-	if (idtype=="introduceid"){
-		$.ajax({
-			dataType: "jsonp",
-			url: "http://localhost/v5/v5/home/capi/space.php?do=introduce&uid="+uid+"&id="+id+"",
-		   
-			success: function( data ) {
-			  /* Get the movies array from the data */
+  if (idtype=="introduceid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=introduce&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
 
-			  if(data.code==0){
-					data=data.data;
-					
-				data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);		
+        if(data.code==0){
+          data=data.data;
+          
+        data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);    
 
-					$("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
-			  }else{
-				alert(data.msg);
-			  }
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
 
-			}
-		  });
-	}
+      }
+      });
+  }
   if(idtype=="productid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=product&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=product&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -319,7 +319,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="developmentid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=development&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=development&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -340,7 +340,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="industryid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=industry&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=industry&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -361,7 +361,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="casesid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=cases&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=cases&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -382,7 +382,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="branchid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=branch&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=branch&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -403,7 +403,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="jobid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=job&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=job&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -424,7 +424,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="talkid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://localhost/v5/v5/home/capi/space.php?do=talk&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=talk&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -446,66 +446,66 @@ function getDetail(idtype, id, uid){
 
 
 function getComment(idtype, id,uid, page, perpage){
-	 $("#morebtn .ui-btn-text").html("正在加载...");
-	 $("#morebtn").addClass('ui-disabled');
-	$.ajax({
-			dataType: "jsonp",
-			url: "http://localhost/v5/v5/home/capi/space.php?do=comment&idtype=" + idtype + "&uid=" + uid + "&id=" + id + "&page=" + page + "&perpage=" + perpage,
-		   
-			success: function( data ) {
-			  /* Get the movies array from the data */
-			  $("#morebtn .ui-btn-text").html("更多");
-			  $("#morebtn").removeClass('ui-disabled');
-			  if(data.code==0){
-					data=data.data.comment;
-					if (data.length<=0)
-						
-						$('.more-btn').html('没有更多评论了，赶快发布新的评论吧！');
-					else{
-						for (var i = 0, len = data.length; i < len; ++i) {
-							data[i].dateline = date('Y-m-d H:i',data[i].dateline);
-						}
-						$("#commentTemplate").tmpl(data).appendTo('#comment-panel');
-						$('#page').val(parseInt($('#page').val())+1);
-					}
-			  }else{
-				alert(data.data.commentcount);
-			  }
-			}
-		  });
-	$("#morebtn").removeClass('ui-disabled');
+   $("#morebtn .ui-btn-text").html("正在加载...");
+   $("#morebtn").addClass('ui-disabled');
+  $.ajax({
+      dataType: "jsonp",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=comment&idtype=" + idtype + "&uid=" + uid + "&id=" + id + "&page=" + page + "&perpage=" + perpage,
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+        $("#morebtn .ui-btn-text").html("更多");
+        $("#morebtn").removeClass('ui-disabled');
+        if(data.code==0){
+          data=data.data.comment;
+          if (data.length<=0)
+            
+            $('.more-btn').html('没有更多评论了，赶快发布新的评论吧！');
+          else{
+            for (var i = 0, len = data.length; i < len; ++i) {
+              data[i].dateline = date('Y-m-d H:i',data[i].dateline);
+            }
+            $("#commentTemplate").tmpl(data).appendTo('#comment-panel');
+            $('#page').val(parseInt($('#page').val())+1);
+          }
+        }else{
+        alert(data.data.commentcount);
+        }
+      }
+      });
+  $("#morebtn").removeClass('ui-disabled');
 }
 
 function cpComment(idtype, id, message){
-	var pattern = /^[\s]{0,}$/g;
-	$("#publishbtn").addClass('ui-disabled');
-	if (!pattern.test(message)){
-		$.ajax({
-				dataType: "jsonp",
-				url: "http://localhost/v5/v5/home/capi/cp.php?ac=comment&id="+id+"&commentsubmit=true&idtype="+idtype+"&message="+message,
-			   
-				success: function( data ) {
+  var pattern = /^[\s]{0,}$/g;
+  $("#publishbtn").addClass('ui-disabled');
+  if (!pattern.test(message)){
+    $.ajax({
+        dataType: "jsonp",
+        url: "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=comment&id="+id+"&commentsubmit=true&idtype="+idtype+"&message="+message,
+         
+        success: function( data ) {
           if(data.code==0){
-				  alert("发布成功");
+          alert("发布成功");
         location.reload();
-				  }else{
-					alert(data.msg);
-				  }
-				}
-		});
-	}else{
-		$("#publishbtn").removeClass('ui-disabled');
-		alert("至少写一点东西！");
-	}
+          }else{
+          alert(data.msg);
+          }
+        }
+    });
+  }else{
+    $("#publishbtn").removeClass('ui-disabled');
+    alert("至少写一点东西！");
+  }
 }
 
 $(function(){
-	getDetail($('#idtype').val(), $('#id').val(), $('#uid').val());
+  getDetail($('#idtype').val(), $('#id').val(), $('#uid').val());
   getComment($('#idtype').val(), $('#id').val(), $('#uid').val(),$('#page').val(),$('#perpage').val());
-	
-	
+  
+  
 })
 
 function getTemplate( key ) {
-		return $( "#" + key + "Template" ).template();
+    return $( "#" + key + "Template" ).template();
 }

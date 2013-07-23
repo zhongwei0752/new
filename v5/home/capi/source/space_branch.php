@@ -24,6 +24,8 @@ if($id) {
 	//读取日志
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('branch')." b LEFT JOIN ".tname('branchfield')." bf ON bf.branchid=b.branchid WHERE b.branchid='$id' AND b.uid='$space[uid]'");
 	$branch = $_SGLOBAL['db']->fetch_array($query);
+	$branch["message"] = capi_fhtml($branch["message"]);
+	capi_showmessage_by_data("rest_success", 0, array('branch'=>$branch, 'count'=>count($branch)));
 	//日志不存在
 	if(empty($branch)) {
 		capi_showmessage_by_data('view_to_info_did_not_exist');
@@ -363,8 +365,10 @@ if($id) {
 			$theurl .= "&searchkey=$_REQUEST[searchkey]";
 			cksearch($theurl);
 		}
-
-		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('branch')." b WHERE $wheresql"),0);
+		$page=$_REQUEST['page'];
+		$perpage=$_REQUEST['perpage'];
+		$start = ($page-1)*$perpage;
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('branch')." b WHERE b.uid='$_REQUEST[uid]'"),0);
 		//更新统计
 		if($wheresql == "b.uid='$space[uid]'" && $space['branchnum'] != $count) {
 			updatetable('space', array('branchnum' => $count), array('uid'=>$space['uid']));
@@ -372,7 +376,7 @@ if($id) {
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('branch')." b $f_index
 				LEFT JOIN ".tname('branchfield')." bf ON bf.branchid=b.branchid
-				WHERE $wheresql
+				WHERE b.uid='$_REQUEST[uid]'
 				ORDER BY $ordersql DESC LIMIT $start,$perpage");
 		}
 	}

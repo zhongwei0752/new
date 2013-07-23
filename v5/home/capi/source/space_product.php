@@ -374,17 +374,18 @@ if($id) {
 			$theurl .= "&searchkey=$_REQUEST[searchkey]";
 			cksearch($theurl);
 		}
-
-		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('product')." b WHERE $wheresql"),0);
+		$page=$_REQUEST['page'];
+		$perpage=$_REQUEST['perpage'];
+		$start = ($page-1)*$perpage;
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('product')." b WHERE b.uid='$_REQUEST[uid]'"),0);
 		//¸üÐÂÍ³¼Æ
 		if($wheresql == "b.uid='$space[uid]'" && $space['productnum'] != $count) {
 			updatetable('space', array('productnum' => $count), array('uid'=>$space['uid']));
 		}
-		$wheresql == "b.uid='$_REQUEST[uid]'";
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('product')." b $f_index
 				LEFT JOIN ".tname('productfield')." bf ON bf.productid=b.productid
-				WHERE $wheresql
+				WHERE b.uid='$_REQUEST[uid]'
 				ORDER BY $ordersql DESC LIMIT $start,$perpage");
 		}
 	}

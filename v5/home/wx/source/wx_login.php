@@ -19,7 +19,7 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 		$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         $friend = file_get_contents($friendurl,0,null,null);
         $friend_output = json_decode($friend);
-		wxshowmessage("快捷登录成功","http://v5.home3d.cn/v5/v5/home/index.php");
+		wxshowmessage("快捷登录成功","http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=home&uid=$weixinuid");
 }else{
 
 	$username = $_GET['wxkey'];
@@ -87,7 +87,7 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 				$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         		$friend = file_get_contents($friendurl,0,null,null);
         		$friend_output = json_decode($friend);
-				wxshowmessage("快捷注册成功","http://v5.home3d.cn/v5/v5/home/index.php");
+				wxshowmessage("快捷注册成功","http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=home&uid=$weixinuid");
 
 }
 ?>

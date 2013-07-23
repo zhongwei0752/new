@@ -24,6 +24,8 @@ if($id) {
 	//读取日志
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('job')." b LEFT JOIN ".tname('jobfield')." bf ON bf.jobid=b.jobid WHERE b.jobid='$id' AND b.uid='$space[uid]'");
 	$job = $_SGLOBAL['db']->fetch_array($query);
+	$job["message"] = capi_fhtml($job["message"]);
+	capi_showmessage_by_data("rest_success", 0, array('job'=>$job, 'count'=>count($job)));
 	//日志不存在
 	if(empty($job)) {
 		capi_showmessage_by_data('view_to_info_did_not_exist');
@@ -364,7 +366,7 @@ if($id) {
 			cksearch($theurl);
 		}
 
-		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('job')." b WHERE $wheresql"),0);
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('job')." b WHERE b.uid='$_REQUEST[uid]'"),0);
 		//更新统计
 		if($wheresql == "b.uid='$space[uid]'" && $space['jobnum'] != $count) {
 			updatetable('space', array('jobnum' => $count), array('uid'=>$space['uid']));
@@ -372,7 +374,7 @@ if($id) {
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('job')." b $f_index
 				LEFT JOIN ".tname('jobfield')." bf ON bf.jobid=b.jobid
-				WHERE $wheresql
+				WHERE b.uid='$_REQUEST[uid]'
 				ORDER BY $ordersql DESC LIMIT $start,$perpage");
 		}
 	}

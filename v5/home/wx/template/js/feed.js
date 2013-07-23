@@ -270,10 +270,9 @@ $(document).ready(function(){
   //var uid=$.query.get('uid');
   var uid=$.query.get('uid');
   var idtype=$.query.get('idtype');
-
 	$.ajax({
 			dataType: "jsonp",
-			url: "http://localhost/v5/v5/home/capi/space.php?do="+idtype+"&uid="+uid+"",
+			url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do="+idtype+"&uid="+uid+"&page=1&perpage=4",
 		   
 			success: function( data ) {
 			  /* Get the movies array from the data */
@@ -286,6 +285,9 @@ $(document).ready(function(){
 }
     if(""+idtype+""=="development"){
           data=data.data.development;
+          if (data.length<=0){
+            $(".more_btn").appendto("<div class='more_btn'>亲，没有了哦！</div>");
+          }
 }
   if(""+idtype+""=="industry"){
           data=data.data.industry;
@@ -303,12 +305,17 @@ if(""+idtype+""=="talk"){
           data=data.data.talk;
 }
 
-
+          
           //oid1=data.quiz.options[0].oid;
          // oid2=data.quiz.options[1].oid;
 					//data.message = html_entity_decode(data.message);
             for (var i = 0, len = data.length; i < len; ++i) {
           data[i].dateline = date('Y-m-d H:i',data[i].dateline);
+          if(data[i].image1url){
+             data[i].image1url ="../"+data[i].image1url+"";
+          }else{
+            data[i].image1url ="";
+          }
         }
 					//data.user = getUser(data.uid, auth);
 					//data.idtype = "photoid";
@@ -364,6 +371,74 @@ if(""+idtype+""=="talk"){
 		}
 	  })
 			  }
+
+  //分页
+   function getComment(idtype, uid, page, perpage){
+   $("#morebtn .ui-btn-text").html("正在加载...");
+   $("#morebtn").addClass('ui-disabled');
+  $.ajax({
+      dataType: "jsonp",
+      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do="+idtype+"&uid=" + uid + "&page=" + page + "&perpage=" + perpage,
+       
+      success: function( data ) {
+          if(data.code==0){
+        if(""+idtype+""=="introduce"){
+          data=data.data.introduce;
+}
+            if(""+idtype+""=="product"){
+          data=data.data.product;
+          
+}
+    if(""+idtype+""=="development"){
+          data=data.data.development;
+}
+  if(""+idtype+""=="industry"){
+          data=data.data.industry;
+}
+  if(""+idtype+""=="cases"){
+          data=data.data.cases;
+}
+ if(""+idtype+""=="branch"){
+          data=data.data.branch;
+}
+if(""+idtype+""=="job"){
+          data=data.data.job;
+}
+if(""+idtype+""=="talk"){
+          data=data.data.talk;
+}
+
+          if (data.length<=0){
+            
+            $(".more_btn").html("<div class='more_btn'>亲，没有了哦！</div>");
+          }
+          //oid1=data.quiz.options[0].oid;
+         // oid2=data.quiz.options[1].oid;
+          //data.message = html_entity_decode(data.message);
+            for (var i = 0, len = data.length; i < len; ++i) {
+          data[i].dateline = date('Y-m-d H:i',data[i].dateline);
+          if(data[i].image1url){
+             data[i].image1url ="../"+data[i].image1url+"";
+          }else{
+            data[i].image1url ="";
+          }
+        }
+          //data.user = getUser(data.uid, auth);
+          //data.idtype = "photoid";
+          //data.piclistlen = data.piclist.length;
+          $('#page').val(parseInt($('#page').val())+1);
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+           
+
+     
+     
+        }else{
+        alert(data.msg);
+        }
+      }
+      })
+       
+}     
 
 //投票
 

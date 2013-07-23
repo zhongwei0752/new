@@ -209,11 +209,11 @@ class wechatCallbackapiTest
                       $app = file_get_contents($appurl,0,null,null);
                       $app_output = json_decode($app);
                       $count=$app_output->data->count;
-                    $url = "http://www.betit.cn/wx/wx.php?do=login&wxkey=".$toUsername;
+                    $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=home&uid=".$row[uid];
                     $pic = "http://v5.home3d.cn/v5/v5/home/".$row[logourl];
                     $articles[] = makeArticleItem($name, $name, $pic, $url);
                       for($i=0;$i<$count;$i++){
-                       $url = "http://www.betit.cn/wx/wx.php?do=login&wxkey=".$toUsername;
+                       $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&idtype=".$app_output->data->app[$i]->english;
                        $subject=$app_output->data->app[$i]->subject;
                        $pic = "http://v5.home3d.cn/v5/v5/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 

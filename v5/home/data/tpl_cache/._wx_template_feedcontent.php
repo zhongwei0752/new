@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1374207987', './wx/template/feedcontent');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1374486924', './wx/template/feedcontent');?><!DOCTYPE html>
 <html>
   <head>
   	 <title></title>
@@ -18,10 +18,58 @@
      </style>
 
      <script id="detailTemplate" type="text/x-jquery-tmpl">
-
  <header class="content_header_width">
   
-     
+      <h3> <?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
+                 <p> {{= industry.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                  <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
+                 <p> {{= branch.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                    <?=BLOCK_TAG_START?>if development<?=BLOCK_TAG_END?>
+                 <p> {{= development.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if product<?=BLOCK_TAG_END?>
+                 <p> {{= product.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if introduce<?=BLOCK_TAG_END?>
+                 <p> {{= introduce.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if cases<?=BLOCK_TAG_END?>
+                 <p> {{= cases.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if talk<?=BLOCK_TAG_END?>
+                 <p> {{= branch.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
+                 <p> {{= job.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?></h3>
+
+
+      <span class="time"><?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
+                 <p> {{= industry.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                  <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
+                 <p> {{= branch.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                    <?=BLOCK_TAG_START?>if development<?=BLOCK_TAG_END?>
+                 <p> {{= development.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if product<?=BLOCK_TAG_END?>
+                 <p> {{= product.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if introduce<?=BLOCK_TAG_END?>
+                 <p> {{= introduce.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if cases<?=BLOCK_TAG_END?>
+                 <p> {{= cases.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if talk<?=BLOCK_TAG_END?>
+                 <p> {{= branch.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
+                 <p> {{= job.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?></span>
          
 
         </header><!-- header end -->
@@ -29,13 +77,34 @@
           <div class="normal_wrapper_width">
            <div class="content_pic">
            
-
+                <?=$typepic?>
              </div>
-
              <div class="content_text">
-             
-                  
+              <?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
+                 <p> {{= industry.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                  <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
+                 <p> {{= branch.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                    <?=BLOCK_TAG_START?>if development<?=BLOCK_TAG_END?>
                  <p> {{= development.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if product<?=BLOCK_TAG_END?>
+                 <p> {{= product.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if introduce<?=BLOCK_TAG_END?>
+                 <p> {{= introduce.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if cases<?=BLOCK_TAG_END?>
+                 <p> {{= cases.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if talk<?=BLOCK_TAG_END?>
+                 <p> {{= branch.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
+                 <p> {{= job.message}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+
                   
                 
              </div>
@@ -75,6 +144,7 @@
     <input type="hidden" id="wxkey" name="wxkey" value="<?=$_GET['wxkey']?>"/>
     <input type="hidden" id="id" name="id" value="<?=$_GET['id']?>"/>
     <input type="hidden" id="idtype" name="idtype" value="<?=$_GET['idtype']?>"/>
+    <input type="hidden" id="type" name="type" value="<?=$_GET['type']?>"/>
     <input type="hidden" id="uid" name="uid" value="<?=$_GET['uid']?>"/>
     <input type="hidden" id="page" name="page" value="0"/>
     <input type="hidden" id="perpage" name="perpage" value="5"/>

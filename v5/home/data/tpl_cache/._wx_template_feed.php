@@ -1,7 +1,7 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374207742', './wx/template/feed');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374487832', './wx/template/feed');?><!DOCTYPE html>
 <html>
   <head>
-  	 <title>企业介绍</title>
+  	 <title><?=$appname?></title>
   	 <meta charset="utf-8">
   	 <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="stylesheet" href="template/css/mobiscroll.custom-2.5.4.min.css"><!-- 时间选择插件 -->
@@ -57,7 +57,8 @@ $(document).ready(function(){
                       </table>
                   </td>
                   <td style="float:right;">
-                       <img src="../{{= image1url}}" class="list_pic"> 
+
+                       <img src="{{= image1url}}" class="list_pic"> 
                   </td>
                </tr>
             </table>
@@ -76,17 +77,23 @@ $(document).ready(function(){
         <div data-role="content">
           <div id="detail-panel"></div>
           <a href="#" class="more_btn_link">
-              <div class="more_btn">
-                  更多
-              </div>
+             <a href="javascript:;" class="more_btn"   onclick="getComment($('#idtype').val(), $('#uid').val(), $('#page').val(), $('#perpage').val());" > <div class="more_btn">
+                更多
+              </div></a>
+
+
+
            </a>
+            <input type="hidden" id="id" name="id" value="<?=$_GET['id']?>"/>
+            <input type="hidden" id="idtype" name="idtype" value="<?=$_GET['idtype']?>"/>
+            <input type="hidden" id="uid" name="uid" value="<?=$_GET['uid']?>"/>
+            <input type="hidden" id="page" name="page" value="2"/>
+            <input type="hidden" id="perpage" name="perpage" value="4"/>
             <select name="City" id="demo" class="f-dd" onchange="top.location=this.value;" >
-                <option value="v5_a_index.html">首页</option>
-                <option value="info.html">企业介绍</option>
-                <option value="product_list.html">产品列表</option>
-                <option value="feed.html" selected="selected">企业动态</option>
-                <option value="book.html">预订预约</option>
-                <option value="job.html">人才招聘</option>
+                <option value="wx.php?do=home&uid=<?=$_GET['uid']?>">首页</option>
+              <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
+                <option value="wx.php?do=feed&uid=<?=$_GET['uid']?>&idtype=<?=$value['english']?>"><?=$value['subject']?></option>
+                <?php } } ?>
             </select>
 <!-- 
 <a href="#" id="clearSelect" class="btn btn-blue"><span class="btn-i">Clear</span></a>
