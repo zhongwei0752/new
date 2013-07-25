@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_pm|template/default/header|template/default/footer', '1374723375', 'template/default/space_pm');?><?php $_TPL['titles'] = array('短消息'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_pm|template/default/header|template/default/footer', '1374748557', 'template/default/space_pm');?><?php $_TPL['titles'] = array('短消息'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -114,9 +114,9 @@
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
                     </ul>
               </div>
          </div>
@@ -356,7 +356,7 @@
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
     </div>
 

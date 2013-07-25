@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/message|admin/tpl/header|admin/tpl/footer|template/default/header|template/default/footer', '1374721494', 'admin/tpl/message');?><?php $_TPL['menunames'] = array(
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/message|admin/tpl/header|admin/tpl/footer|template/default/header|template/default/footer', '1374745133', 'admin/tpl/message');?><?php $_TPL['menunames'] = array(
 		'index' => '管理首页',
 		'config' => '站点设置',
 		'privacy' => '隐私设置',
@@ -167,9 +167,9 @@
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
                     </ul>
               </div>
          </div>
@@ -285,7 +285,7 @@
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
     </div>
 

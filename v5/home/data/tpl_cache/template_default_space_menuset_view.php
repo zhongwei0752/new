@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374632275', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374747204', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -56,13 +56,12 @@
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?>
-<?php if($space['allnum']) { ?>
+                <?php if($space['pmnum']) { ?>
+<?php if($space['pmnum']) { ?><a class="grid_2" href="space.php?do=pm&filter=newpm"><p>短消息</p><a href="space.php?do=pm" alt="短消息"><div class="message_pawpaw"><?=$space['pmnum']?></div></a><?php } ?>
+                 <?php } else { ?>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?></a>
 
-
-<?php if($space['namestatusnum']) { ?><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1" alt="未审核用户"><div class="message_pawpaw" ><?=$space['namestatusnum']?></div></a><?php } ?>
-
-<?php } ?></a>
+<?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
 <div class="grid_3" style="width:400px;display:inline-block;"></div>
@@ -116,9 +115,9 @@
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
                     </ul>
               </div>
          </div>
@@ -371,7 +370,7 @@ magicColor(elems[i]);
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
     </div>
 

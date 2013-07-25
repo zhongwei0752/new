@@ -102,7 +102,11 @@ $_SGLOBAL['usergroup']=Array
 		'allowjob' => '0',
 		'allowtalk' => '0',
 		'managemenuset' => '0',
-		'allowcases' => '0'
+		'allowcases' => '0',
+		'allowrecommend' => '0',
+		'managerecommend' => '0',
+		'allowmoblie' => '0',
+		'managemoblie' => '0'
 		)
 	)
 ?>

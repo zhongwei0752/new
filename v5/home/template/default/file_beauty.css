@@ -6,7 +6,7 @@ position: relative;
 width: 94px;  
 height: 32px;  
 overflow: hidden;  
-background: url('./image/btn_normal.png')no-repeat;
+background: url('.template/default/image/btn_normal.png')no-repeat;
 color: #fff;  
 padding-bottom: 4px;
 cursor: pointer;  

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374735442', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374748550', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -116,9 +116,9 @@
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
                     </ul>
               </div>
          </div>

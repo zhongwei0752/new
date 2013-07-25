@@ -497,6 +497,26 @@ function getclassmenusetarr($uid) {
 	}
 	return $classarr;
 }
+function getclassrecommendarr($uid) {
+	global $_SGLOBAL;
+
+	$classarr = array();
+	$query = $_SGLOBAL['db']->query("SELECT classid, classname FROM ".tname('classmoblie')." WHERE uid='$uid' or uid=0");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		$classarr[$value['classid']] = $value;
+	}
+	return $classarr;
+}
+function getclassmobliearr($uid) {
+	global $_SGLOBAL;
+
+	$classarr = array();
+	$query = $_SGLOBAL['db']->query("SELECT classid, classname FROM ".tname('classmoblie')." WHERE uid='$uid' or uid=0");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		$classarr[$value['classid']] = $value;
+	}
+	return $classarr;
+}
 
 //ªÒ»°œ‡≤·
 function getalbums($uid) {

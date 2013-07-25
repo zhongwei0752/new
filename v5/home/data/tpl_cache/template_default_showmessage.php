@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/showmessage|template/default/header|template/default/footer', '1374733146', 'template/default/showmessage');?><?php $_TPL['nosidebar']=1; ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/showmessage|template/default/header|template/default/footer', '1374745029', 'template/default/showmessage');?><?php $_TPL['nosidebar']=1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -114,9 +114,9 @@
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
-                        <li class="side_option"><a href="">焦点推荐</a></li>
+                        <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
                     </ul>
               </div>
          </div>

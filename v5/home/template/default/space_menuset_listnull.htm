@@ -52,7 +52,7 @@
         <div class="grid_6">
                             <div class="assembly_inner bg1" >
                             <div class="assembly_title" id='basic-modal'>
-        <a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" ><span class="title">$value[subject]</span></a><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" class="view_detail 1basic">查看详情>></a></div>
+        <a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" ><span class="title">$value[subject]</span></a><a href="space.php?uid=$value[uid]&do=$do&id=$value[menusetid]" class="view_detail basic$value[menusetid]">查看详情>></a></div>
       <div id="num$value[menusetid]" style="height:160px;">
         <!--{if $value[money]}--><div id="numh$value[menusetid]"></div><!--{else}--><div id="numh$value[menusetid]"><input type='hidden' name='$value[menusetid]' value='1' style='width:20px;' /></div><!--{/if}-->
        
@@ -93,10 +93,31 @@
         
       });
       </script>
+  <div id="basic-modal-content$value[menusetid]">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">$value[subject]</h3>
+  <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;overflow:scroll;">$value[message1]</div>
+
+</div>
+
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+        $('#basic-modal-content$value[menusetid]').attr("style", "display:none;");;
+           $('#basic-modal input.basic$value[menusetid], #basic-modal a.basic$value[menusetid]').click(function (e) {
+    e.preventDefault();
+    $('#basic-modal-content$value[menusetid]').modal();
+  });
+
+            
+       })
+    </script>
     <!--{/loop}-->
-  
+
                 
                      <div class="confirm_btn container_12" style="padding-left:400px;">
+                      <br/>
                            <input type="submit" class="btn grid_2"></a>
                       </div>
                  </div><!-- content_detail_wrapper end -->

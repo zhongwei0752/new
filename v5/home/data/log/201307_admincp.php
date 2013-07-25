@@ -228,3 +228,14 @@
 <?PHP exit;?>	2013-07-25 11:04:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
 <?PHP exit;?>	2013-07-25 11:04:54		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"59";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-07-25 11:04:55		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-25 15:32:54		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-25 15:33:21		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-25 15:33:22		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-25 15:33:23		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-25 17:18:16		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-25 17:18:18		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-25 17:18:19		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-25 17:18:20		127.0.0.1	1	/v5/v5/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-25 17:38:48		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-25 17:38:53		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"63";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-25 17:38:54		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}

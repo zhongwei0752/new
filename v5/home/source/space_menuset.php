@@ -408,6 +408,7 @@ if($_GET['view'] == 'me') {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
+
 					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
@@ -427,6 +428,7 @@ if($_GET['view'] != 'me') {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
+						$value['message1'] = $value['message'];
 					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
