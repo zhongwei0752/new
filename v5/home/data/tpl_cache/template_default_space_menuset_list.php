@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374229989', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374721849', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -57,8 +57,12 @@
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
-<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
+                <?php if($space['pmnum']) { ?>
+<?php if($space['pmnum']) { ?><a class="grid_2" href="space.php?do=pm&filter=newpm"><p>短消息</p><a href="space.php?do=pm" alt="短消息"><div class="message_pawpaw"><?=$space['pmnum']?></div></a><?php } ?>
+                 <?php } else { ?>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?></a>
+
+<?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
 <div class="grid_3" style="width:400px;display:inline-block;"></div>
@@ -118,7 +122,6 @@
                     </ul>
               </div>
          </div>
-
 
 <!--<div class="app_m">
 <ul>
@@ -208,29 +211,33 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>企业动态</span>
+                   <span><a href="space.php?do=home">首页</a></span>><span>应用管理</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                  	<?php if($_GET['view']=="all") { ?>
-                     <div class="bread_actived grid_1" style="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all">
-                         大家的应用
+                      <div class="bread_actived grid_1" style="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all"style="margin-left:10px;">
+                         更多应用
                      </div>
-                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me" class="link_back_bread grid_3">
+                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=me"  class="link_back_bread grid_3">
                       我的应用
                      </a>
+                    
                      <?php } else { ?>
-                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all" class="link_back_bread grid_3" style="margin-left:-10px;">
-                      大家的应用
-                     </a>
-                     <div class="bread_actived grid_1" style="margin-left:10px;">
+                     
+                     <div class="bread_actived grid_1" >
                       我的应用
                      </div>
+                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all" class="link_back_bread grid_3" >
+                      更多应用
+                     </a>
                      <?php } ?>
+
                      <?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?>
-                     <a href="cp.php?ac=menuset" class="btn grid_2">
+                     <a href="cp.php?ac=menuset" class="btn grid_2" style="margin-left:10px;">
                       发表新应用
                      </a>
                      <?php } ?>
+                     <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" >排序</a>
                  </div>		
 
 <?php } ?>	
@@ -331,12 +338,12 @@
 
     
 </div>	
- <?php if($_GET['view']=='me') { ?>
+ <?php if($_GET['view']=='me') { ?><?php if($_GET['change']=='1') { ?>
     <div style="padding-bottom: 30px;padding-left:12px;">*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
     
                            <input style="margin-left:330px;margin-top: -10px;" type="submit" class="btn grid_2">
                     <!--   <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" style="margin-top: -10px;">修改</a> -->
-                      </form>
+                      </form><?php } ?>
                       <?php } ?>
 
 

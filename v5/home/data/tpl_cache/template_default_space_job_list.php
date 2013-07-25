@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_job_list|template/default/header|template/default/footer', '1374461552', 'template/default/space_job_list');?><?php $_TPL['titles'] = array('人才招聘'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_job_list|template/default/header|template/default/footer', '1374571477', 'template/default/space_job_list');?><?php $_TPL['titles'] = array('人才招聘'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -185,7 +185,7 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>人才招聘</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>人才招聘</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -211,7 +211,7 @@
                                   <p><?=$value['message']?></p><br/>
                                   <p class="action_info">
                                      <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
-                                    <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['jobid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
+                                    <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['jobid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?><span>发布日期：<?php echo sgmdate('Y-m-d',$value[dateline]); ?></span>
                                   </p>
                              </div>
                           </div>

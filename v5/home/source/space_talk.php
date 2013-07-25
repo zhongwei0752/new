@@ -25,7 +25,7 @@ if(empty($zhong2)){
 }
 
 //·ÖÒ³
-$perpage = 20;
+$perpage = 5;
 $perpage = mob_perpage($perpage);
 
 $page = empty($_GET['page'])?0:intval($_GET['page']);

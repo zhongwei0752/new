@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1374206959', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1374721767', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>v5v5v5v5</title>
@@ -30,7 +30,7 @@
     <div class="wrapper">
         <div class="navbar">
             <div class="navbar-inner container_36">
-                <a class="logo grid_1" href="#" style="background:none;"><img src="./template/default/image/logo.png"></a>
+                <a class="logo grid_1" href="space.php?do=home" style="background:none;"><img src="./template/default/image/logo.png"></a>
                 <a href="#" class="grid_5" style="float:right;color:#BDBEBF;padding-right:10px;">帮助</a>
              </div>
          </div>
@@ -94,7 +94,7 @@
       });
       </script>
     <?php } } ?>
-                       
+  
                 
                      <div class="confirm_btn container_12" style="padding-left:400px;">
                            <input type="submit" class="btn grid_2"></a>
@@ -167,7 +167,7 @@
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

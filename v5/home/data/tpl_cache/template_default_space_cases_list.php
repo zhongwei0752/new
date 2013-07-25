@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_list|template/default/header|template/default/footer', '1374461347', 'template/default/space_cases_list');?><?php $_TPL['titles'] = array('成功案例'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_list|template/default/header|template/default/footer', '1374648931', 'template/default/space_cases_list');?><?php $_TPL['titles'] = array('成功案例'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -57,8 +57,12 @@
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
-<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
+                <?php if($space['pmnum']) { ?>
+<?php if($space['pmnum']) { ?><a class="grid_2" href="space.php?do=pm"><p>短消息</p><a href="space.php?do=pm" alt="短消息"><div class="message_pawpaw"><?=$space['pmnum']?></div></a><?php } ?>
+                 <?php } else { ?>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?></a>
+
+<?php } ?>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
 <div class="grid_3" style="width:400px;display:inline-block;"></div>
@@ -118,7 +122,6 @@
                     </ul>
               </div>
          </div>
-
 
 <!--<div class="app_m">
 <ul>
@@ -185,7 +188,7 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>成功案例</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>成功案例</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -212,10 +215,10 @@
                              <div class="list_test ">
                                   <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['casesid']?>"><h3><?=$value['subject']?></h3></a>
                                   <p><?=$value['message']?></p><br/>
-                                  <p class="action_info">
+                                  <p class="action_info"  style="margin-top:-4px;">
                                    <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
                                     <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['casesid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
-                                    <?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['casesid']?>#comment"><span>评论: <?=$value['replynum']?> 个</span></a><?php } else { ?><span>评论: 0次</span><?php } ?>
+                                    <?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['casesid']?>#comment"><span>评论: <?=$value['replynum']?> 个</span></a><?php } else { ?><span>评论: 0次</span><?php } ?><span>发布日期：<?php echo sgmdate('Y-m-d',$value[dateline]); ?></span>
                                   </p>
                              </div>
                           </div>

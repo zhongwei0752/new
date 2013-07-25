@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374487832', './wx/template/feed');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1374639302', './wx/template/feed');?><!DOCTYPE html>
 <html>
   <head>
   	 <title><?=$appname?></title>
@@ -56,10 +56,7 @@ $(document).ready(function(){
                           <tr><td><span class="time">{{= dateline}}</span></td></tr>
                       </table>
                   </td>
-                  <td style="float:right;">
-
-                       <img src="{{= image1url}}" class="list_pic"> 
-                  </td>
+                
                </tr>
             </table>
             </a>

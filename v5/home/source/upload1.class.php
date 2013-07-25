@@ -37,7 +37,7 @@
 					}
 					//showmessage($this->upload_final_name);
 					//$this->upload_target_path = $this->upload_target_dir.$this->upload_name;
-					$this->upload_final_name = $table.strtotime("now").$this->upload_name;
+					$this->upload_final_name = $table."_".$id."_"."idcard.jpg";
 					$this->upload_target_path = $this->upload_target_dir.$this->upload_final_name;
 					if(move_uploaded_file($this->upload_tmp_name,$this->upload_target_path)){
 					include("./source/image1.class.php");

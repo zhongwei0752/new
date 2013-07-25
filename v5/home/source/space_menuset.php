@@ -483,7 +483,7 @@ if($_GET['view'] != 'me') {
 		}else{
 		inserttable("appset", array('month'=>'0','dateline1' => '0','endtime'=>'0','orderid'=>$value2['menusetid'],'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
 		$showmessage1='订制成功。';
-		$showlink1="space.php?do=menuset";
+		$showlink1="space.php?do=menuset&view=me";
 		}
 	}else{
 	$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
@@ -503,7 +503,7 @@ if($_GET['view'] != 'me') {
 	updatetable("appset", array('month'=>'0','endtime'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	updatetable("appset", array('appstatus'=>'1'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	$showmessage1='订制成功。';
-	$showlink1="space.php?do=menuset";
+	$showlink1="space.php?do=menuset&view=me";
 }
 }
 }

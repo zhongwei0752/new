@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374229986', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374632275', 'template/default/space_menuset_view');?><?php $_TPL['titles'] = array($menuset['subject'], '应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -56,8 +56,13 @@
                  <a href="index.php" class="grid_2">首页</a>
                 <?php } ?>
                 <?php if($_SGLOBAL['supe_uid']) { ?>	
-                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?><?php if(!empty($_SGLOBAL['member']['newpm'])) { ?><div class="message_pawpaw"><?=$_SGLOBAL['member']['newpm']?></div><?php } ?></a>
-<?php if($_SGLOBAL['member']['allnotenum']) { ?><a onmouseover="showMenu(this.id)"  href="space.php?do=notice"><div class="message_pawpaw"><?=$_SGLOBAL['member']['allnotenum']?></div></a><?php } ?>
+                <a class="grid_2" href="space.php?do=pm<?php if(!empty($_SGLOBAL['member']['newpm'])) { ?>&filter=newpm<?php } ?>"><?php if($_GET['do']=="pm") { ?><p class="nav_actived">消息</p> <?php } else { ?>消息<?php } ?>
+<?php if($space['allnum']) { ?>
+
+
+<?php if($space['namestatusnum']) { ?><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1" alt="未审核用户"><div class="message_pawpaw" ><?=$space['namestatusnum']?></div></a><?php } ?>
+
+<?php } ?></a>
 <a href="space.php?do=friend" class="grid_2"><?php if($_GET['do']=="friend") { ?><p class="nav_actived">客户列表</p> <?php } else { ?>客户列表<?php } ?></a>
 <?php } else { ?>
 <div class="grid_3" style="width:400px;display:inline-block;"></div>
@@ -117,7 +122,6 @@
                     </ul>
               </div>
          </div>
-
 
 <!--<div class="app_m">
 <ul>
@@ -254,7 +258,7 @@
      <div class="grid_2">
                                       <h6><span class="commenter">
                                       	<?php if($value['author']) { ?>
-<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"><?=$_SN[$value['authorid']]?></a> 
+<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"  style="color:#02B4AB;"><?=$_SN[$value['authorid']]?></a> 
 <?php } else { ?>
 匿名
 <?php } ?>:</span>

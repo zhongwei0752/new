@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/space_talk_li|template/default/footer', '1374461714', 'template/default/space_talk');?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_talk|template/default/header|template/default/space_talk_li|template/default/space_menu|template/default/space_talk_li|template/default/footer', '1374571482', 'template/default/space_talk');?>
 <?php $_TPL['titles'] = array('在线沟通'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -214,7 +214,7 @@
 
             <div class="content" style="font-size:14px;">
                  <div class="indexing">
-                 <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>在线沟通</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>在线沟通</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -260,13 +260,13 @@
 
 
 
-<a href="javascript:;" onclick="docomment_form(<?=$doid?>, 0);">回复</a>
+<a href="javascript:;" onclick="talkcomment_form(<?=$doid?>, 0);">回复</a>
 <?php if($dv['uid']==$_SGLOBAL['supe_uid']) { ?> <a href="cp.php?ac=talk&op=delete&doid=<?=$doid?>&id=<?=$dv['id']?>" id="talk_delete_<?=$doid?>_<?=$dv['id']?>" onclick="ajaxmenu(event, this.id)" class="re gray">删除</a> &nbsp;<?php } ?>
 
 <?php $list = $clist[$doid]; ?>
 
 <div class="sub_talk" id="talkcomment_<?=$doid?>"<?php if(!$list) { ?> style="display:none;"<?php } ?>>
-<span id="docomment_form_<?=$doid?>_0"></span>
+<span id="talkcomment_form_<?=$doid?>_0"></span>
 <ol>
 <?php if(is_array($list)) { foreach($list as $value) { ?>
 <?php if($value['uid']) { ?>
@@ -299,7 +299,7 @@
 </div>
 <?php } ?>
 </div>
-
+<div class='pagination'><ul><?=$multi?></ul></div>
 <div id="sidebar">
 <?php if($moodlist) { ?>
 <div class="sidebox">

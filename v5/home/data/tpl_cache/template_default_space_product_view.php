@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374207454', 'template/default/space_product_view');?><?php $_TPL['titles'] = array($product['subject'], '产品介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374571343', 'template/default/space_product_view');?><?php $_TPL['titles'] = array($product['subject'], '产品介绍'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -100,13 +100,13 @@
 <div class="side_bar" >
               <div class="side_bar_inner" >
                     <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
@@ -178,20 +178,22 @@
 <?php } ?>
 
 <script type="text/javascript" charset="<?=$_SC['charset']?>" src="source/script_calendar.js"></script>
-<div class="entry" style="padding:0 0 10px;">
+<div style="padding:0 0 10px;">
 
 
             <div class="content" style="font-size:15px;">
             	<div class="indexing" style="margin-bottom:15px;">
-                  <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span><a href="">产品介绍</a></span>
+                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=product&view=me">产品介绍</a></span>
                  </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                            <div class="content_title"><?=$product['subject']?></div>
+
                            <div class="title_down container_12">
                                <a href="" class="book_btn grid_1">预约/预定</a> 
                                <span class="grid_2">价格：<?=$product['money']?>元</span>
                            </div>
+                           <div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$product['username']?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$product[dateline]); ?></div>
                            <div class="content_text_detail"style="overflow:hidden">
                                <p><?=$product['message']?></p>
                            </div>
@@ -260,7 +262,7 @@
      <div class="grid_2">
                                       <h6><span class="commenter">
                                       	<?php if($value['author']) { ?>
-<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"><?=$_SN[$value['authorid']]?></a> 
+<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"  style="color:#02B4AB;"><?=$_SN[$value['authorid']]?></a> 
 <?php } else { ?>
 匿名
 <?php } ?>:</span>
@@ -384,7 +386,7 @@ magicColor(elems[i]);
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374230153', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1374570870', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -179,14 +179,15 @@
 
 <script type="text/javascript" charset="<?=$_SC['charset']?>" src="source/script_calendar.js"></script>
 
-<div class="entry" style="padding:0 0 10px;">
+<div style="padding:0 0 10px;">
 <div class="content" style="font-size:15px;">
 <div class="indexing" style="margin-bottom:15px;">
-                  <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span><a href="">成功案例</a></span>
+                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=cases&view=me">成功案例</a></span>
                  </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                       	<div class="content_title"><?=$cases['subject']?></div>
+                      	<div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$cases['username']?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$cases[dateline]); ?></div>
                            <h3 class="first_party"><span>案例甲方</span><span class="party_name"><?=$cases['company']?></span></h3>
                            <div class="content_text_detail" style="overflow:hidden"><br/>
                                <p><?=$cases['message']?></p>

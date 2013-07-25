@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_list|template/default/header|template/default/footer', '1374486127', 'template/default/space_product_list');?><?php $_TPL['titles'] = array('产品介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_list|template/default/header|template/default/footer', '1374571344', 'template/default/space_product_list');?><?php $_TPL['titles'] = array('产品介绍'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -186,7 +186,7 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a></span>><span>产品介绍</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>产品介绍</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -214,10 +214,10 @@
                              <div class="list_test ">
                                   <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>"><h3><?=$value['subject']?></h3></a>
                                   <p><?=$value['message']?></p><br/>
-                                  <p class="action_info">
+                                  <p class="action_info" style="margin-top:-4px;">
                                    <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
                                     <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
-                                    <?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>#comment"><span>评论: <?=$value['replynum']?> 个</span></a><?php } else { ?><span>评论: 0次</span><?php } ?>
+                                    <?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>#comment"><span>评论: <?=$value['replynum']?> 个</span></a><?php } else { ?><span>评论: 0次</span><?php } ?><span>发布日期：<?php echo sgmdate('Y-m-d',$value[dateline]); ?></span>
                                   </p>
                              </div>
                           </div>

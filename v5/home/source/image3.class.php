@@ -83,11 +83,11 @@
 				$newsrc=$this->newdir.strrchr($src,"/");
 			}
 
-			if(file_exists($newsrc) && $this->over==0)		//如果已存在,直接返回地址
-			{
-				updatetable($table, array('smalllogourl'=>$newsrc), array('uid'=>$id));
-				return $newsrc;
-			}
+			//if(file_exists($newsrc) && $this->over==0)		//如果已存在,直接返回地址
+			//{
+			//	updatetable($table, array('smalllogourl'=>$newsrc), array('uid'=>$id));
+			//	return $newsrc;
+			//}
 
 			if(strstr($src,"http://") && !strstr($src,$_SERVER['HTTP_HOST']))//如果是网络文件,先保存
 			{
@@ -121,16 +121,16 @@
 			if($k1<$k2)
 			{
 				$width_a=$width;
-				$height_a=round($width*$k1);
+				$height_a=$height;
 				$sw=0;
-				$sh=($height-$height_a)/2;
+				$sh=0;
 
 			}
 			else
 			{
-				 $width_a=$height/$k1;
+				 $width_a=$width;
    				 $height_a=$height;
-   				 $sw=($width-$width_a)/2;
+   				 $sw=0;
                  $sh = 0;
 			}
 

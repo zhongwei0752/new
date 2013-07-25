@@ -157,7 +157,7 @@ if($id) {
 	}
 
 	//ÆÀÂÛ
-	$perpage = 30;
+	$perpage = 5;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
@@ -224,7 +224,7 @@ if($id) {
 
 } else {
 	//·ÖÒ³
-	$perpage = 10;
+	$perpage = 5;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
@@ -401,7 +401,7 @@ if($id) {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
-					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
+					$value['message'] = getstr($value['message'], 200, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				$list[] = $value;

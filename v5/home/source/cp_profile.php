@@ -7,17 +7,17 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-
-if(!in_array($_GET['op'], array('base','contact','edu','work','info'))) {
-	$_GET['op'] = 'base';
-}
-		if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
+	if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		include 'cp.php?ac=profile';
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
 		showmessage('enter_the_space', 'space.php?do=menuset', 0);
 	}
+if(!in_array($_GET['op'], array('base','contact','edu','work','info'))) {
+	$_GET['op'] = 'base';
+}
+	
 $theurl = "cp.php?ac=profile&op=$_GET[op]";
 
 if($_GET['op'] == 'base') {
@@ -294,8 +294,7 @@ if($_GET['op'] == 'base') {
 		$_GET['namechange'] = 0;//²»ÔÊÐíÐÞ¸Ä
 	}
 			if(submitcheck('nextsubmit')) {
-			$url="cp.php?ac=profile";
-		showmessage('update_on_successful_individuals', $url);
+				showmessage('update_on_successful_individuals', './template/default/post_ok.htm', 0);
 	}
 	
 	//ÒþË½
@@ -391,7 +390,8 @@ if($_GET['op'] == 'base') {
 		$url="space.php?do=menuset";
 	}
 		}
-		showmessage('update_on_successful_individuals', $url);
+		//showmessage('update_on_successful_individuals', $url);
+		include($url);
 	}
 	
 	//ÒþË½

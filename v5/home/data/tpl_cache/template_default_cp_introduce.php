@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_introduce|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1374207114', 'template/default/cp_introduce');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_introduce|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1374571308', 'template/default/cp_introduce');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -98,13 +98,13 @@
 <div class="side_bar" >
               <div class="side_bar_inner" >
                     <ul>
-                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
-                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset" class="manage_btn">管理</a></li>
+                        <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
@@ -273,7 +273,7 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="<?=$wei1['image2url']?>" /><span><a href="space.php?uid=<?=$space['uid']?>"><?=$_SN[$space['uid']]?></a>/span>><span>企业介绍</span>
+                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=introduce&view=me">企业介绍</a></span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -293,7 +293,7 @@
 <tr>
 <td>
 <div class="post_list container_12">
-                         <span class="select_title grid_1">分类&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">分类&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                          <select name="classid" id="classid" onchange="addSort(this)">
 <option value="a">请选择分类</option>
 <?php if(is_array($classarr)) { foreach($classarr as $value) { ?>
@@ -305,17 +305,18 @@
 <?php } } ?>
 <?php if(!$introduce['uid'] || $introduce['uid']==$_SGLOBAL['supe_uid']) { ?><option value="addoption" style="color:red;">+新建分类</option><?php } ?>
 </select>
+<font color="#02B4AB">*如果企业介绍已经有此分类的内容，则再选择此分类填写的内容会覆盖更新原内容。</font>
                       </div>
 <div class="post_list container_12">
-                         <span class="select_title grid_1">标题&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">标题&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                            <input type="text" class="t_input" id="subject" name="subject" value="<?=$introduce['subject']?>"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
                             </div>
                             <div class="post_list container_12">
-                         <span class="select_title grid_1">摘要&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">摘要&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                          <input type="text" class="t_input" id="tag" name="tag" value="<?=$introduce['tag']?>" placeholder="摘要可自己填写，也会自动获取！"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"  ><br/>
                             </div>
                             <div class="post_list container_12">
-                         <span class="select_title grid_1">封面图片&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">封面图片&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <input type="file" name="files"  value="<?=$introduce['image1url']?>"/>
                             </div>
 </td>
@@ -324,10 +325,10 @@
 <tr>
 <td>
  <div class="post_list container_12">
-                         <span class="select_title grid_1">企业介绍&nbsp;&nbsp;:</span>
+                         <span class="select_title grid_1">企业介绍&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=introduce_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
   <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$introduce['message']?></textarea>
-  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:300px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
                             </div>
 </td>
 </tr>
@@ -344,7 +345,7 @@
 <tr><th width="100">图片</th><td>
 <div class="pic_submit container_12">
 <input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
-<input type="button" class="btn grid_3" name="clickbutton[]" value="插入图片" class="button" style="margin-left:20px;" onclick="edit_album_show('album')">
+
 </div>
 </td></tr>
 </table>
@@ -371,18 +372,11 @@
 </tbody>
 <tbody id="attachbody"></tbody>
 </table>
-<strong>存储相册</strong>: 
 <table cellspacing="2" cellpadding="0">
 <tr>
 <td>
-<select name="albumid" id="uploadalbum" onchange="addSort(this)">
-<option value="-1">请选择相册</option>
-<option value="-1">默认相册</option>
-<?php if(is_array($albums)) { foreach($albums as $value) { ?>
-<option value="<?=$value['albumid']?>"><?=$value['albumname']?></option>
-<?php } } ?>
-<option value="addoption" style="color:red;">+新建相册</option>
-</select>
+<input type="hidden" name="albumid" id="uploadalbum" value="-1"/>
+<font color="#02B4AB">*此上传图片将会出现在正文底部，且会出现在微信详情页面头部。</font>
 <script src="source/script_upload.js" type="text/javascript"></script>
 <iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
 </td>
@@ -479,7 +473,7 @@
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery_v1.10.2.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

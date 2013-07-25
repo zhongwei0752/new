@@ -78,13 +78,15 @@ if($op == 'add') {
 				//添加单向好友
 				if(capi_submitcheck('addsubmit')) {
 					$setarr = array(
-						'uid' => $_SGLOBAL['supe_uid'],
-						'fuid' => $uid,
-						'fusername' => addslashes($tospace['username']),
+						'uid' => $uid,
+						'fuid' => $_SGLOBAL['supe_uid'],
+						'fusername' => addslashes($space['username']),
 						'gid' => intval($_REQUEST['gid']),
 						'note' => getstr($_REQUEST['note'], 50, 1, 1),
-						'dateline' => $_SGLOBAL['timestamp']
+						'dateline' => $_SGLOBAL['timestamp'],
+						'status'  =>  '1'
 					);
+
 					inserttable('friend', $setarr);
 					
 					//发送邮件通知

@@ -156,7 +156,7 @@ if($id) {
 	}
 
 	//ÆÀÂÛ
-	$perpage = 30;
+	$perpage = 5;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;
@@ -223,7 +223,7 @@ if($id) {
 
 } else {
 	//·ÖÒ³
-	$perpage = 2;
+	$perpage = 7;
 	$perpage = mob_perpage($perpage);
 	
 	$start = ($page-1)*$perpage;

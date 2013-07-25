@@ -31,7 +31,7 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <img src="$wei1[image2url]" /><span><a href="space.php?uid=$space[uid]">{$_SN[$space[uid]]}</a></span>><span>人才招聘</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>人才招聘</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
@@ -57,7 +57,7 @@
                                   <p>$value[message]</p><br/>
                                   <p class="action_info">
                                      <a href="space.php?uid=$value[uid]"> <span>发布：{$_SN[$value[uid]]}</span></a>
-                                    <!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[jobid]"><span>阅读: $value[viewnum]次</span></a><!--{else}--><span>阅读: 0次</span><!--{/if}-->
+                                    <!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[jobid]"><span>阅读: $value[viewnum]次</span></a><!--{else}--><span>阅读: 0次</span><!--{/if}--><span>发布日期：<!--{date('Y-m-d',$value[dateline])}--></span>
                                   </p>
                              </div>
                           </div>
