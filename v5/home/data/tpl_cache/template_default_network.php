@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374721458', 'template/default/network');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1374733147', 'template/default/network');?><!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -40,13 +40,13 @@
                      <li style="float:left">注册账号</li>
                      <li style="padding-left:60px;" id="btna"><a href="javascript:void(0)" class="login_hover"><span style="margin-right:8px;">登陆</span><img class="login_png" src="./template/default/image/login_btn.png" style="vertical-align:-3px;" id="btna" onmouseover="this.src='./template/default/image/login_btn_hover.png'" onmouseout="this.src='./template/default/image/login_btn.png'"></a></li>
                   </ul>
-                 <form id="registerform" name="registerform" action="do.php?ac=<?=$_SCONFIG['register_action']?>&<?=$url_plus?>&ref" method="post" >
+                 <form id="registerform" name="registerform" action="do.php?ac=<?=$_SCONFIG['register_action']?>&<?=$url_plus?>&ref" method="post" style="padding-left:6px;">
                   <input type="text" id="username" name="username" value="" placeholder="用户名"  onBlur="checkUserName()" tabindex="2" />&nbsp;<span id="checkusername">&nbsp;</span>
                   <input type="text" id="email" name="email" placeholder="邮箱"  tabindex="5" /><span>&nbsp;&nbsp;</span>
                     <input type="password" name="password" id="tx" placeholder="密码"  onBlur="checkPassword()" onkeyup="checkPwd(this.value);" tabindex="3" />&nbsp;<span id="checkpassword">&nbsp;</span>
                     <input name="" type="password" style="display:none;" id="pwd" />
                     <input type="hidden" name="refer" value="cp.php?ac=profile" />
-                    <input type="submit" id="registersubmit" name="registersubmit" value="注册微伍" class="sign_btn" onclick="<?php if($register_rule) { ?>if(!checkClause()){return false;}<?php } ?>ajaxpost('registerform', 'register');" tabindex="6" />
+                    <input type="submit" id="registersubmit" name="registersubmit" style="border:none;margin-right: 10px;" value="注册微伍" class="sign_btn" onclick="<?php if($register_rule) { ?>if(!checkClause()){return false;}<?php } ?>ajaxpost('registerform', 'register');" tabindex="6" />
                     <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
                  </form>
             </div>
@@ -62,7 +62,7 @@
         <input type="password" name="password" id="password"  />
         <p class="submitrow">
           <input type="hidden" name="refer" value="space.php?do=home" />
-          <input type="submit" id="loginsubmit" class="sign_btn" name="loginsubmit" value="登录" class="submit" />
+          <input type="submit" id="loginsubmit" style="border:none;" class="sign_btn" name="loginsubmit" value="登录" class="submit" />
           <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
         </p>
       </form>
@@ -288,7 +288,7 @@ tx.value = "密码";
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
     </div>
 

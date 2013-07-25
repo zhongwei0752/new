@@ -752,7 +752,6 @@ padding-top: 1px;
 }
 .company_avata_box .grid_2 {
   width: 300px;
-  padding-left: 20px;
 }
 .company_avata_box .grid_2 h3,
 .company_avata_box .grid_2 h5 {
@@ -816,7 +815,7 @@ padding-top: 1px;
   text-align: center;
   color: #fff;
   margin-left: 164px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post:hover {
   background: #389A93;
@@ -838,6 +837,9 @@ width: 340px;
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 h5 {
   margin: 4px;
   color: #8A8B8B;
+}
+.index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 h5 a{
+
 }
 .index_assembly_boxes .grid_6 .index_assembly_box .assembly_info1 .quick_post {
   display: block;

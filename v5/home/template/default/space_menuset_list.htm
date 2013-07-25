@@ -66,13 +66,13 @@
                      </a>
                     
                      <!--{else}-->
-                     
-                     <div class="bread_actived grid_1" >
-                      我的应用
-                     </div>
-                     <a href="space.php?uid=$space[uid]&do=$do&view=all" class="link_back_bread grid_3" >
+                     <a href="space.php?uid=$space[uid]&do=$do&view=all" class="link_back_bread grid_3" style="margin-left:-10px;">
                       更多应用
                      </a>
+                     <div class="bread_actived grid_1" style="margin-left:10px;">
+                      我的应用
+                     </div>
+                     
                      <!--{/if}-->
 
                      <!--{if {$_SN[$_SGLOBAL[supe_uid]]}=='admin'}-->

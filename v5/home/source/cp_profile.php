@@ -104,7 +104,11 @@ if($_GET['op'] == 'base') {
 			showmessage("企业介绍不能为空！");
 		}
 	}
-	
+	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where wxkey=$_POST[wxkey]");	
+		$value2 = $_SGLOBAL['db']->fetch_array($query2);
+		if($value2){
+			showmessage("微信id重复");
+		}
 		//Ìá½»¼ì²é
 
 			if($_POST['qq']){
@@ -212,7 +216,6 @@ if($_GET['op'] == 'base') {
 				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
 			}
 		
-			
 
 	
 		//±ä¸ü¼ÇÂ¼

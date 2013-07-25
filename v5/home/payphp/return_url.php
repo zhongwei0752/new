@@ -112,7 +112,7 @@ if($verify_result) {//验证成功
              <img src="../template/default/image/guide_all_complete.png" style="margin:20px auto;">
              <div style="width:750px;height:200px;border:1px solid #D9D9DA;background:#fff;margin:20px auto;color:#999999;padding-top:70px;">
                  <img src="../template/default/image/submit_success.png" style="vertical-align:-14px;"><span style="font-size:20px;color:#48B0BA;line-height:40px;"><?php if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS'){echo"组件选择成功";}else{echo"组件选择失败";} ?></span>
-                 <p><a href="" style="color:#999999">点击马上进入>></a><span id="seconds" style="color:red">5</span>秒</p>
+                 <p><a href="../space.php?do=home" style="color:#999999">点击马上进入>></a><span id="seconds" style="color:red">5</span>秒</p>
                 
              </div>
               

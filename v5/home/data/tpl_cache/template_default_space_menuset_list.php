@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374721849', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1374735442', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -223,13 +223,13 @@
                      </a>
                     
                      <?php } else { ?>
-                     
-                     <div class="bread_actived grid_1" >
-                      我的应用
-                     </div>
-                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all" class="link_back_bread grid_3" >
+                     <a href="space.php?uid=<?=$space['uid']?>&do=<?=$do?>&view=all" class="link_back_bread grid_3" style="margin-left:-10px;">
                       更多应用
                      </a>
+                     <div class="bread_actived grid_1" style="margin-left:10px;">
+                      我的应用
+                     </div>
+                     
                      <?php } ?>
 
                      <?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?>
@@ -411,7 +411,7 @@
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
     </div>
 

@@ -1,15 +1,23 @@
-<h2 class="title"><img src="$wei1[image2url]">在线沟通</h2>
-<div class="tabs_header">
-	<ul class="tabs">
-		<li<!--{if empty($talk[talkid])}--> class="active"<!--{/if}-->><a href="cp.php?ac=talk"><span>发布</span></a></li>
-		<li$actives[all]><a href="space.php?uid=$space[uid]&do=talk&view=all"><span>在线沟通</span></a></li>
-		<li class="null"  style="margin-left:625px;"><a href="cp.php?ac=talk">发布</a></li>
+<div class="content" style="font-size:15px;">
+          
+                 <div class="indexing">
+                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=talk&view=me">在线沟通</a></span>><span>发布</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         发布
+                     </div>
+                     <a href="space.php?do=talk&view=me" class="link_back_bread grid_3">
+                      在线沟通
+                     </a>
+                 </div>
+<div class="content_detail_wrapper">
+                    <div class="post_wrapper" style="margin:0 auto;text-align:center;">
 
-	</ul>
-</div>
+
 <form method="post" id="talkform" action="cp.php?ac=talk&view=$_GET[view]" class="post_talk">
 标题:<br/><textarea id="subject" name="subject"  rows="4" style="width:538px; height: 22px;"></textarea><br/>
-内容:<div class="r_option1"style="margin-left:400px;">还可输入 <strong id="maxlimit">200</strong> 个字符</div>
+内容:<div >还可输入 <strong id="maxlimit">200</strong> 个字符</div>
 <a href="###" id="talkface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a></td>
 <!--{if checkperm('seccode')}-->
 	<!--{if $_SCONFIG['questionmode']}-->
@@ -28,3 +36,5 @@
 <input type="hidden" name="topicid" value="$topicid" />
 <input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
 </form>
+</div>
+</div>

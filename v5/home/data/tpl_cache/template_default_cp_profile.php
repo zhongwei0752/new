@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374721295', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374731673', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html>
 <html>
@@ -323,12 +323,18 @@
                      </a><?php } ?>
                  <?php if($_SCONFIG['namechange']) { ?><?php if($zhong1) { ?><a class="btn grid_2" href="<?=$theurl?>&namechange=1">修改</a><?php } ?><?php } ?>
                  </div><!-- end -->
-                 <div id="content" style="width:760px; ">
+                
+    
 <?php $farr = array(0=>'全用户','1'=>'仅好友','3'=>'仅自己'); ?>
 <form method="post" action="<?=$theurl?>&ref&namechange=<?=$_GET['namechange']?>" class="c_form"  enctype="multipart/form-data">
 
 <?php if($_GET['op'] == 'base') { ?>
-<div class="content_detail_wrapper" style="color:#939393;width:760px; margin-left:-50px;margin-top:-9px;">
+
+                  <?php if(empty($zhong1)) { ?>
+                  <div class="content_detail_wrapper" style="color:#939393;width:760px; ">
+                     <?php } else { ?>
+                <div class="content_detail_wrapper" style="color:#939393;width:760px; margin-left:-45px;margin-top:-9px;">
+  <?php } ?>
                     <div class="post_wrapper">
                   
                       <div class="post_list container_12">
@@ -399,7 +405,7 @@
                       <div class="post_list container_12">
                          <span class="select_title grid_1">营业执照扫描件&nbsp;&nbsp;:</span>
                         <?php if($space['image4url'] && empty($_GET['namechange'])) { ?>
-             &nbsp;&nbsp;<img src="<?=$space['image4url']?>"/>  <a href="" class="view_detail1 basic">点击大图>></a>
+             &nbsp;&nbsp;<img src="<?=$space['image4url']?>"/>
              <?php } else { ?>
              <img src="<?=$space['image4url']?>" style="float:left;"/>
                          <div class="grid_2">
