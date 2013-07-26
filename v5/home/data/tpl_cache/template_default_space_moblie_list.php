@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1374748640', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1374757479', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
   <style type="text/css">
        h3{color: #727272;margin-top: 20px;font-weight:normal;}

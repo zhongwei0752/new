@@ -28,5 +28,10 @@ $query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname($type)." b LEFT J
 }else{
 	$typepic="";
 }
-include_once template("./wx/template/feedcontent");
+if($_GET['moblieclicknum']){
+		include_once template("./wx/template/$_GET[moblieclicknum]/feedcontent");
+	}else{
+	include_once template("./wx/template/feedcontent");
+}
+
 ?>
