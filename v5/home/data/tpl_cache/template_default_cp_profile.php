@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1374768198', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1375111557', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html>
 <html>
@@ -418,7 +418,7 @@
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业LOGO&nbsp;&nbsp;:</span>
                          <?php if($space['smalllogourl'] && empty($_GET['namechange'])) { ?>
-                           &nbsp;&nbsp;<img src="<?=$space['smalllogourl']?>"/>     <a href="" class="view_detail basic">点击大图>></a>
+                           &nbsp;&nbsp;<img src="<?=$space['smalllogourl']?>"/>
                           <?php } else { ?>
                           <img src="<?=$space['smalllogourl']?>" style="float:left;"/>
                          <div class="grid_2">

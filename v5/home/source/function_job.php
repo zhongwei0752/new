@@ -73,6 +73,7 @@ function job_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
+	$message1 = $POST['message1'];
 	$messagecomment = $POST['messagecomment'];
 	$othermessage = $POST['othermessage'];
 	
@@ -131,7 +132,7 @@ function job_post($POST, $olds=array()) {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('pic')." WHERE picid IN (".simplode($picids).") AND uid='$_SGLOBAL[supe_uid]'");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(empty($titlepic) && $value['thumb']) {
-				$titlepic = $value['filepath'].'.thumb.jpg';
+				$titlepic = $value['filepath'];
 				$jobarr['picflag'] = $value['remote']?2:1;
 			}
 			$uploads[$POST['picids'][$value['picid']]] = $value;
@@ -159,10 +160,13 @@ function job_post($POST, $olds=array()) {
 			if($searchs) {
 				$message = str_replace($searchs, $replaces, $message);
 				$message = str_replace($idsearchs, 'uchomelocalimg[]', $message);
+				$message1 = str_replace($searchs, $replaces, $message1);
+				$message1 = str_replace($idsearchs, 'uchomelocalimg[]', $message1);
 			}
 		}
 		//Œ¥≤Â»ÎŒƒ’¬
 		foreach ($uploads as $value) {
+			$message1.="<div class=\"uchome-message-pic\"><img src=\"../attachment/$value[filepath]\"><p>$value[title]</p></div>";
 			$picurl = pic_get($value['filepath'], $value['thumb'], $value['remote'], 0);
 			$message .= "<div class=\"uchome-message-pic\"><img src=\"$picurl\"><p>$value[title]</p></div>";
 		}
@@ -213,6 +217,7 @@ function job_post($POST, $olds=array()) {
 	//∏Ω±Ì	
 	$fieldarr = array(
 		'message' => $message,
+		'message1' => $message1,
 		'messagecomment' => $messagecomment,
 		'othermessage' => $othermessage,
 		'postip' => getonlineip(),

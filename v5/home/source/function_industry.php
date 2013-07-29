@@ -73,6 +73,7 @@ function industry_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
+	$message1 = $POST['message1'];
 
 	//¸öÈË·ÖÀà
 	if(empty($olds['classid']) || $POST['classid'] != $olds['classid']) {
@@ -126,7 +127,7 @@ function industry_post($POST, $olds=array()) {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('pic')." WHERE picid IN (".simplode($picids).") AND uid='$_SGLOBAL[supe_uid]'");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(empty($titlepic) && $value['thumb']) {
-				$titlepic = $value['filepath'].'.thumb.jpg';
+				$titlepic = $value['filepath'];
 				$industryarr['picflag'] = $value['remote']?2:1;
 			}
 			$uploads[$POST['picids'][$value['picid']]] = $value;
@@ -140,6 +141,7 @@ function industry_post($POST, $olds=array()) {
 	//²åÈëÎÄÕÂ
 	if($uploads) {
 		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message, $mathes);
+		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message1, $mathes);
 		if(!empty($mathes[1])) {
 			$searchs = $idsearchs = array();
 			$replaces = array();
@@ -154,10 +156,13 @@ function industry_post($POST, $olds=array()) {
 			if($searchs) {
 				$message = str_replace($searchs, $replaces, $message);
 				$message = str_replace($idsearchs, 'uchomelocalimg[]', $message);
+				$message1 = str_replace($searchs, $replaces, $message1);
+				$message1 = str_replace($idsearchs, 'uchomelocalimg[]', $message1);
 			}
 		}
 		//Î´²åÈëÎÄÕÂ
 		foreach ($uploads as $value) {
+			$message1.="<div class=\"uchome-message-pic\"><img src=\"../attachment/$value[filepath]\"><p>$value[title]</p></div>";
 			$picurl = pic_get($value['filepath'], $value['thumb'], $value['remote'], 0);
 			$message .= "<div class=\"uchome-message-pic\"><img src=\"$picurl\"><p>$value[title]</p></div>";
 		}
@@ -206,6 +211,7 @@ function industry_post($POST, $olds=array()) {
 
 	//¸½±í	
 	$fieldarr = array(
+		'message1' =>$message1,
 		'message' => $message,
 		'postip' => getonlineip(),
 		'target_ids' => $POST['target_ids']

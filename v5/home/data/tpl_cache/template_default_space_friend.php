@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1374748556', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375109962', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -263,7 +263,7 @@
 <?php } } ?>
 </ul>
 </div>
-<div class="page"><?=$multi?></div>
+<div class='pagination'><ul><?=$multi?></ul></div>
 
 <?php } else { ?>
 <div class="c_form" style="margin:0 auto;text-align:center;">

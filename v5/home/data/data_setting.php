@@ -2,8 +2,8 @@
 if(!defined('IN_UCHOME')) exit('Access Denied');
 $_SGLOBAL['setting']=Array
 	(
-	'thumbwidth' => 100,
-	'thumbheight' => 100,
+	'thumbwidth' => 1024,
+	'thumbheight' => '0',
 	'maxthumbwidth' => '',
 	'maxthumbheight' => '',
 	'watermarkfile' => '',

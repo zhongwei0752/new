@@ -5,6 +5,7 @@ require_once 'wx_common.php';
 include_once( CONNECT_ROOT.'/saetv2.ex.class.php' );
 require_once CONNECT_ROOT."/common/jtee.inc.php";
 require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
+require_once('Weixin.class.php');
 
 	$rst = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE wxkey='$_GET[wxkey]'");
 	$row = $_SGLOBAL['db']->fetch_array($rst);
@@ -19,6 +20,17 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 		$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         $friend = file_get_contents($friendurl,0,null,null);
         $friend_output = json_decode($friend);
+        $d = get_obj_by_xiaoquid($row['uid']);
+		$info = $d->getNewWXUser();
+		if($info){
+			$setarr = array(
+						'name' => $info['nickName'],
+						'namestatus' =>'1',
+					);
+			updatetable('space', $setarr, array('uid'=>$row['uid'] ));
+	}
+		
+		
 }else{
 
 	$username = $_GET['wxkey'];
@@ -65,20 +77,22 @@ require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 				wxshowmessage($msg);
 				break;
 			default:
-				$sql = "SELECT uid FROM ".tname('space')." WHERE `wxkey`='".$_GET['wxkey']."'";  
+				$sql = "SELECT * FROM ".tname('space')." WHERE `wxkey`='".$_GET['wxkey']."'";  
 				$user = $_SGLOBAL['db']->fetch_array($_SGLOBAL['db']->query($sql));
 				if($user){
 					$sinauid=$uid_get['uid'];
 					wxshowmessage("已绑定", "http://v5.home3d.cn/v5/v5/home/index.php");
+					
 				}
-				
-				
-			$setarr = array(
-						'name' => getstr($name, 30, 1, 1, 1),
-						'namestatus' => $_SCONFIG['namecheck']?0:1,
+				$d = get_obj_by_xiaoquid($uid);
+					$info = $d->getNewWXUser();	
+					$setarr = array(
+						'name' => $info['nickName'],
+						'namestatus' => '1',
 						'wxkey' => $_GET['wxkey']
 					);
 					updatetable('space', $setarr, array('uid'=>$uid ));
+				
 				}
 				$weixinuid=$_GET['uid'];
 				$auth = setSession($user[0],$user[1]);
@@ -112,4 +126,5 @@ while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 	}else{
 	include_once template("./wx/template/feed");
 }
+
 ?>

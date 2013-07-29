@@ -243,7 +243,7 @@ if(submitcheck('usergroupsubmit')) {
 					$url .= 'namestatus=0';
 					foreach($_POST['uids'] as $key => $uid) {
 						$reward = getreward('realname', 0, $uid, '', 0);
-						$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET namestatus='1', profilestatus='0',alreadyreg='1', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$uid' ");
+						$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET namestatus='1', profilestatus='0', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$uid' ");
 					}
 					$createlog = true;
 				}

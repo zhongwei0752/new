@@ -74,40 +74,8 @@
 
         </header><!-- header end -->
         <div>
-          <div class="normal_wrapper_width">
-           <div class="content_pic">
-           
-                $typepic
-             </div>
-             <div class="content_text">
-              <!--{BLOCK_TAG_START}-->if industry<!--{BLOCK_TAG_END}-->
-                 <p> {{= industry.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                  <!--{BLOCK_TAG_START}-->if branch<!--{BLOCK_TAG_END}-->
-                 <p> {{= branch.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                    <!--{BLOCK_TAG_START}-->if development<!--{BLOCK_TAG_END}-->
-                 <p> {{= development.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if product<!--{BLOCK_TAG_END}-->
-                 <p> {{= product.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if introduce<!--{BLOCK_TAG_END}-->
-                 <p> {{= introduce.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if cases<!--{BLOCK_TAG_END}-->
-                 <p> {{= cases.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if talk<!--{BLOCK_TAG_END}-->
-                 <p> {{= branch.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if job<!--{BLOCK_TAG_END}-->
-                 <p> {{= job.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-
-                  
-                
-             </div>
+          
+          
 
 </script>
    <script id="commentTemplate" type="text/x-jquery-tmpl">
@@ -123,7 +91,14 @@
        <div id="detail-panel">
 
        </div>
-       
+          <div class="content_text">
+            <div class="normal_wrapper_width">
+           <div class="content_pic">
+           
+                              $message
+             </div>
+
+             </div>
           </div>
           <div class="split"></div>
           <div style="background:#f0f0f0">

@@ -73,6 +73,7 @@ function introduce_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
+	$message1=$POST['message'];
 
 	//¸öÈË·ÖÀà
 	if(empty($olds['classid']) || $POST['classid'] != $olds['classid']) {
@@ -106,7 +107,7 @@ function introduce_post($POST, $olds=array()) {
 		$classname = getcount('classintroduce', array('classid'=>$classid, 'uid'=>$_SGLOBAL['supe_uid']), 'classname');
 		if(empty($classname)) $classid = 0;
 	}
-
+	
 	//Ö÷±í
 	$introducearr = array(
 		'subject' => $POST['subject'],
@@ -126,7 +127,7 @@ function introduce_post($POST, $olds=array()) {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('pic')." WHERE picid IN (".simplode($picids).") AND uid='$_SGLOBAL[supe_uid]'");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(empty($titlepic) && $value['thumb']) {
-				$titlepic = $value['filepath'].'.thumb.jpg';
+				$titlepic = $value['filepath'];
 				$introducearr['picflag'] = $value['remote']?2:1;
 			}
 			$uploads[$POST['picids'][$value['picid']]] = $value;
@@ -140,6 +141,7 @@ function introduce_post($POST, $olds=array()) {
 	//²åÈëÎÄÕÂ
 	if($uploads) {
 		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message, $mathes);
+		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message1, $mathes);
 		if(!empty($mathes[1])) {
 			$searchs = $idsearchs = array();
 			$replaces = array();
@@ -154,10 +156,13 @@ function introduce_post($POST, $olds=array()) {
 			if($searchs) {
 				$message = str_replace($searchs, $replaces, $message);
 				$message = str_replace($idsearchs, 'uchomelocalimg[]', $message);
+				$message1 = str_replace($searchs, $replaces, $message1);
+				$message1 = str_replace($idsearchs, 'uchomelocalimg[]', $message1);
 			}
 		}
 		//Î´²åÈëÎÄÕÂ
 		foreach ($uploads as $value) {
+			$message1.="<div class=\"uchome-message-pic\"><img src=\"../attachment/$value[filepath]\"><p>$value[title]</p></div>";
 			$picurl = pic_get($value['filepath'], $value['thumb'], $value['remote'], 0);
 			$message .= "<div class=\"uchome-message-pic\"><img src=\"$picurl\"><p>$value[title]</p></div>";
 		}
@@ -183,22 +188,18 @@ function introduce_post($POST, $olds=array()) {
 	if(checkperm('manageintroduce')) {
 		$introducearr['hot'] = intval($POST['hot']);
 	}
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('introduce')." WHERE classid='$classid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-	if($classnum) {
+	
+	if($olds['introduceid']) {
 		//¸üÐÂ
-		
-		updatetable('introduce', $introducearr, array('classid'=>$classid));
+		$introduceid = $olds['introduceid'];
+		updatetable('introduce', $introducearr, array('introduceid'=>$introduceid));
 		
 		$fuids = array();
 		
 		$introducearr['uid'] = $olds['uid'];
 		$introducearr['username'] = $olds['username'];
-		$introducearr['introduceid'] = $classnum['introduceid'];
-		$introduceid=$classnum['introduceid'];
 	} else {
 		//²ÎÓëÈÈÄÖ
-
 		$introducearr['topicid'] = topic_check($POST['topicid'], 'introduce');
 
 		$introducearr['uid'] = $_SGLOBAL['supe_uid'];
@@ -212,6 +213,7 @@ function introduce_post($POST, $olds=array()) {
 	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,
+		'message1' =>$message1,
 		'postip' => getonlineip(),
 		'target_ids' => $POST['target_ids']
 	);
@@ -239,23 +241,14 @@ function introduce_post($POST, $olds=array()) {
 		$fieldarr['tag'] = empty($tagarr)?'':addslashes(serialize($tagarr));
 	}
 
-	$classcheak = $_SGLOBAL['db']->query("SELECT * FROM ".tname('introducefield')." WHERE introduceid='$introduceid'");
-	$classnum = $_SGLOBAL['db']->fetch_array($classcheak);
-
-	if(!empty($classnum)||$classnum!="0") {
+	if($olds) {
 		//¸üÐÂ
-		
-		
 		updatetable('introducefield', $fieldarr, array('introduceid'=>$introduceid));
 	} else {
-	
 		$fieldarr['introduceid'] = $introduceid;
-
 		$fieldarr['uid'] = $introducearr['uid'];
-
 		inserttable('introducefield', $fieldarr);
 	}
-
 	//¿Õ¼ä¸üÐÂ
 	if($isself) {
 		if($olds) {
@@ -280,8 +273,6 @@ function introduce_post($POST, $olds=array()) {
 	include("./source/upload.class.php");
   	$image= new upload;
   	$image->upload_file($introduceid,"introduce");
-  	
-	//updatetable('introduce', $introducearr, array('classid'=>$classid));
 	//²úÉúfeed
 	if($POST['makefeed']) {
 		include_once(S_ROOT.'./source/function_feed.php');

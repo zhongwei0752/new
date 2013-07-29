@@ -12,6 +12,7 @@ if(empty($m_auth)){
 	wxshowmessage('login_failure_please_re_login',  'wx.php?do=bind&wxkey='.$_GET['wxkey']);
 }
 */
+chdir ('../');
 
 $type=$_GET['type'];
 $typeid=$type."id";
@@ -24,10 +25,10 @@ $query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname($type)." b LEFT J
 	$wei = $_SGLOBAL['db']->fetch_array($query);
 	if($wei['pic']){
 	$typepic="<img src='../attachment/$wei[pic]'>";
-
 }else{
 	$typepic="";
 }
+$message=$wei['message1'];
 if($_GET['moblieclicknum']){
 		include_once template("./wx/template/$_GET[moblieclicknum]/feedcontent");
 	}else{

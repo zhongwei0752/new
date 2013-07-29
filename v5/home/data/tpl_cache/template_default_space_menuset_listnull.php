@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1374748424', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375079271', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>v5v5v5v5</title>
@@ -59,7 +59,7 @@
         <div class="assembly_produce">
                                     <img src="<?=$value['image1url']?>">
                                     <div class="produce_choice">
-                                        <p class="produce_text">123</p>
+                                        <p class="produce_text"><?=$value['message']?></p>
                                     </div>
                                    
                                <?php if($value['money']) { ?> <p class="price">单价:<?=$value['money']?>元/月</p><?php } else { ?><p class="price">单价:免费</p><?php } ?>

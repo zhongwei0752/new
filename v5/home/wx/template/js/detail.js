@@ -285,8 +285,10 @@ function getDetail(idtype, id, uid){
         if(data.code==0){
           data=data.data;
           
-        data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);    
-
+        data.introduce.dateline = date('Y-m-d H:i',data.introduce.dateline);
+        var converter = data.introduce.message;   
+        converter.innerHTML = data.introduce.message;
+        
           $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
         }else{
         alert(data.msg);

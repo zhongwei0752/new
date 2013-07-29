@@ -15,7 +15,7 @@ $_SGLOBAL['msglang'] = array(
 	//common
 	'do_success' => '进行的操作完成了',
 	'no_privilege' => '您目前没有权限进行此操作',
-	'no_privilege_realname' => '需要通过实名验证才能进行当前操作，请等待管理员操作',
+	'no_privilege_realname' => '您需要填写真实姓名后才能进行当前操作，<a href="cp.php?ac=profile">点这里设置真实姓名</a>',
 	'no_privilege_videophoto' => '您需要视频认证通过后才能进行当前操作，<a href="cp.php?ac=videophoto">点这里进行视频认证</a>',
 	'no_open_videophoto' => '目前站点已经关闭视频认证功能',
 	'is_blacklist' => '受对方的隐私设置影响，您目前没有权限进行本操作',

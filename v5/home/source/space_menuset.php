@@ -429,7 +429,7 @@ if($_GET['view'] != 'me') {
 					$value['message'] = $value['pic'] = '';
 				} else {
 						$value['message1'] = $value['message'];
-					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
+					$value['message'] = getstr($value['message'], 20, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				//识别标签，只出现符合标签的应用

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/1/feed', '1374762203', './wx/template/1/feed');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/1/feed', '1374810670', './wx/template/1/feed');?><!DOCTYPE html>
 <html>
 <head>
 <title></title>
@@ -35,7 +35,7 @@ return false;
 });
 </script>
 <script id="detailTemplate" type="text/x-jquery-tmpl">
-    <a href="wx.php?do=detail&id={{= <?=$_GET['idtype']?>id}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id&type=<?=$_GET['idtype']?>&moblieclicknum=<?=$row['moblieclicknum']?>">
+    <a href="wx.php?do=detail&id={{= <?=$_GET['idtype']?>id}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id&type=<?=$_GET['idtype']?>&moblieclicknum=<?=$bac['moblieclicknum']?>">
 <table>
 <tr>
 <td class="info_img">

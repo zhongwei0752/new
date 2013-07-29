@@ -1,19 +1,15 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1374762842', './wx/template/feedcontent');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1375115194', './wx/template/feedcontent');?><!DOCTYPE html>
 <html>
   <head>
   	 <title></title>
   	 <meta charset="utf-8">
   	 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
      <link rel="stylesheet" type="text/css" href="./template/css/jquery-mobile-fluid960.min.css">
-
-<link rel="stylesheet" type="text/css" href="template/1/css/info_content.css" />
-    <script type="text/javascript" src="template/1/js/myAll.js"></script>
-          <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-     <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
-     <script type="text/javascript" src="template/js/detail.js"></script>
+     <link rel="stylesheet" type="text/css" href="./template/css/style.css">
 
    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 
+  
       <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
      <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
      <script type="text/javascript" src="template/js/detail.js"></script>
@@ -78,40 +74,8 @@
 
         </header><!-- header end -->
         <div>
-          <div class="normal_wrapper_width">
-           <div class="content_pic">
-           
-                <?=$typepic?>
-             </div>
-             <div class="content_text">
-              <?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
-                 <p> {{= industry.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                  <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
-                 <p> {{= branch.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                    <?=BLOCK_TAG_START?>if development<?=BLOCK_TAG_END?>
-                 <p> {{= development.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 <?=BLOCK_TAG_START?>if product<?=BLOCK_TAG_END?>
-                 <p> {{= product.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 <?=BLOCK_TAG_START?>if introduce<?=BLOCK_TAG_END?>
-                 <p> {{= introduce.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 <?=BLOCK_TAG_START?>if cases<?=BLOCK_TAG_END?>
-                 <p> {{= cases.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 <?=BLOCK_TAG_START?>if talk<?=BLOCK_TAG_END?>
-                 <p> {{= branch.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
-                 <p> {{= job.message}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-
-                  
-                
-             </div>
+          
+          
 
 </script>
    <script id="commentTemplate" type="text/x-jquery-tmpl">
@@ -127,7 +91,14 @@
        <div id="detail-panel">
 
        </div>
-       
+          <div class="content_text">
+            <div class="normal_wrapper_width">
+           <div class="content_pic">
+           
+                              <?=$message?>
+             </div>
+
+             </div>
           </div>
           <div class="split"></div>
           <div style="background:#f0f0f0">

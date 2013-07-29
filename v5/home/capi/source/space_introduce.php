@@ -40,7 +40,7 @@ if($id) {
 	//¶ÁÈ¡ÈÕÖ¾
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('introduce')." b LEFT JOIN ".tname('introducefield')." bf ON bf.introduceid=b.introduceid WHERE b.introduceid='$id' AND b.uid='$space[uid]'");
 	$introduce = $_SGLOBAL['db']->fetch_array($query);
-	$introduce["message"] = capi_fhtml($introduce["message"]);
+	$introduce["message"] = htmlspecialchars($introduce["message"]);
 	capi_showmessage_by_data("rest_success", 0, array('introduce'=>$introduce, 'count'=>count($introduce)));
 	//ÈÕÖ¾²»´æÔÚ
 	if(empty($introduce)) {
