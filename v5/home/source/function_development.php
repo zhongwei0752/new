@@ -73,7 +73,7 @@ function development_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
-	$message1 = $POST['message1'];
+	$message1 = $POST['message'];
 
 	//¸öÈË·ÖÀà
 	if(empty($olds['classid']) || $POST['classid'] != $olds['classid']) {
@@ -209,11 +209,12 @@ function development_post($POST, $olds=array()) {
 	}
 	
 	$developmentarr['developmentid'] = $developmentid;
-
+	$message1=str_replace("attachment","../attachment",$message);
+	$message1=str_replace("http://v5.home3d.cn/v5/v5/home/../attachment/","http://v5.home3d.cn/v5/v5/home/attachment/",$message1);
 	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,
-		'message' => $message1,
+		'message1' => $message1,
 		'postip' => getonlineip(),
 		'target_ids' => $POST['target_ids']
 	);

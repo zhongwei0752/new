@@ -6,7 +6,7 @@ function get_obj_by_xiaoquid($xiaoquid){
 	$query = $_SGLOBAL['db']->query("select * from ".tname('space')." where uid='$xiaoquid'  ");
 	$value = $_SGLOBAL['db']->fetch_array($query);
 	if($value){
-		$d = new Weixin("623610577@qq.com", "2316663");
+		$d = new Weixin("2899164581@qq.com", "123456a");
 		if($d)return $d;
 	}
 	return false;

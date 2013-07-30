@@ -73,7 +73,7 @@ function job_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
-	$message1 = $POST['message1'];
+	$message1 = $POST['message'];
 	$messagecomment = $POST['messagecomment'];
 	$othermessage = $POST['othermessage'];
 	
@@ -213,7 +213,8 @@ function job_post($POST, $olds=array()) {
 	}
 	
 	$jobarr['jobid'] = $jobid;
-	
+	$message1=str_replace("attachment","../attachment",$message);
+	$message1=str_replace("http://v5.home3d.cn/v5/v5/home/../attachment/","http://v5.home3d.cn/v5/v5/home/attachment/",$message1);
 	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,

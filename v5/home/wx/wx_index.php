@@ -69,7 +69,7 @@ class wechatCallbackapiTest
                           }
                          
         }else{
-           $contentStr.="过期";
+           $contentStr.="未填写微信id";
                $msgType = "text";
                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                echo $resultStr;
@@ -138,7 +138,7 @@ class wechatCallbackapiTest
                           }
                          
         }else{
-           $contentStr.="过期";
+           $contentStr.="此微信公众号还未通过验证，微信id:$toUsername,请等待审核";
                $msgType = "text";
                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                echo $resultStr;

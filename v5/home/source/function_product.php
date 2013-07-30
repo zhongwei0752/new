@@ -73,7 +73,7 @@ function product_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
-	$message1 = $POST['message1'];
+	$message1 = $POST['message'];
 
 	//¸öÈË·ÖÀà
 	if(empty($olds['classid']) || $POST['classid'] != $olds['classid']) {
@@ -210,7 +210,8 @@ function product_post($POST, $olds=array()) {
 	}
 	
 	$productarr['productid'] = $productid;
-
+	$message1=str_replace("attachment","../attachment",$message);
+	$message1=str_replace("http://v5.home3d.cn/v5/v5/home/../attachment/","http://v5.home3d.cn/v5/v5/home/attachment/",$message1);
 	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,

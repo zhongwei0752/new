@@ -20,21 +20,13 @@ require_once('Weixin.class.php');
 		$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         $friend = file_get_contents($friendurl,0,null,null);
         $friend_output = json_decode($friend);
-        $d = get_obj_by_xiaoquid($row['uid']);
-		$info = $d->getNewWXUser();
-		if($info){
-			$setarr = array(
-						'name' => $info['nickName'],
-						'namestatus' =>'1',
-					);
-			updatetable('space', $setarr, array('uid'=>$row['uid'] ));
-	}
+       
 		
 		
 }else{
 
 	$username = $_GET['wxkey'];
-	$name = "微信用户".$_GET['wxkey'];
+	$name = $_GET['wxkey'];
 	$password = "weixin";
 
 	$email = isemail($_REQUEST['email']) ? $_REQUEST['email'] : $username."@v5.com.cn";

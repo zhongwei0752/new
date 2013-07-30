@@ -62,6 +62,7 @@ if(empty($introduce)) {
 	//½ÓÊÕÍâ²¿±êÌâ
 	$introduce['subject'] = empty($_GET['subject'])?'':getstr($_GET['subject'], 80, 1, 0);
 	$introduce['message'] = empty($_GET['message'])?'':getstr($_GET['message'], 5000, 1, 0);
+	$introduce['message1'] = empty($_GET['message1'])?'':getstr($_GET['message1'], 5000, 1, 0);
 	
 } else {
 	
@@ -168,7 +169,9 @@ if($_GET['op'] == 'delete') {
 	
 	
 	$introduce['message'] = str_replace('&amp;', '&amp;amp;', $introduce['message']);
+	$introduce['message1'] = str_replace('&amp;', '&amp;amp;', $introduce['message1']);
 	$introduce['message'] = shtmlspecialchars($introduce['message']);
+	$introduce['message1'] = shtmlspecialchars($introduce['message1']);
 	
 	$allowhtml = checkperm('allowhtml');
 	

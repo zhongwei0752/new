@@ -10,8 +10,8 @@ class Weixin {
 	function __construct($username = '',$password = '')
 	{
 		# code...
-		$this->username = $username ? $username :'623610577@qq.com'; 
-		$this->password = $password ? $password :'2316663';
+		$this->username = $username ? $username :'2899164581@qq.com'; 
+		$this->password = $password ? $password :'123456a';
 		$cookie_dir = dirname(__FILE__).'/'.$this->username.'_cookies.txt';
 		$this->cookie_dir =$cookie_dir;
 	}

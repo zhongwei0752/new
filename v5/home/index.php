@@ -1,4 +1,5 @@
 <?php
+
 /*
 	[UCenter Home] (C) 2007-2008 Comsenz Inc.
 	$Id: index.php 13003 2009-08-05 06:46:06Z liguode $
