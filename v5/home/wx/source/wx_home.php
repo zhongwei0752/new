@@ -20,10 +20,11 @@ while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 }
 $abc = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE uid='$uid'");
 	$bac = $_SGLOBAL['db']->fetch_array($abc);
-	if($bac['moblieclicknum']=='1'){
-		include_once template("./wx/template/1/home");
+	if($bac['moblieclicknum']!="1"){
+		include_once template("./wx/template/$bac[moblieclicknum]/home");
 	}else{
-		include_once template("./wx/template/home");
+	include_once template("./wx/template/home");
 }
+
 	
 ?>

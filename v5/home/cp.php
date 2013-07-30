@@ -25,7 +25,7 @@ if(empty($_SGLOBAL['supe_uid'])) {
 	} else {
 		ssetcookie('_refer', rawurlencode('cp.php?ac='.$ac));
 	}
-	showmessage('to_login', 'do.php?ac='.$_SCONFIG['login_action']);
+	showmessage('to_login', 'index.php');
 }
 
 //»ñÈ¡¿Õ¼äÐÅÏ¢

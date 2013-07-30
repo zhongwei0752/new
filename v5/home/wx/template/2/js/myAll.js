@@ -15,12 +15,12 @@
 
 	function tagDown() {
 		var tag_menu = ele ('tag_menu');
-		tag_menu.src='template/1/img/tag_menu_down.png';
+		tag_menu.src='template/2/img/tag_menu_down.png';
 	}
 
 	function tagUp() {
 		var tag_menu = ele ('tag_menu');
-		tag_menu.src = 'template/1/img/tag_menu.png';
+		tag_menu.src = 'template/2/img/tag_menu.png';
 	}
 
 	function clickMenu() {

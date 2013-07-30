@@ -17,15 +17,12 @@ table {
 	width: 100%;
 }
 
-.tag_menu {
+#tag_menu {
 	position: fixed;
 	width: 12.5%;
+	top: 0;
 	right: 20px;
-}
-
-.tag_menu img {
 	max-width: 80px;
-	width: 100%;
 }
 
 .info_img {

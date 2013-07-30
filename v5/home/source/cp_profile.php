@@ -104,7 +104,7 @@ if($_GET['op'] == 'base') {
 			showmessage("企业介绍不能为空！");
 		}
 	}
-	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where wxkey='$_POST[wxkey]'");	
+	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where wxkey='$_POST[wxkey]' and uid!=$space[uid]");	
 		$value2 = $_SGLOBAL['db']->fetch_array($query2);
 		if($value2){
 			showmessage("微信id重复");
@@ -297,7 +297,11 @@ if($_GET['op'] == 'base') {
 		$_GET['namechange'] = 0;//²»ÔÊÐíÐÞ¸Ä
 	}
 			if(submitcheck('nextsubmit')) {
+				if($space['alreadyreg']=='1'){
+				showmessage('update_on_successful_individuals', 'cp.php?ac=profile', 0);
+				}else{
 				showmessage('update_on_successful_individuals', './template/default/post_ok.htm', 0);
+			}
 	}
 	
 	//ÒþË½

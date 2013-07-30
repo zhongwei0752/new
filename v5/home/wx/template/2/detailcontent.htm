@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
+    <link rel="stylesheet" type="text/css" href="./template/2/css/info_content.css" />
+    <script type="text/javascript" src="./template/2/js/myAll.js"></script>
+  </head>
+
+  <body>
+    <div data-role="page">
+      <header data-role="header" data-tap-toggle="false" data-theme="none">
+      <div class="title">
+        <span id="product_name">$zhong[subject]</span>
+      </div>
+      <div class="time">
+            <span id="time"><!--{date('m-d H:i',$zhong[dateline],1)}--></span>
+          <div class="status">
+          <span id="count_read">阅读（$zhong[viewnum]）</span>
+          </div>
+      </div>
+      </header>
+
+      <div data-role="content">
+
+        <table id="requirement">
+          <tr>
+            <th>职位描述:</th>
+            <td>$zhong[message]</td>
+          </tr>
+
+          <tr>
+            <th>资格要求:</th>
+            <td>$zhong[messagecomment]</td>
+          </tr>
+
+          <tr>
+            <th>电话：</th>
+            <td>$zhong[telephone]</td>
+          </tr>
+
+          <tr>
+            <th>邮箱：</th>
+            <td>$zhong[email]</td>
+          </tr>
+
+          <tr>
+            <th>待遇：</th>
+            <td>$zhong[money]</td>
+          </tr>
+
+          <tr>
+            <th>其他：</th>
+            <td>$zhong[othermessage]</td>
+          </tr>
+
+        </table>
+
+        <div class="button_buy" onclick="">
+          <a href="#" id="colorButton" onmouseover="deeper()" onmouseout="shallower()" tel="$zhong[telephone]">一键拨号</a>
+          <!--<a href="book_info.html"><button id="colorButton" onmouseover="deeper()" onmouseout="shallower()">一键拨号</button></a>-->
+        </div><!-- button_more_2 -->
+
+
+
+      </div><!-- content -->
+    </div><!-- page -->
+  </body>
+</html>

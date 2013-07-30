@@ -4,8 +4,8 @@
 		<title></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
-		<link rel="stylesheet" type="text/css" href="template/1/css/info_content.css" />
-		<script type="text/javascript" src="template/1/js/myAll.js"></script>
+		<link rel="stylesheet" type="text/css" href="template/2/css/info_content.css" />
+		<script type="text/javascript" src="template/2/js/myAll.js"></script>
 		      <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
      <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
      <script type="text/javascript" src="template/js/detail.js"></script>
@@ -61,44 +61,6 @@
                  <p> {{= job.dateline}}</p>
                  <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}--></div>
 			</header>
-  
-
-<div data-role="content">
-				<div class="content_img">
-					 $typepic
-				</div><!-- content_img -->
-
-				<div class="content_text">
-					 <!--{BLOCK_TAG_START}-->if industry<!--{BLOCK_TAG_END}-->
-                 <p> {{= industry.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                  <!--{BLOCK_TAG_START}-->if branch<!--{BLOCK_TAG_END}-->
-                 <p> {{= branch.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                    <!--{BLOCK_TAG_START}-->if development<!--{BLOCK_TAG_END}-->
-                 <p> {{= development.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if product<!--{BLOCK_TAG_END}-->
-                 <p> {{= product.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if introduce<!--{BLOCK_TAG_END}-->
-                 <p> {{= introduce.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if cases<!--{BLOCK_TAG_END}-->
-                 <p> {{= cases.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if talk<!--{BLOCK_TAG_END}-->
-                 <p> {{= branch.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 <!--{BLOCK_TAG_START}-->if job<!--{BLOCK_TAG_END}-->
-                 <p> {{= job.message}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-				</div><!-- content_text -->
-
-         
-
-       
-
 </script>
  <script id="commentTemplate" type="text/x-jquery-tmpl">
  <li>
@@ -118,6 +80,10 @@
 			<div id="detail-panel">
 
        </div>
+       <div data-role="content">
+                <div class="content_text">
+            $message
+                </div><!-- content_text -->
  </div>
 				
 

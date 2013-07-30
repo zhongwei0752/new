@@ -198,13 +198,13 @@ if(submitcheck('usergroupsubmit')) {
 			'residecity'=>getstr($_POST['residecity'], 60, 1, 1),
 			'telephone'=>getstr($_POST['telephone'], 60, 1, 1),
 			'companyintroduce'=>getstr($_POST['companyintroduce'], 60, 1, 1)
-		
+			
 
 
 		);
 		$setarr1= array(
 		'name'=>getstr($_POST['name'], 60, 1, 1),
-		'linkman'=>getstr($_POST['linkman'], 60, 1, 1),
+		'linkman'=>getstr($_POST['linkman'], 60, 1, 1)
 		
 			);
 		foreach ($profilefields as $field => $value) {
@@ -243,7 +243,7 @@ if(submitcheck('usergroupsubmit')) {
 					$url .= 'namestatus=0';
 					foreach($_POST['uids'] as $key => $uid) {
 						$reward = getreward('realname', 0, $uid, '', 0);
-						$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET namestatus='1', profilestatus='0', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$uid' ");
+						$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET namestatus='1', profilestatus='0',alreadyreg='1', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$uid' ");
 					}
 					$createlog = true;
 				}
