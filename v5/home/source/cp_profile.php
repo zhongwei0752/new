@@ -74,11 +74,7 @@ if($_GET['op'] == 'base') {
 			showmessage("联系人电话不能为空！");
 		}
 	}
-	if(empty($space['wxkey'])){
-		if(empty($_POST['wxkey'])){
-			showmessage("微信公众号不能为空！");
-		}
-	}
+
 	if(empty($space['businessaddress'])){
 		if(empty($_POST['businessaddress'])){
 			showmessage("企业地址不能为空！");
@@ -104,11 +100,7 @@ if($_GET['op'] == 'base') {
 			showmessage("企业介绍不能为空！");
 		}
 	}
-	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." where wxkey='$_POST[wxkey]' and uid!=$space[uid]");	
-		$value2 = $_SGLOBAL['db']->fetch_array($query2);
-		if($value2){
-			showmessage("微信id重复");
-		}
+
 		//Ìá½»¼ì²é
 
 			if($_POST['qq']){
@@ -209,10 +201,6 @@ if($_GET['op'] == 'base') {
 			}
 			if($_POST['linkman']){
 				$setarr1['linkman'] = getstr($_POST['linkman'], 40, 1, 1);
-				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
-			}
-			if($_POST['wxkey']){
-				$setarr1['wxkey'] = getstr($_POST['wxkey'], 40, 1, 1);
 				updatetable('space', $setarr1, array('uid'=>$_SGLOBAL['supe_uid']));
 			}
 		

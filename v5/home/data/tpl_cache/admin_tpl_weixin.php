@@ -1,4 +1,59 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1375207040', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/weixin|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1375206245', 'admin/tpl/weixin');?><?php $_TPL['menunames'] = array(
+		'index' => '管理首页',
+		'config' => '站点设置',
+		'privacy' => '隐私设置',
+		'usergroup' => '用户组',
+		'credit' => '积分规则',
+		'profilefield' => '用户栏目',
+		'profield' => '群组栏目',
+		'eventclass' => '活动分类',
+		'magic' => '道具设置',
+		'task' => '有奖任务',
+		'spam' => '防灌水设置',
+		'censor' => '词语屏蔽',
+		'ad' => '广告设置',
+		'userapp' => 'MYOP应用',
+		'app' => 'UCenter应用',
+		'network' => '随便看看',
+		'cache' => '缓存更新',
+		'log' => '系统log记录',
+		'space' => '用户管理',
+		'feed' => '动态(feed)',
+		'share' => '分享',
+		'blog' => '日志',
+		'album' => '相册',
+		'pic' => '图片',
+		'comment' => '评论/留言',
+		'thread' => '话题',
+		'post' => '回帖',
+		'doing' => '记录',
+		'tag' => '标签',
+		'mtag' => '群组',
+		'poll' => '投票',
+		'event' => '活动',
+		'magiclog' => '道具记录',
+		'report' => '举报',
+		'block' => '数据调用',
+		'template' => '模板编辑',
+		'backup' => '数据备份',
+		'stat' => '统计更新',
+		'cron' => '系统计划任务',
+		'click' => '表态动作',
+		'ip' => '访问IP设置',
+		'hotuser' => '推荐成员设置',
+		'defaultuser' => '默认好友设置',
+		'introduce' => '企业介绍',
+		'product' => '产品介绍',
+		'development' => '企业动态',
+		'industry' => '行业动态',
+		'cases' => '成功案例',
+		'branch' => '分支机构',
+		'job' => '人才招聘',
+		'talk' => '在线沟通',
+		'weixin' =>'微信录入'
+	); ?>
+<?php $_TPL['nosidebar'] = 1; ?>
+<?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -156,50 +211,75 @@
 
 <?php } ?>
 
-<h2 class="title"><img src="image/icon/profile.gif">企业设置</h2>
-<div class="tabs_header">
-<a href="cp.php?ac=advance" class="r_option">&raquo; 高级管理</a>
-<ul class="tabs">
-<li<?=$actives['profile']?>><a href="cp.php?ac=profile"><span>实名认证</span></a></li>
-<!--<li<?=$actives['message']?>><a href="cp.php?ac=message"><span>企业资料</span></a></li>-->
-<li<?=$actives['avatar']?>><a href="cp.php?ac=avatar"><span>企业头像</span></a></li>
-<?php if($_SCONFIG['videophoto']) { ?>
-<li<?=$actives['videophoto']?>><a href="cp.php?ac=videophoto"><span>视频认证</span></a></li>
+
+<style type="text/css">
+@import url(admin/tpl/style.css);
+</style>
+
+<div id="cp_content">
+
+<form method="post" id="batchform" action="admincp.php?ac=weixin">
+<div class="mainarea">
+<div class="maininner">
+<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
+<table cellspacing="3" cellpadding="3">
+<tr><th>微信id</th><td><input type="text" name="wxkey" ></td>
+<th>微信登陆账号名</th><td><input type="text" name="username" ></td>
+<th>微信登陆密码</th><td><input type="text" name="password" ></td>
+
+</tr><br>
+
+</table>
+<input type="hidden" name="cheakid" value="1" />
+<input type="submit" name="submit" value="录入" class="submit">
+</div>
+</div>
+</form>
+<div class="side">
+<?php if($menus['0']) { ?>
+<div class="block style1">
+<h2>基本设置</h2>
+<ul class="folder">
+<?php if(is_array($acs['0'])) { foreach($acs['0'] as $value) { ?>
+<?php if($menus['0'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
 <?php } ?>
-<?php if($_SCONFIG['allowdomain'] && $_SCONFIG['domainroot'] && checkperm('domainlength')) { ?>
-<li<?=$actives['domain']?>><a href="cp.php?ac=domain"><span>我的域名</span></a></li>
+<?php } } ?>
+</ul>
+</div>
 <?php } ?>
-<?php if($_SCONFIG['sendmailday']) { ?>
-<li<?=$actives['sendmail']?>><a href="cp.php?ac=sendmail"><span>邮件提醒</span></a></li>
+
+<div class="block style1">
+<h2>批量管理</h2>
+<ul class="folder">
+<?php if(is_array($acs['4'])) { foreach($acs['4'] as $value) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } } ?>
+<?php if(is_array($acs['1'])) { foreach($acs['1'] as $value) { ?>
+<?php if($menus['1'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
 <?php } ?>
+<?php } } ?>
 </ul>
 </div>
 
-<form method="post" action="admincp.php" class="c_form">
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-<table cellspacing="0" cellpadding="0" class="formtable">
-<caption>
-<h2>高级管理</h2>
-<p>通过高级管理，您可以对自己的日志、图片、留言等进行批量删除管理。<br>为了保护您的数据安全，请再次输入您的账户密码以登录高级管理平台。</p>
-</caption>
-<tr>
-<th width="120">用户名</th>
-<td><?=$_SGLOBAL['username']?> (<a href="cp.php?ac=common&op=logout">退出</a>)</td>
-</tr>
-<tr>
-<th>密码</th>
-<td><input type="password" name="password" class="t_input" /></td>
-</tr>
-<tr>
-<td></td>
-<td>
-<input type="hidden" name="loginsubmit" value="true" />
-<input type="hidden" name="refer" value="<?=$_SGLOBAL['refer']?>" />
-<input type="submit" name="btnsubmit" value="进入平台" class="submit" />
-</td>
-</tr>
-</table>
-</form>
+<?php if($menus['2']) { ?>
+<div class="block style1">
+<h2>高级设置</h2>
+<ul class="folder">
+<?php if(is_array($acs['2'])) { foreach($acs['2'] as $value) { ?>
+<?php if($menus['2'][$value]) { ?>
+<?php if($ac==$value) { ?><li class="active"><?php } else { ?><li><?php } ?><a href="admincp.php?ac=<?=$value?>"><?=$_TPL['menunames'][$value]?></a></li>
+<?php } ?>
+<?php } } ?>
+<?php if($menus['0']['config']) { ?><li><a href="<?=UC_API?>" target="_blank">UCenter</a></li><?php } ?>
+</ul>
+</div>
+<?php } ?>
+</div>
+
+</div>
+
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

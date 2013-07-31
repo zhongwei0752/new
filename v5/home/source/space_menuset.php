@@ -515,8 +515,17 @@ if($showmessage){
 	include"./template/default/allcomplete.htm";
 }
 }
-	
-
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$zhong1=$value4;
+if(empty($zhong1)){
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('weixin')." where cheakid='1' limit 0,1");
+$newweixin = $_SGLOBAL['db']->fetch_array($query4);
+if(!empty($newweixin['username'])||!empty($newweixin['password'])){
+updatetable("space", array('wxkey'=>$newweixin['wxkey'],'weixinusername'=>$newweixin['username'],'weixinpassword'=>$newweixin['password']),array('uid'=>$_SGLOBAL['supe_uid']));
+updatetable("weixin", array('cheakid'=>'0'),array('id'=>$newweixin['id']));
+}
+}
 
 	
 

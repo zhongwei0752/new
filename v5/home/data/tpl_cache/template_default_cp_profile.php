@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1375111557', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1375206433', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html>
 <html>
@@ -450,17 +450,7 @@
             <?php } ?>
 
                       </div>
-                      <div class="post_list container_12">
-                         <span class="select_title grid_1">微信id&nbsp;&nbsp;:</span>
-                            <div class="grid_2">
-                        <?php if($space['wxkey'] && empty($_GET['namechange'])) { ?>
-             &nbsp;&nbsp;<span><?=$space['wxkey']?></span>
-            <?php } else { ?>
-            <?php if(empty($_SCONFIG['namechange'])) { ?>您的微信id一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
-            <input id="wxkey" type="text" value="<?=$space['wxkey']?>" name="wxkey" /></div><span style="color:#43B8B0;width:300px;">*请填写你的微信公众账号id,类似"gh_xxxxxxxxxxxxxxx"。</span>
-            <?php } ?>
-          </div>
-                      </div>
+                      
                       <div class="post_list container_12">
                          <span class="select_title grid_1">企业办公地址&nbsp;&nbsp;:</span>
                             <div class="grid_2">

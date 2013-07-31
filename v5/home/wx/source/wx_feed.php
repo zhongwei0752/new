@@ -17,7 +17,7 @@ require_once('Weixin.class.php');
 		$auth = setSession($user[0],$user[1]);
 		$weixinuid=$_GET['uid'];
 		$m_auth=rawurlencode($auth);
-		$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
+		$friendurl = "http://v5.home3d.cn/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         $friend = file_get_contents($friendurl,0,null,null);
         $friend_output = json_decode($friend);
        
@@ -73,7 +73,7 @@ require_once('Weixin.class.php');
 				$user = $_SGLOBAL['db']->fetch_array($_SGLOBAL['db']->query($sql));
 				if($user){
 					$sinauid=$uid_get['uid'];
-					wxshowmessage("已绑定", "http://v5.home3d.cn/v5/v5/home/index.php");
+					wxshowmessage("已绑定", "http://v5.home3d.cn/home/index.php");
 					
 				}
 				$d = get_obj_by_xiaoquid($uid);
@@ -89,7 +89,7 @@ require_once('Weixin.class.php');
 				$weixinuid=$_GET['uid'];
 				$auth = setSession($user[0],$user[1]);
 				$m_auth=rawurlencode($auth);
-				$friendurl = "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
+				$friendurl = "http://v5.home3d.cn/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         		$friend = file_get_contents($friendurl,0,null,null);
         		$friend_output = json_decode($friend);
 

@@ -131,3 +131,29 @@
 <?PHP exit;?>	2013-07-29 23:28:22		119.131.107.245	1	/v5/v5/home/admincp.php?ac=ad	GET{ac=ad;}
 <?PHP exit;?>	2013-07-29 23:28:24		119.131.107.245	1	/v5/v5/home/admincp.php?ac=index	GET{ac=index;}
 <?PHP exit;?>	2013-07-29 23:28:25		119.131.107.245	1	/v5/v5/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 00:08:24		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-31 00:12:14		127.0.0.1	1	/v5/v5/home/admincp.php	
+<?PHP exit;?>	2013-07-31 00:12:18		127.0.0.1	1	/v5/v5/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 00:13:00		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:14:17		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:15:03		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:16:04		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:16:21		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:29:25		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:30:10		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:30:32		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:31:01		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:31:28		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 00:31:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=123;username=123;password=123;submit=录入;}
+<?PHP exit;?>	2013-07-31 00:34:26		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=123;username=123;password=123;submit=录入;}
+<?PHP exit;?>	2013-07-31 01:43:17		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 01:43:44		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 01:43:58		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=234;username=234;password=234;cheakid=1;submit=录入;}
+<?PHP exit;?>	2013-07-31 01:44:05		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 01:44:33		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=345;username=345;password=345;cheakid=1;submit=录入;}
+<?PHP exit;?>	2013-07-31 01:47:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 01:47:49		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"87";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 01:47:55		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 01:57:39		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 01:57:58		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"88";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 01:58:04		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}

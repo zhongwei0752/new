@@ -1,7 +1,7 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375079271', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375206632', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
-    <title>v5v5v5v5</title>
+    <title>选购应用</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -98,13 +98,18 @@
   <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;overflow:scroll;"><?=$value['message1']?></div>
 
 </div>
+ 
 
 
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
     <script type="text/javascript">
        $(document).ready(function(){
-        $('#basic-modal-content<?=$value['menusetid']?>').attr("style", "display:none;");;
+        
+        $('#basic-modal-content<?=$value['menusetid']?>').attr("style", "display:none;");
+        $('#weixin').attr("style", "display:none;");
+        $('#weixin').modal();
+         $('#weixin').attr("style", "display:block;");
            $('#basic-modal input.basic<?=$value['menusetid']?>, #basic-modal a.basic<?=$value['menusetid']?>').click(function (e) {
     e.preventDefault();
     $('#basic-modal-content<?=$value['menusetid']?>').modal();
@@ -127,9 +132,18 @@
               
           </div><!-- content_wrapper end -->
     </div><!-- wrraper end -->
+ <div id="weixin">
+  <?php if(!empty($newweixin['username'])) { ?>
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信id：<?=$newweixin['wxkey']?></h3>
+   <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<?=$newweixin['username']?></h3>
+    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<?=$newweixin['password']?></h3>
+    <?php } else { ?>
+    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">目前还未有微信公众号</h3>
+     <?php } ?>
+
+</div>
  
- 
-  
+
  
    
    <?php if(empty($_SGLOBAL['inajax'])) { ?>

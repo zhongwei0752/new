@@ -212,7 +212,7 @@ function introduce_post($POST, $olds=array()) {
 	
 	$introducearr['introduceid'] = $introduceid;
 	$message1=str_replace("attachment","../attachment",$message);
-	$message1=str_replace("http://v5.home3d.cn/v5/v5/home/../attachment/","http://v5.home3d.cn/v5/v5/home/attachment/",$message1);
+	$message1=str_replace("http://v5.home3d.cn/home/../attachment/","http://v5.home3d.cn/home/attachment/",$message1);
 	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,
