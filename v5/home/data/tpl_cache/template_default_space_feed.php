@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375206643', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375287235', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -158,6 +158,21 @@
 
 <?php } ?>
 
+    <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/file_beauty.css">
+    <link type='text/css' href='./template/default/basic_chosen.css' rel='stylesheet' media='screen' />
+    <style type="text/css">
+       h3{color: #727272;margin-top: 20px;font-weight:normal;}
+       .selected{ -webkit-box-shadow: 3px 3px 3px;
+  -moz-box-shadow: 3px 3px 3px;
+  box-shadow: 3px 3px 3px;}
+  
+      .bg1{ background: url("./template/default/image/chosen_bg.png");}
+      .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
+      .open .price{color:#3EB2B8!important;}
+      #simplemodal-container{height:200px;}
+    </style>
 <style type="text/css">
 .navbar-inner .grid_4 a img{max-width: 40px;}
 </style>
@@ -170,7 +185,7 @@
 <div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></a></div></div></div></div>
 </td>
 <td valign="top">
-<h3 class="index_name" style="margin-left:20px;border:0px;">
+<h3 class="index_name" style="margin-top:-6px;border:0px;">
 <a  href="space.php?uid=<?=$space['uid']?>" style="color:#999;font-size:18px;"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
 
 <span style="color:#43B8B0;">VIP</span>
@@ -178,14 +193,34 @@
 <br/>
  <div class="company_avata_box container_12"  style="margin-top:-30px;">
                    <div class="grid_2">
-                       <h5>当前状态:<?php if($_SGLOBAL['session']['magichidden']) { ?>当前隐身<?php } else { ?>在线<?php } ?></h5>
-                       <h5 style="margin-top:-10px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
-                       <a href="cp.php?ac=profile" style="margin-top:20px;" class="company_setting">企业设置</a>
+                       <h5 style="margin-top:0px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
+                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
+                       <div id="weixin">
+                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>
+                        <div style="background:#fff;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<?=$space['weixinusername']?><br/>登录密码:<?=$space['weixinpassword']?><br/>
+             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
+                        </div>
+
+                        </div>
+                       <a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>
                    </div>
                  </div>
 
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+        
+        $('#weixin').attr("style", "display:none;");
+        $('#weixinhome').click(function (e) {
+    	e.preventDefault();
+    	$('#weixin').modal();
+  });
 
+            
+       })
+    </script>
 
 
 

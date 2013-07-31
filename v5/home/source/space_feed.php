@@ -3,7 +3,10 @@
 	[UCenter Home] (C) 2007-2008 Comsenz Inc.
 	$Id: space_feed.php 13194 2009-08-18 07:44:40Z liguode $
 */
-
+	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
+	$value4 = $_SGLOBAL['db']->fetch_array($query4);
+	$zhong1=$value4;
+	
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }

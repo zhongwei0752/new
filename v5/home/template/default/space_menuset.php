@@ -408,6 +408,7 @@ if($_GET['view'] == 'me') {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
+
 					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
@@ -427,7 +428,8 @@ if($_GET['view'] != 'me') {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
-					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
+						$value['message1'] = $value['message'];
+					$value['message'] = getstr($value['message'], 20, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				//识别标签，只出现符合标签的应用
@@ -513,8 +515,17 @@ if($showmessage){
 	include"./template/default/allcomplete.htm";
 }
 }
-	
-
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
+$value4 = $_SGLOBAL['db']->fetch_array($query4);
+$zhong1=$value4;
+if(empty($zhong1)){
+$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('weixin')." where cheakid='1' limit 0,1");
+$newweixin = $_SGLOBAL['db']->fetch_array($query4);
+if(!empty($newweixin['username'])||!empty($newweixin['password'])){
+updatetable("space", array('wxkey'=>$newweixin['wxkey'],'weixinusername'=>$newweixin['username'],'weixinpassword'=>$newweixin['password']),array('uid'=>$_SGLOBAL['supe_uid']));
+updatetable("weixin", array('cheakid'=>'0'),array('id'=>$newweixin['id']));
+}
+}
 
 	
 

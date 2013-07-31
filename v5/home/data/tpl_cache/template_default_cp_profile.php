@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1375206433', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_profile|template/default/header|template/default/footer', '1375263315', 'template/default/cp_profile');?><?php if(empty($zhong1)) { ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html>
 <html>
@@ -471,6 +471,51 @@
               <?php if(empty($_SCONFIG['namechange'])) { ?>您的企业地址一经确认，将不再允许再次修改，请真实填写。<br><?php } ?>
             <label for="business"><select name="business">
               <option value ="互联网">互联网</option>
+               <option value ="计算机">计算机</option>
+                <option value ="通信">通信</option>
+                 <option value ="电子">电子</option>
+                  <option value ="销售">销售</option>
+                   <option value ="客服">客服</option>
+                    <option value ="技术支持">技术支持</option>
+                     <option value ="会计">会计</option>
+                      <option value ="金融">金融</option>
+                       <option value ="银行">银行</option>
+                        <option value ="保险">保险</option>
+                         <option value ="生产">生产</option>
+                          <option value ="运营">运营</option>
+                           <option value ="采购">采购</option>
+                            <option value ="物流">物流</option>
+                             <option value ="生物">生物</option>
+                              <option value ="制药">制药</option>
+                               <option value ="医疗">医疗</option>
+                                <option value ="护理">护理</option>
+                                 <option value ="广告">广告</option>
+                                  <option value ="市场">市场</option>
+                                   <option value ="媒体">媒体</option>
+                                    <option value ="艺术">艺术</option>
+                                     <option value ="建筑">建筑</option>
+                                      <option value ="房地产">房地产</option>
+                                       <option value ="人事">人事</option>
+                                        <option value ="行政">行政</option>
+                                         <option value ="高级管理">高级管理</option>
+                                          <option value ="咨询">咨询</option>
+                                           <option value ="法律">法律</option>
+                                            <option value ="教育">教育</option>
+                                             <option value ="科研">科研</option>
+                                              <option value ="服务业">服务业</option>
+                                               <option value ="餐饮">餐饮</option>
+                                                <option value ="娱乐">娱乐</option>
+                                                 <option value ="酒店">酒店</option>
+                                                  <option value ="旅游">旅游</option>
+                                                   <option value ="美容">美容</option>
+                                                    <option value ="健身">健身</option>
+                                                     <option value ="百货">百货</option>
+                                                      <option value ="交通运输服务">交通运输服务</option>
+                                                       <option value ="公务员">公务员</option>
+                                                        <option value ="翻译">翻译</option>
+                                                         <option value ="其它">其它</option>
+
+
   
             </select><!--<input id="business" type="text" value="<?=$space['business']?>" name="business" />--></label> 
             <?php } ?>

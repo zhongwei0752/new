@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375206632', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375259103', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>选购应用</title>
@@ -133,12 +133,17 @@
           </div><!-- content_wrapper end -->
     </div><!-- wrraper end -->
  <div id="weixin">
+    <style type="text/css">
+      #simplemodal-container{height:300px;}
+    </style>
+  <?php if(empty($zhong1)) { ?>
   <?php if(!empty($newweixin['username'])) { ?>
   <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信id：<?=$newweixin['wxkey']?></h3>
    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<?=$newweixin['username']?></h3>
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<?=$newweixin['password']?></h3>
     <?php } else { ?>
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">目前还未有微信公众号</h3>
+     <?php } ?>
      <?php } ?>
 
 </div>

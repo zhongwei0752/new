@@ -12,7 +12,7 @@ if(empty($m_auth)){
 	wxshowmessage('login_failure_please_re_login',  'wx.php?do=bind&wxkey='.$_GET['wxkey']);
 }
 */
-chdir ('../');
+
 
 $type=$_GET['type'];
 $typeid=$type."id";

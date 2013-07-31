@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1375115194', './wx/template/feedcontent');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1375241632', './wx/template/feedcontent');?><!DOCTYPE html>
 <html>
   <head>
   	 <title></title>
@@ -93,7 +93,7 @@
        </div>
           <div class="content_text">
             <div class="normal_wrapper_width">
-           <div class="content_pic">
+           <div class="content_pic" style="font-size:14px!important;">
            
                               <?=$message?>
              </div>

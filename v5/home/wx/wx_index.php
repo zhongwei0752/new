@@ -80,20 +80,20 @@ class wechatCallbackapiTest
                       }else{
                         $name=$row[username];
                       }
-                      $appurl = "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=app&uid=$row[uid]";
+                      $appurl = "http://v5.home3d.cn/home/capi/space.php?do=app&uid=$row[uid]";
                       $app = file_get_contents($appurl,0,null,null);
                       $app_output = json_decode($app);
                       $count=$app_output->data->count;
                       $zhong2 = mysql_query("SELECT * FROM uchome_recommend  WHERE uid='$row[uid]'");
                       $wei2 = mysql_fetch_array($zhong2);
                       $name=$wei2[subject];
-                      $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=home&uid=".$row[uid];
-                      $pic = "http://v5.home3d.cn/v5/v5/home/".$wei2[imageurl];
+                      $url = "http://v5.home3d.cn/home/wx/wx.php?do=home&uid=".$row[uid];
+                      $pic = "http://v5.home3d.cn/home/".$wei2[imageurl];
                       $articles[] = makeArticleItem($name, $name, $pic, $url);
                       for($i=0;$i<$count;$i++){
-                       $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
+                       $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
                        $subject=$app_output->data->app[$i]->subject;
-                       $pic = "http://v5.home3d.cn/v5/v5/home/".$app_output->data->app[$i]->image1url;
+                       $pic = "http://v5.home3d.cn/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       }  
                       $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
@@ -181,7 +181,7 @@ class wechatCallbackapiTest
                  
                       if($wei){
                      $english=$wei['english'];
-                     $jsonurl = "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=$english&uid=$row[uid]";
+                     $jsonurl = "http://v5.home3d.cn/home/capi/space.php?do=$english&uid=$row[uid]";
                       $json = file_get_contents($jsonurl,0,null,null);
                       $json_output = json_decode($json);
                      
@@ -265,20 +265,20 @@ class wechatCallbackapiTest
                       }else{
                         $name=$row[username];
                       }
-                      $appurl = "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=app&uid=$row[uid]";
+                      $appurl = "http://v5.home3d.cn/home/capi/space.php?do=app&uid=$row[uid]";
                       $app = file_get_contents($appurl,0,null,null);
                       $app_output = json_decode($app);
                       $count=$app_output->data->count;
                        $zhong2 = mysql_query("SELECT * FROM uchome_recommend  WHERE uid='$row[uid]'");
                   $wei2 = mysql_fetch_array($zhong2);
                   $name=$wei2[subject];
-                    $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?do=home&uid=".$row[uid];
-                    $pic = "http://v5.home3d.cn/v5/v5/home/".$wei2[imageurl];
+                    $url = "http://v5.home3d.cn/home/wx/wx.php?do=home&uid=".$row[uid];
+                    $pic = "http://v5.home3d.cn/home/".$wei2[imageurl];
                     $articles[] = makeArticleItem($name, $name, $pic, $url);
                       for($i=0;$i<$count;$i++){
-                       $url = "http://v5.home3d.cn/v5/v5/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
+                       $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
                        $subject=$app_output->data->app[$i]->subject;
-                       $pic = "http://v5.home3d.cn/v5/v5/home/".$app_output->data->app[$i]->image1url;
+                       $pic = "http://v5.home3d.cn/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       }  
         

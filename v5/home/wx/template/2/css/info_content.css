@@ -28,10 +28,14 @@ header {
 	width: 96.875%;
 }
 
-.content_img img {
+.content_img {
 	padding-left: 3.125%;
 	margin-bottom: 1.5%;
 	width: 93.75%;
+}
+
+.content_img img {
+	width: 100%;
 }
 
 .content_text {

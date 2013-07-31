@@ -5,11 +5,11 @@ $_SGLOBAL['mail']=Array
 	'mailsend' => 2,
 	'maildelimiter' => 1,
 	'mailusername' => 1,
-	'server' => 'smtp.qq.com',
+	'server' => 'smtp.163.com',
 	'port' => 25,
 	'auth' => 1,
-	'from' => '623610577@qq.com',
-	'auth_username' => 623610577,
-	'auth_password' => 73214139487
+	'from' => 'boimty2004@163.com',
+	'auth_username' => 'boimty2004',
+	'auth_password' => 15919318433
 	)
 ?>

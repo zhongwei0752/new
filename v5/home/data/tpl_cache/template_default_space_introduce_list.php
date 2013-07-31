@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_list|template/default/header|template/default/footer', '1375111927', 'template/default/space_introduce_list');?><?php $_TPL['titles'] = array('企业介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_introduce_list|template/default/header|template/default/footer', '1375265403', 'template/default/space_introduce_list');?><?php $_TPL['titles'] = array('企业介绍'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -172,7 +172,7 @@
 <span class="gray r_option"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></span>
 <h4><a href="space.php?uid=<?=$space['uid']?>&do=introduce&id=<?=$value['introduceid']?>" target="_blank" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4>
 <div class="detail">
-<?=$value['message']?>
+<?=$value['message1']?>
 </div>
 </li>
 <?php } } ?>

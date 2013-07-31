@@ -131,29 +131,39 @@
 <?PHP exit;?>	2013-07-29 23:28:22		119.131.107.245	1	/v5/v5/home/admincp.php?ac=ad	GET{ac=ad;}
 <?PHP exit;?>	2013-07-29 23:28:24		119.131.107.245	1	/v5/v5/home/admincp.php?ac=index	GET{ac=index;}
 <?PHP exit;?>	2013-07-29 23:28:25		119.131.107.245	1	/v5/v5/home/admincp.php?ac=config	GET{ac=config;}
-<?PHP exit;?>	2013-07-31 00:08:24		127.0.0.1	1	/v5/v5/home/admincp.php	
-<?PHP exit;?>	2013-07-31 00:12:14		127.0.0.1	1	/v5/v5/home/admincp.php	
-<?PHP exit;?>	2013-07-31 00:12:18		127.0.0.1	1	/v5/v5/home/admincp.php?ac=config	GET{ac=config;}
-<?PHP exit;?>	2013-07-31 00:13:00		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:14:17		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:15:03		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:16:04		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:16:21		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:29:25		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:30:10		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:30:32		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:31:01		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:31:28		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 00:31:43		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=123;username=123;password=123;submit=录入;}
-<?PHP exit;?>	2013-07-31 00:34:26		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=123;username=123;password=123;submit=录入;}
-<?PHP exit;?>	2013-07-31 01:43:17		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
-<?PHP exit;?>	2013-07-31 01:43:44		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 01:43:58		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=234;username=234;password=234;cheakid=1;submit=录入;}
-<?PHP exit;?>	2013-07-31 01:44:05		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}
-<?PHP exit;?>	2013-07-31 01:44:33		127.0.0.1	1	/v5/v5/home/admincp.php?ac=weixin	GET{ac=weixin;}POST{formhash=fe00ab38;wxkey=345;username=345;password=345;cheakid=1;submit=录入;}
-<?PHP exit;?>	2013-07-31 01:47:36		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
-<?PHP exit;?>	2013-07-31 01:47:49		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"87";};optype=1;listsubmit=提交;}
-<?PHP exit;?>	2013-07-31 01:47:55		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
-<?PHP exit;?>	2013-07-31 01:57:39		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
-<?PHP exit;?>	2013-07-31 01:57:58		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"88";};optype=1;listsubmit=提交;}
-<?PHP exit;?>	2013-07-31 01:58:04		127.0.0.1	1	/v5/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 00:09:51		119.131.107.192	1	/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 00:09:59		119.131.107.192	1	/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"75";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 00:10:01		119.131.107.192	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 00:19:34		119.131.107.192	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 00:20:09		119.131.107.192	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 00:48:06		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 00:48:13		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"86";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 00:48:14		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 01:41:49		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 01:41:56		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"86";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 01:41:57		113.111.52.119	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 09:40:40		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 09:40:46		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 09:40:46		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 09:40:46		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 09:40:46		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 09:40:54		58.62.81.229	1	/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-31 09:40:56		58.62.81.229	1	/home/admincp.php?ac=cache	GET{ac=cache;}POST{formhash=fe00ab38;cachetype=a:4:{i:0;s:3:"tpl";i:1;s:5:"block";i:2;s:8:"database";i:3;s:7:"network";};cachesubmit=缓存更新;}
+<?PHP exit;?>	2013-07-31 09:40:57		58.62.81.229	1	/home/admincp.php?ac=cache	GET{ac=cache;}
+<?PHP exit;?>	2013-07-31 09:41:07		58.62.81.229	1	/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 09:44:03		58.62.81.229	1	/home/admincp.php?ac=config	GET{ac=config;}POST{formhash=fe00ab38;config=a:85:{s:8:"sitename";s:12:"我的空间";s:10:"siteallurl";s:0:"";s:8:"template";s:7:"default";s:10:"adminemail";s:19:"webmaster@localhost";s:10:"timeoffset";s:1:"8";s:8:"licensed";s:1:"0";s:9:"debuginfo";s:1:"0";s:8:"miibeian";s:0:"";s:13:"headercharset";s:1:"0";s:12:"allowrewrite";s:1:"0";s:10:"onlinehold";s:4:"1800";s:10:"updatestat";s:1:"1";s:10:"avatarreal";s:1:"0";s:6:"uc_dir";s:0:"";s:5:"my_ip";s:0:"";s:5:"close";s:1:"0";s:11:"closereason";s:0:"";s:13:"closeregister";s:1:"0";s:11:"closeinvite";s:1:"0";s:10:"checkemail";s:1:"0";s:9:"regipdate";s:0:"";s:7:"maxpage";s:3:"100";s:7:"feedday";s:1:"7";s:10:"feedmaxnum";s:3:"100";s:16:"showallfriendnum";s:2:"10";s:14:"feedhiddenicon";s:24:"friend,profile,task,wall";s:10:"feedhotnum";s:1:"3";s:11:"newspacenum";s:1:"3";s:10:"feedhotday";s:1:"2";s:10:"feedhotmin";s:1:"3";s:15:"feedtargetblank";s:1:"1";s:8:"feedread";s:1:"1";s:19:"my_closecheckupdate";s:1:"0";s:11:"my_showgift";s:1:"1";s:11:"networkpage";s:1:"1";s:12:"topcachetime";s:2:"60";s:9:"linkguide";s:1:"1";s:10:"starcredit";s:3:"100";s:12:"starlevelnum";s:1:"5";s:8:"groupnum";s:1:"8";s:9:"importnum";s:3:"100";s:9:"maxreward";s:2:"10";s:11:"sendmailday";s:1:"0";s:10:"openxmlrpc";s:1:"0";s:13:"uc_tagrelated";s:1:"1";s:17:"uc_tagrelatedtime";s:5:"86400";s:10:"allowcache";s:1:"1";s:9:"cachemode";s:8:"database";s:10:"cachegrade";s:1:"0";s:11:"allowdomain";s:1:"0";s:10:"holddomain";s:20:"www|*blog*|*space*|x";s:10:"domainroot";s:0:"";s:8:"realname";s:1:"1";s:9:"namecheck";s:1:"1";s:10:"namechange";s:1:"1";s:19:"name_allowviewspace";s:1:"1";s:16:"name_allowfriend";s:1:"1";s:14:"name_allowpoke";s:1:"1";s:15:"name_allowdoing";s:1:"1";s:14:"name_allowblog";s:1:"0";s:15:"name_allowalbum";s:1:"0";s:16:"name_allowthread";s:1:"0";s:14:"name_allowpoll";s:1:"0";s:15:"name_allowevent";s:1:"0";s:15:"name_allowshare";s:1:"0";s:17:"name_allowcomment";s:1:"0";s:14:"name_allowpost";s:1:"0";s:17:"name_allowuserapp";s:1:"0";s:20:"video_allowviewphoto";s:1:"0";s:17:"video_allowfriend";s:1:"0";s:15:"video_allowpoke";s:1:"0";s:15:"video_allowwall";s:1:"0";s:18:"video_allowcomment";s:1:"0";s:16:"video_allowdoing";s:1:"0";s:15:"video_allowblog";s:1:"0";s:16:"video_allowalbum";s:1:"0";s:17:"video_allowthread";s:1:"0";s:15:"video_allowpoll";s:1:"0";s:16:"video_allowevent";s:1:"0";s:16:"video_allowshare";s:1:"0";s:15:"video_allowpost";s:1:"0";s:18:"video_allowuserapp";s:1:"0";s:14:"allowwatermark";s:1:"0";s:8:"allowftp";s:1:"0";s:6:"ftpurl";s:0:"";};dataset=a:2:{s:6:"reason";s:0:"";s:12:"registerrule";s:0:"";};data=a:14:{s:10:"thumbwidth";s:4:"1024";s:11:"thumbheight";s:1:"0";s:13:"maxthumbwidth";s:0:"";s:14:"maxthumbheight";s:0:"";s:13:"watermarkfile";s:0:"";s:12:"watermarkpos";s:1:"4";s:6:"ftpssl";s:1:"0";s:7:"ftphost";s:0:"";s:7:"ftpport";s:0:"";s:7:"ftpuser";s:0:"";s:11:"ftppassword";s:0:"";s:7:"ftppasv";s:1:"0";s:6:"ftpdir";s:0:"";s:10:"ftptimeout";s:0:"";};mail=a:9:{s:8:"mailsend";s:1:"2";s:13:"maildelimiter";s:1:"1";s:12:"mailusername";s:1:"1";s:6:"server";s:12:"smtp.163.com";s:4:"port";s:2:"25";s:4:"auth";s:1:"1";s:4:"from";s:18:"boimty2004@163.com";s:13:"auth_username";s:10:"boimty2004";s:13:"auth_password";s:11:"15919318433";};thevaluesubmit=提交;}
+<?PHP exit;?>	2013-07-31 09:44:04		58.62.81.229	1	/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 09:47:55		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 09:48:03		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"89";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 09:48:04		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-07-31 10:39:33		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 10:39:55		58.62.81.229	1	/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 10:39:59		58.62.81.229	1	/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 10:40:13		58.62.81.229	1	/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 10:42:24		58.62.81.229	1	/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 10:42:27		58.62.81.229	1	/home/admincp.php?ac=weixin	GET{ac=weixin;}
+<?PHP exit;?>	2013-07-31 14:09:28		58.62.81.229	1	/home/admincp.php	
+<?PHP exit;?>	2013-07-31 14:09:33		58.62.81.229	1	/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-07-31 15:28:37		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-07-31 15:28:43		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:2:"92";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-07-31 15:28:45		58.62.81.229	1	/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}

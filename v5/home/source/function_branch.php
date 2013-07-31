@@ -213,9 +213,8 @@ function branch_post($POST, $olds=array()) {
 	}
 	
 	$brancharr['branchid'] = $branchid;
-	$message1=str_replace("attachment","../attachment",$message);
-	$message1=str_replace("http://v5.home3d.cn/home/../attachment/","http://v5.home3d.cn/home/attachment/",$message1);
-	//¸½±í	
+	$message1=str_replace("attachment","http://v5.home3d.cn/home/attachment",$message);
+	$message1=str_replace("http://v5.home3d.cn/home/http://v5.home3d.cn/home/attachment","http://v5.home3d.cn/home/attachment/",$message1);	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,
 		'message1' => $message1,

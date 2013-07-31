@@ -16,7 +16,20 @@ if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
 		showmessage('enter_the_space', 'space.php?do=menuset&view=me', 0);
 	}
-//分页
+
+if($_POST['friendreply']){
+	require_once './wx/wx_common.php';
+	require_once('./wx/Weixin.class.php');
+	$uid=$_POST['uid'];
+	$fakeid=$_POST['fakeid'];
+	$message=$_POST['message'];
+	$d = get_obj_by_xiaoquid($uid);
+	$info = $d->sendWXSingleMsg($fakeid,$message);	
+	if($info){
+		showmessage("鍥炲鎴愬姛","space.php?do=friend");
+	}
+}	
+//路脰脪鲁
 $perpage = 24;
 $perpage = mob_perpage($perpage);
 
@@ -26,7 +39,7 @@ $page = empty($_GET['page'])?0:intval($_GET['page']);
 if($page<1) $page = 1;
 $start = ($page-1)*$perpage;
 
-//检查开始数
+//录矛虏茅驴陋脢录脢媒
 ckstart($start, $perpage);
 
 if($_GET['view'] == 'online') {
@@ -81,7 +94,7 @@ if($_GET['view'] == 'online') {
 	$theurl = "space.php?uid=$space[uid]&do=friend&view=$_GET[view]";
 	$actives = array('me'=>' class="active"');
 
-	if($_GET['view'] == 'visitor') {//访客
+	if($_GET['view'] == 'visitor') {//路脙驴脥
 		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('visitor')." main WHERE main.uid='$space[uid]'"), 0);
 		$query = $_SGLOBAL['db']->query("SELECT f.resideprovince, f.residecity, f.note, f.spacenote, f.sex, main.vuid AS uid, main.vusername AS username, main.dateline
 			FROM ".tname('visitor')." main
@@ -89,7 +102,7 @@ if($_GET['view'] == 'online') {
 			WHERE main.uid='$space[uid]'
 			ORDER BY main.dateline DESC
 			LIMIT $start,$perpage");
-	} else {//足迹
+	} else {//脳茫录拢
 		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('visitor')." main WHERE main.vuid='$space[uid]'"), 0);
 		$query = $_SGLOBAL['db']->query("SELECT s.username, s.name, s.namestatus, s.groupid, f.resideprovince, f.residecity, f.note, f.spacenote, f.sex, main.uid AS uid, main.dateline
 			FROM ".tname('visitor')." main
@@ -136,13 +149,13 @@ if($_GET['view'] == 'online') {
 
 } else {
 
-	//处理查询
+	//麓娄脌铆虏茅脩炉
 	$theurl = "space.php?uid=$space[uid]&do=$do";
 	$actives = array('me'=>' class="active"');
 	
 	$_GET['view'] = 'me';
 
-	//好友分组
+	//潞脙脫脩路脰脳茅
 	$wheresql = '';
 	if($space['self']) {
 		$groups = getfriendgroup();
@@ -183,10 +196,10 @@ if($_GET['view'] == 'online') {
 			}
 		}
 
-		//分页
+		//路脰脪鲁
 		$multi = multi($count, $perpage, $page, $theurl);
 		$friends = array();
-		//取100好友用户名
+		//脠隆100潞脙脫脩脫脙禄搂脙没
 		$query = $_SGLOBAL['db']->query("SELECT f.fusername, s.name, s.namestatus, s.groupid FROM ".tname('friend')." f
 			LEFT JOIN ".tname('space')." s ON s.uid=f.fuid
 			WHERE f.uid=$_SGLOBAL[supe_uid] AND f.status='1' ORDER BY f.num DESC, f.dateline DESC LIMIT 0,100");
@@ -200,7 +213,7 @@ if($_GET['view'] == 'online') {
 	if($space['self']) {
 		$groupselect = array($group => ' class="current"');
 
-		//好友个数
+		//潞脙脫脩赂枚脢媒
 		$maxfriendnum = checkperm('maxfriendnum');
 		if($maxfriendnum) {
 			$maxfriendnum = checkperm('maxfriendnum') + $space['addfriend'];
@@ -208,7 +221,7 @@ if($_GET['view'] == 'online') {
 	}
 }
 
-//在线状态
+//脭脷脧脽脳麓脤卢
 if($fuids) {
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('session')." WHERE uid IN (".simplode($fuids).")");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {

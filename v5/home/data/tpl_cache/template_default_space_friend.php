@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375109962', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375288757', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -157,6 +157,20 @@
 
 <?php } ?>
 
+    <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/file_beauty.css">
+    <link type='text/css' href='./template/default/basic_chosen.css' rel='stylesheet' media='screen' />
+    <style type="text/css">
+       h3{color: #727272;margin-top: 20px;font-weight:normal;}
+       .selected{ -webkit-box-shadow: 3px 3px 3px;
+  -moz-box-shadow: 3px 3px 3px;
+  box-shadow: 3px 3px 3px;}
+  
+      .bg1{ background: url("./template/default/image/chosen_bg.png");}
+      .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
+      .open .price{color:#3EB2B8!important;}
+    </style>
 
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
 <div id="space_friend">
@@ -250,16 +264,35 @@
 <?php } else { ?>
 <?php if($ols[$value['uid']]) { ?><div class="gray"><?php echo sgmdate('H:i',$ols[$value[uid]],1); ?></div><?php } ?>
 <div class="gray">
-<?php if($value['num']) { ?><a href="cp.php?ac=friend&op=changenum&uid=<?=$value['uid']?>" id="friendnum_<?=$value['uid']?>" onclick="ajaxmenu(event, this.id)">热度(<span id="spannum_<?=$value['uid']?>"><?=$value['num']?></span>)</a><span class="pipe">|</span><?php } ?>
+<?php if($value['num']) { ?><a href="cp.php?ac=friend&op=changenum&uid=<?=$value['uid']?>" id="friendnum_<?=$value['uid']?>" onclick="ajaxmenu(event, this.id)">热度(<span id="spannum_<?=$value['uid']?>"></span>)</a><span class="pipe">|</span><?php } ?>
 <?php if(!$value['isfriend']) { ?>
 <a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
 <?php } else { ?>
 <a href="cp.php?ac=friend&op=changegroup&uid=<?=$value['uid']?>" id="friend_group_<?=$value['uid']?>" onclick="ajaxmenu(event, this.id)">分组</a><span class="pipe">|</span>
+<a href="cp.php?ac=friend&op=ignore&uid=<?=$value['uid']?>" id="a_talk_<?=$value['fakeid']?>" onclick="ajaxmenu(event, this.id)">私信我(<?=$value['fakeid']?>)</a>
 <a href="cp.php?ac=friend&op=ignore&uid=<?=$value['uid']?>" id="a_ignore_<?=$key?>" onclick="ajaxmenu(event, this.id)">删除</a>
 <?php } ?>
 </div>
 <?php } ?>
 </li>
+<div id="talk<?=$value['fakeid']?>">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
+  <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message"><input type="hidden" name="fakeid" value="<?=$value['fakeid']?>"><input type="hidden" name="uid" value="<?=$value['uid']?>"><input type="submit" name="friendreply" value="回复"></form></div>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+        $('#talk<?=$value['fakeid']?>').attr("style", "display:none;");;
+           $('#a_talk_<?=$value['fakeid']?>').click(function (e) {
+    		e.preventDefault();
+    $('#talk<?=$value['fakeid']?>').modal();
+  });
+
+            
+       })
+    </script>
 <?php } } ?>
 </ul>
 </div>
@@ -273,6 +306,7 @@
 
 </div>
 </div>
+
 
 <div id="sidebar" style="width: 150px;">
 <?php if($_SCONFIG['my_status']) { ?>

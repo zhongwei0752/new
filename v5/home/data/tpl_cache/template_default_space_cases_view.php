@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1375088305', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1375265359', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
