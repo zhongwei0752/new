@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1375285966', 'template/default/network');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1375350661', 'template/default/network');?><!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,7 +33,7 @@
          <!-- navbar end -->
          <div class="login_wrapper container_12">
             <div class="grid_1">
-                 <img src="./template/default/image/login_pic.png">
+                 <img src="<?=$bigimage['imageurl']?>">
             </div>
             <div class="grid_2 sign_window" id="log">
                   <ul>
@@ -74,8 +74,8 @@
           <div class="companies container_12">
             <?php if(is_array($openlist)) { foreach($openlist as $key => $value) { ?>
             <div class="grid_3">
-                   <a href="space.php?uid=<?=$value['uid']?>"><span style="float:left;padding-right:10px;max-width:71px;max-height:71px;min-width:71px;min-height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span></a>
-                   <a href="space.php?uid=<?=$value['uid']?>"><span class="company_name"><?=$_SN[$value['uid']]?></span></a><br>
+                   <span style="float:left;padding-right:10px;max-width:71px;max-height:71px;min-width:71px;min-height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span>
+                   <span class="company_name"><?=$_SN[$value['uid']]?></span><br>
                     <span><a  class="fans"><?=$value['friendnum']?>客户</a></span> 
               </div>
       
@@ -91,38 +91,38 @@
                <div class="companies_wrapper">
           <div class="companies container_12">
               <div class="grid_4">
-                  <img src="./template/default/image/logo/宝立方.jpg">
+                  <a href="<?=$logoimage['0']['url']?>"><img src="<?=$logoimage['0']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/波奇网.jpg">
+                  <a href="<?=$logoimage['1']['url']?>"><img src="<?=$logoimage['1']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/大保龙.jpg">
+                 <a href="<?=$logoimage['2']['url']?>"><img src="<?=$logoimage['2']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/凤韵.jpg">
+                  <a href="<?=$logoimage['3']['url']?>"><img src="<?=$logoimage['3']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/宏门.jpg">
+                  <a href="<?=$logoimage['4']['url']?>"><img src="<?=$logoimage['4']['imageurl']?>"></a>
               </div>
                
           </div>
           
             <div class="companies container_12">
                <div class="grid_4">
-                  <img src="./template/default/image/logo/酒商会.jpg">
+                  <a href="<?=$logoimage['5']['url']?>"><img src="<?=$logoimage['5']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/兰瑟.jpg">
+                  <a href="<?=$logoimage['6']['url']?>"><img src="<?=$logoimage['6']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/美宅.jpg">
+                  <a href="<?=$logoimage['7']['url']?>"><img src="<?=$logoimage['7']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/水密码.jpg">
+                  <a href="<?=$logoimage['8']['url']?>"><img src="<?=$logoimage['8']['imageurl']?>"></a>
               </div>
                <div class="grid_4">
-                  <img src="./template/default/image/logo/岁月知味.jpg">
+                  <a href="<?=$logoimage['9']['url']?>"><img src="<?=$logoimage['9']['imageurl']?>"></a>
               </div>
           </div>
       </div><!-- 无类div结束 -->
@@ -286,7 +286,7 @@ tx.value = "密码";
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

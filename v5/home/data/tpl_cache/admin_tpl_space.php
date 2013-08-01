@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/space|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1375255725', 'admin/tpl/space');?><?php $_TPL['menunames'] = array(
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('admin/tpl/space|admin/tpl/header|admin/tpl/side|admin/tpl/footer|template/default/header|template/default/footer', '1375338708', 'admin/tpl/space');?><?php $_TPL['menunames'] = array(
 		'index' => '管理首页',
 		'config' => '站点设置',
 		'privacy' => '隐私设置',
@@ -50,7 +50,8 @@
 		'branch' => '分支机构',
 		'job' => '人才招聘',
 		'talk' => '在线沟通',
-		'weixin' =>'微信录入'
+		'weixin' =>'微信录入',
+		'image' =>'首页图片录入'
 	); ?>
 <?php $_TPL['nosidebar'] = 1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -165,7 +166,7 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>

@@ -270,6 +270,15 @@ while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 if(empty($star) && $openlist) {
 	$star = sarray_rand($openlist, 1);
 }
+//未登录页展示大图
+$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('image')." where style='bigimage'");
+$bigimage = $_SGLOBAL['db']->fetch_array($query2);
+//未登录页商家logo展示页
+$logoimage=array();
+$query3 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('image')." where style='logoimage' order by id DESC");
+while ($value3 = $_SGLOBAL['db']->fetch_array($query3)) {
+	$logoimage[]=$value3;
+	}
 
 
 //ÔÚÏßÈËÊý

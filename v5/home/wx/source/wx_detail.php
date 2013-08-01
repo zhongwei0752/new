@@ -20,7 +20,8 @@ $field=$type."field";
 $typepic=$type."pic";
 $uid=$_GET['uid'];
 $id=$_GET['id'];
-
+$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE english='$type'");
+$appsubject = $_SGLOBAL['db']->fetch_array($query1);
 
 
 if($_GET['type']=="job"){

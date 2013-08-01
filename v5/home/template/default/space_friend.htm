@@ -107,14 +107,8 @@
 				<!--{else}-->
 					<!--{if $ols[$value[uid]]}--><div class="gray"><!--{date('H:i',$ols[$value[uid]],1)}--></div><!--{/if}-->
 					<div class="gray">
-					<!--{if $value['num']}--><a href="cp.php?ac=friend&op=changenum&uid=$value[uid]" id="friendnum_$value[uid]" onclick="ajaxmenu(event, this.id)">热度(<span id="spannum_$value[uid]"></span>)</a><span class="pipe">|</span><!--{/if}-->
-					<!--{if !$value['isfriend']}-->
-					<a href="cp.php?ac=friend&op=add&uid=$value[uid]" id="a_friend_$key" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
-					<!--{else}-->
-					<a href="cp.php?ac=friend&op=changegroup&uid=$value[uid]" id="friend_group_$value[uid]" onclick="ajaxmenu(event, this.id)">分组</a><span class="pipe">|</span>
 					<a href="cp.php?ac=friend&op=ignore&uid=$value[uid]" id="a_talk_$value[fakeid]" onclick="ajaxmenu(event, this.id)">私信我($value[fakeid])</a>
 					<a href="cp.php?ac=friend&op=ignore&uid=$value[uid]" id="a_ignore_$key" onclick="ajaxmenu(event, this.id)">删除</a>
-					<!--{/if}-->
 					</div>
 				<!--{/if}-->
 			</li>

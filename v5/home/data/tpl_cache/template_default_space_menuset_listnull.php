@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375259103', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375345083', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>选购应用</title>
@@ -107,9 +107,11 @@
        $(document).ready(function(){
         
         $('#basic-modal-content<?=$value['menusetid']?>').attr("style", "display:none;");
+          <?php if(empty($space['weixinusername'])&&empty($space['weixinpassword'])) { ?>
         $('#weixin').attr("style", "display:none;");
         $('#weixin').modal();
          $('#weixin').attr("style", "display:block;");
+              <?php } ?>
            $('#basic-modal input.basic<?=$value['menusetid']?>, #basic-modal a.basic<?=$value['menusetid']?>').click(function (e) {
     e.preventDefault();
     $('#basic-modal-content<?=$value['menusetid']?>').modal();
@@ -137,12 +139,31 @@
       #simplemodal-container{height:300px;}
     </style>
   <?php if(empty($zhong1)) { ?>
+  <?php if(empty($space['weixinusername'])&&empty($space['weixinpassword'])) { ?>
+    <?php if($_GET['status']) { ?>
+      <form action = "space.php?do=goweixin" method = "post">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">如你需要系统为你生成微信公众号，请<a href="space.php?do=menuset">点击此处</a></h3>
+   <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<input type="text" name="weixinusname"></h3>
+    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3>
+    <input type="submit" name="submit" value="提交">
+    <input type="hidden" name="alreadyweixin" value="1">
+    </form>
+  <?php } else { ?>
   <?php if(!empty($newweixin['username'])) { ?>
-  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信id：<?=$newweixin['wxkey']?></h3>
+  <form action = "space.php?do=goweixin" method = "post">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">系统已自动为你生成微信公众号，如你已有微信公众号，可<a href="space.php?do=menuset&status=already">点击此处</a></h3>
    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<?=$newweixin['username']?></h3>
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<?=$newweixin['password']?></h3>
+     <input type="hidden" name="username" value="<?=$newweixin['username']?>">
+     <input type="hidden" name="password" value="<?=$newweixin['password']?>">
+     <input type="hidden" name="id" value="<?=$newweixin['id']?>">
+    <input type="submit" name="submit" value="使用">
+    <input type="hidden" name="newweixin" value="1">
+    </form>
     <?php } else { ?>
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">目前还未有微信公众号</h3>
+     <?php } ?>
+     <?php } ?>
      <?php } ?>
      <?php } ?>
 

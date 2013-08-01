@@ -16,9 +16,9 @@
 
 
 <form method="post" id="talkform" action="cp.php?ac=talk&view=$_GET[view]" class="post_talk">
-标题:<br/><textarea id="subject" name="subject"  rows="4" style="width:538px; height: 22px;"></textarea><br/>
-内容:<div >还可输入 <strong id="maxlimit">200</strong> 个字符</div>
-<a href="###" id="talkface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a></td>
+标题&nbsp;&nbsp;:&nbsp;&nbsp;<textarea id="subject" name="subject"  rows="4" style="width:538px; height: 22px;"></textarea><br/>
+内容:
+<a href="###" id="talkface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a><br/>
 <!--{if checkperm('seccode')}-->
 	<!--{if $_SCONFIG['questionmode']}-->
 	回答提问：<!--{eval question();}--> 
@@ -27,9 +27,9 @@
 	<!--{/if}-->
 	<input type="text" id="seccode" name="seccode" value="" size="10" class="t_input">
 <!--{/if}-->
-<br>
 
-<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:538px; height: 172px;"></textarea><br/>
+
+<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:538px; height: 172px;"></textarea><br/>还可输入 <strong id="maxlimit">200</strong> 个字符<br/>
 <input type="hidden" name="addsubmit" value="true" />
 <button type="submit" id="add" name="add" class="post_button">发布</button>
 <input type="hidden" name="refer" value="$theurl" />

@@ -11,7 +11,7 @@ if(!defined('IN_UCHOME')) {
 include_once(S_ROOT.'./source/function_bbcode.php');
 
 //¹²ÓÃ±äÁ¿
-$tospace = $pic = $blog = $album = $share = $event = $poll=$product=$introduce=$development=$industry=$cases=$branch=$job= array();
+$tospace = $pic = $blog = $album = $share = $event = $poll=$product=$introduce=$goods=$development=$industry=$cases=$branch=$job= array();
 
 if(submitcheck('commentsubmit')) {
 
@@ -470,6 +470,45 @@ if(submitcheck('commentsubmit')) {
 			$hotarr = array('menusetid', $menuset['menusetid'], $menuset['hotuser']);
 			$stattype = 'menusetcomment';//Í³¼Æ
 			break;
+		case 'goodsid':
+			//¶ÁÈ¡ÈÕÖ¾
+			$query = $_SGLOBAL['db']->query("SELECT b.*, bf.target_ids, bf.hotuser
+				FROM ".tname('goods')." b
+				LEFT JOIN ".tname('goodsfield')." bf ON bf.goodsid=b.goodsid
+				WHERE b.goodsid='$id'");
+			$goods = $_SGLOBAL['db']->fetch_array($query);
+			//ÈÕÖ¾²»´æÔÚ
+			if(empty($goods)) {
+				showmessage('view_to_info_did_not_exist');
+			}
+			
+			//¼ìË÷¿Õ¼ä
+			$tospace = getspace($goods['uid']);
+			
+			//ÑéÖ¤ÒþË½
+			if(!ckfriend($goods['uid'], $goods['friend'], $goods['target_ids'])) {
+				//Ã»ÓÐÈ¨ÏÞ
+				showmessage('no_privilege');
+			} elseif(!$tospace['self'] && $goods['friend'] == 4) {
+				//ÃÜÂëÊäÈëÎÊÌâ
+				$cookiename = "view_pwd_goods_$goods[goodsid]";
+				$cookievalue = empty($_SCOOKIE[$cookiename])?'':$_SCOOKIE[$cookiename];
+				if($cookievalue != md5(md5($goods['password']))) {
+					showmessage('no_privilege');
+				}
+			}
+
+			//ÊÇ·ñÔÊÐíÆÀÂÛ
+			if(!empty($goods['noreply'])) {
+				showmessage('do_not_accept_comments');
+			}
+			if($goods['target_ids']) {
+				$goods['target_ids'] .= ",$goods[uid]";
+			}
+			
+			$hotarr = array('goodsid', $goods['goodsid'], $goods['hotuser']);
+			$stattype = 'goodscomment';//Í³¼Æ
+			break;	
 		case 'sid':
 			//¶ÁÈ¡ÈÕÖ¾
 			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('share')." WHERE sid='$id'");
@@ -700,6 +739,18 @@ if(submitcheck('commentsubmit')) {
 			$fs['target_ids'] = $menuset['target_ids'];
 			$fs['friend'] = $menuset['friend'];
 			break;
+		case 'goods':
+			//¸üÐÂÆÀÂÛÍ³¼Æ
+			$_SGLOBAL['db']->query("UPDATE ".tname('menuset')." SET replynum=replynum+1 WHERE goods='$id'");
+			//ÊÂ¼þ
+			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=menuset&id=$id\">$menuset[subject]</a>");
+			$fs['body_template'] = '';
+			$fs['body_data'] = array();
+			$fs['body_general'] = '';
+			$fs['target_ids'] = $menuset['target_ids'];
+			$fs['friend'] = $menuset['friend'];
+			break;	
 		case 'sid':
 			//ÊÂ¼þ
 			$fs['title_template'] = cplang('feed_comment_share');
@@ -871,6 +922,17 @@ if(submitcheck('commentsubmit')) {
 			$msgtype = 'menuset_comment';
 			$q_msgtype = 'menuset_comment_reply';
 			break;
+		case 'goodsid':
+			//Í¨Öª
+			$n_url = "space.php?uid=$tospace[uid]&do=goods&id=$id&cid=$cid";
+			$note_type = 'goodscomment';
+			$note = cplang('note_goods_comment', array($n_url, $goods['subject']));
+			$q_note = cplang('note_goods_comment_reply', array($n_url));
+			$msg = 'do_success';
+			$magvalues = array();
+			$msgtype = 'goods_comment';
+			$q_msgtype = 'goods_comment_reply';
+			break;
 		case 'sid':
 			//·ÖÏí
 			$n_url = "space.php?uid=$tospace[uid]&do=share&id=$id&cid=$cid";
@@ -949,6 +1011,10 @@ if(submitcheck('commentsubmit')) {
 			if($_POST['idtype']=='jobid'){
 				include_once S_ROOT.'./uc_client/client.php';
 				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('job_pm_message', array($message)), 1, 0, 0);
+			}
+			if($_POST['idtype']=='goodsid'){
+				include_once S_ROOT.'./uc_client/client.php';
+				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('goods_pm_message', array($message)), 1, 0, 0);
 			}
 			//·¢ËÍÓÊ¼þÍ¨Öª
 			smail($tospace['uid'], '', cplang($msgtype, array($_SN[$space['uid']], shtmlspecialchars(getsiteurl().$n_url))), '', $msgtype);

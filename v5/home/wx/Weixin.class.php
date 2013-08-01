@@ -14,6 +14,7 @@ class Weixin {
 		$this->password = $password ? $password :'123456a';
 		$cookie_dir = dirname(__FILE__).'/'.$this->username.'_cookies.txt';
 		$this->cookie_dir =$cookie_dir;
+		return $this->username;
 	}
 
 	//模拟数据登录网页版微信

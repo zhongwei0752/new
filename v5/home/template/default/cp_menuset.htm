@@ -70,18 +70,22 @@
 <!--{if $topic}-->
 	<!--{template cp_topic_menu}-->
 <!--{else}-->
-	<h2 class="title"><img src="image/app/menuset.gif" />应用</h2>
-	<div class="tabs_header">
-		<ul class="tabs">
-			<!--{if $menuset[menusetid]}-->
-			<li class="active"><a href="cp.php?ac=menuset&menusetid=$menuset[menusetid]"><span>编辑应用</span></a></li>
-			<!--{/if}-->
-			<li<!--{if empty($menuset[menusetid])}--> class="active"<!--{/if}-->><a href="cp.php?ac=menuset"><span>发表新应用</span></a></li>
-			<li><a href="space.php?uid=$space[uid]&do=menuset&view=me"><span>返回我的应用</span></a></li>
-		</ul>
-	</div>
+<div class="content" style="font-size:15px;">
+          
+                 <div class="indexing">
+                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=menuset&view=me">应用管理</a></span>><span>发布</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         发布
+                     </div>
+                     <a href="space.php?uid=$space[uid]&do=menuset&view=me" class="link_back_bread grid_3">
+                      应用管理
+                     </a>
+                 </div>
 <!--{/if}-->
-
+ <div class="content_detail_wrapper">
+                    <div class="post_wrapper">
 <div class="c_form">
 
 	<style type="text/css">
@@ -280,7 +284,7 @@
 		<tr>
 			<th width="100">&nbsp;</th>
 			<td>
-			<input type="button" id="issuance" onclick="document.getElementById('menusetbutton').click();" value="保存发布" class="submit" /></td>
+			 <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('menusetbutton').click();" value="保存发布" class="submit" />
 		</tr>
 	</table>
 </div>

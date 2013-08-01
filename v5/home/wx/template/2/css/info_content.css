@@ -37,12 +37,20 @@ header {
 .content_img img {
 	width: 100%;
 }
+.content_pic img {
+  width: 50%;
+  margin-top: 10px;
+}
 
 .content_text {
 	font-size: 1em;
 	color: #666666;
 	padding-left: 3.125%;
 	line-height: 1.5em;
+}
+.content_text  img{
+	width: 100%;
+  margin-top: 10px;
 }
 
 .content_text p {

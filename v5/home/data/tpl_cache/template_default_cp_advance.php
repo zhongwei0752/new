@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1375263293', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1375338675', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -110,7 +110,7 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>

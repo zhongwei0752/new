@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_talk|template/default/header|template/default/space_talk_li|template/default/space_talk_form|template/default/footer', '1375265479', 'template/default/cp_talk');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_talk|template/default/header|template/default/space_talk_li|template/default/space_talk_form|template/default/footer', '1375353175', 'template/default/cp_talk');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -69,7 +69,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -110,7 +110,7 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
@@ -228,9 +228,9 @@
 
 
 <form method="post" id="talkform" action="cp.php?ac=talk&view=<?=$_GET['view']?>" class="post_talk">
-标题:<br/><textarea id="subject" name="subject"  rows="4" style="width:538px; height: 22px;"></textarea><br/>
-内容:<div >还可输入 <strong id="maxlimit">200</strong> 个字符</div>
-<a href="###" id="talkface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a></td>
+标题&nbsp;&nbsp;:&nbsp;&nbsp;<textarea id="subject" name="subject"  rows="4" style="width:538px; height: 22px;"></textarea><br/>
+内容:
+<a href="###" id="talkface" onclick="showFace(this.id, 'message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a><br/>
 <?php if(checkperm('seccode')) { ?>
 <?php if($_SCONFIG['questionmode']) { ?>
 回答提问：<?php question(); ?> 
@@ -239,9 +239,9 @@
 <?php } ?>
 <input type="text" id="seccode" name="seccode" value="" size="10" class="t_input">
 <?php } ?>
-<br>
 
-<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:538px; height: 172px;"></textarea><br/>
+
+<textarea id="message" name="message" onkeyup="textCounter(this, 'maxlimit', 200)" onkeydown="ctrlEnter(event, 'add');" rows="4" style="width:538px; height: 172px;"></textarea><br/>还可输入 <strong id="maxlimit">200</strong> 个字符<br/>
 <input type="hidden" name="addsubmit" value="true" />
 <button type="submit" id="add" name="add" class="post_button">发布</button>
 <input type="hidden" name="refer" value="<?=$theurl?>" />
@@ -303,7 +303,7 @@
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
