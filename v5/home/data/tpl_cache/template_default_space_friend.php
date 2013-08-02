@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375342263', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375415435', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,7 +70,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -443,7 +443,7 @@ my_scri.src = "http://uchome.manyou.com/user/syncFriends?sId=<?=$_SCONFIG['my_si
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

@@ -10,6 +10,7 @@ if(!defined('IN_UCHOME')) {
 
 include_once(S_ROOT.'./source/function_bbcode.php');
 
+
 //¹²ÓÃ±äÁ¿
 $tospace = $pic = $blog = $album = $share = $event = $poll=$product= $introduce =$development=$industry=$cases=$branch=$job= array();
 

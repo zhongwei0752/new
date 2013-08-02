@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_ajax|template/default/header|template/default/space_comment_li|template/default/space_post_li|template/default/space_share_li|template/default/footer', '1375350613', 'template/default/do_ajax');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/do_ajax|template/default/header|template/default/space_comment_li|template/default/space_post_li|template/default/space_share_li|template/default/footer', '1375439183', 'template/default/do_ajax');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -112,7 +112,7 @@
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>

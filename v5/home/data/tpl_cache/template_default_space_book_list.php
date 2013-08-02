@@ -1,5 +1,6 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375439156', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
-<?php $_TPL['titles'] = array('首页'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_book_list|template/default/header|template/default/footer', '1375429420', 'template/default/space_book_list');?><?php $_TPL['titles'] = array('预约预定'); ?>
+<?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
+
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -158,10 +159,7 @@
 
 <?php } ?>
 
-    <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
-    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
-    <link rel="stylesheet" type="text/css" href="./template/default/file_beauty.css">
-    <link type='text/css' href='./template/default/basic_chosen.css' rel='stylesheet' media='screen' />
+ <link type='text/css' href='./template/default/basic_chosen.css' rel='stylesheet' media='screen' />
     <style type="text/css">
        h3{color: #727272;margin-top: 20px;font-weight:normal;}
        .selected{ -webkit-box-shadow: 3px 3px 3px;
@@ -171,166 +169,120 @@
       .bg1{ background: url("./template/default/image/chosen_bg.png");}
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
-      #simplemodal-container{height:200px;}
     </style>
-<style type="text/css">
-.navbar-inner .grid_4 a img{max-width: 40px;}
-</style>
-<div id="content" style="width:762px;margin-left:20px;margin-top:10px;">
-
-<?php if($space['uid'] && $space['self']) { ?>
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-<tr>
-<td valign="top" width="150">
-<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></a></div></div></div></div>
-</td>
-<td valign="top">
-<h3 class="index_name" style="margin-top:-6px;border:0px;">
-<a  href="space.php?uid=<?=$space['uid']?>" style="color:#999;font-size:18px;"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
-
-<span style="color:#43B8B0;">VIP</span>
+<?php if(!empty($_SGLOBAL['inajax'])) { ?>
+<div id="space_blog" class="feed">
+<h3 class="feed_header">
+<a href="cp.php?ac=product" class="r_option" target="_blank">发布</a>
 </h3>
-<br/>
- <div class="company_avata_box container_12"  style="margin-top:-30px;">
-                   <div class="grid_2">
-                       <h5 style="margin-top:0px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
-                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                       <div id="weixin">
-                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>
-                        <div style="background:#fff;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<?=$space['weixinusername']?><br/>登录密码:<?=$space['weixinpassword']?><br/>
-             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
-                        </div>
+<?php if($count) { ?>
+<ul class="line_list">
+<?php if(is_array($list)) { foreach($list as $value) { ?>
+<li>
+<span class="gray r_option"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></span>
+<h4><a href="space.php?uid=<?=$space['uid']?>&do=product&id=<?=$value['productid']?>" target="_blank" <?php if($value['magiccolor']) { ?> class="magiccolor<?=$value['magiccolor']?>"<?php } ?>><?=$value['subject']?></a></h4>
+<div class="detail">
+<?=$value['message']?>
+</div>
+</li>
+<?php } } ?>
+</ul>
+<div class="page"><?=$multi?></div>
+<?php } else { ?>
+<div class="c_form">还没有相关的预约预定。</div>
+<?php } ?>
+</div>
+<?php } else { ?>
 
-                        </div>
-                       <a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>
-                   </div>
-                 </div>
+<?php if($space['self']) { ?>
 
+<div class="content" style="font-size:15px;">
+          
+                 <div class="indexing">
+                 <span><a href="space.php?do=home">首页</a></span>><span>预约预定</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         预约预定
+                     </div>
+                     <a href="cp.php?ac=product" class="btn grid_2">
+                      发布
+                     </a>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+                 </div>	
+
+ 
+
+<?php } ?>
+
+<div id="content" style="width:760px;">
+
+<div class="content_detail_wrapper">
+ 		<?php if($list) { ?>
+<?php if(is_array($list)) { foreach($list as $value) { ?>
+                     <div class="content_list container_12">
+                          <div class="grid_1">
+                               <img src="<?=$value['image1url']?>" class="list_pic">
+                          </div>
+                          <div class="grid_2">
+                             <div class="list_test ">
+                                  <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>" style="float:left;"><h3><?=$value['subject']?></h3></a> <a href="cp.php?ac=product" id="basic-modal<?=$value['productid']?>" class="btn grid_2"  style="width:100px;float: right;">设置</a><br/><br/>
+                                  <p><?=$value['message']?></p><br/>
+                                  <p class="action_info" style="margin-top:-4px;">
+                                   <a href="space.php?uid=<?=$value['uid']?>"> <span>发布：<?=$_SN[$value['uid']]?></span></a>
+                                    <?php if($value['viewnum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>"><span>阅读: <?=$value['viewnum']?>次</span></a><?php } else { ?><span>阅读: 0次</span><?php } ?>
+                                    <?php if($value['replynum']) { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['productid']?>#comment"><span>评论: <?=$value['replynum']?> 个</span></a><?php } else { ?><span>评论: 0次</span><?php } ?><span>发布日期：<?php echo sgmdate('Y-m-d',$value[dateline]); ?></span>
+                                  </p>
+                             </div>
+                          </div>
+                     </div><!-- list end -->
+                     <br/>
+  <div id="basic-modal-content<?=$value['productid']?>">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;"><?=$value['subject']?></h3>
+  <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;">
+   <script type="text/javascript" src="source/script_calendar.js"></script>
+   <input type="text" name="starttime" id="starttime" value="<?php echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp]) ?>"  onclick="showcalendar(event,this,1,'<?php echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp]) ?>', '<?php echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp] + 3600 * 24 * 60) ?>')" />    
+   </div>
+
+</div>
+
+ <script src="./source/jquery.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
     <script type="text/javascript">
-       $(document).ready(function(){
+       jQuery.noConflict(); 
+       jQuery(document).ready(function(){
         
-        $('#weixin').attr("style", "display:none;");
-        $('#weixinhome').click(function (e) {
-    	e.preventDefault();
-    	$('#weixin').modal();
+        jQuery('#basic-modal-content<?=$value['productid']?>').attr("style", "display:none;");
+           jQuery('#basic-modal<?=$value['productid']?>').click(function (e) {
+    		e.preventDefault();
+    	   jQuery('#basic-modal-content<?=$value['productid']?>').modal();
   });
 
             
        })
     </script>
 
-
-
-
-
-</td>
-</tr>
-</table>
-
-
-<?php if($space['allnum']) { ?>
-<div class="mgs_list">
-<?php if($space['namestatusnum']) { ?><div><img src="image/icon/profile.gif" alt="" /><a href="admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1"><strong><?=$space['namestatusnum']?></strong> 个待认证用户</a></div><?php } ?>
-
-</div>
+                   <?php } } ?>
+<?php } else { ?>
+<div class="c_form">还没有相关的预约预定。</div>
 <?php } ?>
- <div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:0px 0 30px 0;"></div>
-                <div class="container_12 index_assembly_boxes">
-                	<?php if($myself) { ?>
-<?php if(is_array($myself)) { foreach($myself as $value) { ?>
-
-                    <div class="grid_6">
-                        <div class="index_assembly_box">
-                            <div class="assembly_title">
-                                   <span class="title"><?=$value['subject']?></span>
-                             </div>
-                             <div class="assembly_info">
-                                <img src="<?=$value['image1url']?>" style="width:120px;height:120px;">
-                                
-                                <h5 style="padding-top: 20px;">文章数：<?=$a[$value['menusetid']]?> 篇</h5>
-                                <h5>浏览量：<?php if($b[$value['menusetid']]) { ?><?=$b[$value['menusetid']]?><?php } else { ?>0<?php } ?>次</h5>
-                                <h5>评论数：<?php if($c[$value['menusetid']]) { ?><?=$c[$value['menusetid']]?><?php } else { ?>0<?php } ?>条</h5>
-                                <h5>有效期至：<?php if($value['money']) { ?><?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } else { ?>长期<?php } ?></h5>
-                                <a href="cp.php?ac=<?=$value['english']?>" class="quick_post">快速发布</a>
-                             </div>
-                        </div>
-                    </div><!-- end -->   
-                      <?php } } ?> 
-                      <?php } ?>     
-                    </div>
-                    </div>                                                         
-
-
-
-
-
-<?php } ?>	
-
-
-
-
-
-
-
+          
+</div>
+                     
+<div class='pagination'><ul><?=$multi?></ul></div>
 
 
 
 </div>
-<!--/content-->
 
 
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-
-var next = <?=$start?>;
-function feed_more() {
-var x = new Ajax('XML', 'ajax_wait');
-var html = '';
-next = next + <?=$perpage?>;
-x.get('cp.php?ac=feed&op=get&start='+next+'&view=<?=$_GET['view']?>&appid=<?=$_GET['appid']?>&icon=<?=$_GET['icon']?>&filter=<?=$_GET['filter']?>&day=<?=$_GET['day']?>', function(s){
-html = '<h4 class="feedtime">以下是新读取的动态</h4>' + s;
-$('feed_div').innerHTML += html;
-});
-}
-
-function filter_more(id) {
-if($('feed_filter_div_'+id).style.display == '') {
-$('feed_filter_div_'+id).style.display = 'none';
-$('feed_filter_notice_'+id).style.display = '';
-} else {
-$('feed_filter_div_'+id).style.display = '';
-$('feed_filter_notice_'+id).style.display = 'none';
-}
-}
-
-function close_feedbox() {
-var x = new Ajax();
-x.get('cp.php?ac=common&op=closefeedbox', function(s){
-$('feed_box').style.display = 'none';
-});
-}
-
-var elems = selector('li[class~=magicthunder]', $('feed_div')); 
-for(var i=0; i<elems.length; i++){		
-magicColor(elems[i]); 
+<script>
+function fuidgoto(fuid) {
+window.location.href = "space.php?do=product&view=we&fuid="+fuid;
 }
 </script>
+<?php } ?>
 
-<?php my_checkupdate(); ?>
-<?php my_showgift(); ?>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -446,5 +398,4 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?>
 <?php } ?><?php ob_out();?>

@@ -272,7 +272,7 @@ $(document).ready(function(){
   var idtype=$.query.get('idtype');
 	$.ajax({
 			dataType: "jsonp",
-			url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do="+idtype+"&uid="+uid+"&page=1&perpage=4",
+			url: "http://v5.home3d.cn/home/capi/space.php?do="+idtype+"&uid="+uid+"&page=1&perpage=4",
 		   
 			success: function( data ) {
 			  /* Get the movies array from the data */
@@ -378,7 +378,7 @@ if(""+idtype+""=="talk"){
    $("#morebtn").addClass('ui-disabled');
   $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do="+idtype+"&uid=" + uid + "&page=" + page + "&perpage=" + perpage,
+      url: "http://v5.home3d.cn/home/capi/space.php?do="+idtype+"&uid=" + uid + "&page=" + page + "&perpage=" + perpage,
        
       success: function( data ) {
           if(data.code==0){

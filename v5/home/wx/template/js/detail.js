@@ -277,7 +277,7 @@ function getDetail(idtype, id, uid){
   if (idtype=="introduceid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=introduce&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=introduce&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -300,7 +300,7 @@ function getDetail(idtype, id, uid){
   if(idtype=="productid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=product&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=product&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -321,7 +321,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="developmentid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=development&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=development&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -342,7 +342,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="industryid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=industry&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=industry&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -363,7 +363,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="casesid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=cases&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=cases&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -384,7 +384,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="branchid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=branch&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=branch&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -405,7 +405,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="jobid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=job&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=job&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -426,7 +426,7 @@ function getDetail(idtype, id, uid){
    if(idtype=="talkid"){
     $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=talk&uid="+uid+"&id="+id+"",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=talk&uid="+uid+"&id="+id+"",
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -452,7 +452,7 @@ function getComment(idtype, id,uid, page, perpage){
    $("#morebtn").addClass('ui-disabled');
   $.ajax({
       dataType: "jsonp",
-      url: "http://v5.home3d.cn/v5/v5/home/capi/space.php?do=comment&idtype=" + idtype + "&uid=" + uid + "&id=" + id + "&page=" + page + "&perpage=" + perpage,
+      url: "http://v5.home3d.cn/home/capi/space.php?do=comment&idtype=" + idtype + "&uid=" + uid + "&id=" + id + "&page=" + page + "&perpage=" + perpage,
        
       success: function( data ) {
         /* Get the movies array from the data */
@@ -484,7 +484,7 @@ function cpComment(idtype, id, message){
   if (!pattern.test(message)){
     $.ajax({
         dataType: "jsonp",
-        url: "http://v5.home3d.cn/v5/v5/home/capi/cp.php?ac=comment&id="+id+"&commentsubmit=true&idtype="+idtype+"&message="+message,
+        url: "http://v5.home3d.cn/home/capi/cp.php?ac=comment&id="+id+"&commentsubmit=true&idtype="+idtype+"&message="+message,
          
         success: function( data ) {
           if(data.code==0){

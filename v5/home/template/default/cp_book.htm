@@ -1,0 +1,5 @@
+<!--{template header}-->
+
+ <script type="text/javascript" src="source/script_calendar.js"></script>
+     		<input type="text" name="starttime" id="starttime" value="<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp])}-->"  onclick="showcalendar(event,this,1,'<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp])}-->', '<!--{eval echo sgmdate('Y-m-d H:i', $_SGLOBAL[timestamp] + 3600 * 24 * 60)}-->')" />                
+<!--{template footer}-->

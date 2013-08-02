@@ -7,6 +7,7 @@
 include_once('./common.php');
 include_once(S_ROOT.'./data/data_magic.php');
 
+
 //ÊÇ·ñ¹Ø±ÕÕ¾µã
 checkclose();
 
@@ -29,7 +30,7 @@ if($_SCONFIG['allowrewrite'] && isset($_GET['rewrite'])) {
 
 //ÔÊÐí¶¯×÷
 $dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto',
-	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid','recommend','moblie','goods','goweixin');
+	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid','recommend','moblie','goods','goweixin','book');
 
 //»ñÈ¡±äÁ¿
 $isinvite = 0;
