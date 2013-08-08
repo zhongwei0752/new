@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1375439414', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1375928175', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -173,7 +173,6 @@
       .open{ background: url("./template/default/image/chosen_bg3.png")!important;}
       .open .price{color:#3EB2B8!important;}
     </style>
-    <script src="./source/jquery.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
    <script type='text/javascript' src='./source/basic.js'></script>
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
@@ -281,7 +280,7 @@
         <div class="grid_6">
                             <div class="index_assembly_box bg1" <?php if($_GET['view']!='me') { ?><?php if(!$value['money']) { ?><?php $value1=$value['zhong']; ?><?php if($value1['appstatus']=='1') { ?>style="background: url('./template/default/image/chosen_bg3.png')!important;"<?php } ?><?php } ?><?php } ?>  id="choice">
                             <div class="assembly_title">
-        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?>（此应用未过期，请<a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">戳我</a>重新开通）<?php } ?><?php } ?></span></div>
+        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?><a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">（此应用未过期，请戳我重新开通）</a><?php } ?><?php } ?></span><?php if($_GET['view']=='me') { ?><a href="cp.php?ac=menuset&menusetid=<?=$value['menusetid']?>&op=delete1" class="r_option" style="padding-right:10px;" id="menuset_delete_<?=$value['menusetid']?>" onclick="ajaxmenu(event, this.id)">删除</a><?php } ?></div>
         <div id="num<?=$value['menusetid']?>">
        <div id="numh<?=$value['menusetid']?>"></div>
         <div class="assembly_info1">
@@ -293,7 +292,7 @@
                                <option value ="<?=$value['orderid']?>" selected><?=$value['orderid']?></option>
                                <?php for($i=1;$i<10;$i++){ ?>
   <option value ="<?=$i?>"><?=$i?></option><?php } ?></select><?php } else { ?>序号:<?=$value['orderid']?><?php } ?><?php } ?>
-  								<h5 ><?php if($_GET['view']=='me') { ?><a href="cp.php?ac=menuset&menusetid=<?=$value['menusetid']?>&op=delete1" id="menuset_delete_<?=$value['menusetid']?>" onclick="ajaxmenu(event, this.id)">（删除）</a><?php } ?></h5>
+  								
                              </div>
           
           </div>
@@ -304,17 +303,18 @@
       <?php if($_GET['view']!='me') { ?>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
          <script>
-      $(document).ready(function()
+         var jquery = jQuery.noConflict();
+      jquery(document).ready(function()
         {
         
-      $("#num<?=$value['menusetid']?>").toggle(
+      jquery("#num<?=$value['menusetid']?>").toggle(
         function () {
-                    $("#num<?=$value['menusetid']?>").parent(".index_assembly_box").addClass("open");
-                    $("#numh<?=$value['menusetid']?>").html("<input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />");
+                    jquery("#num<?=$value['menusetid']?>").parent(".index_assembly_box").addClass("open");
+                    jquery("#numh<?=$value['menusetid']?>").html("<input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />");
                   },
                   function () {
-                    $("#num<?=$value['menusetid']?>").parent(".index_assembly_box").removeClass("open");
-                    $("#numh<?=$value['menusetid']?>").html("");
+                    jquery("#num<?=$value['menusetid']?>").parent(".index_assembly_box").removeClass("open");
+                    jquery("#numh<?=$value['menusetid']?>").html("");
                     }
               );
         
@@ -327,11 +327,11 @@
    
     <?php if($_GET['view']!='me') { ?>
 <?php if(empty($list)) { ?>
-<div class="title" style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
+<div style="text-align:center;">系统没有为你匹配到你所属行业的相关应用，你可以通过修改行业选项。</div>
 
 <?php } else { ?>
  <div class="confirm_btn container_12" style="padding-left:320px;">
-                           <input type="submit" class="btn grid_2"></a>
+                           <input type="submit" id="wei0752" class="btn grid_2"></a>
                       </div>
 <?php } ?>
 <?php } ?>

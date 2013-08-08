@@ -52,7 +52,7 @@ if($verify_result) {//验证成功
 		$sql1="select * from uchome_appset where uid = $b";
 		$value=mysql_query($sql1,$conn);
 		while($row = mysql_fetch_array($value)){
-			if($row['appstatus']=='0'){
+			if($row['appstatus']=='0'&&$row['cheak']=='0'){
 			$sql="update uchome_appset set appstatus='1' where uid = $b";
 			mysql_query($sql,$conn);
 		}else{

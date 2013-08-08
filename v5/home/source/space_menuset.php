@@ -324,7 +324,7 @@ if($id) {
 			} else {
 				$wheresql = "b.uid IN ($space[feedfriend])";
 				$theurl = "space.php?uid=$space[uid]&do=$do&view=we";
-				$f_index = 'USE INDEX(dateline)';
+				$f_index = '';
 	
 				$fuid_actives = array();
 	
@@ -393,7 +393,7 @@ if($id) {
 			updatetable('space', array('menusetnum' => $count), array('uid'=>$space['uid']));
 		}
 		if($count) {
-			$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+			$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE $wheresql and bf.appstatus='1'
 				ORDER BY $ordersql ASC LIMIT $start,$perpage");
@@ -439,12 +439,12 @@ if($_GET['view'] != 'me') {
 				$a=$value2['business'];
 				$wei=explode("，",$value['apptag']);
 			if(in_array("$a", $wei)){
-				$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid] and bf.appstatus='1'
 				ORDER BY b.dateline ASC LIMIT $start,$perpage");
 				$value1=$_SGLOBAL['db']->fetch_array($query1);
-				$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid]
 				ORDER BY b.dateline ASC LIMIT $start,$perpage");
@@ -488,7 +488,7 @@ if($_GET['view'] != 'me') {
 		$showlink1="space.php?do=menuset&view=me";
 		}
 	}else{
-	$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+	$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid WHERE bf.num='$p' and bf.uid=$_SGLOBAL[supe_uid]");
 	$value2 = $_SGLOBAL['db']->fetch_array($query2);
 	if($value2['money']){
@@ -502,7 +502,7 @@ if($_GET['view'] != 'me') {
 			$showlink="space.php?do=showmenuset";
 		}
 }else{
-	updatetable("appset", array('month'=>'0','endtime'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+	updatetable("appset", array('month'=>'0','endtime'=>'0','cheak'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	updatetable("appset", array('appstatus'=>'1'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 	$showmessage1='订制成功。';
 	$showlink1="space.php?do=menuset&view=me";

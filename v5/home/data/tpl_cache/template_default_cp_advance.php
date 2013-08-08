@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/cp_header|template/default/footer', '1375338675', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_advance|template/default/header|template/default/footer', '1375853974', 'template/default/cp_advance');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -69,7 +69,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -112,7 +112,7 @@
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -156,25 +156,8 @@
 
 <?php } ?>
 
-<h2 class="title"><img src="image/icon/profile.gif">企业设置</h2>
-<div class="tabs_header">
-<a href="cp.php?ac=advance" class="r_option">&raquo; 高级管理</a>
-<ul class="tabs">
-<li<?=$actives['profile']?>><a href="cp.php?ac=profile"><span>实名认证</span></a></li>
-<!--<li<?=$actives['message']?>><a href="cp.php?ac=message"><span>企业资料</span></a></li>-->
-<li<?=$actives['avatar']?>><a href="cp.php?ac=avatar"><span>企业头像</span></a></li>
-<?php if($_SCONFIG['videophoto']) { ?>
-<li<?=$actives['videophoto']?>><a href="cp.php?ac=videophoto"><span>视频认证</span></a></li>
-<?php } ?>
-<?php if($_SCONFIG['allowdomain'] && $_SCONFIG['domainroot'] && checkperm('domainlength')) { ?>
-<li<?=$actives['domain']?>><a href="cp.php?ac=domain"><span>我的域名</span></a></li>
-<?php } ?>
-<?php if($_SCONFIG['sendmailday']) { ?>
-<li<?=$actives['sendmail']?>><a href="cp.php?ac=sendmail"><span>邮件提醒</span></a></li>
-<?php } ?>
-</ul>
-</div>
-
+  <div class="content_detail_wrapper" style="margin-left:200px;min-height:533px;">
+      <div class="post_wrapper">
 <form method="post" action="admincp.php" class="c_form">
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 <table cellspacing="0" cellpadding="0" class="formtable">
@@ -200,6 +183,8 @@
 </tr>
 </table>
 </form>
+</div>
+</div>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -249,7 +234,7 @@
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

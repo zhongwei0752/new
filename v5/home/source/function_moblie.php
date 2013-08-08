@@ -116,6 +116,7 @@ function moblie_post($POST, $olds=array()) {
 		'friend' => $POST['friend'],
 		'password' => $POST['password'],
 		'num'=>$POST['num'],
+		'money'=>$POST['money'],
 		'noreply' => empty($_POST['noreply'])?0:1
 	);
 

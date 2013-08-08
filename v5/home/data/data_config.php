@@ -100,7 +100,7 @@ $_SCONFIG=Array
 			'click' => 1
 			)
 		),
-	'cronnextrun' => 1375439520,
+	'cronnextrun' => 1375902240,
 	'my_status' => '0',
 	'uniqueemail' => 1,
 	'updatestat' => 1,
@@ -152,9 +152,6 @@ $_SCONFIG=Array
 	'need_friendnum' => '',
 	'seccode_login' => '0',
 	'defaultfusername' => 'admin',
-	'defaultpoke' => '',
-	'my_siteid' => 26161119,
-	'my_sitekey' => '151bcc325edb13841225bb0667908c9e',
-	'videophoto' => '0'
+	'defaultpoke' => ''
 	)
 ?>

@@ -1,8 +1,8 @@
 <?php 
-define('UC_DBHOST', 'localhost');
-define('UC_DBUSER', 'root');
-define('UC_DBPW', '2316663');
-define('UC_DBNAME', 'new');
+define('UC_DBHOST', '58.215.187.8');
+define('UC_DBUSER', 'zhongwei');
+define('UC_DBPW', '623610577');
+define('UC_DBNAME', 'zhongwei');
 define('UC_DBCHARSET', 'utf8');
 define('UC_DBTABLEPRE', 'uc_');
 define('UC_COOKIEPATH', '/');

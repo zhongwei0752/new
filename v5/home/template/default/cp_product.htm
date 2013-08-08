@@ -84,11 +84,11 @@
                       </div>
 					<div class="post_list container_12">
                          <span class="select_title grid_1">标题&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <input type="text" class="t_input" id="subject" name="subject" value="$product[subject]"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
+                           <input type="text" class="t_input" id="subject" name="subject" size="40" value="$product[subject]"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">价格&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <input type="text" class="t_input"  id="money" name="money" value="$product[money]">
+                           <input type="text" class="t_input"  id="money" size="40" name="money" value="$product[money]">
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">封面图片&nbsp;&nbsp;:&nbsp;&nbsp;</span>
@@ -102,7 +102,7 @@
                          <span class="select_title grid_1">产品介绍&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=product_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$product[message]</textarea>
-						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:300px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:350px;border: 1px solid #C5C5C5;" height="200"></iframe>
                             </div>
 				</td>
 			</tr>
@@ -115,8 +115,8 @@
 	</form>
 
 	<!--{if !$_SGLOBAL[inajax] && (!$product['uid'] || $product['uid']==$_SGLOBAL['supe_uid'])}-->
-	<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-		<tr><th width="100">图片</th><td>
+	<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:55px;">
+		<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:&nbsp;&nbsp;</th><td>
 			<div class="pic_submit container_12">
 		<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
 	</div>

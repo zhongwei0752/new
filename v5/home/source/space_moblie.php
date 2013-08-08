@@ -10,11 +10,14 @@ if(!defined('IN_UCHOME')) {
 
 if($_POST){
 	if(!empty($_POST['moblieclicknum'])){
-	updatetable('space', array('moblieclicknum' => $_POST['moblieclicknum']), array('uid'=>$space['uid']));
-	showmessage('选择成功',"space.php?do=moblie&view=all");
-}else{
-	showmessage('选择失败',"space.php?do=moblie&view=all");
+	updatetable('space', array('mobliestatus' => $_POST['moblieclicknum']), array('uid'=>$space['uid']));
+	showmessage('为你跳转到支付确认页面',"space.php?do=showmenuset&status=moblie&moblienum=$_POST[moblieclicknum]");
 }
+	if(!empty($_POST['moblieusenum'])){
+	updatetable('space', array('moblieclicknum' => $_POST['moblieusenum']), array('uid'=>$space['uid']));
+	showmessage('应用成功',"space.php?do=moblie&view=all");
+	}
+
 }
 
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
@@ -360,6 +363,12 @@ if($id) {
 
 	if($count) {
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+			$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('moblie')." b $f_index
+				LEFT JOIN ".tname('mobliechoice')." bf ON bf.moblieid=b.moblieid
+				WHERE bf.uid='$space[uid]' and bf.moblieid='$value[moblieid]'
+				ORDER BY b.dateline DESC LIMIT $start,$perpage");
+			$value1 = $_SGLOBAL['db']->fetch_array($query1);
+			$value['mobliecheak']=$value1;
 			if(ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
 				realname_set($value['uid'], $value['username']);
 				if($value['friend'] == 4) {

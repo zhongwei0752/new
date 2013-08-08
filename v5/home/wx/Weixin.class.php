@@ -144,6 +144,55 @@ class Weixin {
 		$data = (array)$data[0];
 		return $data;
 	}
+	function getUser(){
+		$this->checkwxlogin();
+		$url = "https://mp.weixin.qq.com/cgi-bin/userinfopage?t=wxm-setting&lang=zh_CN&token=".$this->apptoken;
+		$ch = curl_init();    
+		curl_setopt($ch, CURLOPT_URL,$url);     
+		curl_setopt($ch, CURLOPT_HEADER, 0);    
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie_dir);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);  
+		$data = curl_exec($ch);      
+		curl_close($ch);
+		preg_match_all("/<img class=\"settingAvatar\" src=\"\/cgi-bin\/getheadimg\?fakeid=(.*)&/isU",trim($data),$matches);
+		preg_match_all('/<img[^>]*>/Ui', $matches[1], $match2);
+		//preg_match_all('/<img[ ]*src=["\']?([^"\' ><]+)/i',$matches[1],$matches1);  
+		//print_r($matches[1]);
+		$data = $matches[1];
+
+		$data = json_decode($data[0]);
+		$data=json_decode($data);
+		
+
+		//$data = (array)$data[0];
+		return $data;
+	}
+	function GetId(){
+		$url = "https://mp.weixin.qq.com/cgi-bin/getcontactinfo?t=ajax-getcontactinfo&lang=zh_CN&fakeid=&token=".$this->apptoken;
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie_dir);
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
+		$data = curl_exec($ch);
+		curl_close($ch);
+		$result = json_decode($data,1);
+		
+				$data = $this->loginwx();
+				//把写好的cookies重新读出来，去掉多余的'#HttpOnly_'字符
+				$cooky = file_get_contents($this->cookie_dir);
+				preg_match_all("/	TRUE	0	slave_user(.*)/",trim($cooky),$matches);
+				$data = $matches[1];
+				return $data;
+		
+	}
 
 
 }

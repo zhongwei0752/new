@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1375439398', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1375768714', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
   <style type="text/css">
        h3{color: #727272;margin-top: 20px;font-weight:normal;}
@@ -229,7 +229,7 @@
                     <div class="grid_6">
                         <?php if($value['num']==$space['moblieclicknum']) { ?> <div class="index_assembly_box bg1" style="background: url('./template/default/image/chosen_bg3.png')!important;"><?php } else { ?><div class="index_assembly_box bg1" ><?php } ?>
                             <div class="assembly_title" >
-                                   <span class="title"><?=$value['subject']?></span><span class="r_option" style="margin-right:10px;">序号:<?=$value['num']?></span>
+                                   <span class="title"><?=$value['subject']?></span><span style="color:red;margin-left:50px;">价格:<?=$value['money']?></span><span class="r_option" style="margin-right:10px;">序号:<?=$value['num']?></span>
                              </div>
 
                              <div class="assembly_info">
@@ -240,7 +240,9 @@
                              </div>
                             <form action="space.php?do=moblie" method="post">
                             	<input type="hidden" name="moblieclicknum" value="<?=$value['num']?>">
-<input type="submit"  style="margin-left: 160px;" value="选择"></input>
+                <?php if($value['num']!=$space['moblieclicknum']) { ?>       
+<input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="选择"></input>
+                <?php } ?>
 
 </form>
                         </div>

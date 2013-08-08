@@ -260,7 +260,7 @@ h2.title img { margin: 0 5px 0 0; vertical-align: middle; }
 textarea { border: 1px solid #ddd; overflow: auto; }
 .t_input, select { padding: 3px 2px; border: 1px solid #ddd; line-height: 16px; }
 .button { padding: 0 5px; margin: 0 0 0 3px; height: 24px; border: none; background: #DDD; color: #333; line-height: 20px; letter-spacing: 1px; cursor: pointer; }
-.submit { padding: 0 5px; height: 24px; border: none; background: #FF8901; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; }
+.submit { padding: 0 5px; height: 24px; border: none; background: #02B4AB; color: #FFF; line-height: 20px; letter-spacing: 1px; cursor: pointer; }
 a.submit { padding: 5px; }
 a.button { padding: 5px; }
 .c_form { padding: 0.5em 3em;color: #999; }
@@ -436,10 +436,10 @@ a.button { padding: 5px; }
 
 .btn_line { padding: 5px 0; }
 
-.popupmenu_popup { padding: 1em; border: 3px solid #FF8E00; background: #FCF9E6; line-height: 1.4em; text-align: left; overflow: hidden; }
+.popupmenu_popup { padding: 1em; border: 3px solid #02B4AB; background: #FCF9E6; line-height: 1.4em; text-align: left; overflow: hidden; }
     .popupmenu_popup h1 { font-size: 1.17em; padding: 0 0 10px 0; }
     .popupmenu_popup td { padding-bottom: 0.4em; }
-    .popupmenu_popup .float_del{ background-image: url(image/delete2.gif); }
+    /*.popupmenu_popup .float_del{ background-image: url(image/delete2.gif); }*/
 
 .popupmenu_centerbox { border: 8px solid #02B4AB; background: #FCF9E6; text-align: left; min-width:250px; max-width:550px; }
     .popupmenu_centerbox h1 { padding: 0 10px; color: #02B4AB; font-size: 14px; line-height: 26px; cursor: move; }

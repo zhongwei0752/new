@@ -7,7 +7,17 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-	$number=rand();
+$number=rand();
+$zfbuid=$_SGLOBAL['supe_uid'];
+if($_GET['status']=="moblie"){
+	$num=$_GET['moblienum'];
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('moblie')." WHERE num=$num");
+	$value = $_SGLOBAL['db']->fetch_array($query);
+	$list=$value;
+
+
+}else{
+	
 	
 	$query = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid WHERE bf.uid=$_SGLOBAL[supe_uid] and b.money!='0'");
@@ -30,7 +40,7 @@ if(!defined('IN_UCHOME')) {
 			
 
 	}
-	$zfbuid=$_SGLOBAL['supe_uid'];
+	
 	if($_POST['cancel']){
 		$query = $_SGLOBAL['db']->query("delete  FROM ".tname('appset')." WHERE appstatus='0' and uid=$_SGLOBAL[supe_uid]");
 		$value = $_SGLOBAL['db']->fetch_array($query);
@@ -42,7 +52,8 @@ if(!defined('IN_UCHOME')) {
 	}
 		showmessage("正在为你跳转到首页","space.php?do=home");
 	}
-
+}
 	include_once template("space_showmenuset");
+
 
 ?>

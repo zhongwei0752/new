@@ -8,9 +8,15 @@ if(!defined('IN_UCHOME') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 if(submitcheck('submit')) {
+	require_once(S_ROOT.'./wx/Weixin.class.php');
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+	$d = new Weixin("$username", "$password");
+	$info = $d->getUser();
+	$wxkey=$d->get_userinfo_by_fakeid($info);
 	$setarr = array(
-			
-			'wxkey'=>getstr($_POST['wxkey'], 60, 1, 1),
+			'fakeid'=>$info,
+			'wxkey'=>$wxkey['Username'],
 			'username'=>getstr($_POST['username'], 60, 1, 1),
 			'password'=>getstr($_POST['password'], 60, 1, 1),
 			'cheakid'=>getstr($_POST['cheakid'], 60, 1, 1),

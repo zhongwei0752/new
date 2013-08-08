@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375439156', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375928172', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -171,7 +171,7 @@
       .bg1{ background: url("./template/default/image/chosen_bg.png");}
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
-      #simplemodal-container{height:200px;}
+      #simplemodal-container{height:230px;}
     </style>
 <style type="text/css">
 .navbar-inner .grid_4 a img{max-width: 40px;}
@@ -195,14 +195,8 @@
                    <div class="grid_2">
                        <h5 style="margin-top:0px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
                        <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                       <div id="weixin">
-                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>
-                        <div style="background:#fff;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<?=$space['weixinusername']?><br/>登录密码:<?=$space['weixinpassword']?><br/>
-             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
-                        </div>
-
-                        </div>
-                       <a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>
+                      
+                       <!--<a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>-->
                    </div>
                  </div>
 
@@ -328,6 +322,13 @@ for(var i=0; i<elems.length; i++){
 magicColor(elems[i]); 
 }
 </script>
+ <div id="weixin">
+                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>  
+                        <div style="background:#fff;font-size:15px;text-align:center;color: #6D6D6D;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<span style="color:#00E5E8"><?=$space['weixinusername']?></span><br/>登录密码:<span style="color:#00E5E8"><?=$space['weixinpassword']?></span><br/>
+             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
+                        </div>
+
+                        </div>
 
 <?php my_checkupdate(); ?>
 <?php my_showgift(); ?>

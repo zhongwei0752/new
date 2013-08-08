@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_menuset|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375350730', 'template/default/cp_menuset');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_menuset|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375928807', 'template/default/cp_menuset');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -112,7 +112,7 @@
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -359,21 +359,18 @@
 应用单价:<input type="text" class="t_input" id="money" name="money" value="<?=$menuset['money']?>" size="10" onblur="relatekw();" />元/月
 </td>
 </tr>
-</table>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
 <tr>
-<th width="100">标签</th>
-<td><input type="text" class="t_input" size="40" id="tag" name="tag" value="<?=$menuset['tag']?>"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"></td>
+<td>
+标签:<input type="text" class="t_input" size="40" id="tag" name="tag" value="<?=$menuset['tag']?>"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();">
+</td>
 </tr>
-
+<tr>
 <?php if($menuset['uid'] && $menuset['uid']!=$_SGLOBAL['supe_uid']) { ?>
 <?php $selectgroupstyle='display:none'; ?>
 <tbody style="display:none;">
 <?php } ?>
-<tr>
-<th>隐私设置</th>
 <td>
-<select name="friend" onchange="passwordShow(this.value);">
+隐私设置:<select name="friend" onchange="passwordShow(this.value);">
 <option value="0"<?=$friendarr['0']?>>全站用户可见</option>
 <option value="1"<?=$friendarr['1']?>>全好友可见</option>
 <option value="2"<?=$friendarr['2']?>>仅指定的好友可见</option>
@@ -384,58 +381,9 @@
 <input type="checkbox" name="noreply" value="1"<?php if($menuset['noreply']) { ?> checked<?php } ?>> 不允许评论
 </td>
 </tr>
-<?php if($menuset['uid'] && $menuset['uid']!=$_SGLOBAL['supe_uid']) { ?></tbody><?php } ?>
-<tbody id="tb_selectgroup" style="<?=$selectgroupstyle?>">
-<tr>
-<th>指定好友</th>
-<td><select name="selectgroup" onchange="getgroup(this.value);">
-<option value="">从好友组选择好友</option>
-<?php if(is_array($groups)) { foreach($groups as $key => $value) { ?>
-<option value="<?=$key?>"><?=$value?></option>
-<?php } } ?>
-</select> 多次选择会累加到下面的好友名单</td>
-</tr>
-<tr>
-<th>&nbsp;</th>
-<td>
-<textarea name="target_names" id="target_names" style="width:85%;" rows="3"><?=$menuset['target_names']?></textarea>
-<br>(可以填写多个好友名，请用空格进行分割)</td>
-</tr>
-</tbody>
-
-
-<?php if(checkperm('managemenuset')) { ?>
-<tr>
-<th width="100">热度</th>
-<td>
-<input type="text" class="t_input" name="hot" id="hot" value="<?=$menuset['hot']?>" size="5">
-</td>
-</tr>
-<?php } ?>
-
-<?php if(checkperm('seccode')) { ?>
-<?php if($_SCONFIG['questionmode']) { ?>
-<tr>
-<th style="vertical-align: top;">请回答验证问题</th>
-<td>
-<p><?php question(); ?></p>
-<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
-</td>
-</tr>
-<?php } else { ?>
-<tr>
-<th style="vertical-align: top;">请填写验证码</th>
-<td>
-<script>seccode();</script>
-<p>请输入上面的4位字母或数字，看不清可<a href="javascript:updateseccode()">更换一张</a></p>
-<input type="text" id="seccode" name="seccode" value="" size="15" class="t_input" />
-</td>
-</tr>
-<?php } ?>
-<?php } ?>
-
 
 </table>
+
 <input type="hidden" name="menusetsubmit" value="true" />
 <input type="button" id="menusetbutton" name="menusetbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
 <input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
@@ -443,8 +391,8 @@
 </form>
 
 <?php if(!$_SGLOBAL['inajax'] && (!$menuset['uid'] || $menuset['uid']==$_SGLOBAL['supe_uid'])) { ?>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr><th width="100">图片</th><td>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:-58px;">
+<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:&nbsp;&nbsp;</th><td>
 <input type="button" name="clickbutton[]" value="上传图片" class="button" onclick="edit_album_show('pic')">
 <input type="button" name="clickbutton[]" value="插入图片" class="button" onclick="edit_album_show('album')">
 </td></tr>
@@ -511,7 +459,7 @@
 <tr>
 <th width="100">&nbsp;</th>
 <td>
-<input type="button" id="issuance" onclick="document.getElementById('menusetbutton').click();" value="保存发布" class="submit" /></td>
+ <input type="button" class="btn grid_2" style="margin-left:500px;" id="issuance" onclick="document.getElementById('menusetbutton').click();" value="保存发布" class="submit" />
 </tr>
 </table>
 </div>

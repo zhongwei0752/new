@@ -1,11 +1,17 @@
 <?php
-/*
-	[UCenter Home] (C) 2007-2008 Comsenz Inc.
-	$Id: space_feed.php 13194 2009-08-18 07:44:40Z liguode $
-*/
+
+		
 	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
 	$value4 = $_SGLOBAL['db']->fetch_array($query4);
 	$zhong1=$value4;
+
+	require_once('./wx/Weixin.class.php');
+	if($space['weixinusername']&&$space['weixinpassword']){
+	$d = new Weixin($space['weixinusername'], $space['weixinpassword']);
+	$token = $d->GetId();
+	print_r($token[0]);
+	//$info = "https://mp.weixin.qq.com/cgi-bin/getqrcode?fakeid=$space[fakeid]&style=1&token=$output[token];";
+	}
 	
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
@@ -17,7 +23,7 @@ if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
-		showmessage('enter_the_space', 'space.php?do=menuset', 0);
+		showmessage('enter_the_space', 'space.php?do=menuset&view=me', 0);
 	}
 
 //ÏÔÊ¾È«Õ¾¶¯Ì¬µÄºÃÓÑÊý

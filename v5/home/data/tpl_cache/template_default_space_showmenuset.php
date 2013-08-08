@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1374811942', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1375757653', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -72,7 +72,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -113,9 +113,9 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -159,30 +159,217 @@
 
 <?php } ?>
 
-<?php if($list) { ?>
-需要购买的应用:<br/>
-<?php if(is_array($list)) { foreach($list as $value) { ?>
-应用名称:<?=$value['subject']?>/购买月份:<?php if($value['appstatus']) { ?><?=$value['addmonth']?><?php } else { ?><?=$value['month']?><?php } ?>/金额:<?php $cost=$value['cost']; ?><?=$cost?><br/>
+<mce:style type="text/css"><!--  
+/* css document */ body {  
+    font: normal 11px auto "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #4f6b72;  
+    background: #e6eae9;  
+}  
+a {  
+    color: #c75f3e;  
+}  
+#mytable {  
+    width: 700px;  
+    padding: 0;  
+    margin: 0;  
+}  
+caption {  
+    padding: 0 0 5px 0;  
+    width: 700px;  
+    font: italic 11px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    text-align: right;  
+}  
+th {  
+    font: bold 11px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #4f6b72;  
+    border-right: 1px solid #c1dad7;  
+    border-bottom: 1px solid #c1dad7;  
+    border-top: 1px solid #c1dad7;  
+    letter-spacing: 2px;  
+    text-transform: uppercase;  
+    text-align: left;  
+    padding: 6px 6px 6px 12px;  
+    background: #cae8ea url(images/bg_header.jpg) no-repeat;  
+}  
+td {  
+    border-right: 1px solid #c1dad7;  
+    border-bottom: 1px solid #c1dad7;  
+    background: #fff;  
+    font-size:11px;  
+    padding: 6px 6px 6px 12px;  
+    color: #4f6b72;  
+}  
+td.alt {  
+    background: #f5fafa;  
+    color: #797268;  
+}  
+th.spec {  
+    border-left: 1px solid #c1dad7;  
+    border-top: 0;  
+    background: #fff url(images/bullet1.gif) no-repeat;  
+    font: bold 10px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+}  
+th.specalt {  
+    border-left: 1px solid #c1dad7;  
+    border-top: 0;  
+    background: #f5fafa url(images/bullet2.gif) no-repeat;  
+    font: bold 10px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #797268;  
+} /*-----for ie 5.x bug*/  
+html>body td {  
+    font-size:11px;  
+}  
+--></mce:style><style type="text/css" mce_bogus="1">/* css document */ body {  
+    font: normal 11px auto "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #4f6b72;  
+    background: #e6eae9;  
+}  
+a {  
+    color: #c75f3e;  
+}  
+#mytable {  
+    width: 700px;  
+    padding: 0;  
+    margin: 0;  
+}  
+caption {  
+    padding: 0 0 5px 0;  
+    width: 700px;  
+    font: italic 11px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    text-align: right;  
+}  
+th {  
+    font: bold 11px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #4f6b72;  
+    border-right: 1px solid #c1dad7;  
+    border-bottom: 1px solid #c1dad7;  
+    border-top: 1px solid #c1dad7;  
+    letter-spacing: 2px;  
+    text-transform: uppercase;  
+    text-align: left;  
+    padding: 6px 6px 6px 12px;  
+    background: #cae8ea url(images/bg_header.jpg) no-repeat;  
+}  
+td {  
+    border-right: 1px solid #c1dad7;  
+    border-bottom: 1px solid #c1dad7;  
+    background: #fff;  
+    font-size:11px;  
+    padding: 6px 6px 6px 12px;  
+    color: #4f6b72;  
+}  
+td.alt {  
+    background: #f5fafa;  
+    color: #797268;  
+}  
+th.spec {  
+    border-left: 1px solid #c1dad7;  
+    border-top: 0;  
+    background: #fff url(images/bullet1.gif) no-repeat;  
+    font: bold 10px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+}  
+th.specalt {  
+    border-left: 1px solid #c1dad7;  
+    border-top: 0;  
+    background: #f5fafa url(images/bullet2.gif) no-repeat;  
+    font: bold 10px "trebuchet ms", verdana, arial, helvetica, sans-serif;  
+    color: #797268;  
+} /*-----for ie 5.x bug*/  
+html>body td {  
+    font-size:11px;  
+}</style>
+  <?php if($list) { ?>
+<table id="mytable" cellspacing="0" summary="the technical specifications of the apple powermac g5 series">  
+  <caption>  
+  </caption>  
+   <?php if($_GET['moblienum']) { ?>
+   <tr>  
+    <th scope="col" abbr="configurations">应用名称</th>    
+    <th scope="col" abbr="dual 2">单价(单位:元)</th> 
+     <th scope="col" abbr="dual 2">总价(单位:元)</th>   
+  </tr> 
+    <?php } else { ?>
+  <tr>  
+    <th scope="col" abbr="configurations">应用名称</th>  
+    <th scope="col" abbr="dual 1.8">购买月份(单位:月)</th>  
+    <th scope="col" abbr="dual 2">单价(单位:元)</th> 
+     <th scope="col" abbr="dual 2">总价(单位:元)</th>   
+  </tr>  
+   <?php } ?>
+ <?php if($_GET['moblienum']) { ?>
+ <tr>  
+    <th scope="row" abbr="model" class="spec"><?=$list['subject']?></th>  
+    <td><?=$list['money']?></td>  
+    <td></td>   
+   
+  </tr>  
+ <?php } else { ?>
+  <?php if(is_array($list)) { foreach($list as $value) { ?>
+  <tr>  
+    <th scope="row" abbr="model" class="spec"><?=$value['subject']?></th>  
+    <td><?php if($value['appstatus']) { ?><?=$value['addmonth']?><?php } else { ?><?=$value['month']?><?php } ?></td>  
+    <td><?php $cost=$value['cost']; ?><?=$cost?></td>   
+    <td></td>   
+  </tr>  
+ <?php } } ?>
+ <?php } ?>
+  <?php if($_GET['moblienum']) { ?>
+  <tr>  
+    <th scope="row" abbr="model" class="spec"></th>  
+    <td></td>   
+    <td>总计:<?=$list['money']?></td>  
+  </tr> 
+  <?php } else { ?>
+  <tr>  
+    <th scope="row" abbr="model" class="spec"></th>  
+    <td></td>
+    <td></td>    
+    <td><?php $allcost=array_sum($allcost1); ?>总计:<?=$allcost?></td>  
+  </tr> 
+   <?php } ?> 
 
-<?php } } ?>
-总额:<?php $allcost=array_sum($allcost1); ?><?=$allcost?>
-<form name=alipayment action=./payphp/alipayapi.php method=post target="_blank">
-
+    <tr>  
+    <th scope="row" abbr="model" class="spec"></th>  
+    <td>  
+    <form name=alipayment action=./payphp/alipayapi.php method=post target="_blank">
+    <?php if($_GET['moblienum']) { ?>
+<input type="hidden" name="WIDseller_email" value="1907983236@qq.com" />
+<input type="hidden" name="WIDout_trade_no" value="<?=$number?>.<?=$zfbuid?>" />
+<input type="hidden" name="WIDsubject" value="微伍手机模版" />
+<input type="hidden" name="WIDtotal_fee" value="<?=$list['money']?>" />
+<input type="hidden" name="WIDbody" value="欢迎选购微伍手机模版" />
+<input type="hidden" name="WIDshow_url" value="欢迎选购微伍手机模版" />
+    <?php } else { ?>
 <input type="hidden" name="WIDseller_email" value="1907983236@qq.com" />
 <input type="hidden" name="WIDout_trade_no" value="<?=$number?>.<?=$zfbuid?>" />
 <input type="hidden" name="WIDsubject" value="微伍应用" />
 <input type="hidden" name="WIDtotal_fee" value="<?=$allcost?>" />
 <input type="hidden" name="WIDbody" value="欢迎选购微伍应用" />
 <input type="hidden" name="WIDshow_url" value="欢迎选购微伍应用" />
-<input type="submit" value="购买"  name="buy">
+ <?php } ?> 
+<a href=""><input type="submit" class="btn grid_2" value="购买"  name="buy"></a>
 
 </form>
-<form action = "space.php?do=showmenuset" method = "post">
-<input type="submit" value="暂不购买"  name="cancel">
+</td>
+    <td>
+    <form action = "space.php?do=showmenuset" method = "post">
+<a href=""><input type="submit" class="btn grid_2" value="暂不购买"  name="cancel"></a>
 </form>
-<?php } else { ?>
+</td> 
+    <?php if(!$_GET['moblienum']) { ?>   
+    <td></td>  
+     <?php } ?> 
+  </tr> 
+  </table>  
+
+
+ <?php } else { ?>
 没有需要购买的应用
 <?php } ?>
+
+
+
+
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -232,7 +419,7 @@
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

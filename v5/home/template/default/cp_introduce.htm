@@ -81,15 +81,15 @@
 						<!--{/loop}-->
 						<!--{if !$introduce['uid'] || $introduce['uid']==$_SGLOBAL['supe_uid']}--><option value="addoption" style="color:red;">+新建分类</option><!--{/if}-->
 					</select>
-					<font color="#02B4AB">*如果企业介绍已经有此分类的内容，则再选择此分类填写的内容会覆盖更新原内容。</font>
+					
                       </div>
 					<div class="post_list container_12">
                          <span class="select_title grid_1">标题&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <input type="text" class="t_input" id="subject" name="subject" value="$introduce[subject]"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
+                           <input type="text" class="t_input" id="subject" name="subject" size="40" value="$introduce[subject]"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">摘要&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                         <input type="text" class="t_input" id="tag" name="tag" value="$introduce[tag]" placeholder="摘要可自己填写，也会自动获取！"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"  ><br/>
+                         <input type="text" class="t_input" id="tag" name="tag" value="$introduce[tag]" size="40" placeholder="摘要可自己填写，也会自动获取！"> <input type="button" name="clickbutton[]" value="自动获取" class="button" onclick="relatekw();"  ><br/>
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">封面图片&nbsp;&nbsp;:&nbsp;&nbsp;</span>
@@ -104,7 +104,7 @@
                          <span class="select_title grid_1">企业介绍&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=introduce_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$introduce[message]</textarea>
-						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:300px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:350px;border: 1px solid #C5C5C5;" height="200"></iframe>
                             </div>
 				</td>
 			</tr>
@@ -115,12 +115,16 @@
 		<input type="hidden" name="topicid" value="$_GET[topicid]" />
 		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
 	</form>
-
+	<style>
+	.infotable th{
+		padding-right: 0em;
+	}
+	</style>
 	<!--{if !$_SGLOBAL[inajax] && (!$introduce['uid'] || $introduce['uid']==$_SGLOBAL['supe_uid'])}-->
-	<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-		<tr><th width="100">图片</th><td>
+	<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:55px;">
+		<tr><th width="100" style="margin-left:50px;">图片&nbsp;&nbsp;:</th><td>
 			<div class="pic_submit container_12">
-		<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+		<input type="button" class="btn grid_3" style="margin-right:-20px;" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
 	
 	</div>
 		</td></tr>
@@ -180,7 +184,7 @@
 		<tr>
 			<th width="100">&nbsp;</th>
 			<td>
-				<div class="confirm_btn container_12">
+				<div class="confirm_btn container_12" style="margin-left:-20px;">
                            <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
                            <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('introducebutton').click();" value="保存发布" class="submit" />
                         

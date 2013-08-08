@@ -13,6 +13,7 @@
       .bg1{ background: url("./template/default/image/chosen_bg.png");}
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
+      #simplemodal-container{height:200px;}
     </style>
 
 <!--{if !empty($_SGLOBAL[inajax])}-->
@@ -107,29 +108,33 @@
 				<!--{else}-->
 					<!--{if $ols[$value[uid]]}--><div class="gray"><!--{date('H:i',$ols[$value[uid]],1)}--></div><!--{/if}-->
 					<div class="gray">
-					<a href="cp.php?ac=friend&op=ignore&uid=$value[uid]" id="a_talk_$value[fakeid]" onclick="ajaxmenu(event, this.id)">私信我($value[fakeid])</a>
+					<!--{if !empty($value[fakeid])}-->
+					<a href="javascript:void;" id="a_talk_$value[uid]" >私信</a>
+					<!--{/if}-->
 					<a href="cp.php?ac=friend&op=ignore&uid=$value[uid]" id="a_ignore_$key" onclick="ajaxmenu(event, this.id)">删除</a>
 					</div>
 				<!--{/if}-->
 			</li>
-			<div id="talk$value[fakeid]">
-  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
-  <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message"><input type="hidden" name="fakeid" value="$value[fakeid]"><input type="hidden" name="uid" value="$value[uid]"><input type="submit" name="friendreply" value="回复"></form></div>
-
-</div>
+			
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
     <script type="text/javascript">
-       $(document).ready(function(){
-        $('#talk$value[fakeid]').attr("style", "display:none;");;
-           $('#a_talk_$value[fakeid]').click(function (e) {
+    var jquery = jQuery.noConflict();
+      jquery(document).ready(function(){
+       jquery('#talk$value[uid]').attr("style", "display:none;");
+          jquery('#a_talk_$value[uid]').click(function (e) {
     		e.preventDefault();
-    $('#talk$value[fakeid]').modal();
+   jquery('#talk$value[uid]').modal();
   });
 
             
        })
     </script>
+    <div id="talk$value[uid]">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
+  <div style="width:600px;background:#fff;margin:20px auto;text-align:center;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message" style="width:300px;"><input type="hidden" name="fakeid" value="$value[fakeid]"><input type="hidden" name="uid" value="$value[uid]"> <br/><br/><input type="submit" style="margin-left:250px;" class="btn grid_2" name="friendreply"></form></div>
+
+</div>
 		<!--{/loop}-->
 		</ul>
 	</div>

@@ -72,7 +72,7 @@
                     <div class="grid_6">
                         <!--{if $value[num]==$space[moblieclicknum]}--> <div class="index_assembly_box bg1" style="background: url('./template/default/image/chosen_bg3.png')!important;"><!--{else}--><div class="index_assembly_box bg1" ><!--{/if}-->
                             <div class="assembly_title" >
-                                   <span class="title">$value[subject]</span><span class="r_option" style="margin-right:10px;">序号:$value[num]</span>
+                                   <span class="title">$value[subject]</span><span style="color:red;margin-left:50px;">价格:$value[money]</span><span class="r_option" style="margin-right:10px;">序号:$value[num]</span>
                              </div>
 
                              <div class="assembly_info">
@@ -81,15 +81,27 @@
                                 <!--{if $value[num]==$space[moblieclicknum]}--><h5> 当前所选模板<h5> <!--{/if}-->
                                 
                              </div>
-                            <form action="space.php?do=moblie" method="post">
-                            	<input type="hidden" name="moblieclicknum" value="$value[num]">
-								<input type="submit"  style="margin-left: 160px;" value="选择"></input>
+                          </a>   
+                <!--{if $value[num]!=$space[moblieclicknum]}-->
+                <!--{eval $hehe=$value[mobliecheak]}-->
+                <!--{if $hehe}--> 
+                 <form action="space.php?do=moblie" method="post">
+                <input type="hidden" name="moblieusenum" value="$value[num]">    
+								<input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="应用"></input>
+                </form>
+                <!--{else}-->
+                <form action="space.php?do=moblie" method="post">
+                <input type="hidden" name="moblieclicknum" value="$value[num]">
+                <input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="购买"></input>
+                </form>
+                <!--{/if}-->
+                <!--{/if}-->
 
-</form>
+
                         </div>
 
                     </div><!-- end -->
-                </a>
+               
                    <!--{/loop}-->
                    </div>
                </div>
