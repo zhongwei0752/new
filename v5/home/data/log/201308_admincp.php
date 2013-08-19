@@ -231,3 +231,14 @@
 <?PHP exit;?>	2013-08-07 13:55:20		127.0.0.1	1	/NEW/V5/home/admincp.php?ac=backup	GET{ac=backup;}
 <?PHP exit;?>	2013-08-07 13:55:28		127.0.0.1	1	/NEW/V5/home/admincp.php?ac=index	GET{ac=index;}
 <?PHP exit;?>	2013-08-07 13:55:43		127.0.0.1	1	/NEW/V5/home/admincp.php?ac=config	GET{ac=config;}
+<?PHP exit;?>	2013-08-13 11:51:22		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-13 11:51:36		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"120";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-13 11:51:42		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-13 14:08:41		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-13 14:08:53		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"122";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-13 14:09:02		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-13 14:09:04		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-16 14:57:48		127.0.0.1	1	/new/v5/home/admincp.php	
+<?PHP exit;?>	2013-08-16 15:57:50		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-16 15:57:55		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"134";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-16 15:57:56		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}

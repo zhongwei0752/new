@@ -444,6 +444,26 @@ function getDetail(idtype, id, uid){
       }
       });
   }
+     if(idtype=="goodsid"){
+    $.ajax({
+      dataType: "jsonp",
+      url: "http://v5.home3d.cn/home/capi/space.php?do=goods&uid="+uid+"&id="+id+"",
+       
+      success: function( data ) {
+        /* Get the movies array from the data */
+        if(data.code==0){
+          data=data.data;
+          
+        data.goods.dateline = date('Y-m-d H:i',data.goods.dateline);    
+
+          $("#detailTemplate").tmpl(data ).appendTo('#detail-panel');
+        }else{
+        alert(data.msg);
+        }
+
+      }
+      });
+  }
 }
 
 

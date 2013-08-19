@@ -898,3 +898,74 @@ background: url("./image/manage_bg.png");
 .customer_wrapper h5 {
   color: #7A7A7A;
 }
+/*goods list*/
+
+.mylist{width:450px;margin-top: 26px;padding-left: 20px;padding-right: 20px; float:left;}
+.mylist h3{font-size: 18px;color: #1db8ae;margin-bottom: 10px;}
+.mylist h3 a {color: #1db8ae;}
+.mylist p.mes{height:68px;margin-top: 0;color: #929292;font-size: 14px;}
+.mylist .action_info span {padding-right: 44px;color: #7a7a7a;}
+.mylist table td{color:#929292;width:100px;}
+
+.mybox{width: 110px;margin-top: 50px;float:left;height:110px;text-align:left;font-size:14px;}
+.mybox td{height:24px;color:#929292;}
+.taobaourl{background-color:#FF8181;width:100px;line-height:24px;text-align:center;cursor:pointer;display: block;margin-top:7px;}
+.taobaourl a{color:#FFFFFF;}
+
+.old{text-decoration: line-through;}
+.cl{color:#FF8181;font-size:15px;}
+
+
+/*dialog list*/
+#dialoglist{padding:10px;}
+.dialog{padding:15px;width:95%;position:relative;min-height:110px;}
+.dialog .dia-header{height:52px;}
+.dialog .dia-content{height:60px;padding:10px;padding-left:20px;background-color:#DEDEDE;}
+.dialog .dia-footer{height:20px;text-align:right;}
+
+
+
+/*bubble view*/
+#bubblelist{padding:10px;background-color: #fff;}
+.bubbleleft,.bubbleright{overflow: hidden;}
+.bubbleright{width:50%;margin-left:50%;border-left:3px solid #02B4AB;padding-left:20px;}
+.bubbleleft{width:349px;padding-right:20px;border-right:3px solid #02B4AB;}
+
+.bubble{min-height: 200px;margin-top:20px;margin-bottom:20px;background-color:#BDC7C7;position:relative;}
+.bubbleheader{height:45px;color:#fff;padding-left:20px;padding-top:10px;}
+.bubblecontent{min-height:100px;background-color:#E3E3E3;padding:10px;}
+.bubblefooter{height:35px;padding-left:20px;padding-top:10px;color: #FFFFFF;font-size:10px;}
+.write{margin-left:347px;height:50px;width:50px;border-radius:50px;background-color:#02B4AB;color:#fff;line-height:50px;text-align:center;}
+.write:hover{background-color:#FF8181;}
+.dateline{background-color:#02B4AB;position:absolute;border-radius:20px;height:20px;width:20px;}
+.left1{left:-30px;}
+.left2{left:360px;}
+.bgc1{background-color:#9b59b6;}
+.bgc2{background-color:#f39c12;}
+/*reply area*/
+
+.reply_area{padding: 10px;margin-left:30px;}
+.inputText{width:640px;height:32px;resize:none;max-height:32px;max-width:580px;font-size: 16px;padding-left:5px;display:block;float:left;border-radius:5px;}
+
+#reply .grid_r{width:94px;padding: 0;margin-top:2px;;border:0;margin-left:10px;}
+
+#reply .grid_r:hover{background:url('./image/btn_hover.png');}
+
+.pushtoright{float:right;}
+.cursor1{cursor:pointer;}
+.pushtocenter{padding-left:30px;}
+.bottom_set{font-size:12px;text-align:right;}
+
+
+#basic-modal-content {display:none;}
+#basic-modal-content2 {display:none;}
+
+/* Overlay */
+#simplemodal-overlay {background-color:#000; cursor:wait;}
+
+/* Container */
+#simplemodal-container {height:300px; width:620px; color:#bbb; background-color:#fff;border:1px solid #444;}
+#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; margin-bottom:12px; padding:4px 6px 6px;}
+#simplemodal-container a {color:#ddd;}
+#simplemodal-container a.modalCloseImg {background:url(./image/basic/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+#simplemodal-container #basic-modal-content {}

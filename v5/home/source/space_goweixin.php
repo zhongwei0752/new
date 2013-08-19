@@ -2,12 +2,13 @@
 require_once('./wx/Weixin.class.php');
 if($_POST["alreadyweixin"]=="1"){
 	
-	$username=$_POST['username'];
-	$password=$_POST['password'];
+	$username=$_POST['weixinusername'];
+	$password=$_POST['weixinpassword'];
 	$d = new Weixin("$username", "$password");
-	$info = $d->getUser();	
+	$info = $d->getUser();
+	$token = $d->GetId();	
 
-	updatetable("space", array('fakeid'=>$info,'weixinusername'=>$username,'weixinpassword'=>$password),array('uid'=>$_SGLOBAL['supe_uid']));
+	updatetable("space", array('fakeid'=>$info,'wxkey'=>$token[0],'weixinusername'=>$username,'weixinpassword'=>$password),array('uid'=>$_SGLOBAL['supe_uid']));
 	
 }
 if($_POST["newweixin"]=="1"){

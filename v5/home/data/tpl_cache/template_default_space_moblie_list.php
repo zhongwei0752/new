@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1375768714', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_moblie_list|template/default/header|template/default/footer', '1376889103', 'template/default/space_moblie_list');?><?php $_TPL['titles'] = array('手机模版'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
   <style type="text/css">
        h3{color: #727272;margin-top: 20px;font-weight:normal;}
@@ -222,7 +222,7 @@
 <div class="content_detail_wrapper">
 
  		<?php if($list) { ?>
- 		<div style="width:100%;background:#C2C2C2;height:1px;width:100%;margin:20px 0;"></div>
+<br/>
  		<div class="container_12 index_assembly_boxes" style="margin-left:10px;">
 <?php if(is_array($list)) { foreach($list as $value) { ?>
                    <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['moblieid']?>">
@@ -238,17 +238,27 @@
                                 <?php if($value['num']==$space['moblieclicknum']) { ?><h5> 当前所选模板<h5> <?php } ?>
                                 
                              </div>
-                            <form action="space.php?do=moblie" method="post">
-                            	<input type="hidden" name="moblieclicknum" value="<?=$value['num']?>">
-                <?php if($value['num']!=$space['moblieclicknum']) { ?>       
-<input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="选择"></input>
+                          </a>   
+                <?php if($value['num']!=$space['moblieclicknum']) { ?>
+                <?php $hehe=$value[mobliecheak] ?>
+                <?php if($hehe) { ?> 
+                 <form action="space.php?do=moblie" method="post">
+                <input type="hidden" name="moblieusenum" value="<?=$value['num']?>">    
+<input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="应用"></input>
+                </form>
+                <?php } else { ?>
+                <form action="space.php?do=moblie" method="post">
+                <input type="hidden" name="moblieclicknum" value="<?=$value['num']?>">
+                <input type="submit"  style="margin-left: 145px;margin-top:10px;width:94px;" class="btn grid_2" value="购买"></input>
+                </form>
+                <?php } ?>
                 <?php } ?>
 
-</form>
+
                         </div>
 
                     </div><!-- end -->
-                </a>
+               
                    <?php } } ?>
                    </div>
                </div>

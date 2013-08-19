@@ -4,27 +4,39 @@
 	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
 	$value4 = $_SGLOBAL['db']->fetch_array($query4);
 	$zhong1=$value4;
-
+	if($_POST){
 	require_once('./wx/Weixin.class.php');
-	if($space['weixinusername']&&$space['weixinpassword']){
-	$d = new Weixin($space['weixinusername'], $space['weixinpassword']);
-	$token = $d->GetId();
-	print_r($token[0]);
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+	$d = new Weixin($username,$password);
+	//$userid = $d->GetId();
+	$fakeid= $d->getUser();
+	updatetable('space',array('myweixinusername'=>$username,'myweixinpassword'=>$password,'myweixinfakeid'=>$fakeid), array('uid'=>$_SGLOBAL['supe_uid']));
+
+	//if($space['weixinusername']&&$space['weixinpassword']){
+	//$d = new Weixin($space['weixinusername'], $space['weixinpassword']);
+	//$token = $d->GetId();
+	//print_r($token[0]);
 	//$info = "https://mp.weixin.qq.com/cgi-bin/getqrcode?fakeid=$space[fakeid]&style=1&token=$output[token];";
-	}
+	//}
+}
 	
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
+if($_SGLOBAL['supe_uid']) {
 if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}
-	if($space['namestatus']=='0'&&$space['alreadyreg']=='0'){
+	if($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
-		showmessage('enter_the_space', 'space.php?do=menuset&view=me', 0);
+		showmessage('enter_the_space', 'space.php?do=menuset', 0);
 	}
+}else{
+	showmessage('未登录', 'index.php', 0);
+}
 
 //ÏÔÊ¾È«Õ¾¶¯Ì¬µÄºÃÓÑÊý
 if(empty($_SCONFIG['showallfriendnum']) || $_SCONFIG['showallfriendnum']<1) $_SCONFIG['showallfriendnum'] = 10;
@@ -419,6 +431,9 @@ $myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf
 			$b[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT sum(viewnum) AS viewnum FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);
 			$c[$myvalue['menusetid']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT sum(replynum) AS replynum FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]'"), 0);
 			$d = $_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue['english'])."  WHERE uid='$space[uid]' ORDER BY dateline DESC LIMIT 0,1");
+			if($myvalue['newname']){
+				$myvalue['subject']=$myvalue['newname'];
+			}
 			$myself[]=$myvalue;
 		}
 

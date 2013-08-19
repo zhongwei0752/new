@@ -1,7 +1,7 @@
 <?php
 /*
 	[UCenter Home] (C) 2007-2008 Comsenz Inc.
-	$Id: function_product.php 13245 2009-08-25 02:01:40Z liguode $
+	$Id: function_goods.php 13245 2009-08-25 02:01:40Z liguode $
 */
 
 if(!defined('IN_UCHOME')) {
@@ -10,7 +10,6 @@ if(!defined('IN_UCHOME')) {
 
 //Ìí¼Ó²©¿Í
 function goods_post($POST, $olds=array()) {
-	
 	global $_SGLOBAL, $_SC, $space;
 	
 	//²Ù×÷Õß½ÇÉ«ÇÐ»»
@@ -28,7 +27,6 @@ function goods_post($POST, $olds=array()) {
 	$POST['friend'] = intval($POST['friend']);
 	
 	//ÒþË½
-	//设置好友访问级别
 	$POST['target_ids'] = '';
 	if($POST['friend'] == 2) {
 		//ÌØ¶¨ºÃÓÑ
@@ -41,7 +39,7 @@ function goods_post($POST, $olds=array()) {
 			}
 		}
 		if(empty($uids)) {
-			$POST['friend'] = 3;
+			$POST['friend'] = 3;//½ö×Ô¼º¿É¼û
 		} else {
 			$POST['target_ids'] = implode(',', $uids);
 		}
@@ -75,8 +73,8 @@ function goods_post($POST, $olds=array()) {
 			), $POST['message']);
 	}
 	$message = $POST['message'];
-	
-	
+	$message1 = $POST['message'];
+
 	//¸öÈË·ÖÀà
 	if(empty($olds['classid']) || $POST['classid'] != $olds['classid']) {
 		if(!empty($POST['classid']) && substr($POST['classid'], 0, 4) == 'new:') {
@@ -86,7 +84,7 @@ function goods_post($POST, $olds=array()) {
 			if(empty($classname)) {
 				$classid = 0;
 			} else {
-				$classid = getcount('classproduct', array('classname'=>$classname, 'uid'=>$_SGLOBAL['supe_uid']), 'classid');
+				$classid = getcount('classgoods', array('classname'=>$classname, 'uid'=>$_SGLOBAL['supe_uid']), 'classid');
 				if(empty($classid)) {
 					$setarr = array(
 						'classname' => $classname,
@@ -106,20 +104,17 @@ function goods_post($POST, $olds=array()) {
 
 	if($classid && empty($classname)) {
 		//ÊÇ·ñÊÇ×Ô¼ºµÄ
-		$classname = getcount('classproduct', array('classid'=>$classid, 'uid'=>$_SGLOBAL['supe_uid']), 'classname');
+		$classname = getcount('classgoods', array('classid'=>$classid, 'uid'=>$_SGLOBAL['supe_uid']), 'classname');
 		if(empty($classname)) $classid = 0;
 	}
 	
 	//Ö÷±í
-	$productarr = array(
+	$goodsarr = array(
 		'subject' => $POST['subject'],
 		'classid' => $classid,
 		'friend' => $POST['friend'],
 		'password' => $POST['password'],
-		'noreply' => empty($_POST['noreply'])?0:1,
-		'oldprice' => $POST['oldprice'],
-		'curprice' => $POST['curprice'],
-		'taobaourl'=> $POST['taobaourl']
+		'noreply' => empty($_POST['noreply'])?0:1
 	);
 
 	//±êÌâÍ¼Æ¬
@@ -132,20 +127,21 @@ function goods_post($POST, $olds=array()) {
 		$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('pic')." WHERE picid IN (".simplode($picids).") AND uid='$_SGLOBAL[supe_uid]'");
 		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 			if(empty($titlepic) && $value['thumb']) {
-				$titlepic = $value['filepath'].'.thumb.jpg';
-				$productarr['picflag'] = $value['remote']?2:1;
+				$titlepic = $value['filepath'];
+				$goodsarr['picflag'] = $value['remote']?2:1;
 			}
 			$uploads[$POST['picids'][$value['picid']]] = $value;
 		}
 		if(empty($titlepic) && $value) {
 			$titlepic = $value['filepath'];
-			$productarr['picflag'] = $value['remote']?2:1;
+			$goodsarr['picflag'] = $value['remote']?2:1;
 		}
 	}
 	
 	//²åÈëÎÄÕÂ
 	if($uploads) {
 		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message, $mathes);
+		preg_match_all("/\<img\s.*?\_uchome\_localimg\_([0-9]+).+?src\=\"(.+?)\"/i", $message1, $mathes);
 		if(!empty($mathes[1])) {
 			$searchs = $idsearchs = array();
 			$replaces = array();
@@ -160,12 +156,15 @@ function goods_post($POST, $olds=array()) {
 			if($searchs) {
 				$message = str_replace($searchs, $replaces, $message);
 				$message = str_replace($idsearchs, 'uchomelocalimg[]', $message);
+				$message1 = str_replace($searchs, $replaces, $message1);
+				$message1 = str_replace($idsearchs, 'uchomelocalimg[]', $message1);
 			}
 		}
 		//Î´²åÈëÎÄÕÂ
 		foreach ($uploads as $value) {
+			$message1.="<div class=\"uchome-message-pic\"><img src=\"../attachment/$value[filepath]\"><p>$value[title]</p></div>";
 			$picurl = pic_get($value['filepath'], $value['thumb'], $value['remote'], 0);
-			$message .= "<div class=\"uchome-message-pic\"><img src=\"$picurl\" width = \"710px\"\><p>$value[title]</p></div>";
+			$message .= "<div class=\"uchome-message-pic\"><img src=\"$picurl\"><p>$value[title]</p></div>";
 		}
 	}
 	
@@ -181,40 +180,40 @@ function goods_post($POST, $olds=array()) {
 	//´ÓÄÚÈÝÖÐ¶ÁÈ¡Í¼Æ¬
 	if(empty($titlepic)) {
 		$titlepic = getmessagepic($message);
-		$productarr['picflag'] = 0;
+		$goodsarr['picflag'] = 0;
 	}
-	$productarr['pic'] = $titlepic;
+	$goodsarr['pic'] = $titlepic;
 	
 	//ÈÈ¶È
-	if(checkperm('manageproduct')) {
-		$productarr['hot'] = intval($POST['hot']);
+	if(checkperm('managegoods')) {
+		$goodsarr['hot'] = intval($POST['hot']);
 	}
-
+	
 	if($olds['goodsid']) {
 		//¸üÐÂ
 		$goodsid = $olds['goodsid'];
-		//var_dump($productarr);
-		updatetable('goods', $productarr, array('goodsid'=>$goodsid));
-		//var_dump($goodsid);
+		updatetable('goods', $goodsarr, array('goodsid'=>$goodsid));
+		
 		$fuids = array();
 		
-		$productarr['uid'] = $olds['uid'];
-		$productarr['username'] = $olds['username'];
+		$goodsarr['uid'] = $olds['uid'];
+		$goodsarr['username'] = $olds['username'];
 	} else {
 		//²ÎÓëÈÈÄÖ
-		$productarr['topicid'] = topic_check($POST['topicid'], 'product');
+		$goodsarr['topicid'] = topic_check($POST['topicid'], 'goods');
 
-		$productarr['uid'] = $_SGLOBAL['supe_uid'];
-		$productarr['username'] = $_SGLOBAL['supe_username'];
-		$productarr['dateline'] = empty($POST['dateline'])?$_SGLOBAL['timestamp']:$POST['dateline'];
-		$goodsid = inserttable('goods', $productarr, 1);
+		$goodsarr['uid'] = $_SGLOBAL['supe_uid'];
+		$goodsarr['username'] = $_SGLOBAL['supe_username'];
+		$goodsarr['dateline'] = empty($POST['dateline'])?$_SGLOBAL['timestamp']:$POST['dateline'];
+		$goodsid = inserttable('goods', $goodsarr, 1);
 	}
 	
-	$productarr['goodsid'] = $goodsid;
-	//var_dump($goodsid);
-	//¸½±í	
+	$goodsarr['goodsid'] = $goodsid;
+	$message1=str_replace("attachment","http://v5.home3d.cn/home/attachment",$message);
+	$message1=str_replace("http://v5.home3d.cn/home/http://v5.home3d.cn/home/attachment","http://v5.home3d.cn/home/attachment/",$message1);	//¸½±í	
 	$fieldarr = array(
 		'message' => $message,
+		'message1' => $message1,
 		'postip' => getonlineip(),
 		'target_ids' => $POST['target_ids']
 	);
@@ -228,54 +227,52 @@ function goods_post($POST, $olds=array()) {
 		if(!empty($olds['tag'])) {
 			//ÏÈ°ÑÒÔÇ°µÄ¸øÇåÀíµô
 			$oldtags = array();
-			$query = $_SGLOBAL['db']->query("SELECT tagid, productid FROM ".tname('taggoods')." WHERE goodsid='$goodsid'");
+			$query = $_SGLOBAL['db']->query("SELECT tagid, goodsid FROM ".tname('taggoods')." WHERE goodsid='$goodsid'");
 			while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 				$oldtags[] = $value['tagid'];
 			}
 			if($oldtags) {
 				$_SGLOBAL['db']->query("UPDATE ".tname('tag')." SET goodsnum=goodsnum-1 WHERE tagid IN (".simplode($oldtags).")");
-				$_SGLOBAL['db']->query("DELETE FROM ".tname('tagproduct')." WHERE productid='$productid'");
+				$_SGLOBAL['db']->query("DELETE FROM ".tname('taggoods')." WHERE goodsid='$goodsid'");
 			}
 		}
-		$tagarr = tag_batch($productid, $POST['tag']);
+		$tagarr = tag_batch($goodsid, $POST['tag']);
 		//¸üÐÂ¸½±íÖÐµÄtag
 		$fieldarr['tag'] = empty($tagarr)?'':addslashes(serialize($tagarr));
 	}
-if($olds) {
+
+	if($olds) {
 		//¸üÐÂ
-		//var_dump($fieldarr);
 		updatetable('goodsfield', $fieldarr, array('goodsid'=>$goodsid));
 	} else {
 		$fieldarr['goodsid'] = $goodsid;
-		$fieldarr['uid'] = $productarr['uid'];
+		$fieldarr['uid'] = $goodsarr['uid'];
 		inserttable('goodsfield', $fieldarr);
 	}
-
 	//¿Õ¼ä¸üÐÂ
 	if($isself) {
 		if($olds) {
 			//¿Õ¼ä¸üÐÂ
 			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET updatetime='$_SGLOBAL[timestamp]' WHERE uid='$_SGLOBAL[supe_uid]'");
 		} else {
-			if(empty($space['productnum'])) {
-				$space['productnum'] = getcount('product', array('uid'=>$space['uid']));
-				$productnumsql = "productnum=".$space['productnum'];
+			if(empty($space['goodsnum'])) {
+				$space['goodsnum'] = getcount('goods', array('uid'=>$space['uid']));
+				$goodsnumsql = "goodsnum=".$space['goodsnum'];
 			} else {
-				$productnumsql = 'productnum=productnum+1';
+				$goodsnumsql = 'goodsnum=goodsnum+1';
 			}
 			//»ý·Ö
-			$reward = getreward('publishproduct', 0);
-			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET {$productnumsql}, lastpost='$_SGLOBAL[timestamp]', updatetime='$_SGLOBAL[timestamp]', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$_SGLOBAL[supe_uid]'");
+			$reward = getreward('publishgoods', 0);
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET {$goodsnumsql}, lastpost='$_SGLOBAL[timestamp]', updatetime='$_SGLOBAL[timestamp]', credit=credit+$reward[credit], experience=experience+$reward[experience] WHERE uid='$_SGLOBAL[supe_uid]'");
 			
 			//Í³¼Æ
-			updatestat('product');
+			updatestat('goods');
 		}
 	}
 	
 	include("./source/upload.class.php");
   	$image= new upload;
   	$image->upload_file($goodsid,"goods");
-
 	//²úÉúfeed
 	if($POST['makefeed']) {
 		include_once(S_ROOT.'./source/function_feed.php');
@@ -283,18 +280,18 @@ if($olds) {
 	}
 	
 	//ÈÈÄÖ
-	if(empty($olds) && $productarr['topicid']) {
-		topic_join($productarr['topicid'], $_SGLOBAL['supe_uid'], $_SGLOBAL['supe_username']);
+	if(empty($olds) && $goodsarr['topicid']) {
+		topic_join($goodsarr['topicid'], $_SGLOBAL['supe_uid'], $_SGLOBAL['supe_username']);
 	}
 
 	//½ÇÉ«ÇÐ»»
 	if(!empty($__SGLOBAL)) $_SGLOBAL = $__SGLOBAL;
 
-	return $productarr;
+	return $goodsarr;
 }
 
 //´¦Àítag
-function tag_batch($productid, $tags) {
+function tag_batch($goodsid, $tags) {
 	global $_SGLOBAL;
 
 	$tagarr = array();
@@ -318,7 +315,7 @@ function tag_batch($productid, $tags) {
 				'tagname' => $tagname,
 				'uid' => $_SGLOBAL['supe_uid'],
 				'dateline' => $_SGLOBAL['timestamp'],
-				'productnum' => 1
+				'goodsnum' => 1
 			);
 			$tagid = inserttable('tag', $setarr, 1);
 			$tagarr[$tagid] = $tagname;
@@ -330,13 +327,13 @@ function tag_batch($productid, $tags) {
 			}
 		}
 	}
-	if($updatetagids) $_SGLOBAL['db']->query("UPDATE ".tname('tag')." SET productnum=productnum+1 WHERE tagid IN (".simplode($updatetagids).")");
+	if($updatetagids) $_SGLOBAL['db']->query("UPDATE ".tname('tag')." SET goodsnum=goodsnum+1 WHERE tagid IN (".simplode($updatetagids).")");
 	$tagids = array_keys($tagarr);
 	$inserts = array();
 	foreach ($tagids as $tagid) {
-		$inserts[] = "('$tagid','$productid')";
+		$inserts[] = "('$tagid','$goodsid')";
 	}
-	if($inserts) $_SGLOBAL['db']->query("REPLACE INTO ".tname('tagproduct')." (tagid,productid) VALUES ".implode(',', $inserts));
+	if($inserts) $_SGLOBAL['db']->query("REPLACE INTO ".tname('taggoods')." (tagid,goodsid) VALUES ".implode(',', $inserts));
 
 	return $tagarr;
 }
@@ -387,12 +384,12 @@ function checkhtml($html) {
 }
 
 //ÊÓÆµ±êÇ©´¦Àí
-function product_bbcode($message) {
-	$message = preg_replace("/\[flash\=?(media|real)*\](.+?)\[\/flash\]/ie", "product_flash('\\2', '\\1')", $message);
+function goods_bbcode($message) {
+	$message = preg_replace("/\[flash\=?(media|real)*\](.+?)\[\/flash\]/ie", "goods_flash('\\2', '\\1')", $message);
 	return $message;
 }
 //ÊÓÆµ
-function product_flash($swf_url, $type='') {
+function goods_flash($swf_url, $type='') {
 	$width = '520';
 	$height = '390';
 	if ($type == 'media') {

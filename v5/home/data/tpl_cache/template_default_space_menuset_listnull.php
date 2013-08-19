@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1375439075', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1376881693', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>选购应用</title>
@@ -140,9 +140,9 @@
     </style>
   <?php if(empty($zhong1)) { ?>
   <?php if(empty($space['weixinusername'])&&empty($space['weixinpassword'])) { ?>
-    <?php if($_GET['status']) { ?>
-      <form action = "space.php?do=goweixin" method = "post">
-  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">如你需要系统为你生成微信公众号，请<a href="space.php?do=menuset">点击此处</a></h3>
+   <?php if(1) { ?>
+  <form action = "space.php?do=goweixin" method = "post">
+
    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<input type="text" name="weixinusername"></h3>
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3>
     <input type="submit" name="submit" value="提交">
@@ -157,6 +157,7 @@
     <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<?=$newweixin['password']?></h3>
      <input type="hidden" name="username" value="<?=$newweixin['username']?>">
      <input type="hidden" name="password" value="<?=$newweixin['password']?>">
+     <input type="hidden" name="fakeid" value="<?=$newweixin['fakeid']?>">
      <input type="hidden" name="wxkey" value="<?=$newweixin['wxkey']?>">
      <input type="hidden" name="id" value="<?=$newweixin['id']?>">
     <input type="submit" name="submit" value="使用">

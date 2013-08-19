@@ -26,9 +26,9 @@
 <h1>调整热度</h1>
 <a href="javascript:hideMenu();" class="float_del" title="关闭">关闭</a>
 <div class="popupmenu_inner">
-<form method="post" action="cp.php?ac=product&op=edithot&productid=$productid">
+<form method="post" action="cp.php?ac=goods&op=edithot&goodsid=$goodsid">
 	<p class="btn_line">
-		新的热度：<input type="text" name="hot" value="$product[hot]" size="5"> 
+		新的热度：<input type="text" name="hot" value="$goods[hot]" size="5"> 
 		<input type="hidden" name="refer" value="$_SGLOBAL[refer]" />
 		<input type="hidden" name="hotsubmit" value="true" />
 		<input type="submit" name="btnsubmit" value="确定" class="submit" />
@@ -95,7 +95,7 @@
 				<td>
 					<div class="post_list container_12">
                          <span class="select_title grid_1">详细描述&nbsp;&nbsp;:</span>
-                          <a id="doodleBox" href="magic.php?mid=doodle&showid=product_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
+                          <a id="doodleBox" href="magic.php?mid=doodle&showid=goods_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px;margin-left: 0;">$goods[message]</textarea>
 						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="400"></iframe>
                             </div>
@@ -104,7 +104,7 @@
 		</table>
 
 		<input type="hidden" name="goodssubmit" value="true" />
-		<input type="button" id="productbutton" name="goodsbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
+		<input type="button" id="goodsbutton" name="goodsbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
 		<input type="hidden" name="topicid" value="$_GET[topicid]" />
 		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
 	</form>
@@ -185,7 +185,7 @@
 			<td>
 				<div class="confirm_btn container_12">
                            <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
-                           <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('productbutton').click();" value="保存发布" class="submit" />
+                           <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('goodsbutton').click();" value="保存发布" class="submit" />
                         
                       </div>
 			</td>

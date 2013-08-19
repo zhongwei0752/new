@@ -481,7 +481,7 @@ if(submitcheck('commentsubmit')) {
 			if(empty($goods)) {
 				showmessage('view_to_info_did_not_exist');
 			}
-			
+		
 			//¼ìË÷¿Õ¼ä
 			$tospace = getspace($goods['uid']);
 			
@@ -647,8 +647,8 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('introduce')." SET replynum=replynum+1 WHERE introduceid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
-			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=blog&id=$id\">$blog[subject]</a>");
+			$fs['title_template'] = cplang('feed_comment_introduce');
+			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=introduce&id=$id\">$introduce[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
 			$fs['body_general'] = '';
@@ -659,7 +659,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('product')." SET replynum=replynum+1 WHERE productid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_product');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=product&id=$id\">$product[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -671,7 +671,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('development')." SET replynum=replynum+1 WHERE developmentid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_development');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=development&id=$id\">$development[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -683,7 +683,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('industry')." SET replynum=replynum+1 WHERE industryid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_industry');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=industry&id=$id\">$industry[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -695,7 +695,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('cases')." SET replynum=replynum+1 WHERE casesid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_cases');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=cases&id=$id\">$cases[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -707,7 +707,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('branch')." SET replynum=replynum+1 WHERE branchid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_branch');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=branch&id=$id\">$branch[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -719,7 +719,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('job')." SET replynum=replynum+1 WHERE jobid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_job');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=job&id=$id\">$job[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -731,7 +731,7 @@ if(submitcheck('commentsubmit')) {
 			//¸üÐÂÆÀÂÛÍ³¼Æ
 			$_SGLOBAL['db']->query("UPDATE ".tname('menuset')." SET replynum=replynum+1 WHERE menusetid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_menuset');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=menuset&id=$id\">$menuset[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -739,11 +739,11 @@ if(submitcheck('commentsubmit')) {
 			$fs['target_ids'] = $menuset['target_ids'];
 			$fs['friend'] = $menuset['friend'];
 			break;
-		case 'goods':
+		case 'goodsid':
 			//¸üÐÂÆÀÂÛÍ³¼Æ
-			$_SGLOBAL['db']->query("UPDATE ".tname('menuset')." SET replynum=replynum+1 WHERE goods='$id'");
+			$_SGLOBAL['db']->query("UPDATE ".tname('goods')." SET replynum=replynum+1 WHERE goodsid='$id'");
 			//ÊÂ¼þ
-			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_template'] = cplang('feed_comment_goods');
 			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=menuset&id=$id\">$menuset[subject]</a>");
 			$fs['body_template'] = '';
 			$fs['body_data'] = array();
@@ -968,12 +968,11 @@ if(submitcheck('commentsubmit')) {
 	}
 
 	if(empty($comment)) {
-		
 		//·ÇÒýÓÃÆÀÂÛ
 		if($tospace['uid'] != $_SGLOBAL['supe_uid']) {
 			//ÊÂ¼þ·¢²¼
 			if(ckprivacy('comment', 1)) {
-				feed_add($fs['icon'], $fs['title_template'], $fs['title_data'], $fs['body_template'], $fs['body_data'], $fs['body_general'],$fs['images'], $fs['image_links'], $fs['target_ids'], $fs['friend']);
+				feed_add($fs['icon'], $fs['title_template'], $fs['title_data'], $fs['body_template'], $fs['body_data'], $fs['body_general'],$fs['images'], $fs['image_links'], $fs['target_ids'], $fs['friend'],'','',$_POST['idtype'] );
 			}
 			
 			//·¢ËÍÍ¨Öª
@@ -983,6 +982,7 @@ if(submitcheck('commentsubmit')) {
 			if($_POST['idtype'] == 'uid' && $tospace['updatetime'] == $tospace['dateline']) {
 				include_once S_ROOT.'./uc_client/client.php';
 				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('wall_pm_message', array(addslashes(getsiteurl().$n_url))), 1, 0, 0);
+				
 			}
 			if($_POST['idtype']=='introduceid'){
 				include_once S_ROOT.'./uc_client/client.php';

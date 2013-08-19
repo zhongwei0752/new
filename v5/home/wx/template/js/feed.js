@@ -304,7 +304,9 @@ if(""+idtype+""=="job"){
 if(""+idtype+""=="talk"){
           data=data.data.talk;
 }
-
+if(""+idtype+""=="goods"){
+          data=data.data.goods;
+}
           
           //oid1=data.quiz.options[0].oid;
          // oid2=data.quiz.options[1].oid;
@@ -406,6 +408,9 @@ if(""+idtype+""=="job"){
 }
 if(""+idtype+""=="talk"){
           data=data.data.talk;
+}
+if(""+idtype+""=="goods"){
+          data=data.data.goods;
 }
 
           if (data.length<=0){

@@ -7,6 +7,7 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
+if($_SGLOBAL['supe_uid']) {
 if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}
@@ -14,8 +15,11 @@ if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', './template/default/post_ok.htm', 0);
 	}
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
-		showmessage('enter_the_space', 'space.php?do=menuset', 0);
+		showmessage('enter_the_space', 'space.php?do=menuset&view=me', 0);
 	}
+}else{
+	showmessage('未登录', 'index.php', 0);
+}
 include_once(S_ROOT.'./uc_client/client.php');
 
 $list = array();
@@ -44,7 +48,7 @@ if($_GET['subop'] == 'view') {
 	
 	$filter = in_array($_GET['filter'], array('newpm', 'privatepm', 'systempm', 'announcepm'))?$_GET['filter']:($space['newpm']?'newpm':'privatepm');
 	
-	//��ҳ
+	//·ÖÒ³
 	$perpage = 10;
 	$perpage = mob_perpage($perpage);
 	
@@ -59,7 +63,7 @@ if($_GET['subop'] == 'view') {
 	$multi = multi($count, $perpage, $page, "space.php?do=pm&filter=$filter");
 	
 	if($_SGLOBAL['member']['newpm']) {
-		//ȡ���¶���Ϣ��ʾ
+		//È¡ÏûÐÂ¶ÌÏûÏ¢ÌáÊ¾
 		updatetable('space', array('newpm'=>0), array('uid'=>$_SGLOBAL['supe_uid']));
 		//UCenter
 		uc_pm_ignore($_SGLOBAL['supe_uid']);
@@ -68,7 +72,7 @@ if($_GET['subop'] == 'view') {
 	$actives = array($filter=>' class="active"');
 }
 
-//ʵ��
+//ÊµÃû
 if($list) {
 	$today = $_SGLOBAL['timestamp'] - ($_SGLOBAL['timestamp'] + $_SCONFIG['timeoffset'] * 3600) % 86400;
 	foreach ($list as $key => $value) {

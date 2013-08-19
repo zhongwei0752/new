@@ -471,6 +471,45 @@ if(capi_submitcheck('commentsubmit')) {
 			$hotarr = array('menusetid', $menuset['menusetid'], $menuset['hotuser']);
 			$stattype = 'menusetcomment';//Í³¼Æ
 			break;
+				case 'goodsid':
+			//¶ÁÈ¡ÈÕÖ¾
+			$query = $_SGLOBAL['db']->query("SELECT b.*, bf.target_ids, bf.hotuser
+				FROM ".tname('goods')." b
+				LEFT JOIN ".tname('goodsfield')." bf ON bf.goodsid=b.goodsid
+				WHERE b.goodsid='$id'");
+			$goods = $_SGLOBAL['db']->fetch_array($query);
+			//ÈÕÖ¾²»´æÔÚ
+			if(empty($goods)) {
+				capi_showmessage_by_data('view_to_info_did_not_exist');
+			}
+			
+			//¼ìË÷¿Õ¼ä
+			$tospace = getspace($goods['uid']);
+			
+			//ÑéÖ¤ÒþË½
+			if(!ckfriend($goods['uid'], $goods['friend'], $goods['target_ids'])) {
+				//Ã»ÓÐÈ¨ÏÞ
+				capi_showmessage_by_data('no_privilege');
+			} elseif(!$tospace['self'] && $goods['friend'] == 4) {
+				//ÃÜÂëÊäÈëÎÊÌâ
+				$cookiename = "view_pwd_goods_$goods[goodsid]";
+				$cookievalue = empty($_SCOOKIE[$cookiename])?'':$_SCOOKIE[$cookiename];
+				if($cookievalue != md5(md5($goods['password']))) {
+					capi_showmessage_by_data('no_privilege');
+				}
+			}
+
+			//ÊÇ·ñÔÊÐíÆÀÂÛ
+			if(!empty($goods['noreply'])) {
+				capi_showmessage_by_data('do_not_accept_comments');
+			}
+			if($goods['target_ids']) {
+				$goods['target_ids'] .= ",$goods[uid]";
+			}
+			
+			$hotarr = array('goodsid', $goods['goodsid'], $goods['hotuser']);
+			$stattype = 'goodscomment';//Í³¼Æ
+			break;
 		case 'sid':
 			//¶ÁÈ¡ÈÕÖ¾
 			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('share')." WHERE sid='$id'");
@@ -701,6 +740,18 @@ if(capi_submitcheck('commentsubmit')) {
 			$fs['target_ids'] = $menuset['target_ids'];
 			$fs['friend'] = $menuset['friend'];
 			break;
+		case 'goodsid':
+			//¸üÐÂÆÀÂÛÍ³¼Æ
+			$_SGLOBAL['db']->query("UPDATE ".tname('goods')." SET replynum=replynum+1 WHERE goodsid='$id'");
+			//ÊÂ¼þ
+			$fs['title_template'] = cplang('feed_comment_blog');
+			$fs['title_data'] = array('touser'=>"<a href=\"space.php?uid=$tospace[uid]\">".$_SN[$tospace['uid']]."</a>", 'blog'=>"<a href=\"space.php?uid=$tospace[uid]&do=goods&id=$id\">$goods[subject]</a>");
+			$fs['body_template'] = '';
+			$fs['body_data'] = array();
+			$fs['body_general'] = '';
+			$fs['target_ids'] = $goods['target_ids'];
+			$fs['friend'] = $goods['friend'];
+			break;
 		case 'sid':
 			//ÊÂ¼þ
 			$fs['title_template'] = cplang('feed_comment_share');
@@ -872,6 +923,17 @@ if(capi_submitcheck('commentsubmit')) {
 			$msgtype = 'menuset_comment';
 			$q_msgtype = 'menuset_comment_reply';
 			break;
+		case 'goodsid':
+			//Í¨Öª
+			$n_url = "space.php?uid=$tospace[uid]&do=goods&id=$id&cid=$cid";
+			$note_type = 'goodscomment';
+			$note = cplang('note_goods_comment', array($n_url, $goods['subject']));
+			$q_note = cplang('note_goods_comment_reply', array($n_url));
+			$msg = 'do_success';
+			$magvalues = array();
+			$msgtype = 'goods_comment';
+			$q_msgtype = 'goods_comment_reply';
+			break;	
 		case 'sid':
 			//·ÖÏí
 			$n_url = "space.php?uid=$tospace[uid]&do=share&id=$id&cid=$cid";
@@ -914,7 +976,17 @@ if(capi_submitcheck('commentsubmit')) {
 			if(ckprivacy('comment', 1)) {
 				feed_add($fs['icon'], $fs['title_template'], $fs['title_data'], $fs['body_template'], $fs['body_data'], $fs['body_general'],$fs['images'], $fs['image_links'], $fs['target_ids'], $fs['friend']);
 			}
-			
+				include_once(S_ROOT.'./wx/wx_common.php');
+				include_once(S_ROOT.'./wx/Weixin.class.php');
+				$uid=$tospace['uid'];
+				$query = $_SGLOBAL['db']->query("SELECT a.*,m.* FROM ".tname('appset')." a LEFT JOIN ".tname('menuset')." m ON a.num=m.menusetid where a.uid ='$uid' and m.english='$_REQUEST[idtype]'");
+				$value = $_SGLOBAL['db']->fetch_array($query);
+				$childrenid=$value['childrenid'];
+				$wei=getspace($childrenid);
+				$fakeid=$wei['fakeid'];
+				$message="$value[subject]有最新评论，请查收!";
+				$d = get_obj_by_xiaoquid($uid);
+				$info = $d->sendWXSingleMsg($fakeid,$message);
 			//·¢ËÍÍ¨Öª
 			notification_add($tospace['uid'], $note_type, $note);
 			
@@ -922,10 +994,13 @@ if(capi_submitcheck('commentsubmit')) {
 			if($_REQUEST['idtype'] == 'uid' && $tospace['updatetime'] == $tospace['dateline']) {
 				include_once S_ROOT.'./uc_client/client.php';
 				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('wall_pm_message', array(addslashes(getsiteurl().$n_url))), 1, 0, 0);
+					
 			}
 			if($_REQUEST['idtype']=='introduceid'){
 				include_once S_ROOT.'./uc_client/client.php';
 				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('introduce_pm_message', array($message)), 1, 0, 0);
+			
+				
 			}
 			if($_REQUEST['idtype']=='productid'){
 				include_once S_ROOT.'./uc_client/client.php';
@@ -951,6 +1026,11 @@ if(capi_submitcheck('commentsubmit')) {
 				include_once S_ROOT.'./uc_client/client.php';
 				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('job_pm_message', array($message)), 1, 0, 0);
 			}
+			if($_REQUEST['idtype']=='goodsid'){
+				include_once S_ROOT.'./uc_client/client.php';
+				uc_pm_send($_SGLOBAL['supe_uid'], $tospace['uid'], cplang('wall_pm_subject'), cplang('goods_pm_message', array($message)), 1, 0, 0);
+			}
+
 			//·¢ËÍÓÊ¼þÍ¨Öª
 			smail($tospace['uid'], '', cplang($msgtype, array($_SN[$space['uid']], shtmlspecialchars(getsiteurl().$n_url))), '', $msgtype);
 		}

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1375415435', 'template/default/space_friend');?><?php $_TPL['titles'] = array('好友'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_friend|template/default/header|template/default/space_menu|template/default/space_list|template/default/footer', '1376619983', 'template/default/space_friend');?><?php $_TPL['titles'] = array('客户'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -113,7 +113,7 @@
                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -170,13 +170,17 @@
       .bg1{ background: url("./template/default/image/chosen_bg.png");}
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
+
+      #simplemodal-container a {
+color:#02B4AB;
+}
     </style>
 
 <?php if(!empty($_SGLOBAL['inajax'])) { ?>
 <div id="space_friend">
 <h3 class="feed_header">
-<a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找好友</a>
-好友(共 <?=$count?> 个)
+<a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找客户</a>
+客户(共 <?=$count?> 个)
 </h3><br>
 
 <?php if($list) { ?>
@@ -198,7 +202,7 @@
 <div class="setti">
 
 <?php if(!$value['isfriend']) { ?>
-<a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
+<a href="cp.php?ac=friend&op=add&uid=<?=$value['uid']?>" id="a_friend_<?=$key?>" onclick="ajaxmenu(event, this.id, 1)">加为客户</a>
 <?php } ?>
 </div>
 </td></tr></table>
@@ -223,13 +227,15 @@
 
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
-                         好友列表
+                         客户列表
                      </div>
                     
                  </div>		
 
  <div class="content_detail_wrapper">
-
+ <div id="nav" style="margin-top:20px;margin-left:180px;">
+<a href="space.php?do=friend" style="<?php if($_GET['view']=='me') { ?>color:#02B4AB<?php } ?>">最新关注排序</a><a href="space.php?do=friend&view=lastlogin" style="padding-left:20px;<?php if($_GET['view']=='lastlogin') { ?>color:#02B4AB<?php } ?>">最后登陆时间排序</a><a href="space.php?do=friend&view=hot" style="padding-left:20px;<?php if($_GET['view']=='hot') { ?>color:#02B4AB<?php } ?>">活跃度排序</a>  
+ 	</div>
 
 
 
@@ -246,7 +252,7 @@
 <div class="avatar48"><a href="space.php?uid=<?=$value['uid']?>"><?php echo avatar($value[uid],small); ?></a></div>
 <div class="thumbTitle">
 <p<?php if($ols[$value['uid']]) { ?> class="online_icon_p"<?php } ?>>
-<a href="space.php?uid=<?=$value['uid']?>"<?php g_color($value[groupid]); ?>><?=$_SN[$value['uid']]?></a> 
+<a style="color:#02B4AB;" href="space.php?uid=<?=$value['uid']?>"<?php g_color($value[groupid]); ?>><?=$_SN[$value['uid']]?></a> 
 <?php g_icon($value[groupid]); ?>
 <?php if($value['videostatus']) { ?>
 <img src="image/videophoto.gif" align="absmiddle">
@@ -264,29 +270,31 @@
 <?php } else { ?>
 <?php if($ols[$value['uid']]) { ?><div class="gray"><?php echo sgmdate('H:i',$ols[$value[uid]],1); ?></div><?php } ?>
 <div class="gray">
-<a href="cp.php?ac=friend&op=ignore&uid=<?=$value['uid']?>" id="a_talk_<?=$value['fakeid']?>" onclick="ajaxmenu(event, this.id)">私信我(<?=$value['fakeid']?>)</a>
+<?php if(!empty($value['fakeid'])) { ?>
+<a href="javascript:void;" id="a_talk_<?=$value['uid']?>" >私信</a>
+<?php } ?>
 <a href="cp.php?ac=friend&op=ignore&uid=<?=$value['uid']?>" id="a_ignore_<?=$key?>" onclick="ajaxmenu(event, this.id)">删除</a>
 </div>
 <?php } ?>
 </li>
-<div id="talk<?=$value['fakeid']?>">
-  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
-  <div style="width:600px;height:560px;min-height:560px;max-height:560px;background:#fff;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message"><input type="hidden" name="fakeid" value="<?=$value['fakeid']?>"><input type="hidden" name="uid" value="<?=$value['uid']?>"><input type="submit" name="friendreply" value="回复"></form></div>
 
-</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
     <script type="text/javascript">
-       $(document).ready(function(){
-        $('#talk<?=$value['fakeid']?>').attr("style", "display:none;");;
-           $('#a_talk_<?=$value['fakeid']?>').click(function (e) {
+    var jquery = jQuery.noConflict();
+      jquery(document).ready(function(){
+       jquery('#talk<?=$value['uid']?>').attr("style", "display:none;");
+      
+          jquery('#a_talk_<?=$value['uid']?>').click(function (e) {
     		e.preventDefault();
-    $('#talk<?=$value['fakeid']?>').modal();
+   jquery('#talk<?=$value['uid']?>').modal();
   });
+
 
             
        })
     </script>
+
 <?php } } ?>
 </ul>
 </div>
@@ -304,7 +312,7 @@
 
 <div id="sidebar" style="width: 150px;">
 <?php if($_SCONFIG['my_status']) { ?>
-<!-- 同步好友至Manyou 开始 -->
+<!-- 同步客户至Manyou 开始 -->
 <script type="text/javascript">
 function my_sync_tip(msg, close_time) {;
 var my_tip = document.getElementById("my_tip");
@@ -320,7 +328,7 @@ setTimeout("document.getElementById('my_tip').style.display = 'none';", close_ti
 }
 }
 function my_sync_friend() {
-my_sync_tip('正在同步好友信息...', 0);
+my_sync_tip('正在同步客户信息...', 0);
 var my_scri = document.createElement("script");
 document.getElementsByTagName("head")[0].appendChild(my_scri);
 my_scri.charset = "UTF-8";
@@ -329,15 +337,15 @@ my_scri.src = "http://uchome.manyou.com/user/syncFriends?sId=<?=$_SCONFIG['my_si
 </script>
 
 <div class="c_mgs"><div class="ye_r_t"><div class="ye_l_t"><div class="ye_r_b"><div class="ye_l_b">
-<p>在游戏中找不到自己的好友？请点击下面的的按钮，将好友信息同步到里面。</p>
-<p style="text-align: center;padding: 20px 0 0;"> <a href="#" onclick="my_sync_friend(); return false;" title="将好友关系同步至Manyou平台，以便在应用里看到他们"><img alt="刷新好友信息" src="image/syncfriend.gif"/></a> </p>
+<p>在游戏中找不到自己的客户？请点击下面的的按钮，将客户信息同步到里面。</p>
+<p style="text-align: center;padding: 20px 0 0;"> <a href="#" onclick="my_sync_friend(); return false;" title="将客户关系同步至Manyou平台，以便在应用里看到他们"><img alt="刷新客户信息" src="image/syncfriend.gif"/></a> </p>
 </div></div></div></div></div>
-<!-- 同步好友至Manyou 结束 -->
+<!-- 同步客户至Manyou 结束 -->
 <?php } ?>
 
 <?php } else { ?>
-<?php $_TPL['spacetitle'] = "好友";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=friend&view=me\">TA的好友列表</a>"; ?>
+<?php $_TPL['spacetitle'] = "客户";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=friend&view=me\">TA的客户列表</a>"; ?>
 <div class="c_header a_header">
 <div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
 <?php if($_SGLOBAL['refer']) { ?>
@@ -350,7 +358,7 @@ my_scri.src = "http://uchome.manyou.com/user/syncFriends?sId=<?=$_SCONFIG['my_si
 <?php } ?>
 </div>
 
-<div class="h_status">共有 <?=$space['friendnum']?> 个好友</div>
+<div class="h_status">共有 <?=$space['friendnum']?> 个客户</div>
 <div class="space_list">
 <?php if($list) { ?>
 <?php if(is_array($list)) { foreach($list as $key => $value) { ?>
@@ -394,6 +402,15 @@ my_scri.src = "http://uchome.manyou.com/user/syncFriends?sId=<?=$_SCONFIG['my_si
 
 <?php } ?>
 
+
+<?php if(is_array($list)) { foreach($list as $key => $value) { ?>
+
+    <div id="talk<?=$value['uid']?>">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
+  <div style="width:600px;background:#fff;margin:20px auto;text-align:center;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message" style="width:300px;"><input type="hidden" name="fakeid" value="<?=$value['fakeid']?>"><input type="hidden" name="uid" value="<?=$space['uid']?>"> <br/><br/><input type="submit" style="margin-left:250px;" class="btn grid_2" name="friendreply"></form></div>
+
+</div>
+<?php } } ?>
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>

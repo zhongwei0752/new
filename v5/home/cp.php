@@ -14,7 +14,7 @@ $acs = array('space', 'doing', 'upload', 'comment', 'blog', 'album', 'relatekw',
 	'swfupload', 'thread', 'mtag', 'poke', 'friend',
 	'avatar', 'profile', 'theme', 'import', 'feed', 'privacy', 'pm', 'share', 'advance', 'invite','sendmail',
 	'userapp', 'task', 'credit', 'password', 'domain', 'event', 'poll', 'topic',
-	'click','magic', 'top', 'videophoto','introduce','product','development','industry','text','cases','branch','job','talk','menuset','message','recommend','moblie','goods','book');
+	'click','magic', 'top', 'videophoto','introduce','product','development','industry','text','cases','branch','job','talk','menuset','message','recommend','moblie','goods','book','myweixin','dialog','weixinmenu');
 $ac = (empty($_GET['ac']) || !in_array($_GET['ac'], $acs))?'profile':$_GET['ac'];
 $op = empty($_GET['op'])?'':$_GET['op'];
 
@@ -56,6 +56,9 @@ $zhong = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f
 				WHERE bf.uid='$space[uid]' and bf.appstatus='1'
 				ORDER BY b.dateline ASC ");
 while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
+	if($wei['newname']){
+				$wei['subject']=$wei['newname'];
+			}
 	$zhongwei[]=$wei;
 
 }

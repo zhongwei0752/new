@@ -163,7 +163,7 @@ if(submitcheck('loginsubmit')) {
 	$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." where uid=$space[uid] and appstatus='1'");
 	$value2 = $_SGLOBAL['db']->fetch_array($query2);
 	if(empty($value2)){
-	$_POST['refer'] = 'space.php?do=menuset&view=me';
+	$_POST['refer'] = 'space.php?do=menuset';
 	}else{
 	$_POST['refer'] = 'space.php?do=home';	
 }
@@ -180,7 +180,7 @@ if(submitcheck('loginsubmit')) {
 	}elseif($space['profilestatus']!='0'&&$space['namestatus']=='0'&&$space['alreadyreg']=='0'){
 		showmessage('login_success', "./template/default/post_ok.htm", 1, array($ucsynlogin));
 	}elseif($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($value2)){
-		showmessage('login_success', "space.php?do=menuset&view=me", 1, array($ucsynlogin));
+		showmessage('login_success', "space.php?do=menuset", 1, array($ucsynlogin));
 	}else{
 		//重定向浏览器 
 		header("Location: space.php?do=home"); 

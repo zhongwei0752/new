@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_moblie|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375754116', 'template/default/cp_moblie');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_moblie|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1376562998', 'template/default/cp_moblie');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -305,9 +305,14 @@
                            <input type="text" class="t_input" id="num" name="num" value="<?=$moblie['num']?>" placeholder="不要重复哦，亲" />
                             </div>
                             <div class="post_list container_12">
+                         <span class="select_title grid_1">价格&nbsp;&nbsp;:&nbsp;&nbsp;</span>
+                           <input type="text" class="t_input" id="money" name="money" value="<?=$moblie['money']?>" />
+                            </div>
+                            <div class="post_list container_12">
                          <span class="select_title grid_1">封面图片&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <input type="file" name="files"  value="<?=$moblie['image1url']?>"/>
                             </div>
+                            
 </td>
 </tr>
 <tr>

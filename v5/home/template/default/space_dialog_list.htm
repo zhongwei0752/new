@@ -1,0 +1,115 @@
+
+<!--{template header}-->
+
+<!--{if $space[self]}-->
+<div class="content" style="font-size:15px;">
+          
+                 <div class="indexing">
+                   <img src="$wei1[image2url]" /><span><a href="space.php?uid=$space[uid]">{$_SN[$space[uid]]}</a></span>><span>在线沟通</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         对话列表
+                     </div>
+                     
+                     
+                 </div>	
+
+ 
+
+<!--{/if}-->
+	<script language="javascript" type="text/javascript" src="source/jquery.js"></script>
+		<script type="text/javascript" src="./source/jquery.simplemodal.js"></script>	
+<div id="content" style="width:760px;">
+
+<div class="content_detail_wrapper">
+		 <div id="talk75">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">回复</h3>
+  <div style="width:600px;background:#fff;margin:20px auto;text-align:center;">
+  	<form  method = "post" id = "reply">
+  		<textarea id = "inputText" name="message" style="width:300px;height:50px;resize: none;"></textarea>
+  		<br/><br/>
+  		<input type="button" style="margin-left:250px;" class="btn grid_2" value="提交" onclick="datasubmit()">
+  	</form>
+  </div>
+
+</div>
+ <script type="text/javascript">
+    var jquery = jQuery.noConflict();
+      jquery(document).ready(function(){
+       jquery('#talk75').attr("style", "display:none;");
+	});
+    </script> 
+	<div id = "dialoglist" class = "pm_list">
+		<ul class="pushtocenter">
+ 		<!--{if $list}-->
+		<!--{loop $list $value}-->
+                     
+                     <br/>
+                     <li>
+                     	
+                     <div class="avatar48"><!--{avatar($value[cid])}--></div>
+                     <div class="pm_body">
+                     	<div class = "pm_h">
+                     		<div class = "pm_f">
+                     			<p>
+                     				<a href = "space.php?uid={$value[cid]}">$value[username]</a>
+                     				
+                     			</p>
+                     			<div class = "pm_c">
+                     				<p>$value[message]</p>
+                     			</div>
+                     			<p class = "bottom_set">
+                     				<a href = "space.php?do=communicate&dialog=$value[dialogid]" >查看详情</a>&nbsp;&nbsp;&nbsp;
+                          	        <a href = "javascript:void(0);" onclick="quickreply($space[uid],$value[cid],$value[dialogid])">快速回复</a>
+                     			</p>
+                     		</div>
+                     	</div>
+                     </div>
+                		</li>
+                   <!--{/loop}-->
+                  </ul>
+		<!--{else}-->
+			<div class="c_form">还没有相关的对话。</div>
+		<!--{/if}-->
+          
+	</div>
+    </div>             
+	<div class='pagination'><ul>$multi</ul></div>
+	
+	
+
+</div>
+
+
+<script>
+
+function fuidgoto(fuid) {
+	window.location.href = "space.php?do=product&view=we&fuid="+fuid;
+}
+function datasubmit(){
+	console.log(uid);
+	var mes = $("#inputText").val();
+	var ddata = {"uid":uid,"rid":rid,"dialogid":did,"message":mes};
+	$.post("cp.php?ac=dialog",ddata,function(data){
+		//showmessage("reply_success");
+		console.log(data);
+		//$(".reply_area").append(data);
+		window.location.reload();
+	});
+	//window.reload();
+	//console.log($space[uid]);
+}
+function quickreply(uidt,ridt,didt){
+	var jquery = jQuery.noConflict(); 
+    jquery('#talk75').attr("style", "display:none;");
+   	//e.preventDefault();
+   	jquery('#talk75').modal();
+   	uid = uidt;
+   	rid = ridt;
+   	did = didt;
+}
+</script>
+
+	
+<!--{template footer}-->

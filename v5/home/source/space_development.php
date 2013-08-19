@@ -13,6 +13,16 @@ $query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." WHERE engli
 $value4 = $_SGLOBAL['db']->fetch_array($query4);
 $wei1=$value4;
 
+//页面标题
+$newname1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and b.english='$do' and bf.appstatus='1'
+				ORDER BY bf.orderid ASC ");
+$newname = $_SGLOBAL['db']->fetch_array($newname1);
+if($newname['newname']){
+	$newname['subject']=$newname['newname'];
+}
+
 //判断是否购买
 $query5 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid

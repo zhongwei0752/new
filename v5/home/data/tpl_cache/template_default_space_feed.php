@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1375928172', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1376906741', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -195,7 +195,7 @@
                    <div class="grid_2">
                        <h5 style="margin-top:0px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
                        <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                      
+                      	<div id="weixinone"><a href="space.php?do=myweixin" style="margin-top:12px;" class="company_setting">个人微信号绑定</a></div>
                        <!--<a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>-->
                    </div>
                  </div>
@@ -207,10 +207,12 @@
        $(document).ready(function(){
         
         $('#weixin').attr("style", "display:none;");
+       
         $('#weixinhome').click(function (e) {
     	e.preventDefault();
     	$('#weixin').modal();
   });
+
 
             
        })

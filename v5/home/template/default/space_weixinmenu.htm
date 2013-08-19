@@ -1,0 +1,60 @@
+<!--{eval $_TPL['titles'] = array('微信自定义菜单');}-->
+<!--{template header}-->
+<!--{if empty($list)}-->
+<form method="post" action="space.php?do=weixinmenu">
+<div id="longbutton1" style="float:left;"><input type="text" name="button1" id="button1" ></div><div id="add1" ><a  href="javascript::void;">添加二级菜单</a></div><br/>
+<div id="longbutton2" style="float:left;"><input type="text" name="button2" id="button2" ></div><div id="add2" ><a  href="javascript::void;">添加二级菜单</a></div><br/>
+<div id="longbutton3" style="float:left;"><input type="text" name="button3" id="button3" ></div><div id="add3" ><a  href="javascript::void;">添加二级菜单</a></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	var a='1';
+$("#add1").click(function(){
+	if(a<'6'){
+ $("#add1").append("二级菜单"+a+"<input type='text' name='1sub_button"+a+"'  id='sub_button"+a+"'>");
+ 	a++;
+ }
+})
+	var b='1';
+$("#add2").click(function(){
+	if(b<'6'){
+ $("#add2").append("二级菜单"+b+"<input type='text' name='2sub_button"+b+"'  id='sub_button"+b+"'>");
+ 	b++;
+ }
+})
+	var c='1';
+$("#add3").click(function(){
+	if(c<'6'){
+ $("#add3").append("二级菜单"+c+"<input type='text' name='3sub_button"+c+"'  id='sub_button"+c+"'>");
+ 	c++;
+ }
+})
+});
+
+</script>
+<input type="submit">
+<input type="hidden" name="fristsubmit" value="1">
+</form>
+<!--{/if}-->
+<!--{if $list}-->
+<!--{if $_GET['edit']=="1"}-->
+<form method="post" action="space.php?do=weixinmenu">
+
+一级菜单(左侧)<div id="longbutton1" ><input type="text" name="button1" id="button1" value="$list[0][button]"></div>二次菜单(左侧)：<br/><input type="text" name="1sub_button1" id="button1" value="$list[0][sub_button1]"><input type="text" name="1sub_button2" id="button2" value="$list[0][sub_button2]"><input type="text" name="1sub_button3" id="button3" value="$list[0][sub_button3]"><input type="text" name="1sub_button4" id="button4" value="$list[0][sub_button4]"><input type="text" name="1sub_button5" id="button5" value="$list[0][sub_button5]"><br/><br/><hr/><br/>
+一级菜单(中间)<div id="longbutton2" ><input type="text" name="button2" id="button2" value="$list[1][button]" ></div>二次菜单(中间)：<br/><input type="text" name="2sub_button1" id="button1" value="$list[1][sub_button1]"><input type="text" name="2sub_button2" id="button2" value="$list[1][sub_button2]"><input type="text" name="2sub_button3" id="button3" value="$list[1][sub_button3]"><input type="text" name="2sub_button4" id="button4" value="$list[1][sub_button4]"><input type="text" name="2sub_button5" id="button5" value="$list[1][sub_button5]"><br/><br/><hr/><br/>
+一级菜单(右侧)<div id="longbutton3" ><input type="text" name="button3" id="button3" value="$list[2][button]"></div>二次菜单(右侧)：<br/><input type="text" name="3sub_button1" id="button1" value="$list[2][sub_button1]"><input type="text" name="3sub_button2" id="button2" value="$list[2][sub_button2]"><input type="text" name="3sub_button3" id="button3" value="$list[2][sub_button3]"><input type="text" name="3sub_button4" id="button4" value="$list[2][sub_button4]"><input type="text" name="3sub_button5" id="button5" value="$list[2][sub_button5]">
+<br/>
+
+<input type="submit">
+<input type="hidden" name="secondsubmit" value="1">
+</form>
+<!--{else}-->
+<a href="space.php?do=weixinmenu&edit=1">修改</a><br/>
+<!--{if $list[0][button]}-->一级菜单(左侧)<div id="longbutton1" >$list[0][button]</div>二次菜单(左侧)：<br/><!--{if $list[0][sub_button1]}-->$list[0][sub_button1]<br/><!--{/if}--><!--{if $list[0][sub_button2]}-->$list[0][sub_button2]<br/><!--{/if}--><!--{if $list[0][sub_button3]}-->$list[0][sub_button3]<br/><!--{/if}--><!--{if $list[0][sub_button4]}-->$list[0][sub_button4]<br/><!--{/if}--><!--{if $list[0][sub_button5]}-->$list[0][sub_button5]<!--{/if}--><!--{/if}--><br/><br/><hr/><br/>
+<!--{if $list[1][button]}-->一级菜单(中间)<div id="longbutton2" >$list[1][button]</div>二次菜单(中间)：<br/><!--{if $list[1][sub_button1]}-->$list[1][sub_button1]<br/><!--{/if}--><!--{if $list[1][sub_button2]}-->$list[1][sub_button2]<br/><!--{/if}--><!--{if $list[1][sub_button3]}-->$list[1][sub_button3]<br/><!--{/if}--><!--{if $list[1][sub_button4]}-->$list[1][sub_button4]<br/><!--{/if}--><!--{if $list[1][sub_button5]}-->$list[1][sub_button5]<!--{/if}--><!--{/if}--><br/><br/><hr/><br/>
+<!--{if $list[2][button]}-->一级菜单(右侧)<div id="longbutton2" >$list[2][button]</div>二次菜单(右侧)：<br/><!--{if $list[2][sub_button2]}-->$list[2][sub_button2]<br/><!--{/if}--><!--{if $list[2][sub_button2]}-->$list[2][sub_button2]<br/><!--{/if}--><!--{if $list[2][sub_button3]}-->$list[2][sub_button3]<br/><!--{/if}--><!--{if $list[2][sub_button4]}-->$list[2][sub_button4]<br/><!--{/if}--><!--{if $list[2][sub_button5]}-->$list[2][sub_button5]<!--{/if}--><!--{/if}--><br/><br/><hr/><br/>
+<!--{/if}-->
+<!--{/if}-->
+<a href="cp.php?ac=weixinmenu">生成菜单</a>
+<!--{template footer}-->

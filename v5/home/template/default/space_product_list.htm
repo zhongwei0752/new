@@ -1,4 +1,4 @@
-<!--{eval $_TPL['titles'] = array('产品介绍');}-->
+<!--{eval $_TPL['titles'] = array($newname[subject]);}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 
 <!--{template header}-->
@@ -22,7 +22,7 @@
 		</ul>
 		<div class="page">$multi</div>
 		<!--{else}-->
-		<div class="c_form">还没有相关的产品介绍。</div>
+		<div class="c_form">还没有相关的$newname[subject]。</div>
 		<!--{/if}-->
 	</div>
 <!--{else}-->
@@ -32,11 +32,11 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                 <span><a href="space.php?do=home">首页</a></span>><span>产品介绍</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span>$newname[subject]</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
-                         产品介绍
+                         $newname[subject]
                      </div>
                      <a href="cp.php?ac=product" class="btn grid_2">
                       发布
@@ -71,7 +71,7 @@
                      <br/>
                    <!--{/loop}-->
 		<!--{else}-->
-			<div class="c_form">还没有相关的产品介绍。</div>
+			<div class="c_form">还没有相关的$newname[subject]。</div>
 		<!--{/if}-->
           
 	</div>

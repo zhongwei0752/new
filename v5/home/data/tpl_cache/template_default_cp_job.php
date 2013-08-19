@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_job|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375255439', 'template/default/cp_job');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_job|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375930840', 'template/default/cp_job');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -69,7 +69,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -110,9 +110,9 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -292,49 +292,57 @@
   <div class="content_detail_wrapper">
                     <div class="post_wrapper">
 <form method="post" action="cp.php?ac=job&jobid=<?=$job['jobid']?>" enctype="multipart/form-data">
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
+<tr>
+<td>
 <div class="post_list container_12">
                          <span class="select_title grid_1">职位名称&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                         <input type="text" class="t_input" id="subject" name="subject" value="<?=$job['subject']?>"  onblur="relatekw();"  />
+                         <input type="text" class="t_input" id="subject" name="subject" value="<?=$job['subject']?>" size="40" onblur="relatekw();"  />
                             </div>
                          <div class="post_list container_12">
                          <span class="select_title grid_1">职位描述&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=job_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
   <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$job['message']?></textarea>
-  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;border: 1px solid #C5C5C5;" height="200"></iframe>
                             </div>
                          <div class="post_list container_12">
                          <span class="select_title grid_1">资格要求&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                          <textarea name="messagecomment" style="width:550px;height:200px;margin-left:20px;"><?=$job['messagecomment']?></textarea>
+                          <textarea name="messagecomment" style="width:550px;height:200px;"><?=$job['messagecomment']?></textarea>
                             </div>
  <div class="post_list container_12">
                          <span class="select_title grid_1">电话&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                          <input type="text" class="t_input" id="telephone" name="telephone" value="<?=$job['telephone']?>" />
+                          <input type="text" class="t_input" id="telephone" size="40" name="telephone" value="<?=$job['telephone']?>" />
                             </div>
                              <div class="post_list container_12">
                          <span class="select_title grid_1">邮箱&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                          <input type="text" class="t_input" id="email" name="email" value="<?=$job['email']?>" />
+                          <input type="text" class="t_input" id="email" size="40" name="email" value="<?=$job['email']?>" />
                             </div>
                              <div class="post_list container_12">
                          <span class="select_title grid_1">待遇&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                          <input type="text" class="t_input" id="money" name="money" value="<?=$job['money']?>" />
+                          <input type="text" class="t_input" id="money" size="40" name="money" value="<?=$job['money']?>" />
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">其他&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                          <textarea name="othermessage" style="width:550px;height:200px;margin-left:20px;"><?=$job['othermessage']?></textarea>
+                          <textarea name="othermessage" style="width:550px;height:200px;"><?=$job['othermessage']?></textarea>
                             </div>
-
+</table>
 
 <input type="hidden" name="jobsubmit" value="true" />
 <input type="button" id="jobbutton" name="jobbutton" value="提交发布" onclick="validate(this);" style="display: none;" />
 <input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
+<style>
+.infotable th{
+padding-right: 0em;
+}
+</style>
 
 <?php if(!$_SGLOBAL['inajax'] && (!$job['uid'] || $job['uid']==$_SGLOBAL['supe_uid'])) { ?>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr><th width="100">图片</th><td>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:50px;">
+<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:</th><td>
 <div class="pic_submit container_12">
-<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+<input type="button" class="btn grid_3" style="margin-right:-20px;" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
 </div>
 </td></tr>
 </table>
@@ -393,7 +401,7 @@
 <tr>
 <th width="100">&nbsp;</th>
 <td>
-<div class="confirm_btn container_12">
+<div class="confirm_btn container_12" style="margin-left:-20px;">
                            <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
                            <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('jobbutton').click();" value="保存发布" class="submit" />
                         
@@ -455,7 +463,7 @@
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

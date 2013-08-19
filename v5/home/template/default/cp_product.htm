@@ -49,14 +49,14 @@
 	<div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=product&view=me">产品介绍</a></span>><span>发布</span>
+                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=product&view=me">$newname[subject]</a></span>><span>发布</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
                          发布
                      </div>
                      <a href="space.php?do=product&view=me" class="link_back_bread grid_3">
-                      产品介绍
+                      $newname[subject]
                      </a>
                  </div>
 <!--{/if}-->
@@ -99,7 +99,7 @@
 			<tr>
 				<td>
 					<div class="post_list container_12">
-                         <span class="select_title grid_1">产品介绍&nbsp;&nbsp;:&nbsp;&nbsp;</span>
+                         <span class="select_title grid_1">$newname[subject]&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=product_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$product[message]</textarea>
 						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:350px;border: 1px solid #C5C5C5;" height="200"></iframe>
@@ -113,12 +113,16 @@
 		<input type="hidden" name="topicid" value="$_GET[topicid]" />
 		<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
 	</form>
-
+	<style>
+	.infotable th{
+		padding-right: 0em;
+	}
+	</style>
 	<!--{if !$_SGLOBAL[inajax] && (!$product['uid'] || $product['uid']==$_SGLOBAL['supe_uid'])}-->
-	<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:55px;">
-		<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:&nbsp;&nbsp;</th><td>
+	<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:50px;">
+		<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:</th><td>
 			<div class="pic_submit container_12">
-		<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+		<input type="button" class="btn grid_3" name="clickbutton[]" style="margin-right:-20px;" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
 	</div>
 		</td></tr>
 	</table>
@@ -178,7 +182,7 @@
 		<tr>
 			<th width="100">&nbsp;</th>
 			<td>
-				<div class="confirm_btn container_12">
+				<div class="confirm_btn container_12" style="margin-left:-20px;">
                            <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
                            <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('productbutton').click();" value="保存发布" class="submit" />
                         

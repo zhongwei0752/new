@@ -27,12 +27,8 @@ require_once('Weixin.class.php');
 	$username = $_GET['wxkey'];
 	$name = $_GET['wxkey'];
 	$password = "weixin";
-
 	$email = isemail($_REQUEST['email']) ? $_REQUEST['email'] : $username."@v5.com.cn";
-
 	$data = array();
-
-
 	 require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 		 $regClass = new siteUserRegister();
 		$uid = $regClass->reg($username, $email, $password);
@@ -96,6 +92,7 @@ require_once('Weixin.class.php');
 				$friendurl = "http://v5.home3d.cn/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
         		$friend = file_get_contents($friendurl,0,null,null);
         		$friend_output = json_decode($friend);
+        		$row['uid']=$uid;
 
 }	
  $m_auth = getAuth();
@@ -117,7 +114,7 @@ while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 }	
 	$abc = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE uid='$uid'");
 	$bac = $_SGLOBAL['db']->fetch_array($abc);
-	if($bac['moblieclicknum']!="1"){
+	if($bac['moblieclicknum']!="1"&&$bac['moblieclicknum']!="0"){
 		include_once template("./wx/template/$bac[moblieclicknum]/feed");
 	}else{
 	include_once template("./wx/template/feed");

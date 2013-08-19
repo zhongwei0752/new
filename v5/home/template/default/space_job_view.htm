@@ -1,4 +1,4 @@
-<!--{eval $_TPL['titles'] = array($job['subject'], '人才招聘');}-->
+<!--{eval $_TPL['titles'] = array($job['subject'], $newname[subject]);}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 <!--{template header}-->
 
@@ -6,9 +6,9 @@
 
 <!--{else}-->
 <!--{eval
-	$_TPL['spacetitle'] = "人才招聘";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有企业介绍</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=job&id=$job[jobid]\">查看企业介绍</a>";
+	$_TPL['spacetitle'] = " $newname[subject]";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有$newname[subject]</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=job&id=$job[jobid]\">查看$newname[subject]</a>";
 }-->
 <!--{template space_menu}-->
 <!--{/if}-->
@@ -18,7 +18,7 @@
 <div style="padding:0 0 10px;">
             <div class="content" style="font-size:15px;">
                     <div class="indexing content_indexing">
-                    <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=job&view=me">人才招聘</a></span>
+                    <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=job&view=me"> $newname[subject]</a></span>
                     </div><!-- end -->
                  <div class="content_detail_wrapper">
                  	
@@ -52,7 +52,7 @@
                                  <li>阅览（$job[viewnum]）</li>
                                  <!--{if $_SGLOBAL[supe_uid] == $job[uid] || checkperm('managejob')}-->
                                  <li><a href="cp.php?ac=job&jobid=$job[jobid]&op=edit">修改</a></li>
-                                 <li><a href="cp.php?ac=job&jobid=$job[jobid]&op=delete">删除</a></li>
+                                 <li><a href="cp.php?ac=job&jobid=$job[jobid]&op=delete" id="blog_delete_$job[jobid]" onclick="ajaxmenu(event, this.id)">删除</a></li>
                                  <!--{/if}-->
                               </ul>
                            </div>

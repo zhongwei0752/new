@@ -412,7 +412,9 @@ if($_GET['view'] == 'me') {
 					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-			
+				if($value['newname']){
+				$value['subject']=$value['newname'];
+				}
 				$list[] = $value;
 			} else {
 				$pricount++;
@@ -450,6 +452,9 @@ if($_GET['view'] != 'me') {
 				ORDER BY b.dateline ASC LIMIT $start,$perpage");
 				$value2=$_SGLOBAL['db']->fetch_array($query2);
 				$value['zhong'] = $value2;
+				if($value2['newname']){
+				$value['subject']=$value2['newname'];
+				}
 				$list[] = $value;
 			}
 			} else {
@@ -469,9 +474,10 @@ if($_GET['view'] != 'me') {
 	$zhong1=$value4;
 
 	if($_POST){
-		if(empty($space['namestatus'])){
-			showmessage("你还未进行实名验证，现在为你跳转到实名验证页面。","cp.php?ac=profile");
-		}
+		if (empty($space['weixinname'])&&empty($space['weixinpassword'])){
+		showmessage("未填写微信用户名和密码", 'space.php?do=menuset', 0);
+	}
+	
 		foreach($_POST as $p => $o){
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE num='$p' and uid=$_SGLOBAL[supe_uid]");
 	$value = $_SGLOBAL['db']->fetch_array($query);

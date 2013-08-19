@@ -1,7 +1,7 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1375241632', './wx/template/feedcontent');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1376467062', './wx/template/feedcontent');?><!DOCTYPE html>
 <html>
   <head>
-  	 <title></title>
+  	 <title><?=$appsubject['subject']?></title>
   	 <meta charset="utf-8">
   	 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
      <link rel="stylesheet" type="text/css" href="./template/css/jquery-mobile-fluid960.min.css">
@@ -43,7 +43,11 @@
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                  <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
                  <p> {{= job.subject}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?></h3>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if goods<?=BLOCK_TAG_END?>
+                 <p> {{= goods.subject}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 </h3>
 
 
       <span class="time"><?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
@@ -69,7 +73,11 @@
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                  <?=BLOCK_TAG_START?>if job<?=BLOCK_TAG_END?>
                  <p> {{= job.dateline}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?></span>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 <?=BLOCK_TAG_START?>if goods<?=BLOCK_TAG_END?>
+                 <p> {{= goods.dateline}}</p>
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
+                 </span>
          
 
         </header><!-- header end -->

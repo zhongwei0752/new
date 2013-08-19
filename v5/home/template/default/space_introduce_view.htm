@@ -1,4 +1,4 @@
-<!--{eval $_TPL['titles'] = array($introduce['subject'], '企业介绍');}-->
+<!--{eval $_TPL['titles'] = array($introduce['subject'], $value[subject]);}-->
 <!--{eval $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见');}-->
 <!--{template header}-->
 
@@ -7,9 +7,9 @@
 
 <!--{else}-->
 <!--{eval
-	$_TPL['spacetitle'] = "企业介绍";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有企业介绍</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=introduce&id=$introduce[introduceid]\">查看企业介绍</a>";
+	$_TPL['spacetitle'] = "$value[subject]";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有$value[subject]</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=introduce&id=$introduce[introduceid]\">查看$value[subject]</a>";
 }-->
 <!--{template space_menu}-->
 <!--{/if}-->
@@ -20,7 +20,7 @@
 
             <div class="content" style="font-size:15px;">
             	<div class="indexing" style="margin-bottom:15px;">
-                  <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=introduce&view=me">企业介绍</a></span>
+                  <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=introduce&view=me">$newname[subject]</a></span>
                  </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">

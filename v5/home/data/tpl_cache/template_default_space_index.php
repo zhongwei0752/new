@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_index|template/default/header|template/default/space_status|template/default/space_feed_li|template/default/space_comment_li|template/default/footer', '1375267087', 'template/default/space_index');?><?php $_TPL['nosidebar']=1; ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_index|template/default/header|template/default/space_status|template/default/space_feed_li|template/default/footer', '1376885885', 'template/default/space_index');?><?php $_TPL['nosidebar']=1; ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,7 +70,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -111,9 +111,9 @@
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
                         <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
                         <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
@@ -161,9 +161,64 @@
 <?php if($narrowlist || $widelist) { ?>
 <script type="text/javascript" src="source/script_swfobject.js"></script>
 <?php } ?>
+ <script type="application/javascript" src="./template/default/awesomechart.js"> </script>
 
+    <head>
+
+        <style>
+        
+            body{
+                background: #fff;
+                color: #333;
+            }
+            
+            a, a:visited, a:link, a:active{
+                color: #333;
+            }
+            
+            a:hover{
+                color: #00f;
+            }
+        
+            .charts_container{
+                width: 900px;
+                height: 420px;
+                margin: 10px auto;
+            }
+            
+            .chart_container_centered{
+                text-align: center;
+                width: 900px;
+                height: 420px;
+                margin: 10px auto;
+            }
+            
+            .chart_container{
+                width: 400px;
+                height: 400px;
+                margin: 0px 25px;
+                float: left;
+            }
+            
+            .footer{
+                font-size: small;
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+
+        
+
+     	  
+
+
+
+<div id="content" style="width:1024px;">
+
+<div class="content_detail_wrapper">
 <div id="space_page" >
-
+<br/>
 <div id="ubar">
 
 <div id="space_avatar">
@@ -181,92 +236,48 @@
 
 </div>
 
-<?php if($space['self'] && $_SGLOBAL['magic']['superstar']) { ?>
-<div class="borderbox">
-<div style="width:100%; overflow:hidden;">
-<img src="image/magic/superstar.small.gif" class="magicicon" />
-<?php if($space['magicstar'] && $space['magicexpire']>$_SGLOBAL['timestamp']) { ?>
-<a id="a_magic_superstar" href="cp.php?ac=magic&op=cancelsuperstar" onclick="ajaxmenu(event, this.id)">取消超级明星</a>
-<?php } else { ?>
-<a id="a_magic_superstar" href="magic.php?mid=superstar" onclick="ajaxmenu(event, this.id, 1)">我要变超级明星</a>
-<?php } ?>
-</div>
-</div><br />
-<?php } ?>
 
-<div class="borderbox">
-<ul class="spacemenu_list" style="width:100%; overflow:hidden;">
-<?php if($space['self']) { ?>
-<li><a href="cp.php?ac=avatar">我的头像</a></li>
-<li><a href="cp.php?ac=profile">个人资料</a></li>
-<li><a href="cp.php?ac=theme">主页风格</a></li>
-<li><a href="cp.php?ac=credit">我的积分</a></li>
-<?php if($_SCONFIG['sendmailday']) { ?>
-<li><a href="cp.php?ac=sendmail">邮件提醒</a></li>
-<?php } ?>
-<li><a href="cp.php?ac=privacy">隐私筛选</a></li>
-<?php } else { ?>
-<?php if(!$space['isfriend']) { ?>
-<li><img src="image/icon/friend.gif"><a href="cp.php?ac=friend&op=add&uid=<?=$space['uid']?>" id="a_friend_li" onclick="ajaxmenu(event, this.id, 1)">加为好友</a></li>
-<?php } ?>
-<li><img src="image/icon/wall.gif"><a href="#comment">给我留言</a></li>
-<li><img src="image/icon/poke.gif"><a href="cp.php?ac=poke&op=send&uid=<?=$space['uid']?>" id="a_poke" onclick="ajaxmenu(event, this.id, 1)">打个招呼</a></li>
-<li><img src="image/icon/pm.gif"><a href="cp.php?ac=pm&uid=<?=$space['uid']?>" id="a_pm" onclick="ajaxmenu(event, this.id, 1)">发送消息</a></li>
-<?php if($space['isfriend']) { ?>
-<li><img src="image/icon/friend.gif"><a href="cp.php?ac=friend&op=ignore&uid=<?=$space['uid']?>" id="a_ignore" onclick="ajaxmenu(event, this.id)">解除好友</a></li>
-<?php } ?>
-<li><img src="image/icon/report.gif"><a href="cp.php?ac=common&op=report&idtype=uid&id=<?=$space['uid']?>" id="a_report" onclick="ajaxmenu(event, this.id, 1)">违规举报</a></li>
-<?php if(checkperm('managename')||checkperm('managespacegroup')||checkperm('managespaceinfo')||checkperm('managespacecredit')||checkperm('managespacenote')) { ?>
-<li><img src="image/icon/profile.gif"><a href="admincp.php?ac=space&op=manage&uid=<?=$space['uid']?>" id="a_manage">管理用户</a></li>
-<?php } ?>
-<?php } ?>
-</ul>
-</div><br />
+
+<br />
 
 <div id="space_mymenu">
 <h2>个人菜单</h2>
 <ul class="line_list">
 <li>
 <?php if($space['self']) { ?>
-<a href="cp.php?ac=profile" class="r_option" target="_blank">完善</a>
+<a href="cp.php?ac=introduce" class="r_option" target="_blank">发表</a>
 <?php } ?>
-<img src="image/icon/profile.gif"><a href="javascript:;" onclick="getindex('info');">个人资料</a>
+<img src="image/icon/doing.gif"><a href="javascript:;" onclick="getindex('introduce');">企业介绍</a><?php if($space['doingnum']) { ?><em>(<?=$space['doingnum']?>)</em><?php } ?>
 </li>
 <li>
 <?php if($space['self']) { ?>
-<a href="space.php?do=doing&view=me" class="r_option" target="_blank">记录</a>
+<a href="cp.php?ac=product" class="r_option" target="_blank">发表</a>
 <?php } ?>
-<img src="image/icon/doing.gif"><a href="javascript:;" onclick="getindex('doing');">记录</a><?php if($space['doingnum']) { ?><em>(<?=$space['doingnum']?>)</em><?php } ?>
-</li>
-<li>
-<?php if($space['self']) { ?>
-<a href="cp.php?ac=blog" class="r_option" target="_blank">发表</a>
-<?php } ?>
-<img src="image/icon/blog.gif"><a href="javascript:;" onclick="getindex('blog');">日志</a><?php if($space['blognum']) { ?><em>(<?=$space['blognum']?>)</em><?php } ?></li>
+<img src="image/icon/blog.gif"><a href="javascript:;" onclick="getindex('product');">产品介绍</a><?php if($space['blognum']) { ?><em>(<?=$space['blognum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
-<a href="cp.php?ac=upload" class="r_option" target="_blank">上传</a>
+<a href="cp.php?ac=development" class="r_option" target="_blank">发表</a>
 <?php } ?>
-<img src="image/icon/album.gif"><a href="javascript:;" onclick="getindex('album');">相册</a><?php if($space['albumnum']) { ?><em>(<?=$space['albumnum']?>)</em><?php } ?></li>
+<img src="image/icon/album.gif"><a href="javascript:;" onclick="getindex('development');">企业动态</a><?php if($space['albumnum']) { ?><em>(<?=$space['albumnum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
 <a href="cp.php?ac=thread" class="r_option" target="_blank">发表</a>
 <?php } ?>
-<img src="image/icon/thread.gif"><a href="javascript:;" onclick="getindex('thread');">话题</a><?php if($space['threadnum']) { ?><em>(<?=$space['threadnum']?>)</em><?php } ?></li>
+<img src="image/icon/thread.gif"><a href="javascript:;" onclick="getindex('industry');">行业动态</a><?php if($space['threadnum']) { ?><em>(<?=$space['threadnum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
-<a href="cp.php?ac=poll" class="r_option" target="_blank">发起</a>
+<a href="cp.php?ac=branch" class="r_option" target="_blank">发起</a>
 <?php } ?>
-<img src="image/icon/poll.gif"><a href="javascript:;" onclick="getindex('poll');">投票</a><?php if($space['pollnum']) { ?><em>(<?=$space['pollnum']?>)</em><?php } ?></li>
+<img src="image/icon/poll.gif"><a href="javascript:;" onclick="getindex('branch');">分支机构</a><?php if($space['pollnum']) { ?><em>(<?=$space['pollnum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
-<a href="cp.php?ac=event" class="r_option" target="_blank">发起</a>
+<a href="cp.php?ac=job" class="r_option" target="_blank">发起</a>
 <?php } ?>
-<img src="image/icon/event.gif"><a href="javascript:;" onclick="getindex('event');">活动</a><?php if($space['eventnum']) { ?><em>(<?=$space['eventnum']?>)</em><?php } ?></li>
+<img src="image/icon/event.gif"><a href="javascript:;" onclick="getindex('job');">人才招聘</a><?php if($space['eventnum']) { ?><em>(<?=$space['eventnum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
-<a href="space.php?do=share&view=me" class="r_option" target="_blank">添加</a>
+<a href="cp.php?ac=cases" class="r_option" target="_blank">发布</a>
 <?php } ?>
-<img src="image/icon/share.gif"><a href="javascript:;" onclick="getindex('share');">分享</a><?php if($space['sharenum']) { ?><em>(<?=$space['sharenum']?>)</em><?php } ?></li>
+<img src="image/icon/share.gif"><a href="javascript:;" onclick="getindex('share');">成功案例</a><?php if($space['sharenum']) { ?><em>(<?=$space['sharenum']?>)</em><?php } ?></li>
 <li><?php if($space['self']) { ?>
 <a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找</a>
 <?php } ?>
-<img src="image/icon/friend.gif"><a href="javascript:;" onclick="getindex('friend');">好友</a><?php if($space['friendnum']) { ?><em>(<?=$space['friendnum']?>)</em><?php } ?></li>
+<img src="image/icon/friend.gif"><a href="javascript:;" onclick="getindex('friend');">客户</a><?php if($space['friendnum']) { ?><em>(<?=$space['friendnum']?>)</em><?php } ?></li>
 </ul>
 </div>
 
@@ -342,9 +353,6 @@
 <li>用户组别：<a href="cp.php?ac=credit&op=usergroup"><?=$_SGLOBAL['grouptitle'][$space['groupid']]['grouptitle']?></a> <?php g_icon($space[groupid]); ?></li>
 <li>主页地址：<a href="<?=$space['domainurl']?>" onclick="javascript:setCopy('<?=$space['domainurl']?>');return false;" class="spacelink domainurl"><?=$space['domainurl']?></a></li>
 
-<?php if(!$space['self'] && $space['spacenote']) { ?>
-<li><?=$space['spacenote']?> <a href="space.php?uid=<?=$space['uid']?>&do=doing">&raquo;</a></li>
-<?php } ?>
 </ul>
 
 <?php if($space['self']) { ?>
@@ -450,65 +458,43 @@ hiddenstatus();
 
 <div id="maincontent">
 
-<?php if(!$space['isfriend']) { ?>
-<div class="borderbox">
-<p style="padding-bottom:10px;">如果您认识<?=$_SN[$space['uid']]?>，可以给TA留个言，或者打个招呼，或者添加为好友。<br />成为好友后，您就可以第一时间关注到TA的更新动态。</p>
-<a href="cp.php?ac=friend&op=add&uid=<?=$space['uid']?>" id="a_friend_notice" onclick="ajaxmenu(event, this.id, 1)" class="submit">加为好友</a></p>
-</div><br>
-<?php } ?>
 
-<div id="space_info">
 <h3 class="feed_header">
-<?php if($space['self']) { ?>
-<a href="cp.php?ac=profile" class="r_option">完善资料</a>
-<?php } ?>
-个人资料
+<?php if($space['name']) { ?><?=$space['name']?><?php } else { ?><?=$space['username']?><?php } ?>评论统计
 </h3>
-<ul class="spacemenu_list">
-<li><em>创建:</em><?php echo sgmdate('Y-m-d',$space[dateline],1); ?></li>
-<li><em>登录:</em><?php if($space['lastlogin']) { ?><?php echo sgmdate('Y-m-d',$space[lastlogin],1); ?><?php } ?></li>
-<?php if($isonline) { ?>
-<li><em>活跃:</em><?=$isonline?> (当前在线)</li>
-<?php } ?>
-<?php if($space['sex']) { ?>
-<li><em>性别:</em><?=$space['sex']?></li>
-<?php } ?>
-<?php if($space['birth']) { ?>
-<li><em>生日:</em><?=$space['birth']?></li>
-<?php } ?>
-<?php if($space['blood']) { ?>
-<li><em>血型:</em><?=$space['blood']?></li>
-<?php } ?>
-<?php if($space['marry']) { ?>
-<li><em>婚恋:</em><?=$space['marry']?></li>
-<?php } ?>
-<?php if($space['residecity']) { ?>
-<li><em>居住:</em><?=$space['residecity']?></li>
-<?php } ?>
-<?php if($space['birthcity']) { ?>
-<li><em>家乡:</em><?=$space['birthcity']?></li>
-<?php } ?>
-<?php if($space['mobile']) { ?>
-<li><em>手机:</em><?=$space['mobile']?></li>
-<?php } ?>
-<?php if($space['qq']) { ?>
-<li><em>QQ:</em><?=$space['qq']?></li>
-<?php } ?>
-<?php if($space['msn']) { ?>
-<li><em>MSN:</em><?=$space['msn']?></li>
-<?php } ?>
-</ul>
-<p class="info_more"><a href="javascript:;" onclick="getindex('info');">&raquo; 查看全部个人资料</a></p>
-</div>
+
+ <div class="charts_container">
+            <div class="chart_container">
+            
+                <canvas id="chartCanvas1" width="520" height="400" style="text-align:center;margin:0 auto;">
+                    Your web-browser does not support the HTML 5 canvas element.
+                </canvas>
+                
+            </div>
+            
+
+        </div>
+
+<?php if($cba=="1") { ?>
+<h3 class="feed_header">
+<?php if($space['name']) { ?><?=$space['name']?><?php } else { ?><?=$space['username']?><?php } ?>组件使用统计
+</h3>
+<div class="charts_container">
+  <div class="chart_container">
+            
+                <canvas id="chartCanvas2" width="520" height="400" style="text-align:center;margin:0 auto;">
+                    Your web-browser does not support the HTML 5 canvas element.
+                </canvas>
+                
+            </div>
+               </div>
+<?php } ?>	
 
 <?php if($feedlist) { ?>
 <?php $_TPL['hidden_hot']=1; ?>
 <div id="space_feed" class="feed">
 <h3 class="feed_header">
-<span class="r_option">
-<a href="space.php?uid=<?=$space['uid']?>&do=feed&view=me" class="action">全部</a>
-</span>
-<span class="entry-title">个人动态</span>
+<span class="entry-title">最新动态</span>
 </h3>
 <div class="box_content">
 <ul>
@@ -626,50 +612,6 @@ hiddenstatus();
 </div>
 <?php } ?>
 
-<?php if($albumlist) { ?>
-<div id="space_photo">
-<h3 class="feed_header">
-<a href="space.php?uid=<?=$space['uid']?>&do=album&view=me" class="r_option">全部</a>
-相册
-</h3>
-<table cellspacing="4" cellpadding="4" width="100%">
-<tr>
-<?php if(is_array($albumlist)) { foreach($albumlist as $key => $value) { ?>
-<td width="85" align="center"><a href="space.php?uid=<?=$space['uid']?>&do=album&id=<?=$value['albumid']?>" target="_blank"><img src="<?=$value['pic']?>" alt="<?=$value['albumname']?>" width="70" /></a></td>
-<td width="165">
-<h6><a href="space.php?uid=<?=$space['uid']?>&do=album&id=<?=$value['albumid']?>" target="_blank" title="<?=$value['albumname']?>"><?=$value['albumname']?></a></h6>
-<p class="gray"><?=$value['picnum']?> 张照片</p>
-<p class="gray">更新于 <?php echo sgmdate('m-d',$value[dateline],1); ?></p>
-</td>
-<?php if($key%2==1) { ?></tr><tr><?php } ?>
-<?php } } ?>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<?php if($bloglist) { ?>
-<div id="space_blog" class="feed">
-<h3 class="feed_header">
-<a href="space.php?uid=<?=$space['uid']?>&do=blog&view=me" class="r_option">全部</a>
-日志
-</h3>
-<ul class="line_list">
-<?php if(is_array($bloglist)) { foreach($bloglist as $value) { ?>
-<li>
-
-<h4>
-<span class="gray r_option"><?php echo sgmdate('m-d H:i',$value[dateline],1); ?></span>
-<a href="space.php?uid=<?=$space['uid']?>&do=blog&id=<?=$value['blogid']?>" target="_blank"><?=$value['subject']?></a>
-</h4>
-<div class="detail">
-<?=$value['message']?>
-</div>
-</li>
-<?php } } ?>
-</ul>
-</div>
-<?php } ?>
 
 
 <?php if(is_array($widelist)) { foreach($widelist as $value) { ?>
@@ -690,60 +632,7 @@ hiddenstatus();
 
 </div>
 
-<div id="comment" class="comments_list">
-<h3 class="feed_header">
-<a href="space.php?uid=<?=$space['uid']?>&do=wall&view=me" class="r_option">全部</a>
-留言板
-</h3>
 
-<div class="box">
-<form action="cp.php?ac=comment" id="quick_commentform_<?=$space['uid']?>" name="quick_commentform_<?=$space['uid']?>" method="post" style="padding:0 0 0 5px;">
-<a href="###" id="editface" onclick="showFace(this.id, 'comment_message');return false;"><img src="image/facelist.gif" align="absmiddle" /></a>
-<?php if($_SGLOBAL['magic']['doodle']) { ?>
-<a id="a_magic_doodle" href="magic.php?mid=doodle&showid=comment_doodle&target=comment_message" onclick="ajaxmenu(event, this.id, 1)"><img src="image/magic/doodle.small.gif" class="magicicon" />涂鸦板</a>
-<?php } ?>
-<br />
-<textarea name="message" id="comment_message" rows="4" cols="60" style="width:98%;" onkeydown="ctrlEnter(event, 'commentsubmit_btn');"></textarea><br>
-<input type="hidden" name="refer" value="space.php?uid=<?=$space['uid']?>" />
-<input type="hidden" name="id" value="<?=$space['uid']?>" />
-<input type="hidden" name="idtype" value="uid" />
-<input type="hidden" name="commentsubmit" value="true" />
-<input type="button" id="commentsubmit_btn" name="commentsubmit_btn" class="submit" value="留言" onclick="ajaxpost('quick_commentform_<?=$space['uid']?>', 'wall_add')" />
-<span id="__quick_commentform_<?=$space['uid']?>"></span>
-<input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
-</form>
-</div>
-
-<div class="box_content">
-<ul class="post_list a_list justify_list" id="comment_ul">
-<?php if(is_array($walllist)) { foreach($walllist as $value) { ?>
-<div style="border-bottom:1px dashed #999;margin-top:10px;">
-<div class="comment_list container_12" style="margin-left:60px;">
-<?php if($value['author']) { ?>
-<div class="avatar48"><a href="space.php?uid=<?=$value['authorid']?>"><?php echo avatar($value[authorid],small); ?></a></div>
-<?php } else { ?>
- <img src="image/magic/hidden.gif" class="grid_1">
-<?php } ?>
-     <div class="grid_2">
-                                      <h6><span class="commenter">
-                                      	<?php if($value['author']) { ?>
-<a href="space.php?uid=<?=$value['authorid']?>" id="author_<?=$value['cid']?>"  style="color:#02B4AB;"><?=$_SN[$value['authorid']]?></a> 
-<?php } else { ?>
-匿名
-<?php } ?>:</span>
-<span class="comment_text"><?=$value['message']?></span></h6>
-        <span class="comment_time"><?php echo sgmdate('Y-m-d H:i',$value[dateline],1); ?></span>
-        </div>
- </div> <br/></div>
-
-
-<?php } } ?>
-</ul>
-<?php if($walllist) { ?>
-<p class="r_option" style="padding:5px 0 10px 0;"><a href="space.php?uid=<?=$space['uid']?>&do=wall&view=me">&raquo; 更多留言</a></p>
-<?php } ?>
-</div>
-</div>
 </div>
 
 <div id="obar">
@@ -813,7 +702,7 @@ hiddenstatus();
 <span class="r_option">
 <a href="space.php?uid=<?=$space['uid']?>&do=friend&view=me" class="action">全部(<?=$space['friendnum']?>)</a>
 </span>
-好友
+客户
 </h2>
 <ul class="avatar_list">
 <?php if(is_array($friendlist)) { foreach($friendlist as $value) { ?>
@@ -827,7 +716,8 @@ hiddenstatus();
 <?php } ?>
 
 </div>
-
+</div>
+</div>
 </div>
 
 <?php if($_GET['theme']) { ?><div class="nn">您是否想使用这款个性风格?<br /><a href="cp.php?ac=theme&op=use&dir=<?=$_GET['theme']?>">[应用]</a><a href="cp.php?ac=theme">[取消]</a></div><?php } ?>
@@ -880,7 +770,7 @@ hiddenstatus();
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
@@ -961,4 +851,31 @@ for(var i=0; i<elems.length; i++){
 magicColor(elems[i]);
 }
 
-</script><?php ob_out();?>
+</script>
+
+
+        <script type="application/javascript">
+        
+            var chart1 = new AwesomeChart('chartCanvas1');
+            chart1.title ="";
+            chart1.data = [<?php if(is_array($myself)) { foreach($myself as $value) { ?><?=$b[$value['english']]?>,<?php } } ?>];
+            chart1.labels = [<?php if($myself1['0']['subject']) { ?>"<?=$myself1['0']['subject']?>",<?php } ?><?php if($myself1['1']['subject']) { ?>"<?=$myself1['1']['subject']?>",<?php } ?><?php if($myself1['2']['subject']) { ?>"<?=$myself1['2']['subject']?>",<?php } ?><?php if($myself1['3']['subject']) { ?>"<?=$myself1['3']['subject']?>",<?php } ?><?php if($myself1['4']['subject']) { ?>"<?=$myself1['4']['subject']?>",<?php } ?><?php if($myself1['5']['subject']) { ?>"<?=$myself1['5']['subject']?>",<?php } ?><?php if($myself1['6']['subject']) { ?>"<?=$myself1['6']['subject']?>",<?php } ?><?php if($myself1['7']['subject']) { ?>"<?=$myself1['7']['subject']?>",<?php } ?><?php if($myself1['8']['subject']) { ?>"<?=$myself1['8']['subject']?>",<?php } ?>];
+            chart1.colors = ['#006CFF', '#FF6600', '#34A038', '#945D59', '#93BBF4', '#F493B8'];
+            chart1.randomColors = true;
+            chart1.animate = true;
+            chart1.animationFrames = 30;
+            chart1.draw();
+             var chart2 = new AwesomeChart('chartCanvas2');
+            chart2.title = "";
+            chart2.data = [<?php if($myself1['0']['subject']) { ?><?=$a[$myself1['0']['english']]?>,<?php } ?><?php if($myself1['1']['subject']) { ?><?=$a[$myself1['1']['english']]?>,<?php } ?><?php if($myself1['2']['subject']) { ?><?=$a[$myself1['2']['english']]?>,<?php } ?><?php if($myself1['3']['subject']) { ?><?=$a[$myself1['3']['english']]?>,<?php } ?><?php if($myself1['4']['subject']) { ?><?=$a[$myself1['4']['english']]?>,<?php } ?><?php if($myself1['5']['subject']) { ?><?=$a[$myself1['5']['english']]?>,<?php } ?><?php if($myself1['6']['subject']) { ?><?=$a[$myself1['6']['english']]?>,<?php } ?><?php if($myself1['7']['subject']) { ?><?=$a[$myself1['7']['english']]?>,<?php } ?>];
+            chart2.labels = [<?php if($myself1['0']['subject']) { ?>"<?=$myself1['0']['subject']?>",<?php } ?><?php if($myself1['1']['subject']) { ?>"<?=$myself1['1']['subject']?>",<?php } ?><?php if($myself1['2']['subject']) { ?>"<?=$myself1['2']['subject']?>",<?php } ?><?php if($myself1['3']['subject']) { ?>"<?=$myself1['3']['subject']?>",<?php } ?><?php if($myself1['4']['subject']) { ?>"<?=$myself1['4']['subject']?>",<?php } ?><?php if($myself1['5']['subject']) { ?>"<?=$myself1['5']['subject']?>",<?php } ?><?php if($myself1['6']['subject']) { ?>"<?=$myself1['6']['subject']?>",<?php } ?><?php if($myself1['7']['subject']) { ?>"<?=$myself1['7']['subject']?>",<?php } ?><?php if($myself1['8']['subject']) { ?>"<?=$myself1['8']['subject']?>",<?php } ?>];
+            chart2.barFillStyle = chart1.colors[0];
+            chart2.labelFillStyle = chart1.colors[0];
+            chart2.randomColors = true;
+            chart2.animate = true;
+            chart2.animationFrames = 30;
+            chart2.draw();
+            
+          
+        </script>
+ <?php ob_out();?>

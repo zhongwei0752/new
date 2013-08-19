@@ -49,14 +49,14 @@
 	<div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=introduce&view=me">企业介绍</a></span>><span>发布</span>
+                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=introduce&view=me">$newname[subject]</a></span>><span>发布</span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
                          发布
                      </div>
                      <a href="space.php?do=introduce&view=me" class="link_back_bread grid_3">
-                      企业介绍
+                      $newname[subject]
                      </a>
                  </div>
 <!--{/if}-->
@@ -101,7 +101,7 @@
 			<tr>
 				<td>
 					 <div class="post_list container_12">
-                         <span class="select_title grid_1">企业介绍&nbsp;&nbsp;:&nbsp;&nbsp;</span>
+                         <span class="select_title grid_1">$newname[subject]&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=introduce_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
 						  <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px">$introduce[message]</textarea>
 						  <iframe src="editor.php?charset=$_SC[charset]&allowhtml=$allowhtml&doodle=<!--{if isset($_SGLOBAL[magic][doodle])}-->1<!--{/if}-->" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:350px;border: 1px solid #C5C5C5;" height="200"></iframe>

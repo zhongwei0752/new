@@ -38,7 +38,7 @@
                    <div class="grid_2">
                        <h5 style="margin-top:0px;">已有$space[viewnum]人访问,$space[experience]个信用</h5>
                        <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                      
+                      	<div id="weixinone"><a href="space.php?do=myweixin" style="margin-top:12px;" class="company_setting">个人微信号绑定</a></div>
                        <!--<a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>-->
                    </div>
                  </div>
@@ -50,10 +50,12 @@
        $(document).ready(function(){
         
         $('#weixin').attr("style", "display:none;");
+       
         $('#weixinhome').click(function (e) {
     	e.preventDefault();
     	$('#weixin').modal();
   });
+
 
             
        })

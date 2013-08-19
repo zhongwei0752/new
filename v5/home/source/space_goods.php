@@ -1,7 +1,7 @@
 <?php
 /*
 	[UCenter Home] (C) 2007-2008 Comsenz Inc.
-	$Id: space_product.php 13208 2009-08-20 06:31:35Z liguode $
+	$Id: space_goods.php 13208 2009-08-20 06:31:35Z liguode $
 */
 
 if(!defined('IN_UCHOME')) {
@@ -34,7 +34,7 @@ $classid = empty($_GET['classid'])?0:intval($_GET['classid']);
 
 //±íÌ¬·ÖÀà
 @include_once(S_ROOT.'./data/data_click.php');
-$clicks = empty($_SGLOBAL['click']['productid'])?array():$_SGLOBAL['click']['productid'];
+$clicks = empty($_SGLOBAL['click']['goodsid'])?array():$_SGLOBAL['click']['goodsid'];
 
 if($id) {
 
@@ -53,7 +53,7 @@ if($id) {
 		exit();
 	} elseif(!$space['self'] && $goods['friend'] == 4) {
 		//ÃÜÂëÊäÈëÎÊÌâ
-		$cookiename = "view_pwd_product_$product[productid]";
+		$cookiename = "view_pwd_goods_$goods[goodsid]";
 		$cookievalue = empty($_SCOOKIE[$cookiename])?'':$_SCOOKIE[$cookiename];
 		if($cookievalue != md5(md5($goods['password']))) {
 			$invalue = $goods;
@@ -68,7 +68,7 @@ if($id) {
 	
 	include_once(S_ROOT.'./source/function_goods.php');
 
-	$goods['message'] = product_bbcode($goods['message']);
+	$goods['message'] = goods_bbcode($goods['message']);
 
 	$otherlist = $newlist = array();
 
@@ -328,7 +328,7 @@ if($id) {
 				$theurl = "space.php?uid=$space[uid]&do=$do&view=me";
 				$actives = array('me'=>' class="active"');
 				//ÈÕÖ¾·ÖÀà
-				$query = $_SGLOBAL['db']->query("SELECT classid, classname FROM ".tname('classproduct')." WHERE uid='$space[uid]' or uid='0'");
+				$query = $_SGLOBAL['db']->query("SELECT classid, classname FROM ".tname('classgoods')." WHERE uid='$space[uid]' or uid='0'");
 				while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 					$classarr[$value['classid']] = $value['classname'];
 				}
@@ -403,7 +403,7 @@ if($id) {
 				if($value['friend'] == 4) {
 					$value['message'] = $value['pic'] = '';
 				} else {
-					$value['message'] = getstr($value['message'], $summarylen, 0, 0, 0, 0, -1);
+					$value['message'] = getstr($value['message'], 210, 0, 0, 0, 0, -1);
 				}
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				$list[] = $value;

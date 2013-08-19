@@ -68,12 +68,7 @@ class wechatCallbackapiTest
 
                           }
                          
-        }else{
-           $contentStr.="未填写微信id";
-               $msgType = "text";
-               $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-               echo $resultStr;
-        }
+    
                       $msgType = "news";
                       if($row[name]){
                         $name=$row[name];
@@ -92,12 +87,27 @@ class wechatCallbackapiTest
                       $articles[] = makeArticleItem($name, $name, $pic, $url);
                       for($i=0;$i<$count;$i++){
                        $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
+                       if($app_output->data->app[$i]->newname){
+                       $subject=$app_output->data->app[$i]->newname;
+                       }else{
                        $subject=$app_output->data->app[$i]->subject;
+                     }
                        $pic = "http://v5.home3d.cn/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
-                      }  
+                      } 
+                      $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=goods";
+                      $subject="商品管理";
+                      $pic = "http://v5.home3d.cn/home/image/logo/goods.jpg";
+                      $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                      echo $resultStr;
+
+                         }else{
+               $contentStr.="未填写微信id";
+               $msgType = "text";
+               $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+               echo $resultStr;
+        }
           }
 
            //extract post data
@@ -164,6 +174,14 @@ class wechatCallbackapiTest
                      $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                      echo $resultStr;
                        
+                         }elseif($keyword=="绑定"){
+                           $msgType = "news";
+                           $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=bind&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."";
+                           $subject="输入帐号密码与微信进行绑定";
+                           $pic = "";
+                           $articles[] = makeArticleItem($subject, $subject, $pic, $url);
+                           $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                           echo $resultStr;
                          }elseif($keyword=="z"){
                             $msgType = "text";
                            $contentStr.="$fromUsername";
@@ -185,77 +203,7 @@ class wechatCallbackapiTest
                       $json = file_get_contents($jsonurl,0,null,null);
                       $json_output = json_decode($json);
                      
-                        if($english=="product"){
-                          if($json_output->data->product[0]->subject){
-                        $contentStr .="产品介绍\r\n".$json_output->data->product[0]->subject."\r\n".$json_output->data->product[0]->message;
-                          }else{
-                        $contentStr .="没有数据";
-                          }
-                        }
-                      
-                       
-                        if($english=="industry"){
-                          if($json_output->data->industry[0]->subject){
-                          $contentStr .="行业动态\r\n".$json_output->data->industry[0]->subject."\r\n".$json_output->data->industry[0]->message;
-                          }else{
-                          $contentStr .="没有数据";
-                          }
-                        }
-                       
-                       
-                        if($english=="introduce"){
-                         if($json_output->data->introduce[0]->subject){
-                        $contentStr .="企业介绍\r\n".$json_output->data->introduce[0]->subject."\r\n".$json_output->data->introduce[0]->message;
-                         }else{
-                         $contentStr .="没有数据"; 
-                         }
-                        }
-                       
-                       
-                        if($english=="development"){
-                          if($json_output->data->development[0]->subject){
-                        $contentStr .="企业动态\r\n".$json_output->data->development[0]->subject."\r\n".$json_output->data->development[0]->message;
-                          }else{
-                           $contentStr .="没有数据"; 
-                          }
-                        }
-                       
-                       
-                        if($english=="cases"){
-                          if($json_output->data->cases[0]->subject){
-                        $contentStr .="成功案例\r\n".$json_output->data->cases[0]->subject."\r\n".$json_output->data->cases[0]->message;
-                          }else{
-                          $contentStr .="没有数据"; 
-                          }
-                        }
-                      
-                       
-                       
-                        if($english=="branch"){
-                          if($json_output->data->branch[0]->subject){
-                        $contentStr .="分支机构\r\n".$json_output->data->branch[0]->subject."\r\n".$json_output->data->branch[0]->message;
-                          }else{
-                           $contentStr .="没有数据"; 
-                          }
-                        }
-                       
-                      
-                        if($english=="job"){
-                          if($json_output->data->job[0]->subject){
-                        $contentStr .="分支招聘\r\n".$json_output->data->job[0]->subject."\r\n".$json_output->data->job[0]->message;
-                          }else{
-                          $contentStr .="没有数据";
-                          }
-                        }
-                       
-                       
-                        if($english=="talk"){
-                          if($json_output->data->talk[0]->subject){
-                        $contentStr .="在线沟通\r\n".$json_output->data->talk[0]->subject."\r\n".$json_output->data->talk[0]->message;
-                          }else{
-                          $contentStr .="没有数据";
-                          }
-                        }
+                        
                       
 
                       }else{ 
@@ -277,11 +225,20 @@ class wechatCallbackapiTest
                     $articles[] = makeArticleItem($name, $name, $pic, $url);
                       for($i=0;$i<$count;$i++){
                        $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->app[$i]->english;
+                       if($app_output->data->app[$i]->newname){
+                       $subject=$app_output->data->app[$i]->newname;
+                       }else{
                        $subject=$app_output->data->app[$i]->subject;
+                     }
                        $pic = "http://v5.home3d.cn/home/".$app_output->data->app[$i]->image1url;
+
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       }  
-        
+                       $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=goods";
+                       $subject="商品管理";
+                       $pic = "http://v5.home3d.cn/home/image/logo/goods.jpg";
+                       
+                       $articles[] = makeArticleItem($subject, $subject, $pic, $url);
                          
                          
                        }         

@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1375928175', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_list|template/default/header|template/default/space_menu|template/default/footer', '1376889033', 'template/default/space_menuset_list');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -232,11 +232,12 @@
                      <?php } ?>
 
                      <?php if($_SN[$_SGLOBAL['supe_uid']]=='admin') { ?>
-                     <a href="cp.php?ac=menuset" class="btn grid_2" style="margin-left:10px;">
+                     <a href="cp.php?ac=menuset" class="btn grid_2" >
                       发表新应用
                      </a>
                      <?php } ?>
                      <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" >排序</a>
+                     <a class="btn grid_2" href="space.php?do=menuset&view=me&change=2" style="margin-left:10px;">修改名称</a>
                  </div>		
 
 <?php } ?>	
@@ -268,8 +269,10 @@
 <?php if($count) { ?>
 <?php if($_GET['view']!='me') { ?>
 <form action = "space.php?do=menuset" method = "post">
-<?php } else { ?>
+<?php } elseif($_GET['change']=='1') { ?>
 <form action = "space.php?do=orderid" method = "post">
+      <?php } elseif($_GET['change']=='2') { ?>
+      <form action = "space.php?do=newname" method = "post">
 <?php } ?>
 <div class="container_12 index_assembly_boxes" style="margin-left:10px;margin-top:20px;">
     <?php if(is_array($list)) { foreach($list as $value) { ?>
@@ -280,18 +283,18 @@
         <div class="grid_6">
                             <div class="index_assembly_box bg1" <?php if($_GET['view']!='me') { ?><?php if(!$value['money']) { ?><?php $value1=$value['zhong']; ?><?php if($value1['appstatus']=='1') { ?>style="background: url('./template/default/image/chosen_bg3.png')!important;"<?php } ?><?php } ?><?php } ?>  id="choice">
                             <div class="assembly_title">
-        <a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?><a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">（此应用未过期，请戳我重新开通）</a><?php } ?><?php } ?></span><?php if($_GET['view']=='me') { ?><a href="cp.php?ac=menuset&menusetid=<?=$value['menusetid']?>&op=delete1" class="r_option" style="padding-right:10px;" id="menuset_delete_<?=$value['menusetid']?>" onclick="ajaxmenu(event, this.id)">删除</a><?php } ?></div>
+       <?php if($_GET['change']=='2') { ?><span class="title"><input type="text" value="<?=$value['subject']?>" name="<?=$value['menusetid']?>"></span><?php } else { ?><a href="space.php?uid=<?=$value['uid']?>&do=<?=$do?>&id=<?=$value['menusetid']?>" ><span class="title"><?=$value['subject']?></span></a><?php } ?><span style="font-size:2px;"><?php if($_GET['view']!='me') { ?><?php $value2=$value['zhong']; ?><?php if($value2['cheak']=='1') { ?><a href="space.php?do=menuset&op=add&menusetid=<?=$value['menusetid']?>">（此应用未过期，请戳我重新开通）</a><?php } ?><?php } ?></span><?php if($_GET['view']=='me') { ?><a href="cp.php?ac=menuset&menusetid=<?=$value['menusetid']?>&op=delete1" class="r_option" style="padding-right:10px;padding-top:10px;" id="menuset_delete_<?=$value['menusetid']?>" onclick="ajaxmenu(event, this.id)"><img src="./template/default/image/delete1.gif"></a><?php } ?></div>
         <div id="num<?=$value['menusetid']?>">
        <div id="numh<?=$value['menusetid']?>"></div>
         <div class="assembly_info1">
           <p class="price2" style="color:#3EB2B8!important" <?php if($_GET['view']!='me') { ?><?php if(!$value['money']) { ?><?php $value1=$value['zhong']; ?><?php if($value1['appstatus']=='1') { ?>style="color:#3EB2B8!important;"<?php } ?><?php } ?><?php } ?> ><?php if($value['money']) { ?> 单价:<?=$value['money']?>元/月<?php } else { ?>单价:免费<?php } ?></p>
                                     <img src="<?=$value['image1url']?>">
-                                  
-                                <h5 style="padding-top: 20px;"><?php if($_GET['view']!='me') { ?><?php $value1=$value['zhong']; ?><?php if($value1['num']==$value['menusetid']) { ?><?php if($value['money']) { ?>（已订购<?=$value1['month']?>个月）<br/>有效期至:<?php echo sgmdate('Y-m-d H:i:s',$value1[endtime]); ?><?php } ?><?php } ?><?php } ?><?php if($value['money']) { ?><?php if($_GET['view']=='me') { ?>有效期:<?php echo sgmdate('Y-m-d H:i',$value[dateline1],1); ?>--<?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } ?><?php } ?></h5>    
-                               <?php if($_GET['view']=='me') { ?><?php if($_GET['change']=='1') { ?><select name="<?=$value['menusetid']?>">
+                                   <h5 style="padding-top: 20px;"><?php if($_GET['view']=='me') { ?><?php if($_GET['change']=='1') { ?><select name="<?=$value['menusetid']?>">
                                <option value ="<?=$value['orderid']?>" selected><?=$value['orderid']?></option>
                                <?php for($i=1;$i<10;$i++){ ?>
-  <option value ="<?=$i?>"><?=$i?></option><?php } ?></select><?php } else { ?>序号:<?=$value['orderid']?><?php } ?><?php } ?>
+                               <option value ="<?=$i?>"><?=$i?></option><?php } ?></select><?php } else { ?>序号:<?=$value['orderid']?><?php } ?><?php } ?></h5>
+                                <h5><?php if($_GET['view']!='me') { ?><?php $value1=$value['zhong']; ?><?php if($value1['num']==$value['menusetid']) { ?><?php if($value['money']) { ?>（已订购<?=$value1['month']?>个月）<br/>有效期至:<?php echo sgmdate('Y-m-d H:i:s',$value1[endtime]); ?><?php } ?><?php } ?><?php } ?><?php if($value['money']) { ?><?php if($_GET['view']=='me') { ?>有效期:<?php echo sgmdate('Y-m-d H:i',$value[dateline1],1); ?>--<?php echo sgmdate('Y-m-d H:i:s',$value[endtime]); ?><?php } ?><?php } ?></h5>    
+                              
   								
                              </div>
           
@@ -342,8 +345,11 @@
     <div style="padding-bottom: 30px;padding-left:12px;">*如果需要更改应用顺序，请通过修改每个应用下的下拉框进行选择，系统会通过数字大小进行排列。<br/>*务必不要选择2个相同的数字</div>
     
                            <input style="margin-left:330px;margin-top: -10px;" type="submit" class="btn grid_2">
+                              <?php } else { ?>
+    <div style="padding-bottom: 30px;padding-left:12px;">点击提交会对名称进行修改<br/>*提交后会以新的名字替换原来的名字，旧名字将不复存在。</div>
+                          <input style="margin-left:330px;margin-top: -10px;" type="submit" class="btn grid_2">
                     <!--   <a class="btn grid_2" href="space.php?do=menuset&view=me&change=1" style="margin-top: -10px;">修改</a> -->
-                      </form><?php } ?>
+                      <?php } ?></form>
                       <?php } ?>
 
 

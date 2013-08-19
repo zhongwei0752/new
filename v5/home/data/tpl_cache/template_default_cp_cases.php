@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_cases|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375667888', 'template/default/cp_cases');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/cp_cases|template/default/header|template/default/cp_topic_menu|template/default/footer|template/default/space_topic_inc', '1375930845', 'template/default/cp_cases');?><?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -297,11 +297,11 @@
 <td>
 <div class="post_list container_12">
                          <span class="select_title grid_1">标题&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <input type="text" class="t_input" id="subject" name="subject" value="<?=$cases['subject']?>"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
+                           <input type="text" class="t_input" id="subject" name="subject" size="40" value="<?=$cases['subject']?>"  onblur="relatekw();" placeholder="标题长度不超过80字符" />
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">案例甲方&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <input type="text" class="t_input" id="company" name="company" value="<?=$cases['company']?>" >
+                           <input type="text" class="t_input" id="company" name="company" size="40" value="<?=$cases['company']?>" >
                             </div>
                             <div class="post_list container_12">
                          <span class="select_title grid_1">封面图片&nbsp;&nbsp;:&nbsp;&nbsp;</span>
@@ -315,7 +315,7 @@
                          <span class="select_title grid_1">正文&nbsp;&nbsp;:&nbsp;&nbsp;</span>
                           <a id="doodleBox" href="magic.php?mid=doodle&showid=cases_doodle&target=uchome-ttHtmlEditor&from=editor" style="display:none"></a>
   <textarea class="userData" name="message" id="uchome-ttHtmlEditor" style="height:100%;width:100%;display:none;border:0px"><?=$cases['message']?></textarea>
-  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:300px;border: 1px solid #C5C5C5;margin-left:20px;" height="200"></iframe>
+  <iframe src="editor.php?charset=<?=$_SC['charset']?>&allowhtml=<?=$allowhtml?>&doodle=<?php if(isset($_SGLOBAL['magic']['doodle'])) { ?>1<?php } ?>" name="uchome-ifrHtmlEditor" id="uchome-ifrHtmlEditor" scrolling="no" border="0" frameborder="0" style="width:550px;height:300px;border: 1px solid #C5C5C5;" height="200"></iframe>
                             </div>
 
 </td>
@@ -324,7 +324,7 @@
 <td>
 <div class="post_list container_12">
                          <span class="select_title grid_1">案例甲方评论&nbsp;&nbsp;:&nbsp;&nbsp;</span>
-                           <textarea name="messagecomment" style="width:550px;height:200px;margin-left:20px;"><?=$cases['messagecomment']?></textarea>
+                           <textarea name="messagecomment" style="width:550px;height:200px;"><?=$cases['messagecomment']?></textarea>
                             </div>
 </td>
 </tr>
@@ -335,12 +335,17 @@
 <input type="hidden" name="topicid" value="<?=$_GET['topicid']?>" />
 <input type="hidden" name="formhash" value="<?php echo formhash(); ?>" />
 </form>
+<style>
+.infotable th{
+padding-right: 0em;
+}
+</style>
 
 <?php if(!$_SGLOBAL['inajax'] && (!$cases['uid'] || $cases['uid']==$_SGLOBAL['supe_uid'])) { ?>
-<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
-<tr><th width="160px">图片:</th><td>
+<table cellspacing="4" cellpadding="4" width="100%" class="infotable" style="margin-left:50px;">
+<tr><th width="100" style="margin-left:50px;padding-right: -1em;">图片&nbsp;&nbsp;:</th><td>
 <div class="pic_submit container_12">
-<input type="button" class="btn grid_3" name="clickbutton[]" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
+<input type="button" class="btn grid_3" name="clickbutton[]" style="margin-right:-20px;" value="上传图片" class="button" style="float:left;" onclick="edit_album_show('pic')">
 </div>
 </td></tr>
 </table>
@@ -399,7 +404,7 @@
 <tr>
 <th width="100">&nbsp;</th>
 <td>
-<div class="confirm_btn container_12">
+<div class="confirm_btn container_12" style="margin-left:-20px;">
                            <a href="space.php?do=home" class="cancle_btn grid_1">取消</a>
                            <input type="button" class="btn grid_2" id="issuance" onclick="document.getElementById('casesbutton').click();" value="保存发布" class="submit" />
                         

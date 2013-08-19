@@ -299,6 +299,288 @@ function deleteindustrys($industryids) {
 	return $industrys;
 }
 
+function deletebranchs($branchids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('delbranch', 0);
+	//获取博客信息
+	$spaces = $branchs = $newbranchids = array();
+	$allowmanage = checkperm('managebranch');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('branch')." WHERE branchid IN (".simplode($branchids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$branchs[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($branchs) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($branchs as $key => $value) {
+		$newbranchids[] = $value['branchid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('branch')." WHERE branchid IN (".simplode($newbranchids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('branchfield')." WHERE branchid IN (".simplode($newbranchids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newbranchids).") AND idtype='branchid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newbranchids).") AND idtype='branchid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newbranchids).") AND idtype='branchid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newbranchids).") AND idtype='branchid'");
+
+	return $branchs;
+}
+
+function deletejobs($jobids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('deljob', 0);
+	//获取博客信息
+	$spaces = $jobs = $newjobids = array();
+	$allowmanage = checkperm('managejob');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('job')." WHERE jobid IN (".simplode($jobids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$jobs[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($jobs) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($jobs as $key => $value) {
+		$newjobids[] = $value['jobid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('job')." WHERE jobid IN (".simplode($newjobids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('jobfield')." WHERE jobid IN (".simplode($newjobids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newjobids).") AND idtype='jobid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newjobids).") AND idtype='jobid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newjobids).") AND idtype='jobid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newjobids).") AND idtype='jobid'");
+
+	return $jobs;
+}
+
+function deletecasess($casesids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('delcases', 0);
+	//获取博客信息
+	$spaces = $casess = $newcasesids = array();
+	$allowmanage = checkperm('managecases');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('cases')." WHERE casesid IN (".simplode($casesids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$casess[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($casess) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($casess as $key => $value) {
+		$newcasesids[] = $value['casesid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('cases')." WHERE casesid IN (".simplode($newcasesids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('casesfield')." WHERE casesid IN (".simplode($newcasesids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newcasesids).") AND idtype='casesid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newcasesids).") AND idtype='casesid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newcasesids).") AND idtype='casesid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newcasesids).") AND idtype='casesid'");
+
+	return $casess;
+}
+
+function deletegoods($goodsids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('delgoods', 0);
+	//获取博客信息
+	$spaces = $goodss = $newgoodsids = array();
+	$allowmanage = checkperm('managegoods');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('goods')." WHERE goodsid IN (".simplode($goodsids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$goodss[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($goodss) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($goodss as $key => $value) {
+		$newgoodsids[] = $value['goodsid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('goods')." WHERE goodsid IN (".simplode($newgoodsids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('goodsfield')." WHERE goodsid IN (".simplode($newgoodsids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newgoodsids).") AND idtype='goodsid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newgoodsids).") AND idtype='goodsid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newgoodsids).") AND idtype='goodsid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newgoodsids).") AND idtype='goodsid'");
+
+	return $goodss;
+}
+
+function deleterecommends($recommendids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('delrecommend', 0);
+	//获取博客信息
+	$spaces = $recommends = $newrecommendids = array();
+	$allowmanage = checkperm('managerecommend');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('recommend')." WHERE recommendid IN (".simplode($recommendids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$recommends[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($recommends) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($recommends as $key => $value) {
+		$newrecommendids[] = $value['recommendid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('recommend')." WHERE recommendid IN (".simplode($newrecommendids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('recommendfield')." WHERE recommendid IN (".simplode($newrecommendids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newrecommendids).") AND idtype='recommendid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newrecommendids).") AND idtype='recommendid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newrecommendids).") AND idtype='recommendid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newrecommendids).") AND idtype='recommendid'");
+
+	return $recommends;
+}
+
+function deletemoblies($moblieids) {
+	global $_SGLOBAL;
+
+	//获取积分
+	$reward = getreward('delmoblie', 0);
+	//获取博客信息
+	$spaces = $moblies = $newmoblieids = array();
+	$allowmanage = checkperm('managemoblie');
+	$managebatch = checkperm('managebatch');
+	$delnum = 0;
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('moblie')." WHERE moblieid IN (".simplode($moblieids).")");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		if($allowmanage || $value['uid'] == $_SGLOBAL['supe_uid']) {
+			$moblies[] = $value;
+			if(!$managebatch && $value['uid'] != $_SGLOBAL['supe_uid']) {
+				$delnum++;
+			}
+		}
+	}
+	if(empty($moblies) || (!$managebatch && $delnum > 1)) return array();
+	
+	foreach($moblies as $key => $value) {
+		$newmoblieids[] = $value['moblieid'];
+		if($allowmanage && $value['uid'] != $_SGLOBAL['supe_uid']) {
+			//扣除积分
+			$_SGLOBAL['db']->query("UPDATE ".tname('space')." SET credit=credit-$reward[credit], experience=experience-$reward[experience] WHERE uid='$value[uid]'");
+		}
+}
+	//数据删除
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('moblie')." WHERE moblieid IN (".simplode($newmoblieids).")");
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('mobliefield')." WHERE moblieid IN (".simplode($newmoblieids).")");
+
+	//评论
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('comment')." WHERE id IN (".simplode($newmoblieids).") AND idtype='moblieid'");
+
+	//删除举报
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('report')." WHERE id IN (".simplode($newmoblieids).") AND idtype='moblieid'");
+
+	//删除feed
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('feed')." WHERE id IN (".simplode($newmoblieids).") AND idtype='moblieid'");
+	
+	//删除脚印
+	$_SGLOBAL['db']->query("DELETE FROM ".tname('clickuser')." WHERE id IN (".simplode($newmoblieids).") AND idtype='moblieid'");
+
+	return $moblies;
+}
+
 //删除事件
 function deletefeeds($feedids) {
 	global $_SGLOBAL;

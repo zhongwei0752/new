@@ -1,4 +1,4 @@
-<!--{eval $_TPL['titles'] = array('好友');}-->
+<!--{eval $_TPL['titles'] = array('客户');}-->
 <!--{template header}-->
     <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
     <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
@@ -13,14 +13,17 @@
       .bg1{ background: url("./template/default/image/chosen_bg.png");}
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
-      #simplemodal-container{height:200px;}
+
+      #simplemodal-container a {
+color:#02B4AB;
+}
     </style>
 
 <!--{if !empty($_SGLOBAL[inajax])}-->
 	<div id="space_friend">
 		<h3 class="feed_header">
-			<a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找好友</a>
-			好友(共 $count 个)
+			<a href="cp.php?ac=friend&op=search" class="r_option" target="_blank">寻找客户</a>
+			客户(共 $count 个)
 		</h3><br>
 
 		<!--{if $list}-->
@@ -42,7 +45,7 @@
 					<div class="setti">
 
 					<!--{if !$value['isfriend']}-->
-					<a href="cp.php?ac=friend&op=add&uid=$value[uid]" id="a_friend_$key" onclick="ajaxmenu(event, this.id, 1)">加为好友</a>
+					<a href="cp.php?ac=friend&op=add&uid=$value[uid]" id="a_friend_$key" onclick="ajaxmenu(event, this.id, 1)">加为客户</a>
 					<!--{/if}-->
 					</div>
 					</td></tr></table>
@@ -67,13 +70,15 @@
 
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
-                         好友列表
+                         客户列表
                      </div>
                     
                  </div>		
 
  <div class="content_detail_wrapper">
-
+ <div id="nav" style="margin-top:20px;margin-left:180px;">
+<a href="space.php?do=friend" style="<!--{if $_GET['view']=='me'}-->color:#02B4AB<!--{/if}-->">最新关注排序</a><a href="space.php?do=friend&view=lastlogin" style="padding-left:20px;<!--{if $_GET['view']=='lastlogin'}-->color:#02B4AB<!--{/if}-->">最后登陆时间排序</a><a href="space.php?do=friend&view=hot" style="padding-left:20px;<!--{if $_GET['view']=='hot'}-->color:#02B4AB<!--{/if}-->">活跃度排序</a>  
+ 	</div>
 
 
 
@@ -90,7 +95,7 @@
 				<div class="avatar48"><a href="space.php?uid=$value[uid]"><!--{avatar($value[uid],small)}--></a></div>
 				<div class="thumbTitle">
 				<p<!--{if $ols[$value[uid]]}--> class="online_icon_p"<!--{/if}-->>
-					<a href="space.php?uid=$value[uid]"<!--{eval g_color($value[groupid]);}-->>{$_SN[$value[uid]]}</a> 
+					<a style="color:#02B4AB;" href="space.php?uid=$value[uid]"<!--{eval g_color($value[groupid]);}-->>{$_SN[$value[uid]]}</a> 
 					<!--{eval g_icon($value[groupid]);}-->
 					<!--{if $value['videostatus']}-->
 					<img src="image/videophoto.gif" align="absmiddle">
@@ -122,19 +127,17 @@
     var jquery = jQuery.noConflict();
       jquery(document).ready(function(){
        jquery('#talk$value[uid]').attr("style", "display:none;");
+      
           jquery('#a_talk_$value[uid]').click(function (e) {
     		e.preventDefault();
    jquery('#talk$value[uid]').modal();
   });
 
+
             
        })
     </script>
-    <div id="talk$value[uid]">
-  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
-  <div style="width:600px;background:#fff;margin:20px auto;text-align:center;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message" style="width:300px;"><input type="hidden" name="fakeid" value="$value[fakeid]"><input type="hidden" name="uid" value="$value[uid]"> <br/><br/><input type="submit" style="margin-left:250px;" class="btn grid_2" name="friendreply"></form></div>
 
-</div>
 		<!--{/loop}-->
 		</ul>
 	</div>
@@ -152,7 +155,7 @@
 
 <div id="sidebar" style="width: 150px;">
 	<!--{if $_SCONFIG['my_status']}-->
-	<!-- 同步好友至Manyou 开始 -->
+	<!-- 同步客户至Manyou 开始 -->
 	<script type="text/javascript">
 		function my_sync_tip(msg, close_time) {;
 			var my_tip = document.getElementById("my_tip");
@@ -168,7 +171,7 @@
 			}
 		}
 		function my_sync_friend() {
-			my_sync_tip('正在同步好友信息...', 0);
+			my_sync_tip('正在同步客户信息...', 0);
 			var my_scri = document.createElement("script");
 			document.getElementsByTagName("head")[0].appendChild(my_scri);
 			my_scri.charset = "UTF-8";
@@ -177,23 +180,32 @@
 	</script>
 
 	<div class="c_mgs"><div class="ye_r_t"><div class="ye_l_t"><div class="ye_r_b"><div class="ye_l_b">
-		<p>在游戏中找不到自己的好友？请点击下面的的按钮，将好友信息同步到里面。</p>
-		<p style="text-align: center;padding: 20px 0 0;"> <a href="#" onclick="my_sync_friend(); return false;" title="将好友关系同步至Manyou平台，以便在应用里看到他们"><img alt="刷新好友信息" src="image/syncfriend.gif"/></a> </p>
+		<p>在游戏中找不到自己的客户？请点击下面的的按钮，将客户信息同步到里面。</p>
+		<p style="text-align: center;padding: 20px 0 0;"> <a href="#" onclick="my_sync_friend(); return false;" title="将客户关系同步至Manyou平台，以便在应用里看到他们"><img alt="刷新客户信息" src="image/syncfriend.gif"/></a> </p>
 	</div></div></div></div></div>
-	<!-- 同步好友至Manyou 结束 -->
+	<!-- 同步客户至Manyou 结束 -->
 	<!--{/if}-->
 
 <!--{else}-->
 <!--{eval
-	$_TPL['spacetitle'] = "好友";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=friend&view=me\">TA的好友列表</a>";
+	$_TPL['spacetitle'] = "客户";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=friend&view=me\">TA的客户列表</a>";
 }-->
 	<!--{template space_menu}-->
-	<div class="h_status">共有 $space[friendnum] 个好友</div>
+	<div class="h_status">共有 $space[friendnum] 个客户</div>
 	<!--{template space_list}-->
 
 <!--{/if}-->
 
 <!--{/if}-->
 
+
+	<!--{loop $list $key $value}-->
+
+    <div id="talk$value[uid]">
+  <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">私信</h3>
+  <div style="width:600px;background:#fff;margin:20px auto;text-align:center;"><form action = "space.php?do=friend" method = "post"><input type="text" name="message" style="width:300px;"><input type="hidden" name="fakeid" value="$value[fakeid]"><input type="hidden" name="uid" value="$space[uid]"> <br/><br/><input type="submit" style="margin-left:250px;" class="btn grid_2" name="friendreply"></form></div>
+
+</div>
+<!--{/loop}-->
 <!--{template footer}-->

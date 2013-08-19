@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_list|template/default/header|template/default/footer', '1375667533', 'template/default/space_cases_list');?><?php $_TPL['titles'] = array('成功案例'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_list|template/default/header|template/default/footer', '1376619711', 'template/default/space_cases_list');?><?php $_TPL['titles'] = array($newname[subject]); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -179,7 +179,7 @@
 </ul>
 <div class="page"><?=$multi?></div>
 <?php } else { ?>
-<div class="c_form">还没有相关的成功案例。</div>
+<div class="c_form">还没有相关的<?=$newname['subject']?>。</div>
 <?php } ?>
 </div>
 <?php } else { ?>
@@ -188,11 +188,11 @@
 <div class="content" style="font-size:15px;">
           
                  <div class="indexing">
-                 <span><a href="space.php?do=home">首页</a></span>><span>成功案例</span>
+                 <span><a href="space.php?do=home">首页</a></span>><span><?=$newname['subject']?></span>
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
-                         成功案例
+                         <?=$newname['subject']?>
                      </div>
                      <a href="cp.php?ac=cases" class="btn grid_2">
                       发布

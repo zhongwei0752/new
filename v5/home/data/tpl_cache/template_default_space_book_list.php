@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_book_list|template/default/header|template/default/footer', '1375429420', 'template/default/space_book_list');?><?php $_TPL['titles'] = array('预约预定'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_book_list|template/default/header|template/default/footer', '1376562585', 'template/default/space_book_list');?><?php $_TPL['titles'] = array('预约预定'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>

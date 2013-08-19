@@ -7,6 +7,7 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
+if($_SGLOBAL['supe_uid']) {
 if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 		showmessage('enter_the_space', 'cp.php?ac=profile', 0);
 	}
@@ -16,6 +17,10 @@ if ($space['profilestatus']=='0'&&$space['namestatus']=='0'){
 	if($space['profilestatus']=='0'&&$space['namestatus']=='1'&&empty($zhong1)){
 		showmessage('enter_the_space', 'space.php?do=menuset&view=me', 0);
 	}
+
+}else{
+	showmessage('未登录', 'index.php', 0);
+}
 
 if($_POST['friendreply']){
 	require_once './wx/wx_common.php';
@@ -125,7 +130,85 @@ if($_GET['view'] == 'online') {
 	}
 	$multi = multi($count, $perpage, $page, $theurl);
 
-} elseif($_GET['view'] == 'blacklist') {
+}elseif($_GET['view'] == 'lastlogin') {
+
+	$theurl = "space.php?uid=$space[uid]&do=friend&view=$_GET[view]";
+	$actives = array('me'=>' class="active"');
+
+	if($space['friendnum']) {
+		if($wheresql) {
+			$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('friend')." main WHERE main.uid='$space[uid]' AND main.status='1' $wheresql"), 0);
+		} else {
+			$count = $space['friendnum'];
+		}
+	if($count) {
+		$query = $_SGLOBAL['db']->query("SELECT s.*, f.resideprovince, f.residecity, f.note, f.spacenote, f.sex, main.gid, main.num
+				FROM ".tname('friend')." main
+				LEFT JOIN ".tname('space')." s ON s.uid=main.fuid
+				LEFT JOIN ".tname('spacefield')." f ON f.uid=main.fuid
+				WHERE main.uid='$space[uid]' AND main.status='1' $wheresql
+				ORDER BY s.lastlogin DESC
+				LIMIT $start,$perpage");
+		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+				$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('feed')." where uid='$value[uid]' ORDER BY dateline DESC");
+				while($value1 = $_SGLOBAL['db']->fetch_array($query1)){
+				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
+
+				$value['feed'][]=mkfeed($value1);
+				}
+				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
+				$value['p'] = rawurlencode($value['resideprovince']);
+				$value['c'] = rawurlencode($value['residecity']);
+				$value['group'] = $groups[$value['gid']];
+				$value['isfriend'] = 1;
+				$fuids[] = $value['uid'];
+				$value['note'] = getstr($value['note'], 28, 0, 0, 0, 0, -1);
+				$list[$value['uid']] = $value;
+			}
+		}
+	}
+	$multi = multi($count, $perpage, $page, $theurl);
+
+}elseif($_GET['view'] == 'hot') {
+
+	$theurl = "space.php?uid=$space[uid]&do=friend&view=$_GET[view]";
+	$actives = array('me'=>' class="active"');
+
+	if($space['friendnum']) {
+		if($wheresql) {
+			$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('friend')." main WHERE main.uid='$space[uid]' AND main.status='1' $wheresql"), 0);
+		} else {
+			$count = $space['friendnum'];
+		}
+	if($count) {
+		$query = $_SGLOBAL['db']->query("SELECT s.*, f.resideprovince, f.residecity, f.note, f.spacenote, f.sex, main.gid, main.num
+				FROM ".tname('friend')." main
+				LEFT JOIN ".tname('space')." s ON s.uid=main.fuid
+				LEFT JOIN ".tname('spacefield')." f ON f.uid=main.fuid
+				WHERE main.uid='$space[uid]' AND main.status='1' $wheresql
+				ORDER BY s.introducenum+s.productnum+s.developmentnum+s.industrynum+s.casesnum+s.branchnum+s.jobnum DESC
+				LIMIT $start,$perpage");
+		while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+				$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('feed')." where uid='$value[uid]' ORDER BY dateline DESC");
+				while($value1 = $_SGLOBAL['db']->fetch_array($query1)){
+				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
+
+				$value['feed'][]=mkfeed($value1);
+				}
+				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
+				$value['p'] = rawurlencode($value['resideprovince']);
+				$value['c'] = rawurlencode($value['residecity']);
+				$value['group'] = $groups[$value['gid']];
+				$value['isfriend'] = 1;
+				$fuids[] = $value['uid'];
+				$value['note'] = getstr($value['note'], 28, 0, 0, 0, 0, -1);
+				$list[$value['uid']] = $value;
+			}
+		}
+	}
+	$multi = multi($count, $perpage, $page, $theurl);
+
+}elseif($_GET['view'] == 'blacklist') {
 
 	$theurl = "space.php?uid=$space[uid]&do=friend&view=$_GET[view]";
 	$actives = array('me'=>' class="active"');
@@ -169,22 +252,29 @@ if($_GET['view'] == 'online') {
 		$wheresql = "AND main.fusername='$_GET[searchkey]'";
 		$theurl .= "&searchkey=$_GET[searchkey]";
 	}
-
+	realname_get();
 	if($space['friendnum']) {
 		if($wheresql) {
 			$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('friend')." main WHERE main.uid='$space[uid]' AND main.status='1' $wheresql"), 0);
 		} else {
 			$count = $space['friendnum'];
 		}
+
 		if($count) {
 			$query = $_SGLOBAL['db']->query("SELECT s.*, f.resideprovince, f.residecity, f.note, f.spacenote, f.sex, main.gid, main.num
 				FROM ".tname('friend')." main
 				LEFT JOIN ".tname('space')." s ON s.uid=main.fuid
 				LEFT JOIN ".tname('spacefield')." f ON f.uid=main.fuid
 				WHERE main.uid='$space[uid]' AND main.status='1' $wheresql
-				ORDER BY main.num DESC, main.dateline DESC
+				ORDER BY main.dateline DESC
 				LIMIT $start,$perpage");
 			while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+				$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('feed')." where uid='$value[uid]' ORDER BY dateline DESC");
+				while($value1 = $_SGLOBAL['db']->fetch_array($query1)){
+				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
+
+				$value['feed'][]=mkfeed($value1);
+				}
 				realname_set($value['uid'], $value['username'], $value['name'], $value['namestatus']);
 				$value['p'] = rawurlencode($value['resideprovince']);
 				$value['c'] = rawurlencode($value['residecity']);
@@ -233,6 +323,11 @@ if($fuids) {
 		}
 	}
 }
+
+
+
+
+
 
 realname_get();
 

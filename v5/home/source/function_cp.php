@@ -531,7 +531,7 @@ function getalbums($uid) {
 }
 
 //事件发布
-function feed_add($icon, $title_template='', $title_data=array(), $body_template='', $body_data=array(), $body_general='', $images=array(), $image_links=array(), $target_ids='', $friend='', $appid='', $returnid=0) {
+function feed_add($icon, $title_template='', $title_data=array(), $body_template='', $body_data=array(), $body_general='', $images=array(), $image_links=array(), $target_ids='', $friend='', $appid='', $returnid=0,$idtype) {
 	global $_SGLOBAL;
 
 	if(empty($appid)) {

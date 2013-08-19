@@ -8,8 +8,8 @@ if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
 
-//²úÉú¶¯Ì¬
-function feed_publish($id, $idtype, $add=0) {
+//Â²ÃºÃ‰ÃºÂ¶Â¯ÃŒÂ¬
+function feed_publish($id, $idtype, $add=0,$uid,$typeid) {
 	global $_SGLOBAL;
 	
 	$setarr = array();
@@ -20,7 +20,7 @@ function feed_publish($id, $idtype, $add=0) {
 				WHERE b.blogid='$id'");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
 				if($value['friend'] != 3) {
-					//»ù±¾
+					//Â»Ã¹Â±Â¾
 					$setarr['icon'] = 'blog';
 					$setarr['id'] = $value['blogid'];
 					$setarr['idtype'] = $idtype;
@@ -31,12 +31,12 @@ function feed_publish($id, $idtype, $add=0) {
 					$setarr['friend'] = $value['friend'];
 					$setarr['hot'] = $value['hot'];
 					
-					//ÏêÏ¸
+					//ÃÃªÃÂ¸
 					$url = "space.php?uid=$value[uid]&do=blog&id=$value[blogid]";
-					if($value['friend'] == 4) {//¼ÓÃÜ
+					if($value['friend'] == 4) {//Â¼Ã“ÃƒÃœ
 						$setarr['title_template'] = cplang('feed_blog_password');
 						$setarr['title_data'] = array('subject' => "<a href=\"$url\">$value[subject]</a>");
-					} else {//·ÇË½ÈË
+					} else {//Â·Ã‡Ã‹Â½ÃˆÃ‹
 						if($value['pic']) {
 							$setarr['image_1'] = pic_cover_get($value['pic'], $value['picflag']);
 							$setarr['image_1_link'] = $url;
@@ -51,6 +51,34 @@ function feed_publish($id, $idtype, $add=0) {
 				}
 			}
 			break;
+		case 'viewid':
+			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')."
+				WHERE english='$id'");
+			if($value = $_SGLOBAL['db']->fetch_array($query)) {
+				$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')."
+				WHERE uid='$add'");
+				$space = $_SGLOBAL['db']->fetch_array($query1);
+				$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')."
+				WHERE uid='$uid'");
+				$newid=$id."id";
+				$space1 = $_SGLOBAL['db']->fetch_array($query2);
+				$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname($id)."
+				WHERE $newid = '$typeid'");
+				$value1 = $_SGLOBAL['db']->fetch_array($query2);
+ 			$setarr = array(
+			    'icon' =>'profile',
+			    'uid' => $add,
+				'username' => $space['name'],
+				'dateline' => $_SGLOBAL['timestamp'],
+				'idtype' => $id,
+				'friend' => 0,
+				'title_template' => "$space[name] æŸ¥çœ‹äº†$space1[name]çš„$value[subject]<$value1[subject]>",
+			   );		  
+
+			}
+				
+			break;
+
 		case 'albumid':
 			$key = 1;
 			if($id > 0) {
@@ -60,7 +88,7 @@ function feed_publish($id, $idtype, $add=0) {
 				while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 					if($value['friend'] <= 2) {
 						if(empty($setarr['icon'])) {
-							//»ù±¾
+							//Â»Ã¹Â±Â¾
 							$setarr['icon'] = 'album';
 							$setarr['id'] = $value['albumid'];
 							$setarr['idtype'] = $idtype;
@@ -69,7 +97,7 @@ function feed_publish($id, $idtype, $add=0) {
 							$setarr['dateline'] = $value['dateline'];
 							$setarr['target_ids'] = $value['target_ids'];
 							$setarr['friend'] = $value['friend'];
-							//ÏêÏ¸
+							//ÃÃªÃÂ¸
 							$setarr['title_template'] = '{actor} '.cplang('upload_album');
 							$setarr['body_template'] = '<b>{album}</b><br>'.cplang('the_total_picture', array('{picnum}'));
 							$setarr['body_data'] = array(
@@ -85,18 +113,18 @@ function feed_publish($id, $idtype, $add=0) {
 					}
 				}
 			} else {
-				//Ä¬ÈÏÏà²á
+				//Ã„Â¬ÃˆÃÃÃ Â²Ã¡
 				$picnum = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('pic')." WHERE uid='$_SGLOBAL[supe_uid]' AND albumid='0'"), 0);
 				if($picnum>=1) {
 					$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('pic')." WHERE uid='$_SGLOBAL[supe_uid]' AND albumid='0' ORDER BY dateline DESC LIMIT 0,4");
 					while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 						if(empty($setarr['icon'])) {
-							//»ù±¾
+							//Â»Ã¹Â±Â¾
 							$setarr['icon'] = 'album';
 							$setarr['uid'] = $value['uid'];
 							$setarr['username'] = $_SGLOBAL['supe_username'];
 							$setarr['dateline'] = $value['dateline'];
-							//ÏêÏ¸
+							//ÃÃªÃÂ¸
 							$setarr['title_template'] = '{actor} '.cplang('upload_album');
 							$setarr['body_template'] = '<b>{album}</b><br>'.cplang('the_total_picture', array('{picnum}'));
 							$setarr['body_data'] = array(
@@ -117,8 +145,8 @@ function feed_publish($id, $idtype, $add=0) {
 				LEFT JOIN ".tname('space')." s ON s.uid=p.uid
 				LEFT JOIN ".tname('album')." a ON a.albumid=p.albumid WHERE $plussql");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
-				if(empty($value['friend'])) {//ÒşË½
-					//»ù±¾
+				if(empty($value['friend'])) {//Ã’Ã¾Ã‹Â½
+					//Â»Ã¹Â±Â¾
 					$setarr['icon'] = 'album';
 					$setarr['id'] = $value['picid'];
 					$setarr['idtype'] = $idtype;
@@ -128,7 +156,7 @@ function feed_publish($id, $idtype, $add=0) {
 					$setarr['target_ids'] = $value['target_ids'];
 					$setarr['friend'] = $value['friend'];
 					$setarr['hot'] = $value['hot'];
-					//ÏêÏ¸
+					//ÃÃªÃÂ¸
 					$url = "space.php?uid=$value[uid]&do=album&picid=$value[picid]";
 					$setarr['image_1'] = pic_get($value['filepath'], $value['thumb'], $value['remote']);
 					$setarr['image_1_link'] = $url;
@@ -143,7 +171,7 @@ function feed_publish($id, $idtype, $add=0) {
 				LEFT JOIN ".tname('post')." p ON p.tid=t.tid AND p.isthread='1'
 				WHERE t.tid='$id'");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
-				//»ù±¾
+				//Â»Ã¹Â±Â¾
 				$setarr['icon'] = 'thread';
 				$setarr['id'] = $value['tid'];
 				$setarr['idtype'] = $idtype;
@@ -152,11 +180,11 @@ function feed_publish($id, $idtype, $add=0) {
 				$setarr['dateline'] = $value['dateline'];
 				$setarr['hot'] = $value['hot'];
 				
-				//ÏêÏ¸
+				//ÃÃªÃÂ¸
 				$url = "space.php?uid=$value[uid]&do=thread&id=$value[tid]";
 				
 				if($value['eventid']) {
-					//»î¶¯
+					//Â»Ã®Â¶Â¯
 					$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname("event")." WHERE eventid='$value[eventid]'");
 					$event = $_SGLOBAL['db']->fetch_array($query);
 					
@@ -185,7 +213,7 @@ function feed_publish($id, $idtype, $add=0) {
 			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('poll')." WHERE pid='$id'");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
 
-				//»ù±¾
+				//Â»Ã¹Â±Â¾
 				$setarr['icon'] = 'poll';
 				$setarr['id'] = $value['pid'];
 				$setarr['idtype'] = $idtype;
@@ -194,7 +222,7 @@ function feed_publish($id, $idtype, $add=0) {
 				$setarr['dateline'] = $value['dateline'];
 				$setarr['hot'] = $value['hot'];
 				
-				//ÏêÏ¸
+				//ÃÃªÃÂ¸
 				$url = "space.php?uid=$value[uid]&do=poll&pid=$value[pid]";
 				
 				$setarr['title_template'] = cplang('feed_poll');
@@ -217,7 +245,7 @@ function feed_publish($id, $idtype, $add=0) {
 			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('event')." WHERE eventid='$id'");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
 
-				//»ù±¾
+				//Â»Ã¹Â±Â¾
 				$setarr['icon'] = 'event';
 				$setarr['id'] = $value['eventid'];
 				$setarr['idtype'] = $idtype;
@@ -226,7 +254,7 @@ function feed_publish($id, $idtype, $add=0) {
 				$setarr['dateline'] = $value['dateline'];
 				$setarr['hot'] = $value['hot'];
 				
-				//ÏêÏ¸
+				//ÃÃªÃÂ¸
 				$url = "space.php?do=event&id=$value[eventid]";
 				
 				$setarr['title_template'] = cplang('event_add');
@@ -239,7 +267,7 @@ function feed_publish($id, $idtype, $add=0) {
 					'starttime' => sgmdate('m-d H:i', $value['starttime']),
 					'endtime' => sgmdate('m-d H:i', $value['endtime'])
 				);
-				//·âÃæ
+				//Â·Ã¢ÃƒÃ¦
 				if($value['poster']) {
 					$setarr['image_1'] = pic_get($value['poster'], $value['thumb'], $value['remote']);
 					$setarr['image_1_link'] = $url;
@@ -250,7 +278,7 @@ function feed_publish($id, $idtype, $add=0) {
 			$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('share')." WHERE sid='$id'");
 			if($value = $_SGLOBAL['db']->fetch_array($query)) {
 
-				//»ù±¾
+				//Â»Ã¹Â±Â¾
 				$setarr['icon'] = 'share';
 				$setarr['id'] = $value['sid'];
 				$setarr['idtype'] = $idtype;
@@ -259,7 +287,7 @@ function feed_publish($id, $idtype, $add=0) {
 				$setarr['dateline'] = $value['dateline'];
 				$setarr['hot'] = $value['hot'];
 				
-				//ÏêÏ¸
+				//ÃÃªÃÂ¸
 				$url = "space.php?uid=$value[uid]&do=share&id=$value[sid]";
 				
 				$setarr['title_template'] = '{actor} '.$value['title_template'];
@@ -276,13 +304,13 @@ function feed_publish($id, $idtype, $add=0) {
 		
 		$setarr['appid'] = UC_APPID;
 			
-		//Êı¾İ´¦Àí
-		$setarr['title_data'] = serialize($setarr['title_data']);//Êı×é×ª»¯
+		//ÃŠÃ½Â¾ÃÂ´Â¦Ã€Ã­
+		$setarr['title_data'] = serialize($setarr['title_data']);//ÃŠÃ½Ã—Ã©Ã—ÂªÂ»Â¯
 		if($idtype != 'sid') {
-			$setarr['body_data'] = serialize($setarr['body_data']);//Êı×é×ª»¯
+			$setarr['body_data'] = serialize($setarr['body_data']);//ÃŠÃ½Ã—Ã©Ã—ÂªÂ»Â¯
 		}
-		$setarr['hash_template'] = md5($setarr['title_template']."\t".$setarr['body_template']);//Ï²ºÃhash
-		$setarr['hash_data'] = md5($setarr['title_template']."\t".$setarr['title_data']."\t".$setarr['body_template']."\t".$setarr['body_data']);//ºÏ²¢hash
+		$setarr['hash_template'] = md5($setarr['title_template']."\t".$setarr['body_template']);//ÃÂ²ÂºÃƒhash
+		$setarr['hash_data'] = md5($setarr['title_template']."\t".$setarr['title_data']."\t".$setarr['body_template']."\t".$setarr['body_data']);//ÂºÃÂ²Â¢hash
 		
 		$setarr = saddslashes($setarr);
 		

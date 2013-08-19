@@ -71,7 +71,7 @@ if(ckprivacy('feed')) {
 $oluids = array();
 $friendlist = array();
 if(ckprivacy('friend')) {
-	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('friend')." WHERE uid='$space[uid]' AND status='1' ORDER BY num DESC, dateline DESC LIMIT 0,16");
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('friend')." WHERE uid='$space[uid]' AND status='1' ORDER BY num DESC, dateline DESC LIMIT 0,8");
 	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 		realname_set($value['fuid'], $value['fusername']);
 		$oluids[$value['fuid']] = $value['fuid'];
@@ -137,6 +137,40 @@ if($space['albumnum'] && ckprivacy('album')) {
 		}
 	}
 }
+
+
+$myself1=array();
+$myapp1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				ORDER BY b.dateline ASC ");
+		while ($myvalue1 = $_SGLOBAL['db']->fetch_array($myapp1)) {
+			//$a=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue1['english'])."  WHERE uid='$myvalue1[uid]'"), 0);
+		
+			if($myvalue1['newname']){
+				$myvalue1['subject']=$myvalue1['newname'];
+			}
+			$myself1[]=$myvalue1;
+		}
+
+$myself=array();
+$myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				ORDER BY b.dateline ASC ");
+		while ($myvalue = $_SGLOBAL['db']->fetch_array($myapp)) {
+			$idtype=$myvalue['english'].'id';
+			$a[$myvalue['english']]=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('feed')."  WHERE uid='$_GET[uid]' and idtype='$myvalue[english]'"), 0);
+			$b[$myvalue['english']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('comment')."  WHERE uid='$_GET[uid]' and idtype='$idtype'"), 0);
+			if($b[$myvalue['english']]){
+				$abc="1";
+			}
+			if($a[$myvalue['english']]){
+				$cba="1";
+			}
+			$myself[]=$myvalue;
+		}		
+
 
 //¡Ù—‘∞Â
 $walllist = array();

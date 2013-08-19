@@ -23,10 +23,23 @@ class Weixin {
 	    $post["username"] =$this->username ;
 	    $post["pwd"] = md5($this->password);
 	    $post["f"] = "json";
+	    $header = array(
+		'Accept: application/json, text/javascript, */*; q=0.01',
+		'Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3',
+		'Accept-Encoding: gzip,deflate,sdch',
+		'Accept-Language: zh-CN,zh;q=0.8',
+		'Connection: keep-alive',
+		'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
+		'Host: mp.weixin.qq.com',
+		'Origin: https://mp.weixin.qq.com',
+		'Referer: https://mp.weixin.qq.com/',
+		'X-Requested-With: XMLHttpRequest'  
+);
 	    $ch = curl_init($url);
 	    curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie_dir);
 	    curl_setopt($ch,CURLOPT_URL,$url);//抓取指定网页
 	    curl_setopt($ch, CURLOPT_HEADER, 1);//设置header
+	    curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
 	    curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
 	    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
@@ -144,6 +157,7 @@ class Weixin {
 		$data = (array)$data[0];
 		return $data;
 	}
+	//网上抓取fakeid
 	function getUser(){
 		$this->checkwxlogin();
 		$url = "https://mp.weixin.qq.com/cgi-bin/userinfopage?t=wxm-setting&lang=zh_CN&token=".$this->apptoken;
@@ -165,11 +179,12 @@ class Weixin {
 
 		$data = json_decode($data[0]);
 		$data=json_decode($data);
-		
+		//$data=$this->apptoken;
 
 		//$data = (array)$data[0];
 		return $data;
 	}
+	//本地抓取slave_user
 	function GetId(){
 		$url = "https://mp.weixin.qq.com/cgi-bin/getcontactinfo?t=ajax-getcontactinfo&lang=zh_CN&fakeid=&token=".$this->apptoken;
 		$ch = curl_init($url);

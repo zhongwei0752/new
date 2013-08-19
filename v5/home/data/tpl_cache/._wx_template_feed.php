@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1375266706', './wx/template/feed');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feed', '1376464490', './wx/template/feed');?><!DOCTYPE html>
 <html>
   <head>
   	 <title><?=$appname?></title>
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 <script id="detailTemplate" type="text/x-jquery-tmpl">
     
-   <a href="wx.php?do=detail&id={{= <?=$_GET['idtype']?>id}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id&type=<?=$_GET['idtype']?>" class="list" data-role="none">
+   <a href="wx.php?do=detail&id={{= <?=$_GET['idtype']?>id}}&uid={{= uid}}&idtype=<?=$_GET['idtype']?>id&type=<?=$_GET['idtype']?>&viewuid=<?=$row['uid']?>" class="list" data-role="none">
               <table style="width:100%;border-spacing: 0;">
                <tr>
                   <td>

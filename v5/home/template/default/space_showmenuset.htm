@@ -136,7 +136,7 @@ html>body td {
     <th scope="col" abbr="configurations">应用名称</th>  
     <th scope="col" abbr="dual 1.8">购买月份(单位:月)</th>  
     <th scope="col" abbr="dual 2">单价(单位:元)</th> 
-     <th scope="col" abbr="dual 2">总价(单位:元)</th>   
+     <th scope="col" abbr="dual 2">操作</th>   
   </tr>  
    <!--{/if}-->
  <!--{if $_GET['moblienum']}-->
@@ -152,7 +152,7 @@ html>body td {
     <th scope="row" abbr="model" class="spec">$value[subject]</th>  
     <td><!--{if $value[appstatus]}-->$value['addmonth']<!--{else}-->$value['month']<!--{/if}--></td>  
     <td><!--{eval $cost=$value['cost'];}-->$cost</td>   
-    <td></td>   
+    <td><a href="space.php?do=showmenuset&op=delete&id=$value[menusetid]">删除</td>   
   </tr>  
  <!--{/loop}-->
  <!--{/if}-->
@@ -191,13 +191,13 @@ html>body td {
 <input type="hidden" name="WIDbody" value="欢迎选购微伍应用" />
 <input type="hidden" name="WIDshow_url" value="欢迎选购微伍应用" />
  <!--{/if}--> 
-<a href=""><input type="submit" class="btn grid_2" value="购买"  name="buy"></a>
+<input type="submit" class="btn grid_2" value="购买"  name="buy">
 
 </form>
 </td>
     <td>
     <form action = "space.php?do=showmenuset" method = "post">
-<a href=""><input type="submit" class="btn grid_2" value="暂不购买"  name="cancel"></a>
+<input type="submit" class="btn grid_2" value="暂不购买"  name="cancel">
 </form>
 </td> 
     <!--{if !$_GET['moblienum']}-->   
@@ -208,7 +208,7 @@ html>body td {
 
 
  <!--{else}-->
-没有需要购买的应用
+没有需要购买的应用或手机模版
 <!--{/if}-->
 
 

@@ -53,10 +53,12 @@ if($verify_result) {//验证成功
         $value=mysql_query($sql1,$conn);
         while($row = mysql_fetch_array($value)){
         $moblieclicknum=$row['mobliestatus'];
-        $sql="update uchome_space set moblieclicknum='$moblieclicknum' where uid = $b";
+        $sql="update uchome_space set moblieclicknum='$moblieclicknum'  where uid = $b";
         mysql_query($sql,$conn);
         $sql1="INSERT INTO uchome_mobliechoice(moblieid,uid) VALUES ($moblieclicknum,$b)"; 
-        mysql_query($sql1,$conn); 
+        mysql_query($sql1,$conn);
+        $sql2="update uchome_space set mobliestatus='0'  where uid = $b";
+        mysql_query($sql2,$conn);
       }
 		
 		
