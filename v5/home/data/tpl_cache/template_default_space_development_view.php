@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_development_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1375255398', 'template/default/space_development_view');?><?php $_TPL['titles'] = array($development['subject'], '企业动态'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_development_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1377680465', 'template/default/space_development_view');?><?php $_TPL['titles'] = array($development['subject'], $newname[subject]); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -71,7 +71,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -105,19 +105,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -185,13 +190,13 @@
 <div style="padding:0 0 10px;">
 <div class="content" style="font-size:15px;">
 <div class="indexing" style="margin-bottom:15px;">
-                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=development&view=me">企业动态</a></span>
+                   <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=development&view=me"> <?=$newname['subject']?></a></span>
                  </div>
                 
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                            <div class="content_title"><?=$development['subject']?></div>
-                            <div class="content_text_detail" style="text-align:center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$development['username']?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$development[dateline]); ?></div>
+                            <div class="content_text_detail" style="text-align:center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$_SN[$development['uid']]?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$development[dateline]); ?></div>
                            <div class="content_text_detail" style="overflow:hidden">
                                <p><?=$development['message']?></p>
                            </div>
@@ -371,7 +376,7 @@ magicColor(elems[i]);
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 

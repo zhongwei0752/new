@@ -392,6 +392,18 @@ function deletejobs($jobids) {
 
 	return $jobs;
 }
+	
+	function deletedialog($dialogid){
+	global $_SGLOBAL;
+	$DB = $_SGLOBAL['db'];
+	$cnt = $DB->query("SELECT COUNT( * ) from ".tname("dialog")." WHERE did = $dialogid");
+	if($cnt > 0){
+		$DB->query("delete from ".tname("dialog")." where did = $dialogid");
+		return true;
+	}else {
+		return false;
+	}
+}
 
 function deletecasess($casesids) {
 	global $_SGLOBAL;

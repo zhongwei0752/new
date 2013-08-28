@@ -1,26 +1,16 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1376467062', './wx/template/feedcontent');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('./wx/template/feedcontent', '1377575393', './wx/template/feedcontent');?><!DOCTYPE html>
 <html>
-  <head>
-  	 <title><?=$appsubject['subject']?></title>
-  	 <meta charset="utf-8">
-  	 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
-     <link rel="stylesheet" type="text/css" href="./template/css/jquery-mobile-fluid960.min.css">
-     <link rel="stylesheet" type="text/css" href="./template/css/style.css">
-
-   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-
-  
-      <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-     <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
-     <script type="text/javascript" src="template/js/detail.js"></script>
-     <style type="text/css">
-          body{background: #fff;}
-     </style>
-
-     <script id="detailTemplate" type="text/x-jquery-tmpl">
- <header class="content_header_width">
-  
-      <h3> <?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
+    <head>
+<meta charset = "utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
+<link rel = "stylesheet" type = "text/css" href = "./template/css/main.css">
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+     	<script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
+     	<script type="text/javascript" src="template/js/detail.js"></script>
+     	<script id="detailTemplate" type="text/x-jquery-tmpl">
+     	<h3>
+     			<?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
                  <p> {{= industry.subject}}</p>
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                   <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
@@ -48,9 +38,8 @@
                  <p> {{= goods.subject}}</p>
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                  </h3>
-
-
-      <span class="time"><?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
+<span class = "info_content_span subtitle">
+<?=BLOCK_TAG_START?>if industry<?=BLOCK_TAG_END?>
                  <p> {{= industry.dateline}}</p>
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                   <?=BLOCK_TAG_START?>if branch<?=BLOCK_TAG_END?>
@@ -76,64 +65,41 @@
                  <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
                  <?=BLOCK_TAG_START?>if goods<?=BLOCK_TAG_END?>
                  <p> {{= goods.dateline}}</p>
-                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?>
-                 </span>
-         
-
-        </header><!-- header end -->
-        <div>
-          
-          
-
+                 <?=BLOCK_TAG_START?>/if<?=BLOCK_TAG_END?></span>
+     	</script>
+     	  <script id="commentTemplate" type="text/x-jquery-tmpl">
+     	  <li>
+<span>{{= author}}: </span>
+{{= message}}
+</li>            
 </script>
-   <script id="commentTemplate" type="text/x-jquery-tmpl">
- <div class="split"></div><!-- 这个是分割线 -->
-            <div class="normal_wrapper_width comments"><span class="commenter">{{= author}}:</span> {{= message}}</div>
-             
-</script>
- 
-  </head>
+</head>
+<body> 
+<div class = "article">
+<div id="detail-panel">
 
-  <body>
-    <div data-role="page">
-       <div id="detail-panel">
+       		</div>
+<div class = "article_content">
+<?=$message?>
+</div>
+</div>
+<div class = "comment">
+<div class = "comment_add">
+<textarea placeholder = "写下你的评论..." class = "comment_area" id="review"></textarea>
+<input type = "button" class = "submit_btn btn" value = "发表" onclick="cpComment($('#idtype').val(), $('#id').val(), $('#review').val())"/>
+</div>
+<ul class = "comment_list">
+   <div id="comment-panel">
 
-       </div>
-          <div class="content_text">
-            <div class="normal_wrapper_width">
-           <div class="content_pic" style="font-size:14px!important;">
-           
-                              <?=$message?>
-             </div>
-
-             </div>
-          </div>
-          <div class="split"></div>
-          <div style="background:#f0f0f0">
-             <div class="normal_wrapper_width container_12">
-                <div class="comment_wrapper grid_8">
-                   <textarea placeholder="写下你的评论..." class="comment_text_box" id="review"></textarea>
-                </div>
-                <a href="#"  class="comment_btn grid_3" onclick="cpComment($('#idtype').val(), $('#id').val(), $('#review').val())">
-                   发表
-                </a>
-            </div>
-            <div id="comment-panel">
-
-       </div>
-             
-
-          </div>
-    <input type="hidden" id="wxkey" name="wxkey" value="<?=$_GET['wxkey']?>"/>
-    <input type="hidden" id="id" name="id" value="<?=$_GET['id']?>"/>
-    <input type="hidden" id="idtype" name="idtype" value="<?=$_GET['idtype']?>"/>
-    <input type="hidden" id="type" name="type" value="<?=$_GET['type']?>"/>
-    <input type="hidden" id="uid" name="uid" value="<?=$_GET['uid']?>"/>
-    <input type="hidden" id="page" name="page" value="0"/>
-    <input type="hidden" id="perpage" name="perpage" value="5"/>
-        </div>
-        <footer></footer>
-    </div>
-   
-  </body>
+       		</div>
+</ul>
+</div>
+ <input type="hidden" id="wxkey" name="wxkey" value="<?=$_GET['wxkey']?>"/>
+    	<input type="hidden" id="id" name="id" value="<?=$_GET['id']?>"/>
+    	<input type="hidden" id="idtype" name="idtype" value="<?=$_GET['idtype']?>"/>
+    	<input type="hidden" id="type" name="type" value="<?=$_GET['type']?>"/>
+    	<input type="hidden" id="uid" name="uid" value="<?=$_GET['uid']?>"/>
+    	<input type="hidden" id="page" name="page" value="0"/>
+    	<input type="hidden" id="perpage" name="perpage" value="5"/>
+</body>
 </html><?php ob_out();?>

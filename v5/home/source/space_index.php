@@ -142,7 +142,7 @@ if($space['albumnum'] && ckprivacy('album')) {
 $myself1=array();
 $myapp1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
-				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='1'
 				ORDER BY b.dateline ASC ");
 		while ($myvalue1 = $_SGLOBAL['db']->fetch_array($myapp1)) {
 			//$a=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT * FROM ".tname($myvalue1['english'])."  WHERE uid='$myvalue1[uid]'"), 0);
@@ -153,25 +153,26 @@ $myapp1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf
 			$myself1[]=$myvalue1;
 		}
 
-$myself=array();
+	$myself=array();
+	$abc="1";
 $myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
-				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='1'
 				ORDER BY b.dateline ASC ");
 		while ($myvalue = $_SGLOBAL['db']->fetch_array($myapp)) {
 			$idtype=$myvalue['english'].'id';
-			$a[$myvalue['english']]=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('feed')."  WHERE uid='$_GET[uid]' and idtype='$myvalue[english]'"), 0);
-			$b[$myvalue['english']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('comment')."  WHERE uid='$_GET[uid]' and idtype='$idtype'"), 0);
-			if($b[$myvalue['english']]){
-				$abc="1";
-			}
-			if($a[$myvalue['english']]){
-				$cba="1";
-			}
+			$weicount=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('feed')."  WHERE fatherid='$_GET[uid]'"), 0);
+			$weicount1=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('comment')."  WHERE authorid='$_GET[uid]'"), 0);
+			$a[$myvalue['english']]=$_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('feed')."  WHERE fatherid='$_GET[uid]' and idtype='$myvalue[english]'"), 0);
+			$b[$myvalue['english']]= $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT count(*)  FROM ".tname('comment')."  WHERE authorid='$_GET[uid]' and idtype='$idtype'"), 0);
+			$c[$myvalue['english']]=$a[$myvalue['english']]/$weicount*100;
+			$d[$myvalue['english']]=$b[$myvalue['english']]/$weicount1*100;
+			$myvalue['abc']=$abc++;
+		
+
 			$myself[]=$myvalue;
 		}		
-
-
+		
 //ÁôÑÔ°å
 $walllist = array();
 if(ckprivacy('wall')) {
@@ -288,9 +289,48 @@ if($space['userapp']) {
 	}
 }
 
+if(!empty($_GET['xml'])) {
+	$xaxis = '';
+	$graph = array();
+	$count = 1;
+	
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('userstatus')." where uid='$_GET[uid]' ORDER BY daytime");
+	while ($value = $_SGLOBAL['db']->fetch_array($query)) {
+		$xaxis .= "<value xid='$count'>".substr($value['daytime'], 4, 4)."</value>";
+		
+			$graph['hot'] .= "<value xid='$count'>".$value['hot']."</value>";
+		
+		$count++;
+	}
+	$xml = '';
+	$xml .= '<'."?xml version=\"1.0\" encoding=\"utf-8\"?>";
+	$xml .= '<chart><xaxis>';
+	$xml .= $xaxis;
+	$xml .= "</xaxis><graphs>";
+	$count = 0;
+	foreach ($graph as $key => $value) {
+		$xml .= "<graph gid='$count' title='".siconv(cplang("do_stat_$key"), 'utf8')."'>";
+		$xml .= $value;
+		$xml .= '</graph>';
+		$count++;
+	}
+	$xml .= '</graphs></chart>';
+	
+	@header("Expires: -1");
+	@header("Cache-Control: no-store, private, post-check=0, pre-check=0, max-age=0", FALSE);
+	@header("Pragma: no-cache");
+	@header("Content-type: application/xml; charset=utf-8");
+	echo $xml;
+	exit();
+}
+
+$siteurl = getsiteurl();
+$statuspara = "path=&settings_file=data/stat_setting.xml&data_file=".urlencode("space.php?do=index&xml=1&type=$type&uid=$_GET[uid];");
+
+$actives = array($type => ' style="font-weight:bold;"');
+
 //ÊµÃû
 realname_get();
-
 //feed
 foreach ($feedlist as $key => $value) {
 	$feedlist[$key] = mkfeed($value);

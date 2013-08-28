@@ -7,7 +7,9 @@
 if(!defined('IN_UCHOME')) {
 	exit('Access Denied');
 }
-
+if(!getcount("mobliechoice",array('uid'=>"$space[uid]",'moblieid'=>"1"))){
+	inserttable("mobliechoice",array('uid'=>"$space[uid]",'moblieid'=>"1"));
+}
 if($_POST){
 	if(!empty($_POST['moblieclicknum'])){
 	updatetable('space', array('mobliestatus' => $_POST['moblieclicknum']), array('uid'=>$space['uid']));

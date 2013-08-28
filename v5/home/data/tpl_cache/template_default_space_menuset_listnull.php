@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1376881693', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_menuset_listnull|template/default/footer', '1377168436', 'template/default/space_menuset_listnull');?><!DOCTYPE html>
 <html>
   <head>
     <title>选购应用</title>
@@ -62,7 +62,7 @@
                                         <p class="produce_text"><?=$value['message']?></p>
                                     </div>
                                    
-                               <?php if($value['money']) { ?> <p class="price">单价:<?=$value['money']?>元/月</p><?php } else { ?><p class="price">单价:免费</p><?php } ?>
+                               <?php if($value['money']) { ?> <p class="price">单价:<?=$value['money']?>元/年</p><?php } else { ?><p class="price">单价:免费</p><?php } ?>
                              </div>
           
           </div>
@@ -105,13 +105,21 @@
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
     <script type="text/javascript">
        $(document).ready(function(){
-        
+
+        $(".modalCloseImg").click(function(){
+         $('#allbuy').hide();
+        });
         $('#basic-modal-content<?=$value['menusetid']?>').attr("style", "display:none;");
           <?php if(empty($space['weixinusername'])&&empty($space['weixinpassword'])) { ?>
         $('#weixin').attr("style", "display:none;");
         $('#weixin').modal();
-         $('#weixin').attr("style", "display:block;");
+        $('#weixin').attr("style", "display:block;");
               <?php } ?>
+        <?php if($space['weixinusername'] && $space['weixinpassword']) { ?>
+        $('#allbuy').attr("style", "display:none;");
+        $('#allbuy').modal();
+        $('#allbuy').attr("style", "display:block;");
+        <?php } ?>
            $('#basic-modal input.basic<?=$value['menusetid']?>, #basic-modal a.basic<?=$value['menusetid']?>').click(function (e) {
     e.preventDefault();
     $('#basic-modal-content<?=$value['menusetid']?>').modal();
@@ -123,8 +131,8 @@
     <?php } } ?>
 
                 
-                     <div class="confirm_btn container_12" style="padding-left:400px;">
-                      <br/>
+                     <div class="confirm_btn container_12" style="width:760px;padding-left:400px;">
+                     <br/>
                            <input type="submit" class="btn grid_2"></a>
                       </div>
                  </div><!-- content_detail_wrapper end -->
@@ -141,11 +149,11 @@
   <?php if(empty($zhong1)) { ?>
   <?php if(empty($space['weixinusername'])&&empty($space['weixinpassword'])) { ?>
    <?php if(1) { ?>
-  <form action = "space.php?do=goweixin" method = "post">
-
-   <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信用户名：<input type="text" name="weixinusername"></h3>
-    <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3>
-    <input type="submit" name="submit" value="提交">
+  <form action = "space.php?do=goweixin" method = "post" style="margin:0 auto;text-align:center;">
+    <br/>
+   <h3 style="font-size:20px;color:#44B1BA;margin-left:-10px;line-height:40px;">你的微信登录名：<input type="text" name="weixinusername"></h3>
+    <h3 style="font-size:20px;color:#44B1BA;margin:0;line-height:40px;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3><br/>
+    <input type="submit" name="submit" style="margin-left:250px;" class="btn grid_2" value="提交">
     <input type="hidden" name="alreadyweixin" value="1">
     </form>
   <?php } else { ?>
@@ -169,6 +177,23 @@
      <?php } ?>
      <?php } ?>
      <?php } ?>
+
+</div>
+<div id="allbuy">
+  <?php if($space['weixinusername']&&$space['weixinpassword']) { ?>
+
+  <br/>
+  <h3 style="font-size:20px;color:#44B1BA;margin-left:10px;line-height:40px;">亲爱的<?=$_SN[$space['uid']]?>：<br/>根据你的行业"<?=$space['business']?>",我们诚意为你推荐了一套量身为你订做的组件，点击下面"一键购买"，即可马上得到最完美的体验。</h3>
+  <br/>
+  <form action = "space.php?do=highmenuset" method = "post" style="margin:0 auto;text-align:center;">
+ 
+  <?php if(is_array($all)) { foreach($all as $value) { ?>
+  <input type='hidden' name='<?=$value['menusetid']?>' value='1' style='width:20px;' />
+  <?php } } ?>
+   <input type="submit" style="margin-left:250px;" class="btn grid_2" value="一键购买">
+  </form>
+
+  <?php } ?>
 
 </div>
  

@@ -1,22 +1,26 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1375257189', 'template/default/space_product_view');?><?php $_TPL['titles'] = array($product['subject'], '产品介绍'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_product_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1377685998', 'template/default/space_product_view');?><?php $_TPL['titles'] = array($product['subject'], $newname[subject]); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=<?=$_SC['charset']?>" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta http-equiv="x-ua-compatible" content="ie=7"/>
 <title><?php if($_TPL['titles']) { ?><?php if(is_array($_TPL['titles'])) { foreach($_TPL['titles'] as $value) { ?><?php if($value) { ?><?=$value?> - <?php } ?><?php } } ?><?php } ?><?php if($_SN[$space['uid']]) { ?><?=$_SN[$space['uid']]?> - <?php } ?><?=$_SCONFIG['sitename']?> - Powered by UCenter Home</title>
+ <script src="./source/jquery.js"></script>
+ <script src="./source/back_top.js" ></script>
 <script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_common.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_face.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+
+
  <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
-    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
+<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="template/default/style1.css">
 
 <style type="text/css">
 
@@ -71,7 +75,7 @@
                
                 <div class="grid_3"></div>
                 <div class="grid_4">
-                   <a href="space.php?uid=<?=$_SGLOBAL['supe_uid']?>"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
+                   <a href="cp.php?ac=profile"  style="float:left;padding-right:10px;"><?php echo avatar($_SGLOBAL[supe_uid]); ?></a>
                    <span class="company_name"><?=$_SN[$_SGLOBAL['supe_uid']]?></span><br/>
                    <a href="cp.php" class="header_btn setting_btn">设置</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="cp.php?ac=common&op=logout&uhash=<?=$_SGLOBAL['uhash']?>"  class="header_btn quit_btn">退出</a> 
                 </div>
@@ -105,19 +109,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
-                        <li class="side_option"><a href="">商品管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
+                        <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
-                        <li class="side_option"><a href="">预约预定管理</a></li>
+                        <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -163,9 +172,9 @@
 
 
 <?php } else { ?>
-<?php $_TPL['spacetitle'] = "产品介绍";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有产品介绍</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=product&id=$product[productid]\">查看产品介绍</a>"; ?>
+<?php $_TPL['spacetitle'] = "$newname[subject]";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有$newname[subject]</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=product&id=$product[productid]\">查看$newname[subject]</a>"; ?>
 <div class="c_header a_header">
 <div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
 <?php if($_SGLOBAL['refer']) { ?>
@@ -181,22 +190,24 @@
 <?php } ?>
 
 <script type="text/javascript" charset="<?=$_SC['charset']?>" src="source/script_calendar.js"></script>
+<img src="./image/book_normal.png" / style="position:absolute;top:-9999999999999999px;">
 <div style="padding:0 0 10px;">
-
+ 
 
             <div class="content" style="font-size:15px;">
             	<div class="indexing" style="margin-bottom:15px;">
-                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=product&view=me">产品介绍</a></span>
+                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=product&view=me"><?=$newname['subject']?></a></span>
                  </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                            <div class="content_title"><?=$product['subject']?></div>
 
-                           <div class="title_down container_12">
+                       
+                           <div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$_SN[$product['uid']]?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$product[dateline]); ?></div>
+                               <div class="title_down container_12">
                                <a href="" class="book_btn grid_1">预约/预定</a> 
                                <span class="grid_2">价格：<?=$product['money']?>元</span>
                            </div>
-                           <div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$product['username']?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$product[dateline]); ?></div>
                            <div class="content_text_detail"style="overflow:hidden">
                                <p><?=$product['message']?></p>
                            </div>
@@ -347,7 +358,11 @@ magicColor(elems[i]);
 <?php } ?>
     </div>
     </div>
-    
+      <div id="backtop">
+    	<a href="">
+    		<img src="./template/default/image/back_top.png">
+    	</a>
+    </div>
         </div>
 <div class="footer">
 
@@ -381,7 +396,7 @@ magicColor(elems[i]);
           
         </div><!-- map end -->
         <div class="footer_info">
-             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤AXXXXXXXXXXXXX
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
 <a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
 
@@ -389,7 +404,7 @@ magicColor(elems[i]);
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery.js"></script>
+
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

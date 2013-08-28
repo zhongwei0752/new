@@ -136,9 +136,28 @@ class Weixin {
 		$ary = json_decode($data, true);
 		return $ary;
 	}
-
 	//获取最新关注的一个用户的信息
 	function getNewWXUser(){
+		$this->checkwxlogin();
+		$url = "https://mp.weixin.qq.com/cgi-bin/contactmanage?t=user/index&pagesize=1&pageidx=0&type=0&groupid=0&token={$this->apptoken}&lang=zh_CN";
+		$ch = curl_init();    
+		curl_setopt($ch, CURLOPT_URL,$url);     
+		curl_setopt($ch, CURLOPT_HEADER, 0);    
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie_dir);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);  
+		$data = curl_exec($ch);      
+		curl_close($ch);
+		$tmp=explode('"contacts":[',$data);
+		$tmp=explode("]})",$tmp[1]);
+		$row=json_decode($tmp[0] , 1 );
+		return $row;
+	}
+
+	//获取最新关注的一个用户的信息
+	/*function getNewWXUser(){
 		$this->checkwxlogin();
 		$url = "https://mp.weixin.qq.com/cgi-bin/contactmanagepage?t=wxm-friend&lang=zh_CN&pagesize=1&pageidx=0&type=0&groupid=0&token=".$this->apptoken;
 		$ch = curl_init();    
@@ -156,7 +175,7 @@ class Weixin {
 		$data = json_decode($data[0]);
 		$data = (array)$data[0];
 		return $data;
-	}
+	}*/
 	//网上抓取fakeid
 	function getUser(){
 		$this->checkwxlogin();

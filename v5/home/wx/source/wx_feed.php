@@ -7,11 +7,12 @@ require_once CONNECT_ROOT."/common/jtee.inc.php";
 require_once CONNECT_ROOT."/common/siteUserRegister.class.php";
 require_once('Weixin.class.php');
 
-	$rst = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE wxkey='$_GET[wxkey]'");
+	$rst = $_SGLOBAL['db']->query("SELECT * FROM ".tname('wxkey')." WHERE wxkey='$_GET[wxkey]'");
 	$row = $_SGLOBAL['db']->fetch_array($rst);
 	if($row){
 		loaducenter();
-			
+		//include_once(S_ROOT.'./source/function_cp.php');
+		//updateuserstat('hot');	
 		$user = uc_get_user($row['uid'], 1); 
 		uc_user_synlogin($row['uid']);
 		$auth = setSession($user[0],$user[1]);
@@ -23,7 +24,29 @@ require_once('Weixin.class.php');
 		
 		
 }else{
+	//include_once(S_ROOT.'./source/function_cp.php');
+	//updateuserstat('hot');
+	$nextuid=$_GET['uid'];
+	$d = get_obj_by_xiaoquid($nextuid);
+	$info = $d->getNewWXUser();	
+	$fakeid=$info['id'];
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE fakeid='$fakeid'");
+	$value = $_SGLOBAL['db']->fetch_array($query);
+	if($value){
+		loaducenter();
+		//include_once(S_ROOT.'./source/function_cp.php');
+		//updateuserstat('hot');	
+		$user = uc_get_user($value['uid'], 1); 
+		uc_user_synlogin($value['uid']);
+		$auth = setSession($user[0],$user[1]);
+		$weixinuid=$_GET['uid'];
+		$m_auth=rawurlencode($auth);
+		$friendurl = "http://v5.home3d.cn/home/capi/cp.php?ac=friend&op=add&uid=$weixinuid&gid=0&addsubmit=true&note=微信用户关注&m_auth=$m_auth";
+        $friend = file_get_contents($friendurl,0,null,null);
+        $friend_output = json_decode($friend);
+        inserttable("wxkey",array('wxkey'=>$_GET['wxkey'],'fakeid'=>$fakeid,'uid'=>$value['uid']));
 
+	}else{
 	$username = $_GET['wxkey'];
 	$name = $_GET['wxkey'];
 	$password = "weixin";
@@ -71,11 +94,12 @@ require_once('Weixin.class.php');
 					wxshowmessage("已绑定", "http://v5.home3d.cn/home/index.php");
 					
 				}
-				$d = get_obj_by_xiaoquid($uid);
+					$nextuid=$_GET['uid'];
+					$d = get_obj_by_xiaoquid($nextuid);
 					$info = $d->getNewWXUser();	
 					$setarr = array(
-						'name' => $info['nickName'],
-						'fakeid'=>$info['fakeId'],
+						'name' => $info['nick_name'],
+						'fakeid'=>$info['id'],
 						'namestatus' => '1',
 						'wxkey' => $_GET['wxkey']
 					);
@@ -83,7 +107,7 @@ require_once('Weixin.class.php');
 				
 				}
 				loaducenter();
-			
+				
 				$user = uc_get_user($uid, 1); 
 				uc_user_synlogin($uid);
 				$weixinuid=$_GET['uid'];
@@ -95,6 +119,7 @@ require_once('Weixin.class.php');
         		$row['uid']=$uid;
 
 }	
+}
  $m_auth = getAuth();
 
  	$uid=$_GET['uid'];
@@ -114,7 +139,7 @@ while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 }	
 	$abc = $_SGLOBAL['db']->query("SELECT * FROM ".tname('space')." WHERE uid='$uid'");
 	$bac = $_SGLOBAL['db']->fetch_array($abc);
-	if($bac['moblieclicknum']!="1"&&$bac['moblieclicknum']!="0"){
+	if($bac['moblieclicknum']=="2"){
 		include_once template("./wx/template/$bac[moblieclicknum]/feed");
 	}else{
 	include_once template("./wx/template/feed");

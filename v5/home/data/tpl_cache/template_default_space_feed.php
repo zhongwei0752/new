@@ -1,22 +1,26 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1376906741', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_feed|template/default/header|template/default/footer', '1377688874', 'template/default/space_feed');?><?php if(empty($_TPL['getmore'])) { ?>	
 <?php $_TPL['titles'] = array('首页'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=<?=$_SC['charset']?>" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta http-equiv="x-ua-compatible" content="ie=7"/>
 <title><?php if($_TPL['titles']) { ?><?php if(is_array($_TPL['titles'])) { foreach($_TPL['titles'] as $value) { ?><?php if($value) { ?><?=$value?> - <?php } ?><?php } } ?><?php } ?><?php if($_SN[$space['uid']]) { ?><?=$_SN[$space['uid']]?> - <?php } ?><?=$_SCONFIG['sitename']?> - Powered by UCenter Home</title>
+ <script src="./source/jquery.js"></script>
+ <script src="./source/back_top.js" ></script>
 <script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_common.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_face.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+
+
  <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
-    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
+<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="template/default/style1.css">
 
 <style type="text/css">
 
@@ -105,19 +109,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -172,6 +181,23 @@
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
       #simplemodal-container{height:230px;}
+      #alpha{
+      	position: relative;
+      	z-index: 10000;
+
+      	
+      	display: none;
+      	margin-top: -128px;
+      	
+      	width: 128px;
+      	height: 128px;
+      	line-height: 128px;
+      	text-align: center;
+      	font-size: 18px;
+      	color: #fff;
+        background-color:rgba(73,65,65,0.5);
+        cursor: pointer;
+      }
     </style>
 <style type="text/css">
 .navbar-inner .grid_4 a img{max-width: 40px;}
@@ -181,25 +207,33 @@
 <?php if($space['uid'] && $space['self']) { ?>
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 <tr>
-<td valign="top" width="150">
-<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></a></div></div></div></div>
+<td valign="top" width="150" id="avata_img">
+<div class="ar_r_t">
+  <div class="ar_l_t">
+    <div class="ar_r_b">
+      <div class="ar_l_b">
+        <a href="cp.php?ac=avatar"><?php echo avatar($_SGLOBAL[supe_uid],middle); ?></a><div id="alpha"  onclick=window.open("cp.php?ac=avatar")>修改头像</div>	
+      </div>
+    </div>
+  </div>
+</div>
 </td>
 <td valign="top">
-<h3 class="index_name" style="margin-top:-6px;border:0px;">
-<a  href="space.php?uid=<?=$space['uid']?>" style="color:#999;font-size:18px;"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></a>
+<h3 class="index_name" style="margin-top:-4px;border:0px;margin-bottom:-4px;">
+<span style="color:#999;font-size:18px;"<?php g_color($space[groupid]); ?> ><?=$_SN[$space['uid']]?></span>
 
-<span style="color:#43B8B0;">VIP</span>
+<span style="color:#43B8B0;font-size:18px;">VIP</span>
 </h3>
 <br/>
  <div class="company_avata_box container_12"  style="margin-top:-30px;">
                    <div class="grid_2">
                        <h5 style="margin-top:0px;">已有<?=$space['viewnum']?>人访问,<?=$space['experience']?>个信用</h5>
-                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                      	<div id="weixinone"><a href="space.php?do=myweixin" style="margin-top:12px;" class="company_setting">个人微信号绑定</a></div>
+                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信公众号修改</a></div>
+                      	<div id="weixinone"><a href="space.php?uid=<?=$space['uid']?>" style="margin-top:12px;" class="company_setting">查看统计数据</a></div>
                        <!--<a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>-->
                    </div>
                  </div>
-
+    		
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
@@ -211,9 +245,17 @@
         $('#weixinhome').click(function (e) {
     	e.preventDefault();
     	$('#weixin').modal();
-  });
-
-
+         });
+  
+           $("#avata_img").hover(
+           	function(){
+    	     $("#alpha").show();
+           },
+           function(){
+           	 $("#alpha").hide();
+           }
+           )
+           
             
        })
     </script>
@@ -244,7 +286,7 @@
                                    <span class="title"><?=$value['subject']?></span>
                              </div>
                              <div class="assembly_info">
-                                <img src="<?=$value['image1url']?>" style="width:120px;height:120px;">
+                                <img src="http://v5.home3d.cn/home/image/gray/<?=$value['english1']?>" style="width:120px;height:120px;">
                                 
                                 <h5 style="padding-top: 20px;">文章数：<?=$a[$value['menusetid']]?> 篇</h5>
                                 <h5>浏览量：<?php if($b[$value['menusetid']]) { ?><?=$b[$value['menusetid']]?><?php } else { ?>0<?php } ?>次</h5>
@@ -323,12 +365,17 @@ var elems = selector('li[class~=magicthunder]', $('feed_div'));
 for(var i=0; i<elems.length; i++){		
 magicColor(elems[i]); 
 }
+    
+ 
 </script>
  <div id="weixin">
-                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>  
-                        <div style="background:#fff;font-size:15px;text-align:center;color: #6D6D6D;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<span style="color:#00E5E8"><?=$space['weixinusername']?></span><br/>登录密码:<span style="color:#00E5E8"><?=$space['weixinpassword']?></span><br/>
-             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
-                        </div>
+                    <form action = "space.php?do=feed" method = "post" style="margin:0 auto;text-align:center;">
+    <br/>
+   <h3 style="font-size:20px;color:#44B1BA;margin-left:-10px;line-height:40px;">你的微信登录名：<input type="text" name="weixinusername"></h3>
+    <h3 style="font-size:20px;color:#44B1BA;margin:0;line-height:40px;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3><br/>
+    <input type="submit" name="submit" style="margin-left:250px;" class="btn grid_2" value="修改">
+    <input type="hidden" name="alreadyweixin" value="1">
+    </form>
 
                         </div>
 
@@ -349,7 +396,11 @@ magicColor(elems[i]);
 <?php } ?>
     </div>
     </div>
-    
+      <div id="backtop">
+    	<a href="">
+    		<img src="./template/default/image/back_top.png">
+    	</a>
+    </div>
         </div>
 <div class="footer">
 
@@ -385,13 +436,13 @@ magicColor(elems[i]);
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+
 
     </div>
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery.js"></script>
+
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

@@ -15,6 +15,23 @@
       .open{ background: url("./template/default/image/chosen_bg2.png")!important;}
       .open .price{color:#3EB2B8!important;}
       #simplemodal-container{height:230px;}
+      #alpha{
+      	position: relative;
+      	z-index: 10000;
+
+      	
+      	display: none;
+      	margin-top: -128px;
+      	
+      	width: 128px;
+      	height: 128px;
+      	line-height: 128px;
+      	text-align: center;
+      	font-size: 18px;
+      	color: #fff;
+        background-color:rgba(73,65,65,0.5);
+        cursor: pointer;
+      }
     </style>
 <style type="text/css">
 .navbar-inner .grid_4 a img{max-width: 40px;}
@@ -24,25 +41,33 @@
 <!--{if $space['uid'] && $space[self]}-->
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td valign="top" width="150">
-				<div class="ar_r_t"><div class="ar_l_t"><div class="ar_r_b"><div class="ar_l_b"><a href="cp.php?ac=avatar"><!--{avatar($_SGLOBAL[supe_uid],middle)}--></a></div></div></div></div>
+			<td valign="top" width="150" id="avata_img">
+				<div class="ar_r_t">
+				  <div class="ar_l_t">
+				    <div class="ar_r_b">
+				      <div class="ar_l_b">
+				        <a href="cp.php?ac=avatar"><!--{avatar($_SGLOBAL[supe_uid],middle)}--></a><div id="alpha"  onclick=window.open("cp.php?ac=avatar")>修改头像</div>	
+				      </div>
+				    </div>
+				  </div>
+				</div>
 			</td>
 			<td valign="top">
-				<h3 class="index_name" style="margin-top:-6px;border:0px;">
-						<a  href="space.php?uid=$space[uid]" style="color:#999;font-size:18px;"<!--{eval g_color($space[groupid]);}--> >{$_SN[$space[uid]]}</a>
+				<h3 class="index_name" style="margin-top:-4px;border:0px;margin-bottom:-4px;">
+						<span style="color:#999;font-size:18px;"<!--{eval g_color($space[groupid]);}--> >{$_SN[$space[uid]]}</span>
 					
-					<span style="color:#43B8B0;">VIP</span>
+					<span style="color:#43B8B0;font-size:18px;">VIP</span>
 				</h3>
 					<br/>
 					 <div class="company_avata_box container_12"  style="margin-top:-30px;">
                    <div class="grid_2">
                        <h5 style="margin-top:0px;">已有$space[viewnum]人访问,$space[experience]个信用</h5>
-                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信登陆平台</a></div>
-                      	<div id="weixinone"><a href="space.php?do=myweixin" style="margin-top:12px;" class="company_setting">个人微信号绑定</a></div>
+                       <div id="weixinhome" style="margin-top:-18px;"><a href="#" class="company_setting">微信公众号修改</a></div>
+                      	<div id="weixinone"><a href="space.php?uid=$space[uid]" style="margin-top:12px;" class="company_setting">查看统计数据</a></div>
                        <!--<a href="cp.php?ac=profile" style="margin-top:12px;" class="company_setting">企业设置</a>-->
                    </div>
                  </div>
-						
+	    		
 					
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
@@ -54,9 +79,17 @@
         $('#weixinhome').click(function (e) {
     	e.preventDefault();
     	$('#weixin').modal();
-  });
-
-
+         });
+  
+           $("#avata_img").hover(
+           	function(){
+    	     $("#alpha").show();
+           },
+           function(){
+           	 $("#alpha").hide();
+           }
+           )
+           
             
        })
     </script>
@@ -87,7 +120,7 @@
                                    <span class="title">$value[subject]</span>
                              </div>
                              <div class="assembly_info">
-                                <img src="$value[image1url]" style="width:120px;height:120px;">
+                                <img src="http://v5.home3d.cn/home/image/gray/$value[english1]" style="width:120px;height:120px;">
                                 
                                 <h5 style="padding-top: 20px;">文章数：$a[$value['menusetid']] 篇</h5>
                                 <h5>浏览量：<!--{if $b[$value['menusetid']]}-->$b[$value['menusetid']]<!--{else}-->0<!--{/if}-->次</h5>
@@ -166,12 +199,17 @@
 	for(var i=0; i<elems.length; i++){		
 		magicColor(elems[i]); 
 	}
+    
+ 
 </script>
  <div id="weixin">
-                       <h3 style="font-size:20px;color:#44B1BA;background:#ECEFF1;margin:0;line-height:40px;text-align:left;padding-left:10px;">微信公众帐号登陆</h3>  
-                        <div style="background:#fff;font-size:15px;text-align:center;color: #6D6D6D;">你可以通过前往微信公众平台修改你的公众帐号的信息，包括名称等基本属性。<br/>用户名:<span style="color:#00E5E8">$space[weixinusername]</span><br/>登录密码:<span style="color:#00E5E8">$space[weixinpassword]</span><br/>
-             			<a href="http://mp.weixin.qq.com"  style="display: block;margin:30px auto;text-align:center;width: 148px;height: 28px;background: #43B8B0; line-height: 28px; color: #fff;" class="company_setting"  target="_blank">前往微信公众平台</a>
-                        </div>
+                    <form action = "space.php?do=feed" method = "post" style="margin:0 auto;text-align:center;">
+    <br/>
+   <h3 style="font-size:20px;color:#44B1BA;margin-left:-10px;line-height:40px;">你的微信登录名：<input type="text" name="weixinusername"></h3>
+    <h3 style="font-size:20px;color:#44B1BA;margin:0;line-height:40px;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3><br/>
+    <input type="submit" name="submit" style="margin-left:250px;" class="btn grid_2" value="修改">
+    <input type="hidden" name="alreadyweixin" value="1">
+    </form>
 
                         </div>
 

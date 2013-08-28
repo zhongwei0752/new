@@ -288,6 +288,7 @@ $_SGLOBAL['cplang'] = array(
 	'present_user_magics' => '您收到了管理员赠送的道具：\\1',
 	'has_not_more_doodle' => '您没有涂鸦板了',
 
+	'do_stat_hot' => '活跃度',
 	'do_stat_login' => '来访用户',
 	'do_stat_register' => '新注册用户',
 	'do_stat_invite' => '好友邀请',

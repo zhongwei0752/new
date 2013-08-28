@@ -14,7 +14,7 @@ $acs = array('space', 'doing', 'upload', 'comment', 'blog', 'album', 'relatekw',
 	'swfupload', 'thread', 'mtag', 'poke', 'friend',
 	'avatar', 'profile', 'theme', 'import', 'feed', 'privacy', 'pm', 'share', 'advance', 'invite','sendmail',
 	'userapp', 'task', 'credit', 'password', 'domain', 'event', 'poll', 'topic',
-	'click','magic', 'top', 'videophoto','introduce','product','development','industry','text','cases','branch','job','talk','menuset','message','recommend','moblie','goods','book','myweixin','dialog','weixinmenu');
+	'click','magic', 'top', 'videophoto','introduce','product','development','industry','text','cases','branch','job','talk','menuset','message','recommend','moblie','goods','book','myweixin','dialog','weixinmenu','dialog');
 $ac = (empty($_GET['ac']) || !in_array($_GET['ac'], $acs))?'profile':$_GET['ac'];
 $op = empty($_GET['op'])?'':$_GET['op'];
 
@@ -53,14 +53,25 @@ if(!in_array($ac, array('common', 'pm'))) {
 }
 $zhong = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
-				WHERE bf.uid='$space[uid]' and bf.appstatus='1'
-				ORDER BY b.dateline ASC ");
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='1'
+				ORDER BY bf.orderid ASC ");
 while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
+	
 	if($wei['newname']){
 				$wei['subject']=$wei['newname'];
 			}
-	$zhongwei[]=$wei;
-
+			$zhongwei[]=$wei;
+}
+$zhong1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='2'
+				ORDER BY bf.orderid ASC ");
+while ($wei1 = $_SGLOBAL['db']->fetch_array($zhong1)) {
+	
+	if($wei1['newname']){
+				$wei1['subject']=$wei1['newname'];
+			}
+			$zhongwei1[]=$wei1;
 }
 //隐藏侧边栏
 	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");

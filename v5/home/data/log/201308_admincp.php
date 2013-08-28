@@ -242,3 +242,33 @@
 <?PHP exit;?>	2013-08-16 15:57:50		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
 <?PHP exit;?>	2013-08-16 15:57:55		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"134";};optype=1;listsubmit=提交;}
 <?PHP exit;?>	2013-08-16 15:57:56		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-20 17:28:43		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-20 17:28:54		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"136";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-20 17:28:55		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-21 15:54:35		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-21 15:54:40		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"137";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-21 15:54:41		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-21 17:23:10		127.0.0.1	1	/new/v5/home/admincp.php	
+<?PHP exit;?>	2013-08-21 17:23:18		127.0.0.1	1	/new/v5/home/admincp.php	
+<?PHP exit;?>	2013-08-22 10:13:08		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-22 10:13:12		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"138";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-22 10:13:13		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-22 11:27:06		127.0.0.1	1	/new/v5/home/admincp.php	
+<?PHP exit;?>	2013-08-22 11:27:09		127.0.0.1	1	/new/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-08-22 11:27:15		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&op=manage&uid=139	GET{ac=space;op=manage;uid=139;}
+<?PHP exit;?>	2013-08-22 11:27:19		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&op=delete&uid=139	GET{ac=space;op=delete;uid=139;}
+<?PHP exit;?>	2013-08-22 11:27:20		127.0.0.1	1	/new/v5/home/admincp.php?ac=space	GET{ac=space;}
+<?PHP exit;?>	2013-08-22 11:40:56		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-22 11:41:09		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"140";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-22 11:41:10		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-22 16:00:20		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-22 16:00:25		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"142";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-22 16:00:26		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-22 18:38:48		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}
+<?PHP exit;?>	2013-08-22 18:38:54		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1	GET{ac=space;perpage=20;page=1;}POST{formhash=fe00ab38;uids=a:1:{i:0;s:3:"211";};optype=1;listsubmit=提交;}
+<?PHP exit;?>	2013-08-22 18:38:55		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&page=1namestatus=0	GET{ac=space;perpage=20;page=1namestatus=0;}
+<?PHP exit;?>	2013-08-26 16:03:13		127.0.0.1	1	/new/v5/home/admincp.php	
+<?PHP exit;?>	2013-08-26 16:03:18		127.0.0.1	1	/new/v5/home/admincp.php?ac=image	GET{ac=image;}
+<?PHP exit;?>	2013-08-26 16:04:06		127.0.0.1	1	/new/v5/home/admincp.php?ac=image	GET{ac=image;}POST{formhash=fe00ab38;bigimagesubmit=上传;}
+<?PHP exit;?>	2013-08-26 16:04:07		127.0.0.1	1	/new/v5/home/admincp.php?ac=image	GET{ac=image;}
+<?PHP exit;?>	2013-08-27 20:58:31		127.0.0.1	1	/new/v5/home/admincp.php?ac=space&perpage=20&namestatus=0&searchsubmit=1	GET{ac=space;perpage=20;namestatus=0;searchsubmit=1;}

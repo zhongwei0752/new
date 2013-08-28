@@ -97,6 +97,11 @@
 		<table cellspacing="4" cellpadding="4" width="100%" class="infotable">
 			<tr>
 				<td>
+					应用类型:<select name='style' class="t_input" id="style"><option value ='1'>基本组件</option><option value ='2'>高级组件</option></select>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					应用名称:<input type="text" class="t_input" id="subject" name="subject" value="$menuset[subject]" size="60" onblur="relatekw();" />
 				</td>
 			</tr>
@@ -129,7 +134,7 @@
 			</tr>
 			<tr>
 				<td>
-					应用单价:<input type="text" class="t_input" id="money" name="money" value="$menuset[money]" size="10" onblur="relatekw();" />元/月
+					应用单价:<input type="text" class="t_input" id="money" name="money" value="$menuset[money]" size="10" onblur="relatekw();" />元/年
 				</td>
 			</tr>
 			<tr>

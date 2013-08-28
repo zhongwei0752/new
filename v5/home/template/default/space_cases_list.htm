@@ -58,7 +58,7 @@
                              <div class="list_test ">
                                   <a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]"><h3>$value[subject]</h3></a>
                                   <p>$value[message]</p><br/>
-                                  <p class="action_info"  style="margin-top:-4px;">
+                                  <p class="action_info"  style="margin-top:-4px;text-align:right;">
                                    <a href="space.php?uid=$value[uid]"> <span>发布：{$_SN[$value[uid]]}</span></a>
                                     <!--{if $value[viewnum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]"><span>阅读: $value[viewnum]次</span></a><!--{else}--><span>阅读: 0次</span><!--{/if}-->
                                     <!--{if $value[replynum]}--><a href="space.php?uid=$value[uid]&do=$do&id=$value[casesid]#comment"><span>评论: $value[replynum] 个</span></a><!--{else}--><span>评论: 0次</span><!--{/if}--><span>发布日期：<!--{date('Y-m-d',$value[dateline])}--></span>

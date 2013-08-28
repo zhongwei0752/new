@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1376906718', 'template/default/network');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1377658400', 'template/default/network');?><!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,15 +69,17 @@
             </div>
          </div>
 
-          <p class="login_page_company_title"><span><b>已经开通企业</b></span></p>
+          <p class="login_page_company_title"><span><b>企业名称</b></span></p>
           <div class="companies_wrapper">
           <div class="companies container_12">
             <?php if(is_array($openlist)) { foreach($openlist as $key => $value) { ?>
+            <?php if($_SN[$value['uid']]!="admin") { ?>
             <div class="grid_3">
                    <span style="float:left;padding-right:10px;max-width:71px;max-height:71px;min-width:71px;min-height:71px;overflow:hidden;margin-bottom:20px;"><?php echo avatar($value[uid],middle); ?></span>
                    <span class="company_name"><?=$_SN[$value['uid']]?></span><br>
                     <span><a  class="fans"><?=$value['friendnum']?>客户</a></span> 
               </div>
+              <?php } ?>
       
       <?php } } ?>
              

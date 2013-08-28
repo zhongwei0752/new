@@ -5,14 +5,30 @@
 	$value4 = $_SGLOBAL['db']->fetch_array($query4);
 	$zhong1=$value4;
 	if($_POST){
+
 	require_once('./wx/Weixin.class.php');
-	$username=$_POST['username'];
+	$username=$_POST['weixinusername'];
+	$password=$_POST['weixinpassword'];
+	if(empty($username)||empty($password)){
+		showmessage("登陆帐号密码不能为空","space.php?do=feed");
+	}
+	$d = new Weixin("$username", "$password");
+	$info = $d->getUser();
+	$token = $d->GetId();
+	if(empty($token[0])){
+		showmessage("未能正确获取到微信公众号信息，请确认帐号密码是否填写正确.","space.php?do=feed");
+	}else{	
+	$token[0]=trim($token[0]);
+	updatetable("space", array('fakeid'=>$info,'wxkey'=>$token[0],'weixinusername'=>$username,'weixinpassword'=>$password),array('uid'=>$_SGLOBAL['supe_uid']));
+	showmessage("提交成功","space.php?do=feed");
+	}
+/*	$username=$_POST['username'];
 	$password=$_POST['password'];
 	$d = new Weixin($username,$password);
 	//$userid = $d->GetId();
 	$fakeid= $d->getUser();
 	updatetable('space',array('myweixinusername'=>$username,'myweixinpassword'=>$password,'myweixinfakeid'=>$fakeid), array('uid'=>$_SGLOBAL['supe_uid']));
-
+*/
 	//if($space['weixinusername']&&$space['weixinpassword']){
 	//$d = new Weixin($space['weixinusername'], $space['weixinpassword']);
 	//$token = $d->GetId();
@@ -434,6 +450,7 @@ $myapp = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf
 			if($myvalue['newname']){
 				$myvalue['subject']=$myvalue['newname'];
 			}
+			$myvalue['english1']=$myvalue['english'].".jpg";
 			$myself[]=$myvalue;
 		}
 

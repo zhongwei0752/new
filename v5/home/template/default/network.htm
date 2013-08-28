@@ -19,6 +19,10 @@
         .companies .grid_4 img{
              max-width:172px;max-height:53px;min-width:172px;min-height:53px;
         }
+        /*login hack*/
+        #email,#tx,#pwd{
+        margin-left:-12px\9;
+        }
              </style>
   </head>
   <body>
@@ -69,15 +73,17 @@
             </div>
          </div>
 
-          <p class="login_page_company_title"><span><b>已经开通企业</b></span></p>
+          <p class="login_page_company_title"><span><b>企业名称</b></span></p>
           <div class="companies_wrapper">
           <div class="companies container_12">
             <!--{loop $openlist $key $value}-->
+            <!--{if {$_SN[$value[uid]]}!="admin"}-->
             <div class="grid_3">
                    <span style="float:left;padding-right:10px;max-width:71px;max-height:71px;min-width:71px;min-height:71px;overflow:hidden;margin-bottom:20px;"><!--{avatar($value[uid],middle)}--></span>
                    <span class="company_name">{$_SN[$value[uid]]}</span><br>
                     <span><a  class="fans">$value[friendnum]客户</a></span> 
               </div>
+              <!--{/if}-->
       
       <!--{/loop}-->
              

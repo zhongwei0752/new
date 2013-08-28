@@ -262,7 +262,7 @@ if(empty($star) && $onlinelist) {
 $openlist = array();
 $query = $_SGLOBAL['db']->query("SELECT main.*, field.* FROM ".tname('space')." main USE INDEX (updatetime)
 		LEFT JOIN ".tname('spacefield')." field ON field.uid=main.uid
-		ORDER BY main.friendnum DESC limit 0,12");
+		ORDER BY main.friendnum DESC limit 0,13");
 while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 		realname_set($value['uid'], $value['username']);
 		$openlist[$value['uid']] = $value;

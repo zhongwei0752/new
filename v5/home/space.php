@@ -30,7 +30,8 @@ if($_SCONFIG['allowrewrite'] && isset($_GET['rewrite'])) {
 
 //ÔÊÐí¶¯×÷
 $dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto',
-	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid','recommend','moblie','goods','goweixin','book','newname','myweixin','communicate','weixinmenu');
+	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid','recommend','moblie','goods','goweixin','book','newname','myweixin','communicate','weixinmenu',
+	'highmenuset','dialog');
 
 //»ñÈ¡±äÁ¿
 $isinvite = 0;
@@ -145,7 +146,7 @@ if(!empty($_SCONFIG['cronnextrun']) && $_SCONFIG['cronnextrun'] <= $_SGLOBAL['ti
 }
 $zhong = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
-				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1'
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='1'
 				ORDER BY bf.orderid ASC ");
 while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 	
@@ -154,11 +155,22 @@ while ($wei = $_SGLOBAL['db']->fetch_array($zhong)) {
 			}
 			$zhongwei[]=$wei;
 }
+$zhong1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf $f_index
+				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
+				WHERE bf.uid='$_SGLOBAL[supe_uid]' and bf.appstatus='1' and b.style='2'
+				ORDER BY bf.orderid ASC ");
+while ($wei1 = $_SGLOBAL['db']->fetch_array($zhong1)) {
+	
+	if($wei1['newname']){
+				$wei1['subject']=$wei1['newname'];
+			}
+			$zhongwei1[]=$wei1;
+}
 
 
 
 //隐藏侧边栏
-	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");
+	$query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$_SGLOBAL[supe_uid]' and appstatus='1'");
 	$value4 = $_SGLOBAL['db']->fetch_array($query4);
 	$zhong1=$value4;
 

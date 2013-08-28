@@ -11,6 +11,12 @@ if($_POST['fristsubmit']){
 	if(empty($_POST['button1'])&&empty($_POST['button2'])||empty($_POST['button2'])&&empty($_POST['button3'])||empty($_POST['button1'])&&empty($_POST['button3'])){
 		showmessage("至少填写2项一级菜单");
 	}
+	if(strlen($_POST['button1'])>16||strlen($_POST['button2'])>16||strlen($_POST['button3'])>16){
+	showmessage("一级菜单文字过长");
+}
+		if(strlen($_POST['sub_button1'])>16||strlen($_POST['sub_button2'])>16||strlen($_POST['sub_button3'])>16||strlen($_POST['sub_button4'])>16||strlen($_POST['sub_button5'])>16){
+	showmessage("一级菜单文字过长");
+}
 	//左侧菜单情况
 	if($_POST['button1']){
 	$dataarr1=array(
@@ -21,7 +27,14 @@ if($_POST['fristsubmit']){
 		'sub_button4'=> $_POST['1sub_button4'],
 		'sub_button5'=> $_POST['1sub_button5'],
 		'fathernum'  => '1',
-		'uid'        => $_SGLOBAL['supe_uid']
+		'uid'        => $_SGLOBAL['supe_uid'],
+		'function'  => $_POST['function1'],
+		'sub_function1'=> $_POST['1sub_function1'],
+		'sub_function2'=> $_POST['1sub_function2'],
+		'sub_function3'=> $_POST['1sub_function3'],
+		'sub_function4'=> $_POST['1sub_function4'],
+		'sub_function5'=> $_POST['1sub_function5']
+
 	);	
 	inserttable("weixinmenu",$dataarr1);
 	}
@@ -35,7 +48,13 @@ if($_POST['fristsubmit']){
 		'sub_button4'=> $_POST['2sub_button4'],
 		'sub_button5'=> $_POST['2sub_button5'],
 		'fathernum'  => '2',
-		'uid'        => $_SGLOBAL['supe_uid']
+		'uid'        => $_SGLOBAL['supe_uid'],
+		'function'  => $_POST['function2'],
+		'sub_function1'=> $_POST['2sub_function1'],
+		'sub_function2'=> $_POST['2sub_function2'],
+		'sub_function3'=> $_POST['2sub_function3'],
+		'sub_function4'=> $_POST['2sub_function4'],
+		'sub_function5'=> $_POST['2sub_function5']
 	);	
 	inserttable("weixinmenu",$dataarr2);
 	}
@@ -49,11 +68,17 @@ if($_POST['fristsubmit']){
 		'sub_button4'=> $_POST['3sub_button4'],
 		'sub_button5'=> $_POST['3sub_button5'],
 		'fathernum'  => '3',
-		'uid'        => $_SGLOBAL['supe_uid']
+		'uid'        => $_SGLOBAL['supe_uid'],
+		'function'  => $_POST['function3'],
+		'sub_function1'=> $_POST['3sub_function1'],
+		'sub_function2'=> $_POST['3sub_function2'],
+		'sub_function3'=> $_POST['3sub_function3'],
+		'sub_function4'=> $_POST['3sub_function4'],
+		'sub_function5'=> $_POST['3sub_function5']
 	);	
 	inserttable("weixinmenu",$dataarr3);
 	}
-	
+	showmessage("提交成功","space.php?do=weixinmenu");
 }
 
 if($_POST['secondsubmit']){
@@ -64,7 +89,13 @@ if($_POST['secondsubmit']){
 		'sub_button2'=> $_POST['1sub_button2'],
 		'sub_button3'=> $_POST['1sub_button3'],
 		'sub_button4'=> $_POST['1sub_button4'],
-		'sub_button5'=> $_POST['1sub_button5']
+		'sub_button5'=> $_POST['1sub_button5'],
+		'function'  => $_POST['function1'],
+		'sub_function1'=> $_POST['1sub_function1'],
+		'sub_function2'=> $_POST['1sub_function2'],
+		'sub_function3'=> $_POST['1sub_function3'],
+		'sub_function4'=> $_POST['1sub_function4'],
+		'sub_function5'=> $_POST['1sub_function5']
 	);	
 	//中间菜单情况
 	$dataarr2=array(
@@ -73,7 +104,13 @@ if($_POST['secondsubmit']){
 		'sub_button2'=> $_POST['2sub_button2'],
 		'sub_button3'=> $_POST['2sub_button3'],
 		'sub_button4'=> $_POST['2sub_button4'],
-		'sub_button5'=> $_POST['2sub_button5']
+		'sub_button5'=> $_POST['2sub_button5'],
+		'function'  => $_POST['function2'],
+		'sub_function1'=> $_POST['2sub_function1'],
+		'sub_function2'=> $_POST['2sub_function2'],
+		'sub_function3'=> $_POST['2sub_function3'],
+		'sub_function4'=> $_POST['2sub_function4'],
+		'sub_function5'=> $_POST['2sub_function5']
 	);	
 	//右侧菜单情况
 	$dataarr3=array(
@@ -82,7 +119,14 @@ if($_POST['secondsubmit']){
 		'sub_button2'=> $_POST['3sub_button2'],
 		'sub_button3'=> $_POST['3sub_button3'],
 		'sub_button4'=> $_POST['3sub_button4'],
-		'sub_button5'=> $_POST['3sub_button5']
+		'sub_button5'=> $_POST['3sub_button5'],
+		'function'  => $_POST['function3'],
+		'sub_function1'=> $_POST['3sub_function1'],
+		'sub_function2'=> $_POST['3sub_function2'],
+		'sub_function3'=> $_POST['3sub_function3'],
+		'sub_function4'=> $_POST['3sub_function4'],
+		'sub_function5'=> $_POST['3sub_function5']
+
 	);	
 	updatetable("weixinmenu",$dataarr1,array('fathernum'=>'1','uid'=>$_SGLOBAL['supe_uid']));
 	updatetable("weixinmenu",$dataarr2,array('fathernum'=>'2','uid'=>$_SGLOBAL['supe_uid']));
@@ -93,6 +137,33 @@ $query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('weixinmenu')."  WHERE ui
 while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 	$list[]=$value;
 	}
+	$list1=$list['0']['sub_button1'];
+	$list2=$list['0']['sub_button2'];
+	$list3=$list['0']['sub_button3'];
+	$list4=$list['0']['sub_button4'];
+	$list5=$list['0']['sub_button5'];
+	$list6=$list['0']['sub_button6'];
+$count='1';
+	for($i='0';$i<'6';$i++){
+		$name="sub_button".$i;
+		if($list[0]["$name"]){
+			$count++;
+		}
+	}
+$count1='1';
+	for($i='0';$i<'6';$i++){
+		$name="sub_button".$i;
+		if($list[1]["$name"]){
+			$count1++;
+		}
+	}
+$count2='1';
+	for($i='0';$i<'6';$i++){
+		$name="sub_button".$i;
+		if($list[2]["$name"]){
+			$count2++;
+		}
+	}		
 include_once template("space_weixinmenu");
 
 ?>

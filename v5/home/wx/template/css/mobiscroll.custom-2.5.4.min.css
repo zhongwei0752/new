@@ -1210,6 +1210,8 @@ to {
 	background: -moz-linear-gradient(#eee, #ccc);
 	background: -o-linear-gradient(#eee, #ccc);
 	color: #000;
+	color: white;
+	background-color: rgb(122, 208, 205);
 	font-weight: normal;
 	text-shadow: none;
 	border-radius: 0;
@@ -1384,13 +1386,17 @@ to {
 	height: 36px;
 	line-height: 36px;
 	padding: 0;
-	margin: 0;
+	margin: 3px;
 	font-weight: normal;
 	text-shadow: none;
 	box-shadow: none;
 	border-radius: 0;
 	-webkit-border-radius: 0;
-	-webkit-box-shadow: none
+	-webkit-box-shadow: none;
+
+	color: white !important;
+	background: rgb(66, 184, 177);
+	font-size: 15px;
 }
 
 .android-ics .dw .dwb-a {

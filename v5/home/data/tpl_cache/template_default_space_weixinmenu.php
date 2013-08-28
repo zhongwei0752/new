@@ -1,21 +1,31 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_weixinmenu|template/default/header|template/default/footer', '1376903156', 'template/default/space_weixinmenu');?><?php $_TPL['titles'] = array('微信自定义菜单'); ?>
-<?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_weixinmenu|template/default/header|template/default/footer|template/default/footer', '1377695600', 'template/default/space_weixinmenu');?><!DOCTYPE html>
+<html>
+  <head>
+    <title>v5v5v5v5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=<?=$_SC['charset']?>" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta http-equiv="x-ua-compatible" content="ie=7"/>
 <title><?php if($_TPL['titles']) { ?><?php if(is_array($_TPL['titles'])) { foreach($_TPL['titles'] as $value) { ?><?php if($value) { ?><?=$value?> - <?php } ?><?php } } ?><?php } ?><?php if($_SN[$space['uid']]) { ?><?=$_SN[$space['uid']]?> - <?php } ?><?=$_SCONFIG['sitename']?> - Powered by UCenter Home</title>
+ <script src="./source/jquery.js"></script>
+ <script src="./source/back_top.js" ></script>
 <script language="javascript" type="text/javascript" src="source/script_cookie.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_common.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_menu.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_ajax.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_face.js"></script>
 <script language="javascript" type="text/javascript" src="source/script_manage.js"></script>
+
+
  <!-- Bootstrap -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
-    <link rel="stylesheet" type="text/css" href="template/default/style1.css">
+<link rel="stylesheet" type="text/css" href="template/default/jquery-mobile-fluid960.min.css">
+<link rel="stylesheet" type="text/css" href="template/default/style1.css">
 
 <style type="text/css">
 
@@ -104,19 +114,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -157,63 +172,134 @@
 
 <?php } ?>
 
-<?php if(empty($list)) { ?>
-<form method="post" action="space.php?do=weixinmenu">
-<div id="longbutton1" style="float:left;"><input type="text" name="button1" id="button1" ></div><div id="add1" ><a  href="javascript::void;">添加二级菜单</a></div><br/>
-<div id="longbutton2" style="float:left;"><input type="text" name="button2" id="button2" ></div><div id="add2" ><a  href="javascript::void;">添加二级菜单</a></div><br/>
-<div id="longbutton3" style="float:left;"><input type="text" name="button3" id="button3" ></div><div id="add3" ><a  href="javascript::void;">添加二级菜单</a></div>
+   <!--  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="./template/default/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/style1.css">
+    <link rel="stylesheet" type="text/css" href="./template/default/weixin.css">
+  </head>
+  <body>
+    
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+          <script type='text/javascript' src='./source/jquery.simplemodal.js'></script>
+          <script type="text/javascript">
+          $(document).ready(function(){
+            $('#weixin').attr("style", "display:none;");
+            $('#weixinhome').click(function (e) {
+                e.preventDefault();
+                $('#weixin').modal();
+                   });        
+                 })
+          </script>
+         <!-- navbar end -->
+        
+          <!-- side_bar end -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
-<script>
-$(document).ready(function(){
-var a='1';
-$("#add1").click(function(){
-if(a<'6'){
- $("#add1").append("二级菜单"+a+"<input type='text' name='1sub_button"+a+"'  id='sub_button"+a+"'>");
- 	a++;
- }
-})
-var b='1';
-$("#add2").click(function(){
-if(b<'6'){
- $("#add2").append("二级菜单"+b+"<input type='text' name='2sub_button"+b+"'  id='sub_button"+b+"'>");
- 	b++;
- }
-})
-var c='1';
-$("#add3").click(function(){
-if(c<'6'){
- $("#add3").append("二级菜单"+c+"<input type='text' name='3sub_button"+c+"'  id='sub_button"+c+"'>");
- 	c++;
- }
-})
-});
+            <div class="content" style="width:760px;">
+                 <div class="content" style="font-size:15px;width:760px;">
+          
+                 <div class="indexing">
+                 <span><a href="space.php?do=home">首页</a></span>><span>微信自定义菜单</span>
+                 </div><!-- end -->
+                 <div class="bread container_12">
+                     <div class="bread_actived grid_1">
+                         微信自定义菜单
+                     </div>
 
-</script>
-<input type="submit">
-<input type="hidden" name="fristsubmit" value="1">
-</form>
-<?php } ?>
-<?php if($list) { ?>
-<?php if($_GET['edit']=="1") { ?>
-<form method="post" action="space.php?do=weixinmenu">
+                     <a href="space.php?do=weixinmenu&edit=1" class="btn grid_2">修改</a>
+                 </div> 
+                <?php if(empty($list)) { ?>
+                 <div class="content_detail_wrapper">
+                   <form method="post" action="space.php?do=weixinmenu" onkeydown="if(event.keyCode==13){return false;}">
+                     <div class="left_weixin">
+                        <div class="weixin_header">
+                            <img src="./template/default/image/wx_header.png" alt="">
+                        </div>
+                        <div class="wx_body">  
+                          <div class="weixin_choose">
+                              <div class="wx_choose_img">
+                                    <span>点击添加图片</span>
+                                    <input type="file">
+                              </div> 
+                              
+                              <input type="text" class="input_text" value="输入欢迎语" onFocus="this.value=''">
+                             
+                              <div class="article_choose" id="weixinhome">
+                                 <span>点击选择文章</span>
+                                 <img src="./template/default/image/avata1.png" alt="">
+                              </div>
+                                 <a class="article_choose" href="#">
+                                 <span>点击选择文章</span>
+                                 <img src="./template/default/image/avata1.png" alt="">
+                              </a>
 
-一级菜单(左侧)<div id="longbutton1" ><input type="text" name="button1" id="button1" value="<?=$list['0']['button']?>"></div>二次菜单(左侧)：<br/><input type="text" name="1sub_button1" id="button1" value="<?=$list['0']['sub_button1']?>"><input type="text" name="1sub_button2" id="button2" value="<?=$list['0']['sub_button2']?>"><input type="text" name="1sub_button3" id="button3" value="<?=$list['0']['sub_button3']?>"><input type="text" name="1sub_button4" id="button4" value="<?=$list['0']['sub_button4']?>"><input type="text" name="1sub_button5" id="button5" value="<?=$list['0']['sub_button5']?>"><br/><br/><hr/><br/>
-一级菜单(中间)<div id="longbutton2" ><input type="text" name="button2" id="button2" value="<?=$list['1']['button']?>" ></div>二次菜单(中间)：<br/><input type="text" name="2sub_button1" id="button1" value="<?=$list['1']['sub_button1']?>"><input type="text" name="2sub_button2" id="button2" value="<?=$list['1']['sub_button2']?>"><input type="text" name="2sub_button3" id="button3" value="<?=$list['1']['sub_button3']?>"><input type="text" name="2sub_button4" id="button4" value="<?=$list['1']['sub_button4']?>"><input type="text" name="2sub_button5" id="button5" value="<?=$list['1']['sub_button5']?>"><br/><br/><hr/><br/>
-一级菜单(右侧)<div id="longbutton3" ><input type="text" name="button3" id="button3" value="<?=$list['2']['button']?>"></div>二次菜单(右侧)：<br/><input type="text" name="3sub_button1" id="button1" value="<?=$list['2']['sub_button1']?>"><input type="text" name="3sub_button2" id="button2" value="<?=$list['2']['sub_button2']?>"><input type="text" name="3sub_button3" id="button3" value="<?=$list['2']['sub_button3']?>"><input type="text" name="3sub_button4" id="button4" value="<?=$list['2']['sub_button4']?>"><input type="text" name="3sub_button5" id="button5" value="<?=$list['2']['sub_button5']?>">
-<br/>
+                          </div>
+                              <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="1">
+                                <li></li>
+                                
+                                <li></li>
+                                <li></li>
+                              <li><img src="./template/default/image/erji_add.png" class="add"></li>
+                              <li><input type="text" class="erji_input" name="1sub_button1" value="<?=$list['0']['sub_button1']?>"  placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                            <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="2">
+                                
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                              <li><img src="./template/default/image/erji_add.png" class="add1"></li>
+                              <li><input type="text" class="erji_input" name="2sub_button1" value="<?=$list['1']['sub_button1']?>" placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                          <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="3">
+                                
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                              <li><img src="./template/default/image/erji_add.png" class="add2"></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                          <div class="clear"></div>
+                          <div style="display:inline;">
+                          <ul class="erji_menu_tips">
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="1" class="tip_img"></a></li>
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="2" class="tip_img"></a></li>
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="3" class="tip_img"></a></li>
+                          </ul>
+                          
+                          </div>
+                        </div>
+                          <div class="wx_nav">
+                                <ul>
+                                  <li style="border-left:1px solid #CCCCCC;"><input type="text" name="button1" placeholder="请填写" tag="1" value="<?=$list['0']['button']?>" class="first_menu"></li>
+                                  <li><input type="text" placeholder="请填写" name="button2" value="<?=$list['1']['button']?>" tag="2" class="first_menu"></li>
+                                  <li><input type="text" placeholder="请填写" tag="3" value="<?=$list['2']['button']?>" name="button3" class="first_menu"></li>
+                                </ul>
+                          </div>
 
-<input type="submit">
-<input type="hidden" name="secondsubmit" value="1">
-</form>
-<?php } else { ?>
-<a href="space.php?do=weixinmenu&edit=1">修改</a><br/>
-<?php if($list['0']['button']) { ?>一级菜单(左侧)<div id="longbutton1" ><?=$list['0']['button']?></div>二次菜单(左侧)：<br/><?php if($list['0']['sub_button1']) { ?><?=$list['0']['sub_button1']?><br/><?php } ?><?php if($list['0']['sub_button2']) { ?><?=$list['0']['sub_button2']?><br/><?php } ?><?php if($list['0']['sub_button3']) { ?><?=$list['0']['sub_button3']?><br/><?php } ?><?php if($list['0']['sub_button4']) { ?><?=$list['0']['sub_button4']?><br/><?php } ?><?php if($list['0']['sub_button5']) { ?><?=$list['0']['sub_button5']?><?php } ?><?php } ?><br/><br/><hr/><br/>
-<?php if($list['1']['button']) { ?>一级菜单(中间)<div id="longbutton2" ><?=$list['1']['button']?></div>二次菜单(中间)：<br/><?php if($list['1']['sub_button1']) { ?><?=$list['1']['sub_button1']?><br/><?php } ?><?php if($list['1']['sub_button2']) { ?><?=$list['1']['sub_button2']?><br/><?php } ?><?php if($list['1']['sub_button3']) { ?><?=$list['1']['sub_button3']?><br/><?php } ?><?php if($list['1']['sub_button4']) { ?><?=$list['1']['sub_button4']?><br/><?php } ?><?php if($list['1']['sub_button5']) { ?><?=$list['1']['sub_button5']?><?php } ?><?php } ?><br/><br/><hr/><br/>
-<?php if($list['2']['button']) { ?>一级菜单(右侧)<div id="longbutton2" ><?=$list['2']['button']?></div>二次菜单(右侧)：<br/><?php if($list['2']['sub_button2']) { ?><?=$list['2']['sub_button2']?><br/><?php } ?><?php if($list['2']['sub_button2']) { ?><?=$list['2']['sub_button2']?><br/><?php } ?><?php if($list['2']['sub_button3']) { ?><?=$list['2']['sub_button3']?><br/><?php } ?><?php if($list['2']['sub_button4']) { ?><?=$list['2']['sub_button4']?><br/><?php } ?><?php if($list['2']['sub_button5']) { ?><?=$list['2']['sub_button5']?><?php } ?><?php } ?><br/><br/><hr/><br/>
-<?php } ?>
-<?php } ?>
-<a href="cp.php?ac=weixinmenu">生成菜单</a>
+                     </div>
+                     <div class="wx_notice_text">
+                      <h3>注意事项</h3>
+                      <ol>
+                        <li>顶部是初次使用的推送文章</li>
+                        <li> 底部是微信一级菜单和二级菜单, 一级菜单填写完成后才能继续二级菜单填写</li>
+                        <li>微信自定义菜单填写完成后, 您的公众帐号出现一样的自定义内容</li>
+                      </ol>
+                     </div>
+                          <input type="submit" class="btn grid_2">
+                          <input type="hidden" name="fristsubmit" value="1">
+                        
+                  </form>
+                 </div><!-- content_detail_wrapper end -->
+            
+            </div>
+              
+          </div><!-- content_wrapper end -->
+    </div><!-- wrraper end -->
 
    <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <?php if(empty($_TPL['nosidebar'])) { ?>
@@ -229,7 +315,11 @@ if(c<'6'){
 <?php } ?>
     </div>
     </div>
-    
+      <div id="backtop">
+    	<a href="">
+    		<img src="./template/default/image/back_top.png">
+    	</a>
+    </div>
         </div>
 <div class="footer">
 
@@ -265,13 +355,13 @@ if(c<'6'){
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+
 
     </div>
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery.js"></script>
+
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">
@@ -329,4 +419,384 @@ showreward();
 <?php } ?>
 </body>
 </html>
-<?php } ?><?php ob_out();?>
+<?php } ?>
+
+    <script src="./source/placeholder.js"></script>
+    <script type="text/javascript">
+         $(document).ready(function(){
+           $(".first_menu").blur(
+            
+               function(){
+                // var ke=$(this).val();
+                // alert(ke);
+                 if($(this).val()!="" && $(this).val()!="请填写"){
+                   var q=$(this).attr("tag");
+                  if($(".erji_box[tag=" + q + "]").is(":hidden")){
+                    $("img[tag=" + q + "]").show();
+                  }
+
+                 }
+                 
+                  
+               }             
+            );
+           $(".first_menu").keydown(function(){
+              if(event.keyCode == 13){
+                  var q=$(this).attr("tag");
+                  $("img[tag=" + q + "]").show();                  
+                 }
+               });
+            
+            // 回车事件
+            $(".tip_img").click(function(){
+              var r=$(this).attr("tag");
+              $(this).parent().hide();
+              // var new_r=r+""；
+              $(".erji_box[tag=" + r + "]").show();
+              $(".erji_box[tag=" + r + "]").children().children(".add").hide();
+              $(this).parent().parent().css({"position":"relative","z-index":"1"});
+            });
+
+
+             $(".erji_input").bind("blur keydown",function(){
+              if(event.keyCode == 13){
+                var that=$(this);
+              if ($(this).val()!="") {
+                $(this).parent().siblings().children(".add").show()
+              };
+              }
+             })
+          
+            var a=1; 
+            $(".add").click(
+                function(){
+                  var that=$(this);
+                  var placeholder_val=$(this).parent().next().children("input").val();
+                  // alert(placeholder_val);
+                  a++;
+                   if(placeholder_val!="" && placeholder_val!="请填写"){
+                    if ($(this).parent("li").siblings().children(".add_input").length<4){
+                        $(this).parent().prev("li").remove();
+                        $(this).parent().after("<li><input type='text' name='1sub_button"+a+"' placeholder='请填写' class='add_input'></li>");
+                         if ($(this).parent("li").siblings().children(".add_input").length==4){
+                           $(this).parent().parent().parent().attr("style","margin-top:-40px;");
+                             $(this).hide(); 
+                     }
+                    }
+
+                            $(".add_input").bind("blur keydown",function(){
+                              if(event.keyCode == 13){
+                                  var that=$(this);
+                    if (that.val()!="" && that.parent().siblings().children(".add_input").length<3) {
+                      that.parent().siblings().children(".add").show()
+                      
+                    }
+                    
+                    if(that.val()==""){
+                      that.remove();
+                      
+                    }
+                              }
+                            })
+                   } 
+                   that.hide();  
+                }
+              );
+              var b=1;
+               $(".add1").click(
+                function(){
+                  var that=$(this);
+                  var placeholder_val=$(this).parent().next().children("input").val();
+                  // alert(placeholder_val);
+                   if(placeholder_val!="" && placeholder_val!="请填写"){
+                    if ($(this).parent("li").siblings().children(".add_input").length<4){
+                        $(this).parent().prev("li").remove();
+                        $(this).parent().after("<li><input type='text' placeholder='请填写'  name='2sub_button"+b+"' class='add_input'></li>");
+                         if ($(this).parent("li").siblings().children(".add_input").length==4){
+                           $(this).parent().parent().parent().attr("style","margin-top:-40px;");
+                             $(this).hide(); 
+                     }
+                    }
+
+                            $(".add_input").bind("blur keydown",function(){
+                              if(event.keyCode == 13){
+                                  var that=$(this);
+                    if (that.val()!="" && that.parent().siblings().children(".add_input").length<3) {
+                      that.parent().siblings().children(".add1").show()
+                      
+                    }
+                    
+                    if(that.val()==""){
+                      that.remove();
+                      
+                    }
+                              }
+                            })
+                   } 
+                   that.hide();  
+                }
+              );
+              var c=1;
+                 $(".add2").click(
+                function(){
+                  var that=$(this);
+                  var placeholder_val=$(this).parent().next().children("input").val();
+                  var dd="<?=$list['2']?>[sub_button"+c+"]";
+                  // alert(placeholder_val);
+                   if(placeholder_val!="" && placeholder_val!="请填写"){
+                    if ($(this).parent("li").siblings().children(".add_input").length<4){
+                        $(this).parent().prev("li").remove();
+                        $(this).parent().after("<li><input type='text' placeholder='请填写'  name='3sub_button"+c+"' class='add_input'></li>");
+                         if ($(this).parent("li").siblings().children(".add_input").length==4){
+                           $(this).parent().parent().parent().attr("style","margin-top:-40px;");
+                             $(this).hide(); 
+                     }
+                    }
+
+                            $(".add_input").bind("blur keydown",function(){
+                              if(event.keyCode == 13){
+                                  var that=$(this);
+                    if (that.val()!="" && that.parent().siblings().children(".add_input").length<3) {
+                      that.parent().siblings().children(".add2").show()
+                      
+                    }
+                    
+                    if(that.val()==""){
+                      that.remove();
+                      
+                    }
+                              }
+                            })
+                   } 
+                   that.hide();  
+                }
+              );
+
+        })
+    </script>
+     <?php } else { ?>  
+                          <div class="content_detail_wrapper">
+                   <form method="post" action="space.php?do=weixinmenu" onkeydown="if(event.keyCode==13){return false;}">
+                     <div class="left_weixin">
+                        <div class="weixin_header">
+                            <img src="./template/default/image/wx_header.png" alt="">
+                        </div>
+                        <div class="wx_body">  
+                          <div class="weixin_choose">
+                              <div class="wx_choose_img">
+                                    <span>点击添加图片</span>
+                                    <input type="file">
+                              </div> 
+                              
+                              <input type="text" class="input_text" value="输入欢迎语" onFocus="this.value=''">
+                             
+                              <div class="article_choose" id="weixinhome">
+                                 <span>点击选择文章</span>
+                                 <img src="./template/default/image/avata1.png" alt="">
+                              </div>
+                                 <a class="article_choose" href="#">
+                                 <span>点击选择文章</span>
+                                 <img src="./template/default/image/avata1.png" alt="">
+                              </a>
+
+                          </div>
+                              <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="1">
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="1sub_button1" value="<?=$list['0']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                            <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="2">
+                                <li><input type='text' placeholder='请填写'  name='3sub_button3' class='add_input'></li>
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="2sub_button1" value="<?=$list['1']['sub_button1']?>" placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                          <div class="erji_box_wrap">
+                           <ul style="" class="erji_box" tag="3">
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                                <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                              <li><input type="text" class="erji_input" name="3sub_button1" value="<?=$list['2']['sub_button1']?>"  placeholder="请填写"/></li>
+                          </ul>
+                          </div>
+                          <div class="clear"></div>
+                          <div style="display:inline;">
+                          <ul class="erji_menu_tips">
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="1" class="tip_img"></a></li>
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="2" class="tip_img"></a></li>
+                                  <li><a href="javascript:;"><img src="./template/default/image/erji_menu.png" alt="" tag="3" class="tip_img"></a></li>
+                          </ul>
+                          
+                          </div>
+                        </div>
+                          <div class="wx_nav">
+                                <ul>
+                                  <li style="border-left:1px solid #CCCCCC;"><input type="text" name="button1" placeholder="请填写" tag="1" value="<?=$list['0']['button']?>" class="first_menu"></li>
+
+                                  <li><input type="text" placeholder="请填写" name="button2" value="<?=$list['1']['button']?>" tag="2" class="first_menu"></li>
+                                  <li><input type="text" placeholder="请填写" tag="3" value="<?=$list['2']['button']?>" name="button3" class="first_menu"></li>
+                                </ul>
+                          </div>
+
+                     </div>
+                     <div class="wx_notice_text">
+                      <h3>注意事项</h3>
+                      <ol>
+                        <li>顶部是初次使用的推送文章</li>
+                        <li> 底部是微信一级菜单和二级菜单, 一级菜单填写完成后才能继续二级菜单填写</li>
+                        <li>微信自定义菜单填写完成后, 您的公众帐号出现一样的自定义内容</li>
+                      </ol>
+                     </div>
+                          <input type="submit" class="btn grid_2">
+                          <input type="hidden" name="fristsubmit" value="1">
+                        
+                  </form>
+                 </div><!-- content_detail_wrapper end -->
+            
+            </div>
+              
+          </div><!-- content_wrapper end -->
+    </div><!-- wrraper end -->
+
+   <?php if(empty($_SGLOBAL['inajax'])) { ?>
+<?php if(empty($_TPL['nosidebar'])) { ?>
+<?php if($_SGLOBAL['ad']['contentbottom']) { ?><br style="line-height:0;clear:both;"/><div id="ad_contentbottom"><?php adshow('contentbottom'); ?></div><?php } ?>
+</div>
+
+<!--/mainarea-->
+<?php if($zhong1) { ?>
+<div id="bottom"></div>
+<?php } ?>
+</div>
+<!--/main-->
+<?php } ?>
+    </div>
+    </div>
+      <div id="backtop">
+    	<a href="">
+    		<img src="./template/default/image/back_top.png">
+    	</a>
+    </div>
+        </div>
+<div class="footer">
+
+        <div class="footer_map container_12">
+           <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">使用帮助:</li>
+                <li><a href="">开通流程</a></li>
+                <li><a href="">管理员手册</a></li>
+                <li><a href="">用户手册</a></li>
+           </ul>
+
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">投诉与建议:</li>
+                <li><a href="">在线客服</a></li>
+                <li><a href="">留言板</a></li>
+           </ul>
+
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png"><span>合作:</span></li>
+                <li><a href="">品牌企业合作</a></li>
+                <li><a href="">媒体合作</a></li>
+                <li><a href="">收费细节</a></li>
+           </ul>
+
+            <ul class="grid_3">
+                <li class="map_title"><img src="./template/default/image/ff.png">关于我们:</li>
+                <li><a href="">企业介绍</a></li>
+                <li><a href="">联系方式</a></li>
+                <li><a href="">人才招聘</a></li>
+           </ul>
+          
+        </div><!-- map end -->
+        <div class="footer_info">
+             版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
+            
+
+
+    </div>
+
+</div>
+<!--/wrap-->
+
+    <!--<script src="js/bootstrap.min.js"></script>-->
+<?php if($_SGLOBAL['appmenu']) { ?>
+<ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">
+<li><a href="<?=$_SGLOBAL['appmenu']['url']?>" title="<?=$_SGLOBAL['appmenu']['name']?>" target="_blank"><?=$_SGLOBAL['appmenu']['name']?></a></li>
+<?php if(is_array($_SGLOBAL['appmenus'])) { foreach($_SGLOBAL['appmenus'] as $value) { ?>
+<li><a href="<?=$value['url']?>" title="<?=$value['name']?>" target="_blank"><?=$value['name']?></a></li>
+<?php } } ?>
+</ul>
+<?php } ?>
+
+<?php if($_SGLOBAL['supe_uid']) { ?>
+<ul id="membernotemenu_menu" class="dropmenu_drop" style="display:none;">
+<?php $member = $_SGLOBAL['member']; ?>
+<?php if($member['notenum']) { ?><li><img src="image/icon/notice.gif" width="16" alt="" /> <a href="space.php?do=notice"><strong><?=$member['notenum']?></strong> 个新通知</a></li><?php } ?>
+<?php if($member['pokenum']) { ?><li><img src="image/icon/poke.gif" alt="" /> <a href="cp.php?ac=poke"><strong><?=$member['pokenum']?></strong> 个新招呼</a></li><?php } ?>
+<?php if($member['addfriendnum']) { ?><li><img src="image/icon/friend.gif" alt="" /> <a href="cp.php?ac=friend&op=request"><strong><?=$member['addfriendnum']?></strong> 个好友请求</a></li><?php } ?>
+<?php if($member['mtaginvitenum']) { ?><li><img src="image/icon/mtag.gif" alt="" /> <a href="cp.php?ac=mtag&op=mtaginvite"><strong><?=$member['mtaginvitenum']?></strong> 个群组邀请</a></li><?php } ?>
+<?php if($member['eventinvitenum']) { ?><li><img src="image/icon/event.gif" alt="" /> <a href="cp.php?ac=event&op=eventinvite"><strong><?=$member['eventinvitenum']?></strong> 个活动邀请</a></li><?php } ?>
+<?php if($member['myinvitenum']) { ?><li><img src="image/icon/userapp.gif" alt="" /> <a href="space.php?do=notice&view=userapp"><strong><?=$member['myinvitenum']?></strong> 个应用消息</a></li><?php } ?>
+</ul>
+<?php } ?>
+
+<?php if($_SGLOBAL['supe_uid']) { ?>
+<?php if(!isset($_SCOOKIE['checkpm'])) { ?>
+<script language="javascript"  type="text/javascript" src="cp.php?ac=pm&op=checknewpm&rand=<?=$_SGLOBAL['timestamp']?>"></script>
+<?php } ?>
+<?php if(!isset($_SCOOKIE['synfriend'])) { ?>
+<script language="javascript"  type="text/javascript" src="cp.php?ac=friend&op=syn&rand=<?=$_SGLOBAL['timestamp']?>"></script>
+<?php } ?>
+<?php } ?>
+<?php if(!isset($_SCOOKIE['sendmail'])) { ?>
+<script language="javascript"  type="text/javascript" src="do.php?ac=sendmail&rand=<?=$_SGLOBAL['timestamp']?>"></script>
+<?php } ?>
+
+<?php if($_SGLOBAL['ad']['couplet']) { ?>
+<script language="javascript" type="text/javascript" src="source/script_couplet.js"></script>
+<div id="uch_couplet" style="z-index: 10; position: absolute; display:none">
+<div id="couplet_left" style="position: absolute; left: 2px; top: 60px; overflow: hidden;">
+<div style="position: relative; top: 25px; margin:0.5em;" onMouseOver="this.style.cursor='hand'" onClick="closeBanner('uch_couplet');"><img src="image/advclose.gif"></div>
+<?php adshow('couplet'); ?>
+</div>
+<div id="couplet_rigth" style="position: absolute; right: 2px; top: 60px; overflow: hidden;">
+<div style="position: relative; top: 25px; margin:0.5em;" onMouseOver="this.style.cursor='hand'" onClick="closeBanner('uch_couplet');"><img src="image/advclose.gif"></div>
+<?php adshow('couplet'); ?>
+</div>
+<script type="text/javascript">
+lsfloatdiv('uch_couplet', 0, 0, '', 0).floatIt();
+</script>
+</div>
+<?php } ?>
+<?php if($_SCOOKIE['reward_log']) { ?>
+<script type="text/javascript">
+showreward();
+</script>
+<?php } ?>
+</body>
+</html>
+<?php } ?>
+                          <input type="submit" class="btn grid_2">
+                          <input type="hidden" name="secondsubmit" value="1">
+      <?php } ?>
+    <div id="weixin">
+                    <form action = "space.php?do=feed" method = "post" style="margin:0 auto;text-align:center;">
+    <br/>
+   <h3 style="font-size:20px;color:#44B1BA;margin-left:-10px;line-height:40px;">你的微信登录名：<input type="text" name="weixinusername"></h3>
+    <h3 style="font-size:20px;color:#44B1BA;margin:0;line-height:40px;padding-left:10px;">你的微信密码：<input type="text" name="weixinpassword"></h3><br/>
+    <input type="submit" name="submit" style="margin-left:250px;" class="modalCloseImg simplemodal-close" id="true" title="Close"  value="修改">
+    <input type="hidden" name="alreadyweixin" value="1">
+    </form>
+
+                        </div>
+  </body>
+</html><?php ob_out();?>

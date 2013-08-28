@@ -233,7 +233,7 @@ if($id) {
 
 	$ordersql = 'b.dateline';
 
-	if(empty($_GET['view']) && ($space['friendnum']<$_SCONFIG['showallfriendnum'])) {
+	if(empty($_GET['view'])) {
 		$_GET['view'] = 'all';//Ä¬ÈÏÏÔÊ¾
 	}
 
@@ -373,16 +373,25 @@ if($id) {
 		}
 
 		if($_GET['view'] != 'me') {
-
+		if($zhong1){
 		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('menuset')." b WHERE $wheresql"),0);
+		}else{
+		$count = $_SGLOBAL['db']->result($_SGLOBAL['db']->query("SELECT COUNT(*) FROM ".tname('menuset')." b WHERE b.style='1' and $wheresql"),0);
+		}	
 		//¸üÐÂÍ³¼Æ
 		if($wheresql == "b.uid='$space[uid]'" && $space['menusetnum'] != $count) {
 			updatetable('space', array('menusetnum' => $count), array('uid'=>$space['uid']));
 		}
 		if($count) {
+		if($zhong1){
 			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('menuset')." b $f_index
-				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid 
+				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid
 				ORDER BY $ordersql ASC LIMIT $start,$perpage");
+		}else{
+			$query = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('menuset')." b $f_index
+				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid where b.style='1'
+				ORDER BY $ordersql ASC LIMIT $start,$perpage");
+		}
 		}
 	}
 			if($_GET['view'] == 'me') {
@@ -436,7 +445,7 @@ if($_GET['view'] != 'me') {
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				//识别标签，只出现符合标签的应用
 				$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('spacefield')." 
-				WHERE uid='$space[uid]' ORDER BY uid  ASC LIMIT $start,$perpage");
+				WHERE uid='$space[uid]' ORDER BY uid  ASC");
 				$value2=$_SGLOBAL['db']->fetch_array($query2);
 				$a=$value2['business'];
 				$wei=explode("，",$value['apptag']);
@@ -444,12 +453,12 @@ if($_GET['view'] != 'me') {
 				$query1 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid] and bf.appstatus='1'
-				ORDER BY b.dateline ASC LIMIT $start,$perpage");
+				ORDER BY b.dateline ASC ");
 				$value1=$_SGLOBAL['db']->fetch_array($query1);
 				$query2 = $_SGLOBAL['db']->query("SELECT bf.*, b.* FROM ".tname('appset')." bf 
 				LEFT JOIN ".tname('menuset')." b ON bf.num=b.menusetid
 				WHERE bf.uid='$space[uid]' and bf.num=$value[menusetid]
-				ORDER BY b.dateline ASC LIMIT $start,$perpage");
+				ORDER BY b.dateline ASC");
 				$value2=$_SGLOBAL['db']->fetch_array($query2);
 				$value['zhong'] = $value2;
 				if($value2['newname']){
@@ -464,6 +473,13 @@ if($_GET['view'] != 'me') {
 	}
 }
 	//·ÖÒ³
+			$query1 = $_SGLOBAL['db']->query("SELECT bf.message, bf.target_ids, bf.magiccolor, b.* FROM ".tname('menuset')." b $f_index
+				LEFT JOIN ".tname('menusetfield')." bf ON bf.menusetid=b.menusetid
+				ORDER BY $ordersql ASC ");
+			while ($value1 = $_SGLOBAL['db']->fetch_array($query1)) {
+				$all[] = $value1;
+			}
+
 	$multi = multi($count, $perpage, $page, $theurl);
 
 	//ÊµÃû
@@ -474,10 +490,14 @@ if($_GET['view'] != 'me') {
 	$zhong1=$value4;
 
 	if($_POST){
-		if (empty($space['weixinname'])&&empty($space['weixinpassword'])){
-		showmessage("未填写微信用户名和密码", 'space.php?do=menuset', 0);
-	}
-	
+		if(empty($space['weixinusername'])||empty($space['weixinpassword'])){
+			if($zhong1){
+				showmessage("请务必填写微信登录账号和密码！","space.php?do=feed");
+			
+		}else{
+				showmessage("请务必填写微信登录账号和密码！","space.php?do=menuset");
+		}
+		}
 		foreach($_POST as $p => $o){
 	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE num='$p' and uid=$_SGLOBAL[supe_uid]");
 	$value = $_SGLOBAL['db']->fetch_array($query);
@@ -485,9 +505,11 @@ if($_GET['view'] != 'me') {
 		$query2 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')."  WHERE menusetid='$p'");
 		$value2 = $_SGLOBAL['db']->fetch_array($query2);
 		if($value2['money']){
-		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'orderid'=>$value2['menusetid'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+		inserttable("appset", array('month'=>$o,'dateline1' => $_SGLOBAL['timestamp'],'orderid'=>$value2['menusetid'],'endtime'=> $_SGLOBAL['timestamp']+$o*2592000*12,'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+		if($zhong1){
 		$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
-		$showlink="space.php?do=showmenuset";	
+		$showlink="space.php?do=showmenuset";
+		}	
 		}else{
 		inserttable("appset", array('month'=>'0','dateline1' => '0','endtime'=>'0','orderid'=>$value2['menusetid'],'uid'=>$_SGLOBAL['supe_uid'],'num'=>$p,'appstatus'=>'1'));	
 		$showmessage1='订制成功。';
@@ -499,13 +521,16 @@ if($_GET['view'] != 'me') {
 	$value2 = $_SGLOBAL['db']->fetch_array($query2);
 	if($value2['money']){
 		if($value2['appstatus']=='0'){
-			updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline']+$value2['month']*2592000+$o*2592000),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
+			updatetable("appset", array('month'=>$value2['month']+$o,'endtime'=>$value2['dateline']+$value2['month']*2592000*12+$o*2592000*12),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
 			$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 			$showlink="space.php?do=showmenuset";
+		
 		}else{
 			updatetable("appset", array('addmonth'=>$value2['addmonth']+$o),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));	
+		
 			$showmessage='你所选择的应用包含付费应用，现在为你跳转到支付页面。';
 			$showlink="space.php?do=showmenuset";
+		
 		}
 }else{
 	updatetable("appset", array('month'=>'0','endtime'=>'0','cheak'=>'0'),array('uid'=>$_SGLOBAL['supe_uid'],'num'=>$p));
@@ -518,7 +543,11 @@ if($_GET['view'] != 'me') {
 if($showmessage){
 	showmessage("$showmessage","$showlink");
 }else{
-	include"./template/default/allcomplete.htm";
+	if($zhong1){
+	showmessage("订制成功","space.php?do=menuset&view=me");
+	}else{
+	showmessage("提交成功","space.php?do=highmenuset");
+}
 }
 }
 $query4 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('appset')." WHERE uid='$space[uid]' and appstatus='1'");

@@ -24,7 +24,7 @@
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                       	 <div class="content_title">$branch[subject]</div>
-                      	 <div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : $branch[username]&nbsp;|&nbsp;发布时间 : <!--{date('Y-m-d H:i:s',$branch[dateline])}--></div>
+                      	 <div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : {$_SN[$branch[uid]]}&nbsp;|&nbsp;发布时间 : <!--{date('Y-m-d H:i:s',$branch[dateline])}--></div>
                            <h3 class="first_party">
                             <span><!--{if $branch[place]}-->地址:$branch[place];<!--{else}-->地址:未填;<!--{/if}--></span>
                             <span><!--{if $branch[telephone]}-->电话:$branch[telephone];<!--{else}-->电话:未填;<!--{/if}--></span>

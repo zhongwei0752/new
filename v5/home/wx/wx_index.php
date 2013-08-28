@@ -95,10 +95,6 @@ class wechatCallbackapiTest
                        $pic = "http://v5.home3d.cn/home/".$app_output->data->app[$i]->image1url;
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       } 
-                      $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=goods";
-                      $subject="商品管理";
-                      $pic = "http://v5.home3d.cn/home/image/logo/goods.jpg";
-                      $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                      echo $resultStr;
 
@@ -118,6 +114,8 @@ class wechatCallbackapiTest
                 $toUsername = $postObj->ToUserName;
                 $keyword = trim($postObj->Content);
                 $time = time();
+                $eventkey=$postObj->EventKey;
+
                 //判断是否已经有帐号
                 $textTpl = "<xml>
                                    <ToUserName><![CDATA[%s]]></ToUserName>
@@ -136,19 +134,84 @@ class wechatCallbackapiTest
                               mysql_select_db("$dbname", $con);
                               $result = mysql_query("SELECT s.*,sf.* FROM uchome_space s LEFT JOIN uchome_spacefield sf ON s.uid=sf.uid  WHERE s.wxkey='".$toUsername."' ");
                               mysql_query("SET NAMES 'utf8'");
-          if($row = mysql_fetch_array($result)){
-            
-            
-            
-          $v5 = mysql_query("SELECT a.*,m.* FROM uchome_appset a LEFT JOIN uchome_menuset m ON a.num=m.menusetid WHERE a.uid='$row[uid]' and a.appstatus='1'");
-                          while($v52= mysql_fetch_array($v5)){
-                               $a[] = "$v52[num]";
-                            $b[] = "$v52[subject]";
+                            if($row = mysql_fetch_array($result)){
+                              if($eventkey){
+                              $msgType = "news";
+                              $wei=explode(".",$eventkey);
+                              if($wei[0]=="introduce"){
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=$wei[0]&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=".$wei[0]."id&type=".$wei[0]."&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->introduce->subject;
+                              $pic = "http://v5.home3d.cn/home/".$app_output->data->introduce->imageurl;
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                              }elseif($wei[0]=="branch"){
 
-                          }
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=branch&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=branchid&type=branch&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->branch->subject;
+                              $pic = "http://v5.home3d.cn/home/".$app_output->data->branch->imageurl;
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                      } elseif($wei[0]=="industry"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=industry&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=industryid&type=industry&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->industry->subject;
+                              $pic = "http://v5.home3d.cn/home/".$app_output->data->industry->imageurl;
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                      }   elseif($wei[0]=="job"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=job&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=jobid&type=job&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->job->subject;
+                            
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                      }   elseif($wei[0]=="product"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=product&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=productid&type=product&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->product->subject;
+                              $pic = "http://v5.home3d.cn/home/".$app_output->data->product->imageurl;
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                      } elseif($wei[0]=="cases"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=cases&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=casesid&type=cases&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->cases->subject;
+                              $pic = "http://v5.home3d.cn/home/".$app_output->data->cases->imageurl;
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                      } 
+                               
+                              
+
+   
+             }
                          
         }else{
-           $contentStr.="此微信公众号还未通过验证，微信id:$toUsername,请等待审核";
+           $contentStr.="123";
                $msgType = "text";
                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                echo $resultStr;
@@ -193,20 +256,10 @@ class wechatCallbackapiTest
                            $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                          echo $resultStr;
                          }else{
-                      $msgType = "text";
                   $zhong = mysql_query("SELECT a.*,m.* FROM uchome_appset a LEFT JOIN uchome_menuset m ON a.num=m.menusetid WHERE a.uid='$row[uid]'and a.num='$keyword'");
                   $wei = mysql_fetch_array($zhong);
                  
-                      if($wei){
-                     $english=$wei['english'];
-                     $jsonurl = "http://v5.home3d.cn/home/capi/space.php?do=$english&uid=$row[uid]";
-                      $json = file_get_contents($jsonurl,0,null,null);
-                      $json_output = json_decode($json);
-                     
-                        
-                      
-
-                      }else{ 
+                    
                       $msgType = "news";
                       if($row[name]){
                         $name=$row[name];
@@ -234,14 +287,21 @@ class wechatCallbackapiTest
 
                        $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                       }  
-                       $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=goods";
-                       $subject="商品管理";
-                       $pic = "http://v5.home3d.cn/home/image/logo/goods.jpg";
                        
-                       $articles[] = makeArticleItem($subject, $subject, $pic, $url);
+                    if($app_output->data->highapp){
+                      $url = "http://v5.home3d.cn/home/wx/wx.php?uid=$row[uid]&do=feed&num=rand()&wxkey=".$fromUsername."&uid=".$row[uid]."&idtype=".$app_output->data->highapp[0]->english;
+                      if($app_output->data->highapp[0]->newname){
+                       $subject=$app_output->data->highapp[0]->newname;
+                       }else{
+                       $subject=$app_output->data->highapp[0]->subject;
+                     }
+                      $pic = "http://v5.home3d.cn/home/".$app_output->data->highapp[0]->image1url;
+
+                      $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                    }
                          
                          
-                       }         
+                         
                        
                         
                 

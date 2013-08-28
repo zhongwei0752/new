@@ -1160,6 +1160,23 @@ function updatestat($type, $primary=0) {
 	}
 }
 
+//更新统计
+function updateuserstat($type,$uid) {
+	global $_SGLOBAL, $_SCONFIG;
+	if(empty($uid)){
+		$uid=$_SGLOBAL['supe_uid'];
+	}
+	
+	$nowdaytime = sgmdate('Ymd', $_SGLOBAL['timestamp']);
+	if(getcount('userstatus', array('daytime'=>$nowdaytime ,'uid' => $_SGLOBAL['supe_uid']))) {
+		$_SGLOBAL['db']->query("UPDATE ".tname('userstatus')." SET `$type`=`$type`+1 WHERE daytime='$nowdaytime' and uid='$uid'");
+	} else {
+		//删除昨天的防重数据
+		//插入统计
+		inserttable('userstatus', array('daytime'=>$nowdaytime, 'hot'=>'1','uid'=>$uid));
+	}
+}
+
 //处理网络图片链接
 function picurl_get($picurl, $maxlenth='200') {
 	$picurl = shtmlspecialchars(trim($picurl));

@@ -111,6 +111,7 @@ function menuset_post($POST, $olds=array()) {
 		'subject' => $POST['subject'],
 		'money' =>$POST['money'],
 		'english' =>$POST['english'],
+		'style'  =>$POST['style'],
 		'apptag'  =>$POST['apptag'],
 		'url'=>$POST['url'],
 		'classid' => $classid,

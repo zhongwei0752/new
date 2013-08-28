@@ -9,14 +9,12 @@
                  </div><!-- end -->
                  <div class="bread container_12">
                      <div class="bread_actived grid_1">
-                         对话列表
+                         问题列表
                      </div>
-                     
-                     
+                      <a href="cp.php?ac=dialog&op=ask" class="btn grid_2">
+                      发布
+                     </a>
                  </div>	
-
- 
-
 <!--{/if}-->
 	<script language="javascript" type="text/javascript" src="source/jquery.js"></script>
 		<script type="text/javascript" src="./source/jquery.simplemodal.js"></script>	
@@ -39,36 +37,43 @@
       jquery(document).ready(function(){
        jquery('#talk75').attr("style", "display:none;");
 	});
-    </script> 
+ </script> 
 	<div id = "dialoglist" class = "pm_list">
-		<ul class="pushtocenter">
+		
  		<!--{if $list}-->
 		<!--{loop $list $value}-->
                      
-                     <br/>
-                     <li>
-                     	
-                     <div class="avatar48"><!--{avatar($value[cid])}--></div>
-                     <div class="pm_body">
-                     	<div class = "pm_h">
-                     		<div class = "pm_f">
-                     			<p>
-                     				<a href = "space.php?uid={$value[cid]}">$value[username]</a>
-                     				
-                     			</p>
-                     			<div class = "pm_c">
-                     				<p>$value[message]</p>
-                     			</div>
-                     			<p class = "bottom_set">
-                     				<a href = "space.php?do=communicate&dialog=$value[dialogid]" >查看详情</a>&nbsp;&nbsp;&nbsp;
-                          	        <a href = "javascript:void(0);" onclick="quickreply($space[uid],$value[cid],$value[dialogid])">快速回复</a>
-                     			</p>
-                     		</div>
-                     	</div>
-                     </div>
-                		</li>
-                   <!--{/loop}-->
-                  </ul>
+   		<div class = "dialog">
+   			<div class = "dia-header">
+   				<a class = "q_title" href = "space.php?do=dialog&dialog=$value[id]">$value['subject']</a>
+   				
+   				<a href="javascript:void(0);" style = "color: #00A69E; float: right;" onclick="quickreply($space[uid],$value[q_uid],$value[id])">回复</a>
+   			</div>
+   			<div class = "dia-content">
+   				<ul>
+   					<!--{eval $cl = $clist[$value[num]]}-->
+   					<!--{loop $cl $cval}-->
+   						<li class="q_li">
+   							
+   							<div class = "con-user">
+   								<!--{avatar($cval[uid],'small')}-->
+   							 
+   							</div>
+   							<div class = "con-mes">
+   								<span style = "color: #02B4AB;vertical-align: top;display: block; margin-bottom: 4px;">$cval[name]:</span>
+   								
+   							 $cval[message]
+   							<a href="javascript:void(0);" style = "color: #00A69E;vertical-align: top;" onclick="quickreply($space[uid],$cval[uid],$value[id])">回复</a>	
+   							<a href="cp.php?ac=dialog&dialog=$cval[did]&op=delete" id="blog_delete_$cval[did]" style = "vertical-align: top;" onclick="ajaxmenu(event, this.id)">删除</a>
+						    </div>					
+   						</li>
+   					<!--{/loop}-->
+   				</ul>
+   			</div>
+   		</div>             
+                		
+        <!--{/loop}-->
+                  
 		<!--{else}-->
 			<div class="c_form">还没有相关的对话。</div>
 		<!--{/if}-->
@@ -89,6 +94,7 @@ function fuidgoto(fuid) {
 }
 function datasubmit(){
 	console.log(uid);
+	var $ = jQuery.noConflict();
 	var mes = $("#inputText").val();
 	var ddata = {"uid":uid,"rid":rid,"dialogid":did,"message":mes};
 	$.post("cp.php?ac=dialog",ddata,function(data){
@@ -109,6 +115,19 @@ function quickreply(uidt,ridt,didt){
    	rid = ridt;
    	did = didt;
 }
+
+
+function quickdelete(did){
+	console.log(did);
+	var ddata = {"did":did};
+	var $ = jQuery.noConflict(); 
+	$.post("cp.php?ac=dialog&do=delete",ddata,function(data){
+		console.log(data);
+		window.location.reload();
+	});
+	
+}
+
 </script>
 
 	

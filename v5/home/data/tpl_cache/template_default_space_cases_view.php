@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1375948171', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], '成功案例'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_cases_view|template/default/header|template/default/space_menu|template/default/space_comment_li|template/default/footer', '1377680474', 'template/default/space_cases_view');?><?php $_TPL['titles'] = array($cases['subject'], $newname[subject]); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -105,19 +105,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -163,9 +168,9 @@
 
 
 <?php } else { ?>
-<?php $_TPL['spacetitle'] = "成功案例";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有成功案例</a>";
-	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=cases&id=$cases[casesid]\">查看成功案例</a>"; ?>
+<?php $_TPL['spacetitle'] = "$newname[subject]";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=$do&view=me\">TA的所有$newname[subject]</a>";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=cases&id=$cases[casesid]\">查看$newname[subject]</a>"; ?>
 <div class="c_header a_header">
 <div class="avatar48"><a href="space.php?uid=<?=$space['uid']?>"><?php echo avatar($space[uid],small); ?></a></div>
 <?php if($_SGLOBAL['refer']) { ?>
@@ -185,12 +190,12 @@
 <div style="padding:0 0 10px;">
 <div class="content" style="font-size:15px;">
 <div class="indexing" style="margin-bottom:15px;">
-                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=cases&view=me">成功案例</a></span>
+                 <span><a href="space.php?do=home">首页</a></span>><span><a href="space.php?do=cases&view=me"><?=$newname['subject']?></a></span>
                  </div>
                  <div class="content_detail_wrapper">
                       <div class="content_page_detail">
                       	<div class="content_title"><?=$cases['subject']?></div>
-                      	<div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$cases['username']?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$cases[dateline]); ?></div>
+                      	<div class="content_text_detail" style="text-align: center;margin-bottom:10px;margin-top:10px;font-size:12px;">作者 : <?=$_SN[$cases['uid']]?>&nbsp;|&nbsp;发布时间 : <?php echo sgmdate('Y-m-d H:i:s',$cases[dateline]); ?></div>
                            <h3 class="first_party"><span>案例甲方</span><span class="party_name"><?=$cases['company']?></span></h3>
                            <div class="content_text_detail" style="overflow:hidden"><br/>
                                <p><?=$cases['message']?></p>

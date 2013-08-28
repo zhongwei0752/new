@@ -286,7 +286,7 @@ $(document).ready(function(){
     if(""+idtype+""=="development"){
           data=data.data.development;
           if (data.length<=0){
-            $(".more_btn").appendto("<div class='more_btn'>亲，没有了哦！</div>");
+            $(".more_button").appendto("<div class='more_button'>亲，没有了哦！</div>");
           }
 }
   if(""+idtype+""=="industry"){
@@ -415,7 +415,7 @@ if(""+idtype+""=="goods"){
 
           if (data.length<=0){
             
-            $(".more_btn").html("<div class='more_btn'>亲，没有了哦！</div>");
+            $(".more_button").val("亲，没有了哦!");
           }
           //oid1=data.quiz.options[0].oid;
          // oid2=data.quiz.options[1].oid;

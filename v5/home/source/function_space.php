@@ -76,7 +76,7 @@ function space_open($uid, $username, $gid=0, $email='') {
 	//统计更新
 	include_once(S_ROOT.'./source/function_cp.php');
 	updatestat('register');
-
+	updateuserstat('hot');
 	$_SGLOBAL['supe_uid'] = $_uid;
 	$_SGLOBAL['supe_username'] = $_username;
 		
@@ -152,6 +152,7 @@ function insertsession($setarr) {
 			//统计更新
 			include_once(S_ROOT.'./source/function_cp.php');
 			updatestat('login', 1);
+			updateuserstat('hot');
 
 		}else{
 			$setarr["password"] = $isonline["password"];
@@ -189,6 +190,7 @@ function insertsession($setarr) {
 			//统计更新
 			include_once(S_ROOT.'./source/function_cp.php');
 			updatestat('login', 1);
+			updateuserstat('hot');
 		}
 		return $setarr;
 
@@ -230,6 +232,7 @@ function insertsession($setarr) {
 		//统计更新
 		include_once(S_ROOT.'./source/function_cp.php');
 		updatestat('login', 1);
+		updateuserstat('hot');
 
 		return $setarr;
 	}

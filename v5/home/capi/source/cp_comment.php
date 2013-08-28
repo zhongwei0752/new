@@ -1046,6 +1046,7 @@ if(capi_submitcheck('commentsubmit')) {
 	//Í³¼Æ
 	if($stattype) {
 		updatestat($stattype);
+		updateuserstat('hot');
 	}
 
 	//»ý·Ö

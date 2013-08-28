@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1375757653', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/space_showmenuset|template/default/header|template/default/footer', '1377681828', 'template/default/space_showmenuset');?><?php $_TPL['titles'] = array('应用'); ?>
 <?php $friendsname = array(1 => '仅好友可见',2 => '指定好友可见',3 => '仅自己可见',4 => '凭密码可见'); ?>
 
 <?php if(empty($_SGLOBAL['inajax'])) { ?>
@@ -106,19 +106,24 @@
               <div class="side_bar_inner" >
                     <ul>
                         <li class="side_header"><span class="title">基本组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
+  						
                         <?php if(is_array($zhongwei)) { foreach($zhongwei as $value) { ?>
  <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
 <?php } } ?>
+
                        <!-- <li class="side_option actived"><a href="">企业介绍</a></li>-->
                        
                         <li class="side_header"><span class="title">高级组件</span><a href="space.php?do=menuset&view=me" class="manage_btn">管理</a></li>
-                        <li class="side_option"><a href="">客户管理</a></li>
+                        <?php if(is_array($zhongwei1)) { foreach($zhongwei1 as $value) { ?>
+ <?php if($value['english']==$_GET['do']||$value['english']==$_GET['ac']) { ?><li class="actived"><?php } else { ?><li class="side_option"><?php } ?><a href="<?=$value['url']?>"><?=$value['subject']?></a></li>
+<?php } } ?>
+<!--                         <li class="side_option"><a href="">客户管理</a></li>
                         <li class="side_option"><a href="space.php?do=goods&view=me">商品管理</a></li>
                         <li class="side_option"><a href="">订单管理</a></li>
                         <li class="side_option"><a href="space.php?do=book">预约预定管理</a></li>
                         <li class="side_option"><a href="space.php?do=recommend&view=me">焦点推荐</a></li>
                         <li class="side_option"><a href="">群发</a></li>
-                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li>
+                        <li class="side_option"><a href="space.php?do=moblie&view=all">选择手机模板</a></li> -->
                     </ul>
               </div>
          </div>
@@ -291,9 +296,9 @@ html>body td {
     <?php } else { ?>
   <tr>  
     <th scope="col" abbr="configurations">应用名称</th>  
-    <th scope="col" abbr="dual 1.8">购买月份(单位:月)</th>  
+    <th scope="col" abbr="dual 1.8">购买月份(单位:年)</th>  
     <th scope="col" abbr="dual 2">单价(单位:元)</th> 
-     <th scope="col" abbr="dual 2">总价(单位:元)</th>   
+     <th scope="col" abbr="dual 2">操作</th>   
   </tr>  
    <?php } ?>
  <?php if($_GET['moblienum']) { ?>
@@ -309,7 +314,7 @@ html>body td {
     <th scope="row" abbr="model" class="spec"><?=$value['subject']?></th>  
     <td><?php if($value['appstatus']) { ?><?=$value['addmonth']?><?php } else { ?><?=$value['month']?><?php } ?></td>  
     <td><?php $cost=$value['cost']; ?><?=$cost?></td>   
-    <td></td>   
+    <td><a href="space.php?do=showmenuset&op=delete&id=<?=$value['menusetid']?>">删除</td>   
   </tr>  
  <?php } } ?>
  <?php } ?>
@@ -331,8 +336,8 @@ html>body td {
     <tr>  
     <th scope="row" abbr="model" class="spec"></th>  
     <td>  
-    <form name=alipayment action=./payphp/alipayapi.php method=post target="_blank">
     <?php if($_GET['moblienum']) { ?>
+<form name="alipayment" action="./payphp/mobliealipayapi.php" method=post target="_blank">
 <input type="hidden" name="WIDseller_email" value="1907983236@qq.com" />
 <input type="hidden" name="WIDout_trade_no" value="<?=$number?>.<?=$zfbuid?>" />
 <input type="hidden" name="WIDsubject" value="微伍手机模版" />
@@ -340,6 +345,7 @@ html>body td {
 <input type="hidden" name="WIDbody" value="欢迎选购微伍手机模版" />
 <input type="hidden" name="WIDshow_url" value="欢迎选购微伍手机模版" />
     <?php } else { ?>
+<form name="alipayment" action="./payphp/alipayapi.php" method=post target="_blank">
 <input type="hidden" name="WIDseller_email" value="1907983236@qq.com" />
 <input type="hidden" name="WIDout_trade_no" value="<?=$number?>.<?=$zfbuid?>" />
 <input type="hidden" name="WIDsubject" value="微伍应用" />
@@ -347,13 +353,13 @@ html>body td {
 <input type="hidden" name="WIDbody" value="欢迎选购微伍应用" />
 <input type="hidden" name="WIDshow_url" value="欢迎选购微伍应用" />
  <?php } ?> 
-<a href=""><input type="submit" class="btn grid_2" value="购买"  name="buy"></a>
+<input type="submit" class="btn grid_2" value="购买"  name="buy">
 
 </form>
 </td>
     <td>
     <form action = "space.php?do=showmenuset" method = "post">
-<a href=""><input type="submit" class="btn grid_2" value="暂不购买"  name="cancel"></a>
+<input type="submit" class="btn grid_2" value="暂不购买"  name="cancel">
 </form>
 </td> 
     <?php if(!$_GET['moblienum']) { ?>   
@@ -364,7 +370,7 @@ html>body td {
 
 
  <?php } else { ?>
-没有需要购买的应用
+没有需要购买的应用或手机模版
 <?php } ?>
 
 

@@ -1,104 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
-     <title>$appsubject[subject]</title>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
-     <link rel="stylesheet" type="text/css" href="./template/css/jquery-mobile-fluid960.min.css">
-     <link rel="stylesheet" type="text/css" href="./template/css/style.css">
-
-   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-
-  
-      <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-     <script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
-     <script type="text/javascript" src="template/js/detail.js"></script>
-     <style type="text/css">
-          body{background: #fff;}
-     </style>
-
-     <script id="detailTemplate" type="text/x-jquery-tmpl">
- <header class="content_header_width">
-  
-      <h3>   <!--{BLOCK_TAG_START}-->if goods<!--{BLOCK_TAG_END}-->
-                 <p> {{= goods.subject}}</p><span class="price">{{= goods.curprice}}元</span>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 </h3>
-
-
-      <span class="time">
-                 <!--{BLOCK_TAG_START}-->if goods<!--{BLOCK_TAG_END}-->
+    <head>
+		<meta charset = "utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
+		 <!--{if $_GET[moblieclicknum]=='1'||$_GET[moblieclicknum]=='0'}-->
+        <link rel = "stylesheet" type = "text/css" href = "./template/css/main.css">
+        <!--{else}-->
+        <link rel = "stylesheet" type = "text/css" href = "./template/$_GET[moblieclicknum]/css/main.css">
+        <!--{/if}-->
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+     	<script type="text/javascript" src="template/js/jquery.tmpl.min.js"></script>
+     	<script type="text/javascript" src="template/js/detail.js"></script>
+		     <script id="detailTemplate" type="text/x-jquery-tmpl">
+  			<h3><!--{BLOCK_TAG_START}-->if goods<!--{BLOCK_TAG_END}-->
+                 <p> {{= goods.subject}}</p>
+                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}--></h3>
+			<span class = "info_content_span subtitle"> <!--{BLOCK_TAG_START}-->if goods<!--{BLOCK_TAG_END}-->
                  <p> {{= goods.dateline}}</p>
-                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}-->
-                 </span>
-         
+                 <!--{BLOCK_TAG_START}-->/if<!--{BLOCK_TAG_END}--></span>
 
-        </header><!-- header end -->
-        <div>
-          
-          
 
-</script>
-   <script id="commentTemplate" type="text/x-jquery-tmpl">
- <div class="split"></div><!-- 这个是分割线 -->
-            <div class="normal_wrapper_width comments"><span class="commenter">{{= author}}:</span> {{= message}}</div>
+</script>	
+ <script id="commentTemplate" type="text/x-jquery-tmpl">
+ <li>
+
+					<span>{{= author}}: </span>
+					{{= message}}
+				</li>
              
 </script>
- 
-  </head>
 
-  <body>
-    <div data-role="page">
-       <div id="detail-panel">
-
-       </div>
-          <div class="content_text">
-            <div class="normal_wrapper_width">
-           
-              <div class="content_text product_content_text">
-                  <span style="line-height:28px;">价    格:<b class="price">$wei[curprice]元</b></span><br>
-                  <span>联系人: $space[linkman] </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>电    话: $space[mobile]</span>
-                  <p>
-                 <div class="content_pic" style="font-size:14px!important;">
-           
-                              $message
-             </div>
-                  </p>
-             </div>
-              <a href="javascript:void;" onclick='gototaobao("$wei[taobaourl]")' class="long_btn">购买</a>
-             </div>
-          </div>
-          <div class="split"></div>
-          <div style="background:#f0f0f0">
-             <div class="normal_wrapper_width container_12">
-                <div class="comment_wrapper grid_8">
-                   <textarea placeholder="写下你的评论..." class="comment_text_box" id="review"></textarea>
-                </div>
-                <a href="#"  class="comment_btn grid_3" onclick="cpComment($('#idtype').val(), $('#id').val(), $('#review').val())">
-                   发表
-                </a>
-            </div>
-            <div id="comment-panel">
+	</head>
+	<body> 
+		<div class = "article">
+			 <div id="detail-panel">
 
        </div>
-             
+			<!-- <span class = "job_content_span subtitle">预约（87）</span> -->
+			<span class = "job_content_span subtitle">评论（$wei[replynum]）</span>
+			<span class = "job_content_span subtitle">阅读（$wei[viewnum]）</span>
+			<div class = "article_content">
+                <span style = "display:block; padding-bottom: 8px;" >
+                	<span>价    格:<b class="colour"> $wei[curprice]元</b></span><br />
+                	<span>联系人: $space[linkman]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>电 话: <span class = "underline colour">$space[mobile]</span></span>
+                </span>
+                <p>
+                     $message
+                </p>
+			</div>
+			<input type = "button" onclick='gototaobao("$wei[taobaourl]")' class = "dial_btn btn" value = "购买" />
+		</div>
+		<div class = "comment">
+			<div class = "comment_add">
+				<textarea placeholder = "写下你的评论..." class = "comment_area" id="review"></textarea>
+				<input type = "button" onclick="cpComment($('#idtype').val(), $('#id').val(), $('#review').val())" class = "submit_btn btn" value = "发表" />
+			</div>
+			<ul class = "comment_list">
+			 <div id="comment-panel">
 
-          </div>
-    <input type="hidden" id="wxkey" name="wxkey" value="$_GET[wxkey]"/>
-    <input type="hidden" id="id" name="id" value="$_GET[id]"/>
-    <input type="hidden" id="idtype" name="idtype" value="$_GET[idtype]"/>
-    <input type="hidden" id="type" name="type" value="$_GET[type]"/>
-    <input type="hidden" id="uid" name="uid" value="$_GET[uid]"/>
-    <input type="hidden" id="page" name="page" value="0"/>
-    <input type="hidden" id="perpage" name="perpage" value="5"/>
-        </div>
-        <footer></footer>
-    </div>
-   <script>
+       </div>
+				
+				
+			</ul>
+		</div>
+		<input type="hidden" id="wxkey" name="wxkey" value="$_GET[wxkey]"/>
+    	<input type="hidden" id="id" name="id" value="$_GET[id]"/>
+    	<input type="hidden" id="idtype" name="idtype" value="$_GET[idtype]"/>
+    	<input type="hidden" id="type" name="type" value="$_GET[type]"/>
+    	<input type="hidden" id="uid" name="uid" value="$_GET[viewuid]"/>
+    	<input type="hidden" id="page" name="page" value="0"/>
+    	<input type="hidden" id="perpage" name="perpage" value="5"/>
+    	 <script>
 
 function gototaobao(url){
   window.open(url);
 }
 </script>
-  </body>
+		</body>
 </html>
