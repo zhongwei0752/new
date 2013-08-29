@@ -1,4 +1,4 @@
-<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1377658400', 'template/default/network');?><!DOCTYPE html>
+<?php if(!defined('IN_UCHOME')) exit('Access Denied');?><?php subtplcheck('template/default/network|template/default/footer', '1377760934', 'template/default/network');?><!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,6 +18,10 @@
           } 
         .companies .grid_4 img{
              max-width:172px;max-height:53px;min-width:172px;min-height:53px;
+        }
+        /*login hack*/
+        #email,#tx,#pwd{
+        margin-left:-12px\9;
         }
              </style>
   </head>
@@ -254,7 +258,11 @@ tx.value = "密码";
 <?php } ?>
     </div>
     </div>
-    
+      <div id="backtop">
+    	<a href="">
+    		<img src="./template/default/image/back_top.png">
+    	</a>
+    </div>
         </div>
 <div class="footer">
 
@@ -290,13 +298,13 @@ tx.value = "密码";
         <div class="footer_info">
              版权所有：广州市宏门网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP:&nbsp;&nbsp; 粤ICP备08132436号
             
-<a href="javascript:;" onclick="window.scrollTo(0,0);" id="a_top" title="TOP" style="position:relative;left:280px;top:0;"><img src="image/top.gif" alt="" style="padding: 5px 6px 6px;" /></a>
+
 
     </div>
 
 </div>
 <!--/wrap-->
-    <script src="js/jquery.js"></script>
+
     <!--<script src="js/bootstrap.min.js"></script>-->
 <?php if($_SGLOBAL['appmenu']) { ?>
 <ul id="ucappmenu_menu" class="dropmenu_drop" style="display:none;">

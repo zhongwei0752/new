@@ -144,7 +144,9 @@ class wechatCallbackapiTest
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=".$wei[0]."id&type=".$wei[0]."&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->introduce->subject;
-                              $pic = "http://v5.home3d.cn/home/".$app_output->data->introduce->imageurl;
+                              $message1=$app_output->data->introduce->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
@@ -155,55 +157,104 @@ class wechatCallbackapiTest
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=branchid&type=branch&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->branch->subject;
-                              $pic = "http://v5.home3d.cn/home/".$app_output->data->branch->imageurl;
+                              $message1=$app_output->data->branch->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
-                      } elseif($wei[0]=="industry"){
+                              } elseif($wei[0]=="industry"){
 
                               $url1 = "http://v5.home3d.cn/home/capi/space.php?do=industry&uid=$row[uid]&id=$wei[1]";
                               $app = file_get_contents($url1,0,null,null);
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=industryid&type=industry&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->industry->subject;
-                              $pic = "http://v5.home3d.cn/home/".$app_output->data->industry->imageurl;
+                              $message1=$app_output->data->industry->message1;
+                              $message1=strtolower($message1);
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
-                      }   elseif($wei[0]=="job"){
+                              }   elseif($wei[0]=="job"){
 
                               $url1 = "http://v5.home3d.cn/home/capi/space.php?do=job&uid=$row[uid]&id=$wei[1]";
                               $app = file_get_contents($url1,0,null,null);
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=jobid&type=job&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->job->subject;
-                            
+                              
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
-                      }   elseif($wei[0]=="product"){
+                              }   elseif($wei[0]=="product"){
 
                               $url1 = "http://v5.home3d.cn/home/capi/space.php?do=product&uid=$row[uid]&id=$wei[1]";
                               $app = file_get_contents($url1,0,null,null);
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=productid&type=product&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->product->subject;
-                              $pic = "http://v5.home3d.cn/home/".$app_output->data->product->imageurl;
+                              $message1=$app_output->data->product->message1;
+                              $message1=strtolower($message1);
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
-                      } elseif($wei[0]=="cases"){
+                              } elseif($wei[0]=="cases"){
 
                               $url1 = "http://v5.home3d.cn/home/capi/space.php?do=cases&uid=$row[uid]&id=$wei[1]";
                               $app = file_get_contents($url1,0,null,null);
                               $app_output = json_decode($app);
                               $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=casesid&type=cases&moblieclicknum=$row[moblieclicknum]";
                               $subject=$app_output->data->cases->subject;
-                              $pic = "http://v5.home3d.cn/home/".$app_output->data->cases->imageurl;
+                              $message1=$app_output->data->cases->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
+                              $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                             }elseif($wei[0]=="development"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=development&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=developmentid&type=development&moblieclicknum=$row[moblieclicknum]";
+                              $message1=$app_output->data->development->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
+                               $subject=$app_output->data->development->subject;
                                $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
                               $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
                               echo $resultStr;
-                      } 
+                            }elseif($wei[0]=="goods"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=goods&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=goodsid&type=goods&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->goods->subject;
+                              $message1=$app_output->data->goods->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                            }elseif($wei[0]=="cases"){
+
+                              $url1 = "http://v5.home3d.cn/home/capi/space.php?do=cases&uid=$row[uid]&id=$wei[1]";
+                              $app = file_get_contents($url1,0,null,null);
+                              $app_output = json_decode($app);
+                              $url = "http://v5.home3d.cn/home/wx/wx.php?do=detail&id=".$wei[1]."&uid=$row[uid]&idtype=casesid&type=cases&moblieclicknum=$row[moblieclicknum]";
+                              $subject=$app_output->data->cases->subject;
+                              $message1=$app_output->data->cases->message1;
+                              preg_match_all("<img src=\"(.*)\">",$message1,$matches);
+                              $pic = $matches[1][0];
+                               $articles[] = makeArticleItem($subject, $subject, $pic, $url); 
+                              $resultStr = makeArticles($fromUsername, $toUsername, $time, $msgType, $name,$articles);  
+                              echo $resultStr;
+                            }    
                                
                               
 

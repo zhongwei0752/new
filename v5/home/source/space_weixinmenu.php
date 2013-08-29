@@ -81,6 +81,21 @@ if($_POST['fristsubmit']){
 	showmessage("提交成功","space.php?do=weixinmenu");
 }
 
+if($_POST['functionweixin']){
+	$function=$_POST['province'].".".$_POST['city'];
+	$query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('weixinmenutop')."  WHERE uid='$_SGLOBAL[supe_uid]' and type='$_POST[type]'");
+	$value = $_SGLOBAL['db']->fetch_array($query);
+	if($value){
+		if($_POST['fathernum']){
+		updatetable("weixinmenu",array("$_POST[button]"=>$function),array('uid'=>$_SGLOBAL['supe_uid'],'fathernum'=>"$_POST[fathernum]"));	
+		}else{
+		updatetable("weixinmenutop",array('number'=>$function),array('uid'=>$_SGLOBAL['supe_uid'],'type'=>"$_POST[type]"));
+	}
+	}else{
+		inserttable("weixinmenutop",array('number'=>$function,'uid'=>$_SGLOBAL['supe_uid'],'type'=>"$_POST[type]"));
+	}
+}
+
 if($_POST['secondsubmit']){
 
 	$dataarr1=array(
@@ -90,12 +105,7 @@ if($_POST['secondsubmit']){
 		'sub_button3'=> $_POST['1sub_button3'],
 		'sub_button4'=> $_POST['1sub_button4'],
 		'sub_button5'=> $_POST['1sub_button5'],
-		'function'  => $_POST['function1'],
-		'sub_function1'=> $_POST['1sub_function1'],
-		'sub_function2'=> $_POST['1sub_function2'],
-		'sub_function3'=> $_POST['1sub_function3'],
-		'sub_function4'=> $_POST['1sub_function4'],
-		'sub_function5'=> $_POST['1sub_function5']
+		'function'  => $_POST['function1']
 	);	
 	//中间菜单情况
 	$dataarr2=array(
@@ -105,12 +115,7 @@ if($_POST['secondsubmit']){
 		'sub_button3'=> $_POST['2sub_button3'],
 		'sub_button4'=> $_POST['2sub_button4'],
 		'sub_button5'=> $_POST['2sub_button5'],
-		'function'  => $_POST['function2'],
-		'sub_function1'=> $_POST['2sub_function1'],
-		'sub_function2'=> $_POST['2sub_function2'],
-		'sub_function3'=> $_POST['2sub_function3'],
-		'sub_function4'=> $_POST['2sub_function4'],
-		'sub_function5'=> $_POST['2sub_function5']
+		'function'  => $_POST['function2']
 	);	
 	//右侧菜单情况
 	$dataarr3=array(
@@ -120,12 +125,7 @@ if($_POST['secondsubmit']){
 		'sub_button3'=> $_POST['3sub_button3'],
 		'sub_button4'=> $_POST['3sub_button4'],
 		'sub_button5'=> $_POST['3sub_button5'],
-		'function'  => $_POST['function3'],
-		'sub_function1'=> $_POST['3sub_function1'],
-		'sub_function2'=> $_POST['3sub_function2'],
-		'sub_function3'=> $_POST['3sub_function3'],
-		'sub_function4'=> $_POST['3sub_function4'],
-		'sub_function5'=> $_POST['3sub_function5']
+		'function'  => $_POST['function3']
 
 	);	
 	updatetable("weixinmenu",$dataarr1,array('fathernum'=>'1','uid'=>$_SGLOBAL['supe_uid']));
@@ -137,12 +137,11 @@ $query = $_SGLOBAL['db']->query("SELECT * FROM ".tname('weixinmenu')."  WHERE ui
 while ($value = $_SGLOBAL['db']->fetch_array($query)) {
 	$list[]=$value;
 	}
-	$list1=$list['0']['sub_button1'];
-	$list2=$list['0']['sub_button2'];
-	$list3=$list['0']['sub_button3'];
-	$list4=$list['0']['sub_button4'];
-	$list5=$list['0']['sub_button5'];
-	$list6=$list['0']['sub_button6'];
+$query1 = $_SGLOBAL['db']->query("SELECT * FROM ".tname('menuset')." ");
+	while ($value1 = $_SGLOBAL['db']->fetch_array($query1)) {
+		
+			$list1[] = $value1;
+		}
 $count='1';
 	for($i='0';$i<'6';$i++){
 		$name="sub_button".$i;

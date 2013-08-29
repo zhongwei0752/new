@@ -31,7 +31,7 @@ if($_SCONFIG['allowrewrite'] && isset($_GET['rewrite'])) {
 //ÔÊÐí¶¯×÷
 $dos = array('feed', 'doing', 'mood', 'blog', 'album', 'thread', 'mtag', 'friend', 'wall', 'tag', 'notice', 'share', 'topic', 'home', 'pm', 'event', 'poll', 'top', 'info', 'videophoto',
 	'introduce','product','development','industry','text','cases','branch','job','talk','menuset','check','showmenuset','wei','orderid','recommend','moblie','goods','goweixin','book','newname','myweixin','communicate','weixinmenu',
-	'highmenuset','dialog');
+	'highmenuset','dialog','text1');
 
 //»ñÈ¡±äÁ¿
 $isinvite = 0;

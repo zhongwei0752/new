@@ -12,11 +12,11 @@ if(empty($space['namestatus'])){
 }
 $menusetid = empty($_GET['menusetid'])?0:intval($_GET['menusetid']);
 if($_GET['op']=='delete'){
-	updatetable('appset', array('appstatus' => '0','cheak' => '1'), array('num'=>$menusetid));
+	updatetable('appset', array('appstatus' => '0','cheak' => '1'), array('num'=>$menusetid,'uid'=>$_SGLOBAL['supe_uid']));
 	showmessage("删除成功","space.php?do=menuset&view=me");
 }
 if($_GET['op']=='add'){
-	updatetable('appset', array('appstatus' => '1','cheak' => '0'), array('num'=>$menusetid));
+	updatetable('appset', array('appstatus' => '1','cheak' => '0'), array('num'=>$menusetid,'uid'=>$_SGLOBAL['supe_uid']));
 	showmessage("添加成功","space.php?do=menuset&view=me");
 }
 $minhot = $_SCONFIG['feedhotmin']<1?3:$_SCONFIG['feedhotmin'];
